@@ -1,0 +1,64 @@
+.breadcrumbs{
+      font-size: 0.9rem;
+  color: black;
+  margin: 1rem 0;
+}
+.body{
+    background-color: #81796c96;
+    width: auto;
+
+}
+.profile-img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 auto 20px auto;
+}
+.info{
+    text-align: center;
+    margin-bottom: 20px;
+    vertical-align: middle;
+    display:inline-block;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #704444;
+}
+.image{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.greetings{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #4b3838;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.social-info{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3b2f2f;
+    font-weight: bold;
+    margin-top: 15px;
+
+
+}
+.social-info:hover{
+    color: #000000;
+    font-size: 1.1rem;
+    transition: 0.3s;
+
+}
+hr{
+    border: 1px solid #000000;
+    margin: 20px 0;
+}
+.connect{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #4b3838;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
