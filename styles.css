@@ -115,3 +115,12 @@ footer a:hover{
     color: #3b2f2f;
     font-weight: bold;
 }
+.favicon{
+    width: 32px;
+    height: 32px;
+    border-radius: 50px;
+}
+.favicon:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+}
