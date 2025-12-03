@@ -6,6 +6,9 @@
 .body{
     background-color: #81796c96;
     width: auto;
+    height: auto;
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
 
 }
 .profile-img{
