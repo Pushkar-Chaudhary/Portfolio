@@ -28,7 +28,7 @@
     text-align: center;
     display:block;
     font-family:poppins;
-    color: #6f9ba3;
+    color: #1e2020fd;
     width: 100%;
     max-width: 1000px;
     padding: 10px;
@@ -39,7 +39,7 @@
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #4b3838;
-    font-weight: bold;
+    font-weight: 300;
     margin-bottom: 15px;
 }
 .social-info{
