@@ -196,4 +196,7 @@ footer a:hover{
 .marquee marquee {
   display: inline-block;
 }
-
+.project{
+    margin-bottom: 20px;
+    
+}
