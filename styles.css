@@ -31,7 +31,7 @@
     font-weight: bold;
     color: #131111;
     width: 100%;
-    max-width: 700px;
+    max-width: auto;
     padding: 10px;
 }
 
