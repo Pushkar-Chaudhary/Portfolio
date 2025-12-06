@@ -110,6 +110,9 @@ footer a:hover{
 .nav{
     text-align: center;
     margin-bottom: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
 
 }
 .nav a{
@@ -179,3 +182,19 @@ footer a:hover{
     transform: scale(1.1);
     transition: 0.3s;
 }
+.info:hover{
+    color: #000000;
+    font-size: 1.1rem;
+    transition: 0.3s;
+
+}
+.marquee {
+  display: flex;
+  gap: 10px; 
+  align-items: center; 
+}
+
+.marquee marquee {
+  display: inline-block;
+}
+
