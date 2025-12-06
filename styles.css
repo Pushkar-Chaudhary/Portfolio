@@ -7,31 +7,32 @@
     background-color: rgba(200, 241, 241, 0.7);
     width: auto;
     height: auto;
-    margin: 0;
     font-family:Arial, Helvetica, sans-serif;
     align-items: center;
-    margin-left: 200px;
-    margin-right: 200px;
-    cursor:pointer;
+    margin:0;
+    padding: 0;
+    cursor:pointer ;
 
 }
 .profile-img{
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    display: flex;
-    margin: auto;
+    display:block;
+    margin: 0 auto;
     align-items: right;
 }
 .info{
     text-align: left;
-    margin-bottom: 20px;
+    margin-bottom: 0 auto;
     vertical-align: left;
     display:inline-block;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: #131111;
     width: 100%;
+    max-width: 700px;
+    padding: 10px;
 }
 
 .greetings{
@@ -185,6 +186,8 @@ footer a:hover{
   display: flex;
   gap: 10px; 
   align-items: center; 
+  width:100%;
+  overflow: hidden;
 }
 
 .marquee marquee {
