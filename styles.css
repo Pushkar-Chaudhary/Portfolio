@@ -223,14 +223,33 @@ footer a:hover{
 .navbar .nav{
     padding: 10px 0;
 }
-.nav::after{
-    content: "";
-    display: table;
-    clear: both;
-    text-decoration: underline;
-}
+
 .feedback {
     margin-bottom: 15px;
     text-align: center;
     font-family: Poppins, sans-serif;
+}
+.home:active{
+    text-decoration: underline;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.about:active{
+    text-decoration: underline;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.projects:active{
+    text-decoration: underline;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+}
+.contact:active{
+    text-decoration: underline;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
 }
