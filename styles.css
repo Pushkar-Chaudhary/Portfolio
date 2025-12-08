@@ -229,3 +229,8 @@ footer a:hover{
     clear: both;
     text-decoration: underline;
 }
+.feedback {
+    margin-bottom: 15px;
+    text-align: center;
+    font-family: Poppins, sans-serif;
+}
