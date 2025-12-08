@@ -201,3 +201,7 @@ footer a:hover{
     transform: scale(0.98);
     transition: 0.1s;
 }
+.projects:hover{
+    transform: scale(1.02);
+    transition: 0.3s;
+}
