@@ -205,3 +205,27 @@ footer a:hover{
     transform: scale(1.02);
     transition: 0.3s;
 }
+.project-title{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #2e2a2a;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.navbar .nav{
+    padding: 10px 0;
+}
+.nav::after{
+    content: "";
+    display: table;
+    clear: both;
+    text-decoration: underline;
+}
