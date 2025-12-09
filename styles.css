@@ -229,25 +229,25 @@ footer a:hover{
     text-align: center;
     font-family: Poppins, sans-serif;
 }
-.home:active{
+.home{
     text-decoration: underline;
     padding: 8px 16px;
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
-.about:active{
+.about{
     text-decoration: underline;
     padding: 8px 16px;
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
-.projects:active{
+.projects{
     text-decoration: underline;
     padding: 8px 16px;
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
-.contact:active{
+.contact{
     text-decoration: underline;
     padding: 8px 16px;
     border-radius: 4px;
