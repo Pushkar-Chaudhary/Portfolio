@@ -21,7 +21,7 @@
     height: 150px;
     border-radius: 50%;
     display:block;
-    margin: 0 auto;
+    margin: 0;
     align-items: right;
 }
 .info{
@@ -96,21 +96,14 @@ footer a:hover{
     font-size: 0.9rem;
     transition: 0.3s;
 }
-.header{
-    text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #4b3838;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
+
 
 .nav{
-    text-align: center;
-    margin-bottom: 20px;
+    text-align: left;
+    margin-bottom: 10px;
     display: flex;
     gap: 20px;
-    justify-content: center;
+    justify-content: right;
 
 }
 .nav a{
@@ -197,10 +190,7 @@ footer a:hover{
     margin-bottom: 20px;
     
 }
-.projects:active{
-    transform: scale(0.98);
-    transition: 0.1s;
-}
+
 .projects:hover{
     transform: scale(1.02);
     transition: 0.3s;
@@ -218,11 +208,9 @@ footer a:hover{
     width: 100%;
     background-color: #ffffff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+   
 }
-.navbar .nav{
-    padding: 10px 0;
-}
+
 
 .feedback {
     margin-bottom: 15px;
@@ -231,25 +219,25 @@ footer a:hover{
 }
 .home{
     text-decoration: underline;
-    padding: 8px 16px;
+    
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
 .about{
     text-decoration: underline;
-    padding: 8px 16px;
+  
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
 .projects{
     text-decoration: underline;
-    padding: 8px 16px;
+    
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
 .contact{
     text-decoration: underline;
-    padding: 8px 16px;
+    
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -271,69 +259,17 @@ footer a:hover{
     margin-top: 10px;
 }
 
-.switch {
-  font-size: 17px;
-  position: relative;
-  display: inline-block;
-  width: 3.5em;
-  height: 2em;
-}
+.mail:hover{
+    color: #000000;}
 
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+    .top {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;            
+    padding: 20px;
+    vertical-align: middle;
+    margin-bottom: 0px;
 }
-
-
-.slider {
-  --background: #28096b;
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: var(--background);
-  transition: .5s;
-  border-radius: 30px;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 1.4em;
-  width: 1.4em;
-  border-radius: 50%;
-  left: 10%;
-  bottom: 15%;
-  box-shadow: inset 8px -4px 0px 0px #fff000;
-  background: var(--background);
-  transition: .5s;
-}
-
-input:checked + .slider {
-  background-color: #522ba7;
-}
-
-input:checked + .slider:before {
-  transform: translateX(100%);
-  box-shadow: inset 15px -4px 0px 15px #fff000;
-}
-.switch:active .slider:before{
-    box-shadow: inset 15px -4px 0px 15px #000000;
-    transition: 0.2s;
-}
-.switch:hover .slider:before{
-    box-shadow: inset 15px -4px 0px 15px #ffffff;
-    transition: 0.2s;
-}
-.switch:active .slider{
-    background-color: #28096b;
-    transition: 0.2s;
-}
-.switch:hover .slider{
-    background-color: #522ba7;
-    transition: 0.2s;
+.p{
+    text-align:center;
 }
