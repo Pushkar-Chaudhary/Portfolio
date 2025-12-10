@@ -269,6 +269,7 @@ footer a:hover{
     padding: 20px;
     vertical-align: middle;
     margin-bottom: 0px;
+    max-width:auto;
 }
 .p{
     text-align:center;
