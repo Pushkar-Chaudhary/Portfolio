@@ -224,19 +224,16 @@ footer a:hover{
 }
 .about{
     text-decoration: underline;
-  
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
 .projects{
     text-decoration: underline;
-    
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
 .contact{
     text-decoration: underline;
-    
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
@@ -300,7 +297,9 @@ body {
   body {
     font-size: 12px;
   }
-  .nav {
+  .nav a {
     flex-direction: column; 
+    margin: 5px 0;
+    display: block;
   }
 }
