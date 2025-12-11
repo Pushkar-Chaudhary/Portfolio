@@ -4,7 +4,7 @@
   margin: 1rem 0;
 }
 .body{
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: burlywood;
     width: 1000px;
     font-family:poppins;
     align-items: center;
@@ -24,6 +24,7 @@
     margin: 0;
     align-items: right;
     flex-shrink: 0;
+    padding:30px;
 }
 .info{
     text-align: center;
@@ -237,10 +238,7 @@ footer a:hover{
     border-radius: 4px;
     transition: background-color 0.3s, color 0.3s;
 }
-.home:hover, .about:hover, .projects:hover, .contact:hover {
-    background-color: #4b3838;
-    color: #ffffff;
-}
+
 .bold{
     font-weight: bold;
 }
@@ -259,7 +257,7 @@ footer a:hover{
     color: #000000;}
 
     .top {
-      background-color: rgba(255, 255, 255, 0.7);
+      background-color: burlywood;
     width: 1000px;
     font-family:poppins;
     align-items: center;
@@ -276,7 +274,8 @@ footer a:hover{
 }
 .container {
   width: 90%;   
-  margin: 0 auto;     
+  margin: 0 auto; 
+      
 }
 .body {
   font-size: 16px;
@@ -342,4 +341,16 @@ footer a:hover{
     .nav {
         justify-content: center; 
     }
+}
+.header{
+    color:rgb(38, 95, 97);
+    font-family:Amarna;
+}
+.profile-img:hover{
+    transform: scale(1.1);
+    transition: 0.3s;
+}
+.project-iframe:hover{
+    transform: scale(1.02);
+    transition: 0.3s;
 }
