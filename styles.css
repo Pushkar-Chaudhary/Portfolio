@@ -278,28 +278,69 @@ footer a:hover{
   width: 90%;   
   margin: 0 auto;     
 }
-body {
+.body {
   font-size: 16px;
 }
 
-/* Tablets */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px;
-  }
-  .container {
-    width: 95%;
-  }
-}
 
-/* Mobile */
-@media (max-width: 480px) {
-  body {
-    font-size: 12px;
-  }
   .nav a {
     flex-direction: column; 
     margin: 5px 0;
     display: block;
+    }
+@media (max-width: 600px) {
+  .body {
+    width: 100%; 
+    padding: 10px; 
   }
+    .main-content {
+        width: 100%; 
+        padding: 10px; 
+    }
+    .top {
+        width: 100%; 
+        padding: 10px; 
+    }
+    .profile-img {
+        width: 100px; 
+        height: 100px; 
+    }
+    .nav {
+        justify-content: center; 
+    }
 }
+@media (max-width: 400px) {
+  .nav a {
+    font-size: 0.9rem; 
+    margin: 3px 0; 
+  }
+
+}
+@media(min-width=600px) and (max-width:800px){
+  .nav a {
+    font-size: 0.8rem; 
+    margin: 2px 0; 
+  }
+  .body {
+    width: 95%; 
+    padding: 5px;
+
+
+}
+    .main-content {
+        width: 95%; 
+        padding: 5px; 
+    }
+    .top {
+        width: 95%; 
+        padding: 5px; 
+    }
+    .profile-img {
+        width: 120px; 
+        height: 120px; 
+    }
+    .nav {
+        justify-content: center; 
+    }
+}
+
