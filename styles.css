@@ -310,7 +310,8 @@ footer a:hover{
         padding-bottom: 0px;
     }
     .nav {
-        justify-content: center; 
+        justify-content: center;
+        display:block; 
     }
 }
 @media (max-width: 400px) {
@@ -346,6 +347,7 @@ footer a:hover{
     }
     .nav {
         justify-content: center; 
+        display: block;
     }
 }
 .header{
