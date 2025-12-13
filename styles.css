@@ -45,6 +45,7 @@
     font-weight: 300;
     margin-bottom: 0px;
     display: inline-block;
+    align-items: right;
 }
 .social-info{
     text-align: center;
