@@ -4,7 +4,7 @@
   margin: 1rem 0;
 }
 .body{
-    background-color: burlywood;
+    background-color: whitesmoke;
     width: 700px;
     font-family:poppins;
     align-items: center;
@@ -25,6 +25,7 @@
     flex-shrink: 0;
     padding:30px;
     padding-bottom: 0px;
+    margin-top: 0px;
 }
 .info{
     text-align: center;
@@ -42,7 +43,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #4b3838;
     font-weight: 300;
-    margin-bottom: 15px;
+    margin-bottom: 0px;
     display: inline-block;
 }
 .social-info{
@@ -260,7 +261,7 @@ footer a:hover{
     color: #000000;}
 
     .top {
-      background-color: burlywood;
+      background-color: whitesmoke;
     width: 1000px;
     font-family:poppins;
     align-items: center;
