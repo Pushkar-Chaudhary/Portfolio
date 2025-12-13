@@ -311,8 +311,9 @@ footer a:hover{
         padding-bottom: 0px;
     }
     .nav {
-        justify-content: center;
+        justify-content: left;
         display:block; 
+        align-items:left;
     }
 }
 @media (max-width: 400px) {
@@ -347,8 +348,9 @@ footer a:hover{
         padding-bottom: 0px;
     }
     .nav {
-        justify-content: center; 
+        justify-content: left; 
         display: block;
+        align-items: left;
     }
 }
 .header{
