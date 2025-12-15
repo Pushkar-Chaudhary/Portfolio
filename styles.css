@@ -619,6 +619,18 @@ footer a:hover{
 #scroll-progress {
   transition: width 0.1s linear, opacity 0.3s ease;
 }
+/* Hamburger button */
+.menu-btn {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  margin-left: auto;
+  position: relative;   /* important for z-index */
+  z-index: 999;         /* makes it above other elements */
+  user-select: none;    /* optional, prevents text selection on click */
+}
+
+/* Mobile view */
 @media (max-width: 600px) {
   .menu-btn {
     display: block;
@@ -627,11 +639,14 @@ footer a:hover{
   .nav {
     display: none;
     flex-direction: column;
-    width: calc(100% - 20px); /* <-- leave 10px padding on each side */
+    width: calc(100% - 20px);
     text-align: right;
     margin-top: 10px;
-    margin-right: 10px;  /* push it inside from right */
-    padding-right: 10px; /* optional extra spacing */
+    margin-right: 10px;
+    padding-right: 10px;
+    z-index: 998;  /* below menu-btn */
+    background-color: white; /* optional, makes menu clickable if transparent */
+    position: relative;
   }
 
   .nav.active {
