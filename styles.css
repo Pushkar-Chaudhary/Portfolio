@@ -619,6 +619,28 @@ footer a:hover{
 #scroll-progress {
   transition: width 0.1s linear, opacity 0.3s ease;
 }
+@media (max-width: 600px) {
+  .menu-btn {
+    display: block;
+  }
 
+  .nav {
+    display: none;
+    flex-direction: column;
+    width: calc(100% - 20px); /* <-- leave 10px padding on each side */
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 10px;  /* push it inside from right */
+    padding-right: 10px; /* optional extra spacing */
+  }
+
+  .nav.active {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 8px 0;
+  }
+}
 
 
