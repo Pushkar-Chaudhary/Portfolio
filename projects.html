@@ -16,7 +16,7 @@
 <div class="container">
 <body  class="body">    <div class="top">     
       <header class="header"><h1>Pushkar Chaudhary</h1></header> 
-           
+           <div class="menu-btn" onclick="toggleMenu()">☰</div>
              <div class="nav">
             <a href="index.html" target="_self" >Home</a>
             <a href="aboutme.html" target="_self" >About Me</a>
@@ -33,6 +33,11 @@
     <a href="https://profile-card-ashen-mu.vercel.app/">
    <iframe src="https://profile-card-ashen-mu.vercel.app/" class="project-iframe" title="Profile Card Project"></iframe>
    </a>
+   <script>
+  function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+  }
+</script>
     </div>
 </body></div>
 </html>
