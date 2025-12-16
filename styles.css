@@ -20,7 +20,7 @@ body {
   top: 0;
   left: 0;
   height: 4px;
-  background: #4b3838;
+  background: #4c626e;
   width: 0%;
   transition: width 0.1s ease-out;
   z-index: 1000;
@@ -173,62 +173,64 @@ body {
 
 
 
-/* ===== MOBILE MENU ===== */
+/* Hamburger button */
 .menu-btn {
   display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
+  font-size: 1.8rem;
   cursor: pointer;
-  z-index: 1001;
+  margin-left: auto;
+  position: relative;
+  z-index: 999;
+  user-select: none;
 }
 
+/* Desktop nav */
 .nav {
   display: flex;
   gap: 20px;
+  justify-content: flex-end;
+  flex-wrap: nowrap;
+  transition: max-height 0.4s ease, opacity 0.4s ease; /* smooth open/close */
+  overflow: hidden;
 }
 
-/* Mobile */
+/* Mobile view */
 @media (max-width: 600px) {
   .menu-btn {
     display: block;
   }
 
   .nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100vh;
-    background: #fff;
     flex-direction: column;
-    padding: 80px 20px;
-    transition: transform 0.3s ease;
-    transform: translateX(100%);
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-    z-index: 1000;
+    width: calc(100% - 20px);
+    text-align: right;
+    margin-top: 10px;
+    margin-right: 10px;
+    padding-right: 10px;
+    max-height: 0;      /* collapsed by default */
+    opacity: 0;         /* hidden */
+    background-color: white;
+    position: relative;
+    z-index: 998;
   }
 
   .nav.active {
-    transform: translateX(0);
-    right: 0;
+    max-height: 500px;  /* enough height to show all links */
+    opacity: 1;
   }
 
   .nav a {
-    padding: 12px 0;
-    font-size: 1.2rem;
+    padding: 8px 0;
   }
 }
-@media (max-width: 600px) {
-  .greetings h1 {
-    animation: none;
-    text-shadow: none;
-  }
 
-  * {
-    transition-duration: 0.15s;
-  }
+/* Highlight current page */
+.nav a.active {
+  color: #000000;
+  text-decoration: underline;
+  font-weight: bold;
 }
+
 .about{
   font-size: 1.1rem;
   line-height: 1.6;
@@ -296,6 +298,9 @@ body {
   padding: 15px 0;
   font-size: 0.9rem;
   color: #555;
+}
+.p{
+  text-align: center;
 }
 
 
