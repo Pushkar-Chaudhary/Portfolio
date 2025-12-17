@@ -73,6 +73,7 @@ body {
 @media (max-width: 600px) {
   .menu-btn {
     display: block;
+    background:transparent;
   }
   .nav {
     position: absolute;
