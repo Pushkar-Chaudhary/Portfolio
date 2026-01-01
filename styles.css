@@ -340,10 +340,10 @@ body {
   }
   .menu{
   font-size: 1rem;
-  margin-right: 50px;
+  margin-right: auto;
   font-weight: bold;
   color:#181717;
-  margin-left: auto;
+  margin-left: 80%;
 }
 }
 
