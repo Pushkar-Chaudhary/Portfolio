@@ -182,15 +182,15 @@ body {
     margin-top: 10px;
     margin-right: 10px;
     padding-right: 10px;
-    max-height: 0;      /* collapsed by default */
-    opacity: 0;         /* hidden */
+    max-height: 0;  
+    opacity: 0;       
     background-color: white;
     position: relative;
     z-index: 998;
   }
 
   .nav.active {
-    max-height: 500px;  /* enough height to show all links */
+    max-height: 500px;  
     opacity: 1;
   }
 
@@ -325,7 +325,7 @@ body {
     max-height: 0;         
     overflow: hidden;
     flex-direction: column;
-    background: #fff6f6;
+    background: whitesmoke;
     transition: max-height 0.3s ease;
   }
 
