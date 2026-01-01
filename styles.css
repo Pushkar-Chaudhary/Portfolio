@@ -311,6 +311,41 @@ body {
 .p{
   text-align: center;
 }
+/* --- Desktop --- */
+.menu-btn {
+  display: none; /* hide button on desktop */
+}
+
+.logo {
+  font-size: 28px; /* normal size on desktop */
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block; /* show hamburger on phones */
+    font-size: 28px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav {
+    display: none;
+    flex-direction: column;
+    background: #111; /* optional dark bg */
+    padding: 10px;
+  }
+
+  .nav.active {
+    display: flex; /* show when menu active */
+  }
+
+  .logo {
+    font-size: 18px; /* smaller on mobile */
+  }
+}
+
 
 
 
