@@ -315,7 +315,7 @@ body {
   .menu-btn {
     display: block; 
     align-items: right;
-    padding-left: 20px;
+    
   }
 
   .logo {
@@ -339,7 +339,12 @@ body {
     max-height: 500px; 
   }
 }
-
+.menu{
+  font-size: 1rem;
+  margin-right: 10px;
+  font-weight: bold;
+  color:#181717;
+}
 
 
 
