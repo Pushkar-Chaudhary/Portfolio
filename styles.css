@@ -65,7 +65,7 @@ body {
 
 .menu-btn {
   display: none;
-  font-size: 1.8rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
@@ -151,7 +151,7 @@ body {
 
 .menu-btn {
   display: none;
-  font-size: 1.8rem;
+  font-size: 1rem;
   cursor: pointer;
   margin-left: auto;
   position: relative;
