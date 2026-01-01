@@ -29,11 +29,9 @@
             <a href="aboutme.html" target="_self" class="about">About Me</a>
             <a href="projects.html" target="_self" >Projects</a>
             <a href="contact.html" target="_self" >Contact</a>
-        </div></div> 
-        <section>
-            <p class="p">Web Developer | Student | Learner</p>
-        </section> 
-        <hr>
+        </div></div><hr> 
+       
+        
        
     <div class="about-me">
     <p>I am a 17 yr old student who is passionate about coding and technology. I enjoy learning new programming languages and working on projects that challenge my skills.</p>
@@ -51,15 +49,17 @@
 </section>
  <script defer src="menu.js"></script>
  <script>
-            document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const nav = document.getElementById("navLinks");
 
+  // Toggle dropdown menu
   menuBtn.addEventListener("click", () => {
     nav.classList.toggle("active");
     menuBtn.textContent = nav.classList.contains("active") ? "✕" : "☰";
   });
 
+  // Close menu on link click
   document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", () => {
       nav.classList.remove("active");

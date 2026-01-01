@@ -29,11 +29,7 @@
             <a href="aboutme.html" target="_self" >About Me</a>
             <a href="projects.html" target="_self" >Projects</a>
             <a href="contact.html" target="_self" class="contact">Contact</a>
-        </div></div> 
-        <section>
-            <p class="p">Web Developer | Student | Learner</p>
-        </section><hr> 
-        
+        </div></div><hr> 
     <p class="social-info">You can contact with me from the following options:</p>
       <div class="connect"><h2>Connect With Me.</h2></div>
 <div class="social-info">        <a href="https://www.instagram.com/pushkarchau_/">Instagram/</a>
@@ -45,15 +41,17 @@
 <p>You can see about my projects from my projects page.</p></div>
 <script defer src="menu.js"></script>
 <script>
-            document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const nav = document.getElementById("navLinks");
 
+  // Toggle dropdown menu
   menuBtn.addEventListener("click", () => {
     nav.classList.toggle("active");
     menuBtn.textContent = nav.classList.contains("active") ? "✕" : "☰";
   });
 
+  // Close menu on link click
   document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", () => {
       nav.classList.remove("active");
@@ -67,11 +65,6 @@
     if(link.dataset.page === currentPage) {
       link.classList.add("active");
     }
-
-    // Close menu when link clicked (mobile)
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("active");
-    });
   });
 
 </script>

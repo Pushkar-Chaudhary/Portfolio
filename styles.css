@@ -1,4 +1,4 @@
-/* Basic Reset */
+
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +14,7 @@ body {
   min-height: 200vh;
 }
 
-/* Scroll Progress Bar */
+
 #scroll-progress {
   position: fixed;
   top: 0;
@@ -26,13 +26,13 @@ body {
   z-index: 1000;
 }
 
-/* Header */
+
 .top {
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: whitesmoke;
-  padding: 10px 20px;
+  padding: 10px 10px;
   position: sticky;
   top: 0;
   z-index: 999;
@@ -41,10 +41,10 @@ body {
 
 .header {
   font-family: Amarna, sans-serif;
+  font-size: 0.7rem;
   color: #265f61;
 }
 
-/* Nav */
 .nav {
   display: flex;
   gap: 20px;
@@ -62,47 +62,13 @@ body {
   font-size: 1.1rem;
 }
 
-/* Hamburger */
+
 .menu-btn {
   display: none;
   font-size: 1.8rem;
   cursor: pointer;
 }
 
-/* Mobile Menu */
-@media (max-width: 768px) {
-
-  .top {
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-    max-height: 80px; /* only header visible */
-  }
-
-  .top.active {
-    max-height: 600px; /* expands whole upper section */
-  }
-
-  .top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .nav {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px 0;
-  }
-
-  .menu-btn {
-    font-size: 26px;
-    cursor: pointer;
-  }
-}
-
-
-/* Profile */
 .profile-section {
   display: flex;
   align-items: center;
@@ -133,7 +99,7 @@ body {
   50% { transform: translateY(-8px); }
 }
 
-/* Info */
+
 .info-text {
   text-align: center;
   padding: 10px;
@@ -182,7 +148,7 @@ body {
 
 
 
-/* Hamburger button */
+
 .menu-btn {
   display: none;
   font-size: 1.8rem;
@@ -193,17 +159,17 @@ body {
   user-select: none;
 }
 
-/* Desktop nav */
+
 .nav {
   display: flex;
   gap: 20px;
   justify-content: flex-end;
   flex-wrap: nowrap;
-  transition: max-height 0.4s ease, opacity 0.4s ease; /* smooth open/close */
+  transition: max-height 0.4s ease, opacity 0.4s ease; 
   overflow: hidden;
 }
 
-/* Mobile view */
+
 @media (max-width: 600px) {
   .menu-btn {
     display: block;
@@ -233,7 +199,6 @@ body {
   }
 }
 
-/* Highlight current page */
 .nav a.active {
   color: #000000;
   text-decoration: underline;
@@ -280,16 +245,15 @@ body {
 .contact-info p{
   margin: 8px 0;
 }
-/* Keep the underline for active page links */
+
 .nav a {
-    text-decoration: none; /* default off */
+    text-decoration: none; 
     color: #3b2f2f;
     font-weight: bold;
     position: relative;
     transition: color 0.3s;
 }
 
-/* Underline for active/current page */
 .nav a.home,
 .nav a.about,
 .nav a.projects,
@@ -297,7 +261,7 @@ body {
     text-decoration: underline;
 }
 
-/* Hover effect (optional) */
+
 .nav a:hover {
     color: #000;
     font-size: 1.1rem;
@@ -310,6 +274,68 @@ body {
 }
 .p{
   text-align: center;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: whitesmoke;
+  color: #fff;
+}
+
+.logo {
+  font-size: 28px; 
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+}
+
+.nav a {
+  color: #1d1c1c;
+  text-decoration: none;
+  margin: 0 15px;
+  display: inline-block;
+  padding: 8px 0;
+}
+
+.menu-btn {
+  display: none;
+  font-size: 28px;
+  background: none;
+  border: none;
+  color: #181717;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block; 
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .nav {
+    display: block;
+    max-height: 0;         
+    overflow: hidden;
+    flex-direction: column;
+    background: #fff6f6;
+    transition: max-height 0.3s ease;
+  }
+
+  .nav a {
+    margin: 10px 20px;
+  }
+
+  .nav.active {
+    max-height: 500px; 
+  }
 }
 
 

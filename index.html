@@ -89,10 +89,8 @@
             <a href="aboutme.html" target="_self" >About Me</a>
             <a href="projects.html" target="_self" >Projects</a>
             <a href="contact.html" target="_self" >Contact</a>
-        </div></div>
-        <section>
-            <p class="p">Web Developer | Student | Learner</p>
-        </section><hr> <div class="profile-section">
+        </div></div><hr>
+   <div class="profile-section">
   <img src="pfp2.jpeg" class="profile-img" alt="Profile Image">
   <div class="greetings">
     <h1>Hello and Namaste!</h1>
@@ -192,26 +190,24 @@ I enjoy building clean, responsive websites using HTML, CSS, and JavaScript whil
           </footer>
           <script defer src="menu.js"></script>
           <script>
+     document.addEventListener("DOMContentLoaded", () => {
+  const menuBtn = document.getElementById("menuBtn");
+  const nav = document.getElementById("navLinks");
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  const menuBtn = document.querySelector(".menu-btn");
-  const topSection = document.getElementById("topSection");
-
-  // Toggle whole upper section
-  menuBtn.addEventListener("click", function () {
-    topSection.classList.toggle("active");
-
-    // Optional icon change
-    this.textContent = topSection.classList.contains("active") ? "✕" : "☰";
+  // Toggle dropdown menu
+  menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("active");
+    menuBtn.textContent = nav.classList.contains("active") ? "✕" : "☰";
   });
 
-});
-document.addEventListener("DOMContentLoaded", function () {
-  const navLinks = document.getElementById("navLinks");
-  
-
-
+  // Close menu on link click
+  document.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("active");
+      menuBtn.textContent = "☰";
+    });
+  });
+});       
   // Highlight current page
   const currentPage = window.location.pathname.split("/").pop().split(".")[0];
   document.querySelectorAll(".nav-link").forEach(link => {
@@ -224,7 +220,7 @@ document.addEventListener("DOMContentLoaded", function () {
       navLinks.classList.remove("active");
     });
   });
-});
+
 </script>
          </body></div>
 </html>

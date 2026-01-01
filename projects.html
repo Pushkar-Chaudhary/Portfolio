@@ -29,11 +29,9 @@
             <a href="aboutme.html" target="_self" >About Me</a>
             <a href="projects.html" target="_self" class="projects">Projects</a>
             <a href="contact.html" target="_self" >Contact</a>
-        </div></div> 
-        <section>
-            <p class="p">Web Developer | Student | Learner</p>
-        </section> 
-      <hr>
+        </div></div><hr> 
+        
+      
     <div class="projects-intro">
     <h2>Here are some of my projects:</h2></div>
 
@@ -44,15 +42,17 @@
 
     </div><script defer src="menu.js"></script>
     <script>
-            document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const nav = document.getElementById("navLinks");
 
+  // Toggle dropdown menu
   menuBtn.addEventListener("click", () => {
     nav.classList.toggle("active");
     menuBtn.textContent = nav.classList.contains("active") ? "✕" : "☰";
   });
 
+  // Close menu on link click
   document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", () => {
       nav.classList.remove("active");
@@ -67,13 +67,7 @@
     if(link.dataset.page === currentPage) {
       link.classList.add("active");
     }
-
-    // Close menu when link clicked (mobile)
-    link.addEventListener("click", () => {
-      navLinks.classList.remove("active");
-    });
   });
 </script>
-
 </body></div>
 </html>
