@@ -20,7 +20,7 @@
     <header class="header">
       <h1>Pushkar Chaudhary</h1>
     </header>
-    <div class="menu-btn" id="menuBtn">☰</div>
+    <p class="menu">Menu</p><div class="menu-btn" id="menuBtn"> ☰</div>
   </div>
 
   <div class="nav" id="navLinks">
@@ -47,9 +47,9 @@
     <li>✔ Active on GitHub with real projects</li>
   </ul>
 </section>
- <script defer src="menu.js"></script>
- <script>
-document.addEventListener("DOMContentLoaded", () => {
+        <script defer src="menu.js"></script>
+          <script>
+     document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const nav = document.getElementById("navLinks");
 
@@ -66,8 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
       menuBtn.textContent = "☰";
     });
   });
-});
-
+});       
   // Highlight current page
   const currentPage = window.location.pathname.split("/").pop().split(".")[0];
   document.querySelectorAll(".nav-link").forEach(link => {
@@ -75,7 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
       link.classList.add("active");
     }
 
+    // Close menu when link clicked (mobile)
+    link.addEventListener("click", () => {
+      navLinks.classList.remove("active");
+    });
   });
+
 </script>
 
 
