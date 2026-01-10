@@ -1,32 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const menu = document.getElementById("mobileNav");
-  const btn = document.querySelector(".menu-btn");
+  const menuBtn = document.getElementById("menuBtn");
+  const nav = document.getElementById("navLinks");
 
-  if (!menu || !btn) return;
+  menuBtn.addEventListener("click", () => {
+    nav.classList.toggle("active");
 
-  btn.addEventListener("click", () => {
-    menu.classList.toggle("active");
+    const icon = menuBtn.querySelector(".menu-icon");
+    icon.textContent = nav.classList.contains("active") ? "✕" : "☰";
   });
 
-  /* Swipe to close */
-  let startX = 0;
-
-  menu.addEventListener("touchstart", e => {
-    startX = e.touches[0].clientX;
+  // Close menu on link click (mobile)
+  document.querySelectorAll(".nav-link").forEach(link => {
+    link.addEventListener("click", () => {
+      nav.classList.remove("active");
+      menuBtn.querySelector(".menu-icon").textContent = "☰";
+    });
   });
 
-  menu.addEventListener("touchend", e => {
-    const endX = e.changedTouches[0].clientX;
-    if (endX - startX > 80) {
-      menu.classList.remove("active");
+  // Highlight active page
+  const currentPage = window.location.pathname.split("/").pop().replace(".html","");
+  document.querySelectorAll(".nav-link").forEach(link => {
+    if (link.dataset.page === currentPage) {
+      link.classList.add("active");
     }
   });
 });
-const progress = document.getElementById("scroll-progress");
-
-window.addEventListener("scroll", () => {
-  const h = document.documentElement;
-  const scrolled = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-  progress.style.width = scrolled + "%";
-  progress.style.opacity = h.scrollTop < 50 ? "0" : "1";
-}, { passive: true });
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelector(".profile-section").classList.add("show");
+});

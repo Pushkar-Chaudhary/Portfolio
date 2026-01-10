@@ -11,25 +11,25 @@
 </style>
  <style>
 @import url('https://fonts.googleapis.com/css2?family=Amarna:ital,wght@0,100..700;1,100..700&family=Caveat:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-</style>   
+</style><script defer src="menu.js"></script>   
 </head>
-<div class="container">
-<body class="body">    
-  <div class="top" id="topSection">
-  <div class="top-bar">
-    <header class="header">
-      <h1>Pushkar Chaudhary</h1>
-    </header>
-    <p class="menu">Menu</p><div class="menu-btn" id="menuBtn"> ☰</div>
-  </div>
+<body>
+  <div class="container">    
+<header class="top-bar">
+    <h1 class="logo">Pushkar Chaudhary</h1>
 
-  <div class="nav" id="navLinks">
+    <button class="menu-btn">
+  ☰ <span class="menu-text">Menu</span>
+</button>
 
-            <a href="index.html" target="_self" >Home</a>
-            <a href="aboutme.html" target="_self" >About Me</a>
-            <a href="projects.html" target="_self" >Projects</a>
-            <a href="contact.html" target="_self" class="contact">Contact</a>
-        </div></div><hr> 
+  </header>
+
+  <nav class="nav" id="navLinks">
+    <a href="index.html" class="nav-link" data-page="index">Home</a>
+    <a href="aboutme.html" class="nav-link" data-page="aboutme">About Me</a>
+    <a href="projects.html" class="nav-link" data-page="projects">Projects</a>
+    <a href="contact.html" class="nav-link" data-page="contact">Contact</a>
+  </nav><hr> 
     <p class="social-info">You can contact with me from the following options:</p>
       <div class="connect"><h2>Connect With Me.</h2></div>
 <div class="social-info">        <a href="https://www.instagram.com/pushkarchau_/">Instagram/</a>
@@ -39,36 +39,6 @@
       </div>
   <div class="mail"> <p>My mail id:</p> pushkarchaudhary256@gmail.com
 <p>You can see about my projects from my projects page.</p></div>
-<script defer src="menu.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-  const menuBtn = document.getElementById("menuBtn");
-  const nav = document.getElementById("navLinks");
-
-  // Toggle dropdown menu
-  menuBtn.addEventListener("click", () => {
-    nav.classList.toggle("active");
-    menuBtn.textContent = nav.classList.contains("active") ? "✕" : "☰";
-  });
-
-  // Close menu on link click
-  document.querySelectorAll(".nav-link").forEach(link => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("active");
-      menuBtn.textContent = "☰";
-    });
-  });
-});
-  // Highlight current page
-  const currentPage = window.location.pathname.split("/").pop().split(".")[0];
-  document.querySelectorAll(".nav-link").forEach(link => {
-    if(link.dataset.page === currentPage) {
-      link.classList.add("active");
-    }
-  });
-
-</script>
-
-
-</body></div>
+</div>
+</body>
 </html>
