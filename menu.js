@@ -28,25 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".profile-section").classList.add("show");
 });
-const menuBtn = document.getElementById("menuBtn");
-const nav = document.getElementById("navLinks");
-
-// Toggle dropdown menu
-menuBtn.addEventListener("click", () => {
-  nav.classList.toggle("active");
-});
-
-// Close menu when a link is clicked (mobile)
-document.querySelectorAll(".nav-link").forEach(link => {
-  link.addEventListener("click", () => {
-    if(window.innerWidth <= 767) {
-      nav.classList.remove("active");
-    }
+document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("themeToggle");
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-theme");
   });
-});
-
-// Highlight current page
-const currentPage = window.location.pathname.split("/").pop().split(".")[0];
-document.querySelectorAll(".nav-link").forEach(link => {
-  if(link.dataset.page === currentPage) link.classList.add("active");
 });
