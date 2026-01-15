@@ -349,4 +349,10 @@ body {
     border-bottom: none;
   }
 }
-
+.timeline {
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  margin: 40px auto;
+  max-width: 800px;
+}
