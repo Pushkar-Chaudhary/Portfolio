@@ -30,8 +30,10 @@ body {
   color: var(--text-main);
   margin: 0 auto;
   line-height: 1.6;
-  max-width: 700px;
+  max-width: 650px;
   align-items: center;
+  scroll-behavior: smooth;
+  font-size: smaller;
 }
 
 /* --- CONTAINER --- */
