@@ -5,12 +5,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // 1. TOGGLE MENU WHEN HAMBURGER IS CLICKED
   menuBtn.addEventListener("click", () => {
     nav.classList.toggle("active");
-    
-    // Change icon to X (✕) or Hamburger (☰)
+
+    // Change icon to X or Hamburger using FontAwesome classes
+    const icon = menuBtn.querySelector("i");
     if (nav.classList.contains("active")) {
-      menuBtn.textContent = "✕";
+      icon.classList.remove("fa-bars");
+      icon.classList.add("fa-xmark");
     } else {
-      menuBtn.textContent = "☰";
+      icon.classList.remove("fa-xmark");
+      icon.classList.add("fa-bars");
     }
   });
 
@@ -29,7 +32,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // Only close if it is currently open (mobile view)
       if (nav.classList.contains("active")) {
         nav.classList.remove("active");
-        menuBtn.textContent = "☰"; // Reset icon to hamburger
+
+        // Reset icon to hamburger
+        const icon = menuBtn.querySelector("i");
+        if (icon) {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        }
       }
     });
   });

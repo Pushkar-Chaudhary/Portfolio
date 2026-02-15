@@ -201,7 +201,9 @@ body {
   color: var(--text-main);
   padding: 8px;
   border-radius: 4px;
-  transition: background 0.2s ease, transform 0.2s ease;
+  z-index: 200;
+  /* Ensure on top */
+  position: relative;
 }
 
 .menu-btn:hover {
@@ -308,8 +310,8 @@ body {
     animation: stretchDown 0.3s ease-out forwards;
     position: absolute;
     /* Float it */
-    top: 60px;
-    /* Below header */
+    top: 100%;
+    /* Anchor to bottom of header */
     left: 0;
     right: 0;
     width: 90%;
