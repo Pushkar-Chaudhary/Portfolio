@@ -4,32 +4,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pushkar Chaudhary| Frontend Developer</title>
+  <title>Pushkar Chaudhary | Frontend Developer</title>
   <meta name="description" content="Frontend Developer & Science Student from Nepal">
-  <link rel="icon" href="favicon.png">
+  <link rel="icon" href="favicon.jpeg">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Caveat:wght@700&display=swap"
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Caveat:wght@700&display=swap"
     rel="stylesheet">
+
   <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+  <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
-  <script defer src="menu.js"></script>
+
+  <style>
+    /* Max width container for minimal look */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Marquee middle of the page */
+    .marquee-container {
+      margin: 50px 0;
+    }
+
+    /* Avatar container remains old style */
+    .avatar-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 0 auto;
+    }
+
+    .avatar-container img.avatar {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    .bubble {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #38bdf8;
+      color: black;
+      padding: 5px 10px;
+      border-radius: 8px;
+      opacity: 0;
+      transition: 0.4s ease;
+      font-size: 0.9rem;
+    }
+
+    .avatar-container:hover .bubble {
+      opacity: 1;
+    }
+    .marquee-container {
+  overflow: hidden;
+  margin: 50px 0;
+}
+
+.marquee-row {
+  display: flex;
+  gap: 40px;
+  animation: marquee 15s linear infinite;
+}
+
+.marquee-row.reverse {
+  animation-direction: reverse;
+}
+
+.marquee-item i {
+  margin-right: 8px;
+  color: #38bdf8;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+  </style>
+      <script defer src="menu.js"></script>
   <script defer src="scroll-progress.js"></script>
-  <script src="theme.js"></script> <!-- No defer for instant load -->
-  <!-- Feedback Fish -->
-  <script defer src="https://feedback.fish/ff.js?pid=8182609d645eda"></script>
+  <script src="theme.js"></script>
+
 </head>
 
 <body>
-  <div class="scroll-progress" id="scrollProgress"></div>
+  <!-- Scroll Progress -->
+  <div id="scrollProgress" class="scroll-progress"></div>
+
+  <!-- Header -->
   <header class="top-bar">
     <h1>Pushkar Codes</h1>
-    <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
+    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
     <nav class="nav" id="navLinks">
-      <a href="index.html" class="nav-link">Home</a>
+      <a href="index.html" class="nav-link active">Home</a>
       <a href="aboutme.html" class="nav-link">About Me</a>
       <a href="projects.html" class="nav-link">Projects</a>
       <a href="contact.html" class="nav-link">Contact</a>
@@ -37,96 +114,104 @@
   </header>
 
   <div class="container">
-
-    <!-- PROFILE SECTION (Beside Layout) -->
-    <div class="profile-section">
-      <!-- YOUR PHOTO SRC -->
-      <img src="pfp2.jpeg" class="profile-img" alt="Pushkar Chaudhary">
-
+    <!-- Profile Section -->
+    <section class="profile-section">
+      <div class="avatar-container">
+        <img src="frame1.png" class="avatar" alt="frame1">
+        <img src="frame2.png" class="avatar" alt="frame2">
+        <img src="frame3.png" class="avatar" alt="frame3">
+        <div class="bubble">Hi! I'm Pushkar</div>
+      </div>
       <div class="greetings">
-        <h1>Hello and Namaste!</h1>
-        <p>
-          I am a science student passionate about web development and problem-solving.
-          I enjoy building clean, responsive websites using HTML, CSS, and JavaScript while continuously improving my
-          skills through real projects.
+        <h1>Hello and <span class="highlight">Namaste!</span></h1>
+        <p>I am a science student passionate about web development and problem-solving.
+          I enjoy building clean, minimal, interactive web experiences using HTML, CSS & JS.
         </p>
+        <div class="cta-buttons">
+          <a href="projects.html" class="btn btn-primary">View Projects</a>
+          <a href="contact.html" class="btn btn-secondary">Contact Me</a>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- INFINITE TECH MARQUEE -->
-    <div class="marquee-container">
-      <!-- Row 1: Moves Left -->
+    <!-- Marquee Section (middle) -->
+    <section class="marquee-container">
       <div class="marquee-row">
-        <div class="marquee-content">
-          <div class="marquee-item"><i class="fab fa-html5"></i> HTML</div>
-          <div class="marquee-item"><i class="fab fa-css3-alt"></i> CSS</div>
-          <div class="marquee-item"><i class="fab fa-js"></i> JavaScript</div>
-          <div class="marquee-item"><i class="fab fa-git-alt"></i> Git</div>
-          <div class="marquee-item"><i class="fab fa-github"></i> GitHub</div>
-          <div class="marquee-item"><i class="fab fa-x-twitter"></i> X</div>
-          <!-- Duplicate for Loop -->
-          <div class="marquee-item"><i class="fab fa-html5"></i> HTML</div>
-          <div class="marquee-item"><i class="fab fa-css3-alt"></i> CSS</div>
-          <div class="marquee-item"><i class="fab fa-js"></i> JavaScript</div>
-          <div class="marquee-item"><i class="fab fa-git-alt"></i> Git</div>
-          <div class="marquee-item"><i class="fab fa-github"></i> GitHub</div>
-          <div class="marquee-item"><i class="fab fa-x-twitter"></i> X</div>
-        </div>
+        <div class="marquee-item"><i class="fab fa-html5"></i> HTML</div>
+        <div class="marquee-item"><i class="fab fa-css3-alt"></i> CSS</div>
+        <div class="marquee-item"><i class="fab fa-js"></i> JavaScript</div>
+        <div class="marquee-item"><i class="fab fa-git-alt"></i> Git</div>
+        <div class="marquee-item"><i class="fab fa-github"></i> GitHub</div>
+        <div class="marquee-item"><i class="fab fa-x-twitter"></i> X</div>
       </div>
-
-      <!-- Row 2: Moves Right (Opposite) -->
       <div class="marquee-row reverse">
-        <div class="marquee-content">
-          <div class="marquee-item"><i class="fab fa-react"></i> React</div>
-          <div class="marquee-item"><i class="fab fa-sass"></i> Sass</div>
-          <div class="marquee-item"><i class="fab fa-npm"></i> NPM</div>
-          <div class="marquee-item"><i class="fab fa-figma"></i> Figma</div>
-          <div class="marquee-item"><i class="fab fa-linux"></i> Linux</div>
-          <div class="marquee-item"><i class="fab fa-vuejs"></i> Vue</div>
-          <!-- Duplicate for Loop -->
-          <div class="marquee-item"><i class="fab fa-react"></i> React</div>
-          <div class="marquee-item"><i class="fab fa-sass"></i> Sass</div>
-          <div class="marquee-item"><i class="fab fa-npm"></i> NPM</div>
-          <div class="marquee-item"><i class="fab fa-figma"></i> Figma</div>
-          <div class="marquee-item"><i class="fab fa-linux"></i> Linux</div>
-          <div class="marquee-item"><i class="fab fa-vuejs"></i> Vue</div>
-        </div>
+        <div class="marquee-item"><i class="fab fa-react"></i> React</div>
+        <div class="marquee-item"><i class="fab fa-sass"></i> Sass</div>
+        <div class="marquee-item"><i class="fab fa-npm"></i> NPM</div>
+        <div class="marquee-item"><i class="fab fa-figma"></i> Figma</div>
+        <div class="marquee-item"><i class="fab fa-linux"></i> Linux</div>
+        <div class="marquee-item"><i class="fab fa-vuejs"></i> Vue</div>
       </div>
-    </div>
+    </section>
 
-    <!-- TIMELINE -->
-    <div class="timeline">
+    <!-- Timeline Section -->
+    <section class="timeline">
       <h2>My Journey So Far</h2>
       <ul>
         <li><strong>2025:</strong> Built my own portfolio.</li>
-        <p>After some knowledge about html css and responsive web design I made this <a
-            href="https://pushkar-chaudhary.vercel.app/">portfolio</a>.</p>
-        <li><strong>2024:</strong> Knowledge about web-development.</li>
-        <p>After I got my first laptop after my SEE, I came to know about programming and webdevelopment.</p>
-        <li><strong>2021:</strong> Moved to Itahari.</li>
-        <p>After the Covid-19 pandemic struck, I moved to Itahari with my family.I completed my Secondary Education from
-          Koshi Saint James Residential Boarding School.</p>
-        <li><strong>2016:</strong> Moved to Kathmandu for further studies.</li>
-        <p>I moved to Kathmandu bcuz I was a quiet tallented so my parents decided to give me more opportunities for
-          study.I studied there at <a
-            href="https://edusanjal.com/school/lovely-angles-angreji-awasiya-vidyaalaya-school/">Lovely Angels Angreji
-            Awasiya Bidhyalaya</a>.</p>
-        <li><strong>2008:</strong> My Origin</li>
-        <p>Born in <a href="https://en.wikipedia.org/wiki/Lahan" target="_blank">Lahan,Siraha</a>, Nepal which is a
-          small town located at the mid eastern region of Nepal filled with greenary. I studied there upto class 2 and
-          moved to Kathmandu for my further studies.</p>
+        <p>After learning HTML, CSS, and responsive design, I created this <a href="https://pushkar-chaudhary.vercel.app/">portfolio</a>.</p>
+        <li><strong>2024:</strong> Learned web-development basics.</li>
+        <p>After getting my first laptop post-SEE, I explored programming and web development.</p>
+        <li><strong>2021:</strong>Further</li>
+        <p>Moved to Itahari after covid-a9 pandemic struck Nepal.I completed my Secondary Education from Koshi Saint James Residential Boarding School.</p>
+        <li><strong>2016:</strong>Middle School.</li>
+        <p> Moved to Kathmandu for studies.I studied at <a href="https://edusanjal.com/school/lovely-angles-angreji-awasiya-vidyaalaya-school/">Lovely Angels Angreji Awasiya Bidhyalaya</a>.</p>
+        <li><strong>2008:</strong>My origin.</li>
+        <p>Born in a small town of Eastern Nepal known as Lahan Siraha. Studied there at Public Aims Boarding School upto class 2.Moved to Kathmandu for further studies after class 2.</p>
       </ul>
-    </div>
-
+    </section>
   </div>
 
-  <footer class="footer">
+  <footer>
     <div class="feedback">
       <p><strong>Have feedback or suggestions?</strong></p>
       <button data-feedback-fish>Give Feedback</button>
     </div>
     <p>&copy; 2025 Pushkar Chaudhary. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Scroll progress
+    window.addEventListener("scroll", () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("scrollProgress").style.width = scrolled + "%";
+    });
+
+    // Avatar animation
+    const avatars = document.querySelectorAll(".avatar-container .avatar");
+    let index = 0;
+
+    function animateAvatar() {
+      avatars.forEach((img, i) => img.style.display = i === index ? "block" : "none");
+      index = (index + 1) % avatars.length;
+    }
+
+    setInterval(animateAvatar, 200);
+    animateAvatar();
+
+    // Mobile menu toggle
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    menuBtn.addEventListener("click", () => navLinks.classList.toggle("show"));
+
+    // Theme switch
+    const themeBtn = document.getElementById("themeBtn");
+    themeBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-theme");
+    });
+  </script>
 </body>
 
 </html>
