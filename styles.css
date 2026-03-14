@@ -981,3 +981,19 @@ input[type="email"] {
   background-color: transparent;
   border-radius: 50%;
 }
+.submit-btn {
+  cursor: pointer;
+  background-color: royalblue;
+  color: whitesmoke;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  display: block;
+  margin: auto;
+}
+.contact-form form button:hover {
+  background-color: rgb(14, 121, 243);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14, 121, 243, 0.3);
+}
