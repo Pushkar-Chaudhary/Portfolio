@@ -11,12 +11,13 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Caveat:wght@700&display=swap"
     rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap');
 </style>
   
   <link rel="stylesheet" href="styles.css">
-      <script defer src="menu.js"></script>
+  <script defer src="menu.js"></script>
   <script src="theme.js"></script>
 
 </head>
@@ -24,7 +25,7 @@
 <body>
   <header class="top-bar">
     <h1>Pushkar Codes</h1>
-    <button class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></button>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu"><i class="fas fa-bars"></i></button>
     <nav class="nav" id="navLinks">
       <a href="index.html" class="nav-link active">Home</a>
       <a href="aboutme.html" class="nav-link">About Me</a>
@@ -78,17 +79,6 @@
     }
     setInterval(animateAvatar, 500);
     animateAvatar();
-
-    const menuBtn = document.getElementById("menuBtn");
-    const navLinks = document.getElementById("navLinks");
-    menuBtn.addEventListener("click", () => navLinks.classList.toggle("show"));
-    const links = document.querySelectorAll(".nav-link");
-
-    links.forEach(link => {
-    if (link.href === window.location.href) {
-    link.classList.add("active");
-     }
-     });
   </script>
 </body>
 
