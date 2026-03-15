@@ -2,11 +2,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const nav = document.getElementById("navLinks");
 
-  // 1. TOGGLE MENU WHEN HAMBURGER IS CLICKED
+
   menuBtn.addEventListener("click", () => {
     nav.classList.toggle("active");
 
-    // Change icon to X or Hamburger using FontAwesome classes
+
     const icon = menuBtn.querySelector("i");
     if (nav.classList.contains("active")) {
       icon.classList.remove("fa-bars");
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 2. HIGHLIGHT ACTIVE PAGE (Home/About/Projects/Contact)
+
   const currentPage = window.location.pathname.split("/").pop();
   document.querySelectorAll(".nav-link").forEach(link => {
     link.classList.remove("active");
@@ -26,14 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 3. CLOSE MENU WHEN A LINK IS CLICKED (Mobile Experience)
   document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", () => {
-      // Only close if it is currently open (mobile view)
+    
       if (nav.classList.contains("active")) {
         nav.classList.remove("active");
 
-        // Reset icon to hamburger
+  
         const icon = menuBtn.querySelector("i");
         if (icon) {
           icon.classList.remove("fa-xmark");
