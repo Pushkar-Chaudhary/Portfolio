@@ -1,44 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   const menuBtn = document.getElementById("menuBtn");
   const nav = document.getElementById("navLinks");
-
+  const checkbox = document.getElementById("menuCheckbox");
 
   menuBtn.addEventListener("click", () => {
     nav.classList.toggle("active");
 
-
-    const icon = menuBtn.querySelector("i");
-    if (nav.classList.contains("active")) {
-      icon.classList.remove("fa-bars");
-      icon.classList.add("fa-xmark");
-    } else {
-      icon.classList.remove("fa-xmark");
-      icon.classList.add("fa-bars");
-    }
+    // toggle checkbox so SVG animation works
+    checkbox.checked = nav.classList.contains("active");
   });
 
-
-  const currentPage = window.location.pathname.split("/").pop();
-  document.querySelectorAll(".nav-link").forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === currentPage || (currentPage === "" && link.getAttribute("href") === "index.html")) {
-      link.classList.add("active");
-    }
-  });
-
+  // Close menu when a link is clicked
   document.querySelectorAll(".nav-link").forEach(link => {
     link.addEventListener("click", () => {
-    
-      if (nav.classList.contains("active")) {
-        nav.classList.remove("active");
-
-  
-        const icon = menuBtn.querySelector("i");
-        if (icon) {
-          icon.classList.remove("fa-xmark");
-          icon.classList.add("fa-bars");
-        }
-      }
+      nav.classList.remove("active");
+      checkbox.checked = false;
     });
   });
 });

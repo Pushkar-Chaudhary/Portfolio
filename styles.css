@@ -342,7 +342,6 @@ a:hover {
   padding: 20px 0;
   margin: 40px auto;
   max-width: 100%;
-
   transition: all 0.3s ease;
 }
 
@@ -350,20 +349,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-.avatar-container {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto;
-  cursor: pointer;
-}
-.avatar-container .avatar {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background-color: transparent;
+  max-width: 50%;
 }
 .submit-btn {
   cursor: pointer;
@@ -380,24 +366,6 @@ a:hover {
       max-width: 800px;
       margin: 0 auto;
       padding: 0 15px;
-    }
-    .avatar-container {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      margin: 0 auto;
-    }
-
-    .avatar-container img.avatar {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: none;
-    }
-
-    .avatar-container:hover .bubble {
-      opacity: 1;
     }
   .greetings{
   font-family: Arial;
@@ -464,4 +432,34 @@ footer{
 }
 .more{
   font-family:Datatype;
+}
+.bottom-video {
+  width: 100%;
+  margin-top: 50px;
+  overflow: hidden;
+}
+
+.bottom-video video {
+  width: 100%;
+  height: auto;
+  max-height:200px;
+  object-fit: cover;
+  border-radius: 0px;
+}
+.avatar-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.avatar-container img.avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.25s ease;
 }

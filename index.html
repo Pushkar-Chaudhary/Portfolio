@@ -18,11 +18,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap');
 </style>
-  
   <link rel="stylesheet" href="styles.css">
   <script defer src="menu.js"></script>
-  <script src="theme.js"></script>
-
 </head>
 
 <body>
@@ -39,8 +36,8 @@
   <div class="container">
     <section class="profile-section">
       <div class="avatar-container">
-        <img src="frame1.png" class="avatar" alt="frame1">
-        <img src="frame2.png" class="avatar" alt="frame2">
+        <img src="stand.png" class="avatar" alt="frame1">
+        <img src="namaste.png" class="avatar" alt="frame2">
       </div>
       <div class="greetings">
         <h1 class="intro">Pushkar Chaudhary</h1>
@@ -59,19 +56,32 @@
       <p><strong>Have any feedback or suggestions?</strong></p>
       <a href="https://feedback.fish/265a18dcee38b3" target="_blank" class="feedback-btn">Give Feedback</a>
     </div>
-  </footer>
+     </footer>
+     <section class="bottom-video">
+  <video autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+</section>
+   
+<script>
+  const avatars = document.querySelectorAll(".avatar-container .avatar");
+  let index = 0;
 
-  <script>
-    const avatars = document.querySelectorAll(".avatar-container .avatar");
-    let index = 0;
+  function animateAvatar() {
+    avatars.forEach((img, i) => {
+      img.style.opacity = i === index ? "1" : "0";
+    });
 
-    function animateAvatar() {
-      avatars.forEach((img, i) => img.style.display = i === index ? "block" : "none");
-      index = (index + 1) % avatars.length;
-    }
-    setInterval(animateAvatar, 500);
-    animateAvatar();
-  </script>
+    index = (index + 1) % avatars.length;
+  }
+
+
+  avatars.forEach((img, i) => {
+    img.style.opacity = i === 0 ? "1" : "0";
+  });
+
+  setInterval(animateAvatar, 800);
+</script>
 </body>
 
 </html>
