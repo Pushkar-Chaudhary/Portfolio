@@ -12,6 +12,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="icon" href="favicon.jpeg">
   <script defer src="menu.js"></script>
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Datatype:wght@100..900&display=swap');
+</style>
 </head>
 
 <body>
@@ -24,6 +28,71 @@
       <a href="contact.html" class="nav-link">Contact</a>
     </nav>
   </header>
+  <div class="introduction">
+    <div class="heading"><h1>About Me</h1></div>
+    <p>Hi, I'm Pushkar Chaudhary, a passionate frontend developer and science student from Lahan,Nepal. I specialize in creating minimal and user-friendly websites using HTML, CSS, and JavaScript. With a keen eye for design and a love for coding, I strive to build engaging digital experiences that are both functional and visually appealing. When I'm not coding, you can find me exploring the latest trends in web development or diving into scientific research. I'm always eager to learn and grow in my field, and I'm excited to connect with like-minded individuals who share my passion for technology and creativity.</p>
+  </div>
+  <div class="education"><div class="heading"><h1>Education</h1></div>
+    <div class="school">
+    <img src="sgc.png" class="logo"><p>Sushma Godawari College,Itahari(+2)</p>
+    </div>
+    <div class="school">
+    <img src="koshi.jpg" class="logo"><p>Koshi Saint James Residential Secondary School (Secondary Education)</p>
+    </div>
+    <div class="school">
+    <img src="pabs.jpg" class="logo"><p>Public Aims Boarding School(Primary education)</p>
+    </div>
+ <h1 class="heading">Journey so far</h1>
+    <section class="timeline" id="timeline">
+      <img src="favicon.jpeg" class="timeline-tracker" id="tracker">
+  <div class="timeline-item">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <h3>2026</h3>
+      <p>Now I'm polishing my skills gaining more knowledge and working on some projects that will be helpful in the near future.</p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <h3>2025</h3>
+      <p>After learning html css and responsive web design, I made this <a href="https://pushkar-chaudhary.vercel.app/" target="_blank" rel="noopener noreferrer">portfolio</a></p>
+    </div>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-dot"></div>
+    <div class="timeline-content">
+      <h3>2024</h3>
+      <p>Got some knowledge about webdevelopment and languages.Started with html and css.</p>
+    </div>
+  </div>
+</section>
+  
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const tracker = document.getElementById("tracker");
+  const timeline = document.getElementById("timeline");
+
+  window.addEventListener("scroll", () => {
+
+    const timelineTop = timeline.offsetTop;
+    const timelineHeight = timeline.offsetHeight;
+    const scrollY = window.scrollY;
+
+
+    let progress = (scrollY - timelineTop + window.innerHeight / 2) / timelineHeight;
+
+
+    progress = Math.max(0, Math.min(progress, 1));
+
+    const moveY = progress * timelineHeight;
+
+    tracker.style.transform = `translateY(${moveY}px)`;
+  });
+});
+</script>
 </body>
 
 </html>
