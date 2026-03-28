@@ -524,3 +524,8 @@ footer{
   background: var(--primary);
   border-radius: 50%;
 }
+.wrapper {
+  display: flex;
+  gap: 20px;
+  margin:auto;
+}
