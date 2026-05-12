@@ -437,10 +437,12 @@ footer{
 }
 .more{
   font-family:Inter;
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 .avatar-container {
   position: relative;
-  width: 200px;
+  width: 300px;
   height: 200px;
   overflow: hidden;
 }
@@ -523,8 +525,9 @@ footer{
 }
 .hi{
   font-family:Inter;
+  font-size: 15px;
 }
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .timeline {
     padding-left: 40px;
   }

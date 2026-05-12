@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Pushkar Chaudhary | Frontend Developer from Nepal</title>
+  <title>Pushkar Chaudhary | Developer from Nepal</title>
 
-  <meta name="description" content="Pushkar Chaudhary is a Frontend Developer and Science Student from Nepal. Explore portfolio, projects, skills and contact details.">
+  <meta name="description" content="Pushkar Chaudhary is a young webdev and also makes mobile apps.">
 
-  <meta name="keywords" content="Pushkar Chaudhary, Frontend Developer Nepal, Web Developer Nepal, HTML CSS JavaScript Developer, Pushkar Portfolio">
+  <meta name="keywords" content="Pushkar Chaudhary,Web Developer Nepal, Pushkar Portfolio">
 
   <meta name="author" content="Pushkar Chaudhary">
   <meta name="robots" content="index, follow">
@@ -16,14 +16,14 @@
 
   <link rel="canonical" href="https://pushkar-chaudhary.vercel.app/">
 
-  <meta property="og:title" content="Pushkar Chaudhary | Frontend Developer">
+  <meta property="og:title" content="Pushkar Chaudhary | Developer">
   <meta property="og:description" content="Portfolio website of Pushkar Chaudhary from Nepal.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://pushkar-chaudhary.vercel.app/">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pushkar Chaudhary | Frontend Developer">
-  <meta name="twitter:description" content="Frontend Developer portfolio from Nepal.">
+  <meta name="twitter:title" content="Pushkar Chaudhary | Developer">
+  <meta name="twitter:description" content="Developer portfolio from Nepal.">
 
   <link rel="icon" href="favicon.jpeg">
 
@@ -33,7 +33,7 @@
     "@type":"Person",
     "name":"Pushkar Chaudhary",
     "url":"https://pushkar-chaudhary.vercel.app/",
-    "jobTitle":"Frontend Developer",
+    "jobTitle":"Developer",
     "address":{
       "@type":"Place",
       "addressCountry":"Nepal"
@@ -89,7 +89,7 @@
 
 <p class="hi">
 I am Pushkar Chaudhary, a Frontend Developer from Nepal who creates modern,
-fast and responsive websites using HTML, CSS and JavaScript.
+fast and responsive websites.I am passionate about crafting engaging digital experiences, with a keen eye for design and a love for coding, I strive to build websites that are both functional and visually appealing.
 </p>
 
 <div class="more">
@@ -115,7 +115,7 @@ fast and responsive websites using HTML, CSS and JavaScript.
 <script>
 const avatars = document.querySelectorAll(".avatar-container .avatar");
 const avatarContainer = document.querySelector(".avatar-container");
-let index = 1;
+let index = 0;
 let intervalId;
 
 function animateAvatar() {
@@ -127,7 +127,7 @@ function animateAvatar() {
 }
 
 avatars.forEach((img, i) => {
-  img.style.opacity = i === 1 ? "1" : "0";
+  img.style.opacity = i === 0 ? "1" : "0";
 });
 
 intervalId = setInterval(animateAvatar, 800);
@@ -135,7 +135,7 @@ intervalId = setInterval(animateAvatar, 800);
 avatarContainer.addEventListener('mouseenter', () => {
   clearInterval(intervalId);
   avatars.forEach((img, i) => {
-    img.style.opacity = i === 1 ? "1" : "0"; 
+    img.style.opacity = i === 0 ? "1" : "0"; 
   });
 });
 
