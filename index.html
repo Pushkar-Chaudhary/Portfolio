@@ -130,7 +130,7 @@ avatars.forEach((img, i) => {
   img.style.opacity = i === 1 ? "1" : "0";
 });
 
-intervalId = setInterval(animateAvatar, 700);
+intervalId = setInterval(animateAvatar, 800);
 
 avatarContainer.addEventListener('mouseenter', () => {
   clearInterval(intervalId);
@@ -140,7 +140,7 @@ avatarContainer.addEventListener('mouseenter', () => {
 });
 
 avatarContainer.addEventListener('mouseleave', () => {
-  intervalId = setInterval(animateAvatar, 10000);
+  intervalId = setInterval(animateAvatar, 800);
 });
 </script>
 </body>
