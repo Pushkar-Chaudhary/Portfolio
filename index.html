@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,97 +52,101 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
-  <style>@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');</style>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+  </style>
   <meta name="google-site-verification" content="vWyYRwLvNg8_HrTs9IUBQi8AZevqSKSLbxOhPCmQLgE" />
   <script defer src="menu.js"></script>
 </head>
 
 <body>
 
-<header class="top-bar">
-  <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
-    <i class="fas fa-bars"></i>
-  </button>
-  
+  <header class="top-bar">
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">
+      <i class="fas fa-bars"></i>
+    </button>
 
-  <nav class="nav" id="navLinks">
-    <a href="index.html" class="nav-link active">Home</a>
-    <a href="aboutme.html" class="nav-link">About Me</a>
-    <a href="projects.html" class="nav-link">Projects</a>
-    <a href="contact.html" class="nav-link">Contact</a>
-  </nav>
-</header>
 
-<main class="container">
+    <nav class="nav" id="navLinks">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="aboutme.html" class="nav-link">About Me</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </header>
 
-<section class="profile-section">
+  <main class="container">
 
-<div class="avatar-container">
-  <img src="stand.png" class="avatar" alt="Pushkar Chaudhary profile image">
-  <img src="namaste.png" class="avatar" alt="Pushkar Chaudhary greeting image">
-</div>
+    <section class="profile-section">
 
-<div class="greetings">
+      <div class="avatar-container">
+        <img src="stand.png" class="avatar" alt="Pushkar Chaudhary profile image">
+        <img src="namaste.png" class="avatar" alt="Pushkar Chaudhary greeting image">
+      </div>
 
-<h1 class="intro">Pushkar Chaudhary</h1>
+      <div class="greetings">
 
-<h2 class="sub-intro">Frontend Developer & Science Student</h2>
+        <h1 class="intro">Pushkar Chaudhary</h1>
 
-<p class="hi">
-I am Pushkar Chaudhary, a Frontend Developer from Nepal who creates modern,
-fast and responsive websites.I am passionate about crafting engaging digital experiences, with a keen eye for design and a love for coding, I strive to build websites that are both functional and visually appealing.
-</p>
+        <h2 class="sub-intro">Frontend Developer </h2>
 
-<div class="more">
-  <a href="aboutme.html" class="btn">Learn More About Me</a>
-  <a href="projects.html" class="btn">See My Projects</a>
-  <a href="contact.html" class="btn">Get In Touch</a>
-</div>
+        <p class="hi">
+          I am Pushkar Chaudhary, a Web and Mobile App Developer from Nepal who creates modern,
+          fast and responsive websites.I am passionate about crafting engaging digital experiences, with a keen eye for
+          design and a love for coding, I strive to build websites that are both functional and visually appealing.
+        </p>
 
-</div>
-</section>
+        <div class="more">
+          <a href="aboutme.html" class="btn">Learn More About Me</a>
+          <a href="projects.html" class="btn">See My Projects</a>
+          <a href="contact.html" class="btn">Get In Touch</a>
+        </div>
 
-</main>
+      </div>
+    </section>
 
-<footer>
-  <div class="feedback">
-    <p><strong>Have any feedback or suggestions?</strong></p>
-    <a href="https://feedback.fish/265a18dcee38b3" target="_blank" class="feedback-btn">
-      Give Feedback
-    </a>
-  </div>
-</footer>
+  </main>
 
-<script>
-const avatars = document.querySelectorAll(".avatar-container .avatar");
-const avatarContainer = document.querySelector(".avatar-container");
-let index = 0;
-let intervalId;
+  <footer>
+    <div class="feedback">
+      <p><strong>Have any feedback or suggestions?</strong></p>
+      <a href="https://feedback.fish/265a18dcee38b3" target="_blank" class="feedback-btn">
+        Give Feedback
+      </a>
+    </div>
+  </footer>
 
-function animateAvatar() {
-  avatars.forEach((img, i) => {
-    img.style.opacity = i === index ? "1" : "0";
-  });
+  <script>
+    const avatars = document.querySelectorAll(".avatar-container .avatar");
+    const avatarContainer = document.querySelector(".avatar-container");
+    let index = 0;
+    let intervalId;
 
-  index = (index + 1) % avatars.length;
-}
+    function animateAvatar() {
+      avatars.forEach((img, i) => {
+        img.style.opacity = i === index ? "1" : "0";
+      });
 
-avatars.forEach((img, i) => {
-  img.style.opacity = i === 0 ? "1" : "0";
-});
+      index = (index + 1) % avatars.length;
+    }
 
-intervalId = setInterval(animateAvatar, 800);
+    avatars.forEach((img, i) => {
+      img.style.opacity = i === 0 ? "1" : "0";
+    });
 
-avatarContainer.addEventListener('mouseenter', () => {
-  clearInterval(intervalId);
-  avatars.forEach((img, i) => {
-    img.style.opacity = i === 0 ? "1" : "0"; 
-  });
-});
+    intervalId = setInterval(animateAvatar, 800);
 
-avatarContainer.addEventListener('mouseleave', () => {
-  intervalId = setInterval(animateAvatar, 800);
-});
-</script>
+    avatarContainer.addEventListener('mouseenter', () => {
+      clearInterval(intervalId);
+      avatars.forEach((img, i) => {
+        img.style.opacity = i === 0 ? "1" : "0";
+      });
+    });
+
+    avatarContainer.addEventListener('mouseleave', () => {
+      intervalId = setInterval(animateAvatar, 800);
+    });
+  </script>
 </body>
+
 </html>
