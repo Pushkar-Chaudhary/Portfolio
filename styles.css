@@ -584,3 +584,15 @@ footer{
   transition: opacity 0.25s ease;
 }
 }
+.music-player {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  height: 352px;
+}
+.song {
+  margin: 40px auto;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  color: var(--primary);
+}
