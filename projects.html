@@ -25,27 +25,37 @@
     </nav>
   </header>
 
-  <div class="container">
-    <div class="about-me glass" style="margin-bottom: 40px; text-align: center;">
-      <h2 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--primary);">My Work</h2>
-      <p>Here are some of the projects I've worked on recently.</p>
-    </div>
+  <main class="container projects-page">
+    <section class="projects-hero glass fade-in-up">
+      <p class="projects-kicker">Selected Work</p>
+      <h1>My Projects</h1>
+      <p>Small builds, experiments, and ideas I’ve turned into working pages.</p>
+    </section>
 
-    <div class="projects-grid">
-      <div class="project-card fade-in-up" style="animation-delay: 0.2s; opacity: 0.7;">
-        <div class="card-glow"></div>
-      <div class="project-card fade-in-up" style="animation-delay: 0.4s; border-style: dashed; opacity: 0.7;">
-        <h3>Happy Birthday.</h3>
-        <p>A simple birthday wish page,which can be used to wish yourself a birthday or can be used to wish your loved ones on their special day.</p>
-        <div class="tech-stack">
+    <section class="projects-grid">
+      <article class="project-card project-card--featured fade-in-up">
+        <div class="project-card__header">
+          <div>
+            <p class="project-tag">Featured</p>
+            <h2>Happy Birthday</h2>
+          </div>
+          <a href="https://happybirthdayto-you.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-arrow" aria-label="Open Happy Birthday live demo">↗</a>
+        </div>
+
+        <p>A simple birthday wish page that can be used to celebrate yourself or someone special with a personal greeting.</p>
+
+        <div class="tech-stack" aria-label="Technologies used">
           <span>HTML</span>
           <span>CSS</span>
-          <span>JS</span>
-      </div>
-      <a href="https://happybirthdayto-you.vercel.app/" target="_blank" class="btn">View Live Demo</a>
+          <span>JavaScript</span>
+        </div>
 
-    </div>
-  </div>
+        <div class="project-card__footer">
+          <a href="https://happybirthdayto-you.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn">View Live Demo</a>
+        </div>
+      </article>
+    </section>
+  </main>
 </body>
 
 </html>
