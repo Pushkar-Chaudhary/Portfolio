@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pushkar Chaudhary | Developer from Nepal</title>
-  <meta name="description" content="Hi, I'm Pushkar Chaudhary, a passionate web and mobile app developer from Nepal.">
+  <meta name="description" content="Hi, I'm Pushkar Chaudhary, a developer and designer from Nepal.">
   <meta name="keywords" content="Pushkar Chaudhary,Web Developer Nepal, Pushkar Portfolio">
   <meta name="author" content="Pushkar Chaudhary">
   <meta name="robots" content="max-image-preview:none">
   <meta name="googlebot" content="index, follow">
   <link rel="canonical" href="https://pushkar-chaudhary.vercel.app/">
   <meta property="og:title" content="Pushkar Chaudhary | Developer">
-  <meta property="og:description" content="Hi, I'm Pushkar Chaudhary, a passionate web and mobile app developer from Nepal.">
+  <meta property="og:description" content="Hi, I'm Pushkar Chaudhary, a developer and designer from Nepal.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://pushkar-chaudhary.vercel.app/">
   <meta name="twitter:title" content="Pushkar Chaudhary | Developer">
@@ -69,9 +69,8 @@
 
     <section class="profile-section">
 
-      <div class="avatar-container">
-        <img src="stand.png" class="avatar" alt="Pushkar Chaudhary profile image">
-        <img src="namaste.png" class="avatar" alt="Pushkar Chaudhary greeting image">
+      <div class="pfp-img">
+        <img src="Coffee_20260616_160552_0000.png" class="pfp" alt="Pushkar Chaudhary profile image">
       </div>
 
       <div class="greetings">
@@ -81,7 +80,7 @@
         <h2 class="sub-intro">Frontend Developer </h2>
 
         <p class="hi">
-          I am Pushkar Chaudhary, a Web and Mobile App Developer from Nepal who creates modern,
+          I am Pushkar Chaudhary, a Web and Mobile App Developer, also a desimger who loves creativity,  creates modern,
           fast and responsive websites.I am passionate about crafting engaging digital experiences, with a keen eye for
           design and a love for coding, I strive to build websites that are both functional and visually appealing.
         </p>
@@ -105,38 +104,6 @@
       </a>
     </div>
   </footer>
-
-  <script>
-    const avatars = document.querySelectorAll(".avatar-container .avatar");
-    const avatarContainer = document.querySelector(".avatar-container");
-    let index = 0;
-    let intervalId;
-
-    function animateAvatar() {
-      avatars.forEach((img, i) => {
-        img.style.opacity = i === index ? "1" : "0";
-      });
-
-      index = (index + 1) % avatars.length;
-    }
-
-    avatars.forEach((img, i) => {
-      img.style.opacity = i === 0 ? "1" : "0";
-    });
-
-    intervalId = setInterval(animateAvatar, 800);
-
-    avatarContainer.addEventListener('mouseenter', () => {
-      clearInterval(intervalId);
-      avatars.forEach((img, i) => {
-        img.style.opacity = i === 0 ? "1" : "0";
-      });
-    });
-
-    avatarContainer.addEventListener('mouseleave', () => {
-      intervalId = setInterval(animateAvatar, 800);
-    });
-  </script>
 </body>
 
 </html>
