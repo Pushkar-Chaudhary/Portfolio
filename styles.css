@@ -610,11 +610,7 @@ footer{
 .profile-section {
   margin-top: 10px;
 }
-.more{
-  font-family:Inter;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
+
 .heading {
   margin-bottom: 20px;
   font-family: 'Playfair Display', serif;
@@ -729,4 +725,15 @@ footer{
   height: 100%;
   object-fit: cover;
 
+}
+.wrapper {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 30px;
+}
+.more{
+  font-family:Inter;
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
