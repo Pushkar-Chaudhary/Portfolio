@@ -12,14 +12,6 @@ body,
   transition: none !important;
   -webkit-transition: none !important;
 }
-.glass {
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow);
-}
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -47,6 +39,7 @@ html {
 body {
   font-family: Poppins, sans-serif;
   background-color: var(--bg-body);
+  background-color:beige;
   color: var(--text-main, #1f1f2e);
   margin: 0 auto;
   line-height: 1.7;
