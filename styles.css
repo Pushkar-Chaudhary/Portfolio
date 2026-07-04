@@ -39,7 +39,7 @@ html {
 body {
   font-family: Poppins, sans-serif;
   background-color: var(--bg-body);
-  background-color:beige;
+  background-color:rgb(255, 255, 255);
   color: var(--text-main, #1f1f2e);
   margin: 0 auto;
   line-height: 1.7;
