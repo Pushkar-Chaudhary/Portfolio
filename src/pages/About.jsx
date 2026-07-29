@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/Navbar.jsx";
 
 import sgc from "../assets/sgc.png";
 import koshi from "../assets/koshi.jpg";
