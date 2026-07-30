@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import pfp from "../assets/pfp.png"
-import TypingText from "../components/TypingText.jsx";
+import TypingText from "../components/Typingtext.jsx";
 import Navbar from "../components/Navbar.jsx";
 const Home = () => {
   return (
