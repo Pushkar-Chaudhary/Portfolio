@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pushkarchaudhary.vercel.app/sitemap.xml
+Sitemap: https://pushkar-codes.netlify.app/sitemap.xml

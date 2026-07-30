@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar.jsx";
+import SEO from "../components/SEO.jsx";
 
 const projects = [
   {
@@ -10,7 +11,7 @@ const projects = [
   },
   {
     title: "Portfolio Website",
-    demo: "https://pushkar-chaudhary.vercel.app/",
+    demo: "https://pushkar-codes.netlify.app",
     description:
       "A personal portfolio website that showcases my skills and projects.",
     featured: false,
@@ -20,6 +21,11 @@ const projects = [
 function Projects() {
   return (
     <>
+      <SEO
+        title="Projects | Pushkar Chaudhary - Selected Work & Builds"
+        description="Explore web development projects, experiments, and live apps created by Pushkar Chaudhary."
+        path="/projects"
+      />
       <Navbar />
 
       <main className="container projects-page">

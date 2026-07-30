@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar.jsx";
+import SEO from "../components/SEO.jsx";
 
 const socialLinks = [
   {
@@ -26,6 +27,11 @@ const socialLinks = [
 function Contact() {
   return (
     <>
+      <SEO
+        title="Contact | Pushkar Chaudhary - Get in Touch"
+        description="Connect with Pushkar Chaudhary via email or social channels (GitHub, LinkedIn, Instagram, X)."
+        path="/contact"
+      />
       <Navbar />
 
       <div className="container">

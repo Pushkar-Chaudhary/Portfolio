@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import Navbar from "../components/Navbar.jsx";
+import SEO from "../components/SEO.jsx";
 
 import sgc from "../assets/sgc.png";
 import koshi from "../assets/koshi.jpg";
@@ -37,6 +38,11 @@ function About() {
 
   return (
     <>
+      <SEO
+        title="About Me | Pushkar Chaudhary - Frontend Developer"
+        description="Learn more about Pushkar Chaudhary, a frontend developer and science student from Lahan, Nepal. Education, journey, and technical background."
+        path="/about"
+      />
       <Navbar />
 
       <div className="introduction">

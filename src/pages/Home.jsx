@@ -2,10 +2,17 @@ import { Link } from 'react-router-dom'
 import pfp from "../assets/pfp.png"
 import Typingtext from "../components/Typingtext.jsx";
 import Navbar from "../components/Navbar.jsx";
+import SEO from "../components/SEO.jsx";
+
 const Home = () => {
   return (
     <div>
-        <Navbar/>
+      <SEO
+        title="Pushkar Chaudhary | Frontend Developer & Designer from Nepal"
+        description="Hi, I'm Pushkar Chaudhary, a frontend developer and designer from Nepal passionate about creating modern, fast, and responsive web experiences."
+        path="/"
+      />
+      <Navbar/>
       <main className="container">
         <section className="profile-section">
           <div className="pfp-img">
