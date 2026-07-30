@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import pfp from "../assets/pfp.png"
-import TypingText from "../components/Typingtext.jsx";
+import Typingtext from "../components/Typingtext.jsx";
 import Navbar from "../components/Navbar.jsx";
 const Home = () => {
   return (
@@ -21,7 +21,7 @@ const Home = () => {
             <h1 className="intro">Pushkar Chaudhary</h1>
 
             <h2 className="sub-intro">
-              <TypingText />
+              <Typingtext />
                    </h2>
 
             <p className="hi">
