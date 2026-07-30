@@ -6,7 +6,7 @@ const roles = [
   "Mobile App Developer",
 ];
 
-function Typingtext() {
+function TypingText() {
   const [text, setText] = useState("");
   const [roleIndex, setRoleIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -37,4 +37,4 @@ function Typingtext() {
   return <span>{text}</span>;
 }
 
-export default Typingtext;
+export default TypingText;

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import pfp from "../assets/pfp.png"
-import Typingtext from "../components/Typingtext.jsx";
+import TypingText from "../components/TypingText.jsx";
 import Navbar from "../components/Navbar.jsx";
 import SEO from "../components/SEO.jsx";
 
@@ -28,7 +28,7 @@ const Home = () => {
             <h1 className="intro">Pushkar Chaudhary</h1>
 
             <h2 className="sub-intro">
-              <Typingtext />
+              <TypingText />
                    </h2>
 
             <p className="hi">
