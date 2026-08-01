@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
+import ".HeroSlider.css";
 
 export default function HeroSlider() {
   const [active, setActive] = useState(true);
