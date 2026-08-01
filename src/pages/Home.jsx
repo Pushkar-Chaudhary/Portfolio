@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
-import pfp from "../assets/pfp.png"
 import TypingText from "../components/TypingText.jsx";
 import Navbar from "../components/Navbar.jsx";
 import SEO from "../components/SEO.jsx";
-
+import HeroSlider from "../components/HeroSlider.jsx";
 const Home = () => {
   return (
     <div>
@@ -15,15 +14,8 @@ const Home = () => {
       <Navbar/>
       <main className="container">
         <section className="profile-section">
-          <div className="pfp-img">
-            <img
-              src={pfp}
-              className="pfp"
-              alt="Pushkar Chaudhary profile"
-              loading="lazy"
-            />
-          </div>
-
+            <HeroSlider/>
+          
           <div className="greetings">
             <h1 className="intro">Pushkar Chaudhary</h1>
 

@@ -1,40 +1,26 @@
-import { useEffect, useState } from "react";
+import Typed from "typed.js";
+import { useEffect, useRef } from "react";
 
-const roles = [
-  "Frontend Developer",
-  "UI Designer",
-  "Mobile App Developer",
-];
-
-function TypingText() {
-  const [text, setText] = useState("");
-  const [roleIndex, setRoleIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+export default function TypingText() {
+  const el = useRef(null);
 
   useEffect(() => {
-    const currentRole = roles[roleIndex];
+    const typed = new Typed(el.current, {
+      strings: [
+        "Frontend Developer",
+        "UI Designer",
+        "Mobile App Developer",
+      ],
+      typeSpeed: 60,
+      backSpeed: 35,
+      backDelay: 180,
+      delay: 500,
+      loop: true,
+      showCursor: true,
+    });
 
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        setText(currentRole.substring(0, text.length + 1));
+    return () => typed.destroy();
+  }, []);
 
-        if (text.length + 1 === currentRole.length) {
-          setTimeout(() => setIsDeleting(true), 1500);
-        }
-      } else {
-        setText(currentRole.substring(0, text.length - 1));
-
-        if (text.length === 0) {
-          setIsDeleting(false);
-          setRoleIndex((prev) => (prev + 1) % roles.length);
-        }
-      }
-    }, isDeleting ? 50 : 100);
-
-    return () => clearTimeout(timeout);
-  }, [text, isDeleting, roleIndex]);
-
-  return <span>{text}</span>;
+  return <span ref={el}></span>;
 }
-
-export default TypingText;

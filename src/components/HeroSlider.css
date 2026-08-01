@@ -1,0 +1,35 @@
+.image-stack {
+  position: relative;
+  width: 140px;
+  height: 240px;
+  flex-shrink: 0;
+  margin-right: 35px;
+}
+
+.stack-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  transition: opacity .5s ease;
+}
+
+.front {
+  opacity: 1;
+  z-index: 2;
+}
+
+.back {
+  opacity: .85;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .image-stack {
+    width: 170px;
+    height: 250px;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+}
