@@ -16,6 +16,12 @@ const projects = [
       "A personal portfolio website that showcases my skills and projects.",
     featured: false,
   },
+  {
+    title:"Notes App",
+    demo:"https://notes-app-kappa-ruby-64.vercel.app/",
+    description:"A simple notes app that allows users to create, edit, and delete notes.",
+    featured:false
+  }
 ];
 
 function Projects() {
