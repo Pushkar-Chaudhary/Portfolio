@@ -3,6 +3,7 @@ import TypingText from "../components/TypingText.jsx";
 import Navbar from "../components/Navbar.jsx";
 import SEO from "../components/SEO.jsx";
 import HeroSlider from "../components/HeroSlider.jsx";
+import Footer from './Footer.jsx';
 const Home = () => {
   return (
     <div>
@@ -41,66 +42,10 @@ const Home = () => {
           </div>
         </section>
       </main>
-
-      <ul className="wrapper">
-        <span>
-          <a
-            href="https://www.instagram.com/nvm.pushkarr/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fab fa-instagram"></i>
-          </a>
-        </span>
-
-        <span>
-          <a
-            href="https://x.com/pushkar_chau07"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fab fa-x-twitter"></i>
-          </a>
-        </span>
-
-        <span>
-          <a
-            href="https://github.com/Pushkar-Chaudhary"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fab fa-github"></i>
-          </a>
-        </span>
-
-        <span>
-          <a
-            href="https://www.linkedin.com/in/anik-chy/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="fab fa-linkedin"></i>
-          </a>
-        </span>
-      </ul>
-
       <footer>
-        <div className="feedback">
-          <p>
-            <strong>Have any feedback or suggestions?</strong>
-          </p>
-
-          <a
-            href="https://feedback.fish/265a18dcee38b3"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="feedback-btn"
-          >
-            Give Feedback
-          </a>
+        <div className="border-t-2 border-solid border-gray-500">
+          <Footer/>
         </div>
-
-        <p>&copy; 2026 Pushkar Chaudhary. All rights reserved.</p>
       </footer>
     </div>
   )

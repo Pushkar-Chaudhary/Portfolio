@@ -11,7 +11,7 @@ const projects = [
   },
   {
     title: "Portfolio Website",
-    demo: "https://pushkar-codes.netlify.app",
+    demo: "https://pushkar-chaudhary.vercel.app",
     description:
       "A personal portfolio website that showcases my skills and projects.",
     featured: false,
@@ -75,9 +75,8 @@ function Projects() {
               <p>{project.description}</p>
 
               <div className="tech-stack">
-                <span>HTML</span>
-                <span>CSS</span>
-                <span>JavaScript</span>
+                <span>React</span><br></br>
+                <span>TailwindCSS</span>
               </div>
 
               <div className="project-card__footer">

@@ -101,8 +101,7 @@ function About() {
               <h3>2026</h3>
 
               <p>
-                Now I'm polishing my skills, gaining more knowledge, and working
-                on projects that will help me in the future.
+               Learned React and Tailwind CSS and redesigned this whole portfolio and made some projects and currently learning backend development using Next.js.
               </p>
             </div>
           </div>

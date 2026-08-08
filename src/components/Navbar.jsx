@@ -26,7 +26,9 @@ function Navbar() {
         <Link to="/projects" className="nav-link" onClick={() => setMenuOpen(false)}>
           Projects
         </Link>
-
+        <Link to="/dashboard" className="nav-link" onClick={() => setMenuOpen(false)}>
+          Dashboard
+        </Link>
         <Link to="/contact" className="nav-link" onClick={() => setMenuOpen(false)}>
           Contact
         </Link>
