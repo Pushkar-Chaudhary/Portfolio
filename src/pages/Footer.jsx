@@ -1,16 +1,16 @@
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedin,} from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer>
-      <div className="max-w-6xl mx-auto px-6 py-10">
+      <div className="max-w-3xl mx-auto px-6 py-10">
 
      
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
 
       
           <div className="text-center md:text-left">
-            <h2 className="text-2xl font-bold text-black">
+            <h2 className="text-2xl font-bold text-amber-300 dark:text-amber-50">
               Pushkarcodes<span className="text-cyan-400">.</span>
             </h2>
             <p className="text-gray-400 mt-2 max-w-sm">

@@ -32,7 +32,6 @@ function Projects() {
         description="Explore web development projects, experiments, and live apps created by Pushkar Chaudhary."
         path="/projects"
       />
-      <Navbar />
 
       <main className="container projects-page">
         <section className="projects-hero glass fade-in-up">

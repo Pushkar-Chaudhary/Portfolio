@@ -8,7 +8,6 @@ const Dashboard = () => {
         description="You can view my contributions through here."
         path="/dashboard"
       />
-      <Navbar />
       </div>
   )
 }

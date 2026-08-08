@@ -32,7 +32,6 @@ function Contact() {
         description="Connect with Pushkar Chaudhary via email or social channels (GitHub, LinkedIn, Instagram, X)."
         path="/contact"
       />
-      <Navbar />
 
       <div className="container">
         <div className="social-info">

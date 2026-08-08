@@ -6,13 +6,12 @@ import HeroSlider from "../components/HeroSlider.jsx";
 import Footer from './Footer.jsx';
 const Home = () => {
   return (
-    <div>
+    <div className='max-w-3xl mx-auto flex flex-wrap justify-center'>
       <SEO
         title="Pushkar Chaudhary | Frontend Developer & Designer from Nepal"
         description="Hi, I'm Pushkar Chaudhary, a frontend developer and designer from Nepal passionate about creating modern, fast, and responsive web experiences."
         path="/"
       />
-      <Navbar/>
       <main className="container">
         <section className="profile-section">
             <HeroSlider/>

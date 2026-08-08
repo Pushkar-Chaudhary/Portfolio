@@ -37,13 +37,12 @@ function About() {
   }, []);
 
   return (
-    <>
+    <div className="max-w-3xl mx-auto flex flex-wrap justify-center">
       <SEO
         title="About Me | Pushkar Chaudhary - Frontend Developer"
         description="Learn more about Pushkar Chaudhary, a frontend developer and science student from Lahan, Nepal. Education, journey, and technical background."
         path="/about"
       />
-      <Navbar />
 
       <div className="introduction">
         <div className="heading">
@@ -158,7 +157,7 @@ function About() {
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }
 
