@@ -100,7 +100,7 @@ function About() {
               <h3>2026</h3>
 
               <p>
-               Learned React and Tailwind CSS and redesigned this whole portfolio and made some projects and currently learning backend development using Next.js.
+               Learned React and Tailwind CSS and redesigned this whole portfolio and made some projects and currently learning backend development using Node.js.
               </p>
             </div>
           </div>
