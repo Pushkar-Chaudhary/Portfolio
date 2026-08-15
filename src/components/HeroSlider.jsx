@@ -3,12 +3,14 @@ import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
 import "./HeroSlider.css";
 
-export default function HeroSlider() {
-  const [active, setActive] = useState(true);
+const images = [img1, img2];
+
+function HeroSlider() {
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActive((prev) => !prev);
+      setCurrent((prev) => (prev + 1) % images.length);
     }, 1500);
 
     return () => clearInterval(interval);
@@ -16,16 +18,18 @@ export default function HeroSlider() {
 
   return (
     <div className="image-stack">
-      <img
-        src={img1}
-        alt=""
-        className={`stack-img ${active ? "front" : "back"}`}
-      />
-      <img
-        src={img2}
-        alt=""
-        className={`stack-img ${active ? "back" : "front"}`}
-      />
+      {images.map((img, index) => (
+        <img
+          key={img}
+          src={img}
+          alt=""
+          className={`stack-img ${
+            index === current ? "visible" : "hidden"
+          }`}
+        />
+      ))}
     </div>
   );
 }
+
+export default HeroSlider;

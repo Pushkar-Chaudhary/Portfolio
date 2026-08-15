@@ -1,7 +1,5 @@
 import { useEffect, useRef } from "react";
-import Navbar from "../components/Navbar.jsx";
 import SEO from "../components/SEO.jsx";
-
 import sgc from "../assets/sgc.png";
 import koshi from "../assets/koshi.jpg";
 import pabs from "../assets/pabs.jpg";
@@ -43,23 +41,18 @@ function About() {
         description="Learn more about Pushkar Chaudhary, a frontend developer and science student from Lahan, Nepal. Education, journey, and technical background."
         path="/about"
       />
-
       <div className="introduction">
-        <div className="heading">
-          <h1>About Me</h1>
-        </div>
-
         <p className="about">
-          Hi, I'm <span className="name">Pushkar Chaudhary</span>, a passionate
-          frontend developer and science student from Lahan, Nepal. I specialize
-          in creating minimal and user-friendly websites using HTML, CSS, and
+          <span className="name">Hi, I'm Pushkar Chaudhary, a passionate
+          frontend developer and science student from Lahan, Nepal.</span>
+          <br></br><div className="font-poppins"> I specialize in creating minimal and user-friendly websites using HTML, CSS, and
           JavaScript. With a keen eye for design and a love for coding, I strive
           to build engaging digital experiences that are both functional and
           visually appealing. When I'm not coding, you can find me exploring the
           latest trends in web development or diving into scientific research.
           I'm always eager to learn and grow in my field, and I'm excited to
           connect with like-minded individuals who share my passion for
-          technology and creativity.
+          technology and creativity.</div>
         </p>
       </div>
 

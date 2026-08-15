@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 
 const Switch = ({ checked, onChange }) => {
@@ -25,7 +24,7 @@ const Switch = ({ checked, onChange }) => {
 
 const StyledWrapper = styled.div`
   .switch {
-    font-size: 15px;
+    font-size: 10px;
     position: relative;
     display: inline-block;
     width: 1.8em;

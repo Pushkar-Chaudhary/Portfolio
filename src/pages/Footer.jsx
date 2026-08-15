@@ -10,8 +10,8 @@ const Footer = () => {
 
       
           <div className="text-center md:text-left">
-            <h2 className="text-2xl font-bold text-amber-300 dark:text-amber-50">
-              Pushkarcodes<span className="text-cyan-400">.</span>
+            <h2 className="text-2xl font-bold text-white dark:text-black">
+              Zorocodes<span className="text-cyan-400">.</span>
             </h2>
             <p className="text-gray-400 mt-2 max-w-sm">
               Crafting beautiful web experiences with React and Tailwind CSS.
@@ -20,7 +20,7 @@ const Footer = () => {
 
       
           <div className="flex flex-wrap justify-center gap-6 text-black-300">
-            <a href="#home" className="hover:text-cyan-400 transition">
+            <a href="#" className="hover:text-cyan-400 transition">
               Home
             </a>
             <a href="#about" className="hover:text-cyan-400 transition">

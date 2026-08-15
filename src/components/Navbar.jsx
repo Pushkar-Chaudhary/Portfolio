@@ -9,7 +9,7 @@ function Navbar({ darkMode, setDarkMode }) {
 
   return (
     <div
-      className="flex flex-wrap items-center mx-auto gap-4 mt-3 justify-between w-full px-3 md:justify-center md:gap-10 md:mt-2rem"
+      className="flex flex-wrap items-center mx-auto gap-4 mt-3 justify-between w-full px-3 md:justify-center md:gap-10 md:mt-2rem max-w-[520px]"
       style={{ color: textColor }}
     >
       <header className="flex items-center">
@@ -41,7 +41,7 @@ function Navbar({ darkMode, setDarkMode }) {
             onClick={() => setMenuOpen(false)}
             style={{ color: mutedTextColor }}
           >
-            About Me
+            About
           </Link>
 
           <Link
@@ -70,11 +70,11 @@ function Navbar({ darkMode, setDarkMode }) {
           >
             Contact
           </Link>
-        </nav>
-      </header>
-      <div style={{ marginTop: "4px" }}>
+        </nav><div className="sm:margin-top:4px; margin">
         <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
       </div>
+      </header>
+      
     </div>
   );
 }
