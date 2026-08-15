@@ -54,7 +54,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-5">
 
           <p className="text-gray-500 text-sm text-center">
-            © {new Date().getFullYear()} Anik Chy. All rights reserved.
+            © {new Date().getFullYear()} Pushkar Chaudhary. All rights reserved.
           </p>
           <div className="flex gap-5 text-xl text-black-300">
             <a

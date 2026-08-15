@@ -27,23 +27,11 @@ const Home = () => {
               fast and responsive web experiences with clean design and smooth
               user interactions.
             </p>
-
-            <div className="more">
-              <Link to="/projects" className="btn primary">
-                View Projects
-              </Link>
-
-              <Link to="/contact" className="btn secondary">
-                Contact Me
-              </Link>
-            </div>
           </div>
         </section>
       </main>
       <footer>
-        <div className="border-t-2 border-solid border-gray-500">
           <Footer/>
-        </div>
       </footer>
     </div>
   )

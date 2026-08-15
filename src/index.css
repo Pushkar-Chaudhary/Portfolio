@@ -806,7 +806,7 @@ footer{
 }
 .intro{
   font-family: 'Yuyu', cursive;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: var(--primary);
   font-weight: lighter;
 }
@@ -906,47 +906,27 @@ footer{
     width: 8px;
     height: 8px;
   }
-.pfp{
-  width: 200px;
-  height: 150px;}
-}
-.music-player {
-  width: 100%;
-  max-width: 400px;
-  margin: auto;
-  height: 352px;
-}
-.song {
-  margin: 40px auto;
-  text-align: center;
-  font-family: 'Playfair Display', serif;
-  color: var(--primary);
-}
-.music-player iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
-.pfp{
-  width: 300px;;
-  height: 300px;
-  object-fit: cover;
 
-}
-.wrapper {
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 30px;
-}
-.more{
-  font-family:Inter;
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-.pfp {
-  animation: float 4s ease-in-out infinite;
+  .music-player {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    height: 352px;
+  }
+
+  .song {
+    margin: 40px auto;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    color: var(--primary);
+  }
+
+  .music-player iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 12px;
+  }
 }
 
 @keyframes float {
@@ -977,7 +957,7 @@ footer{
 }
 .name{
   font-family: 'Yuyu', cursive;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: var(--primary);
   font-weight: lighter;
 }
