@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar.jsx";
 import SEO from "../components/SEO.jsx";
 
 const Dashboard = () => {

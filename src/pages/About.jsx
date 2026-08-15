@@ -5,6 +5,7 @@ import koshi from "../assets/koshi.jpg";
 import pabs from "../assets/pabs.jpg";
 import trackerImg from "../assets/favicon.png";
 
+
 function About() {
   const trackerRef = useRef(null);
   const timelineRef = useRef(null);
@@ -35,7 +36,7 @@ function About() {
   }, []);
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-wrap justify-center">
+    <div className="mx-auto flex flex-wrap justify-center max-w-[520px]">
       <SEO
         title="About Me | Pushkar Chaudhary - Frontend Developer"
         description="Learn more about Pushkar Chaudhary, a frontend developer and science student from Lahan, Nepal. Education, journey, and technical background."
@@ -44,15 +45,15 @@ function About() {
       <div className="introduction">
         <p className="about">
           <span className="name">Hi, I'm Pushkar Chaudhary, a passionate
-          frontend developer and science student from Lahan, Nepal.</span>
-          <br></br><div className="font-poppins"> I specialize in creating minimal and user-friendly websites using HTML, CSS, and
-          JavaScript. With a keen eye for design and a love for coding, I strive
-          to build engaging digital experiences that are both functional and
-          visually appealing. When I'm not coding, you can find me exploring the
-          latest trends in web development or diving into scientific research.
-          I'm always eager to learn and grow in my field, and I'm excited to
-          connect with like-minded individuals who share my passion for
-          technology and creativity.</div>
+          frontend developer from Itahari, Nepal.</span>
+        </p>
+        <p className="font-Poppins max-w-2xl text-sm leading-7 text-black dark:text-gray-300">
+          I'm a web developer who enjoys turning ideas into clean, interactive, and
+          user-friendly websites. I work with HTML, CSS, JavaScript, and React while
+          constantly learning new technologies and improving my skills. I care about
+          creating digital experiences that look good, feel intuitive, and work
+          smoothly across devices. When I'm away from coding, I enjoy exploring web
+          development trends, technology, and scientific research.
         </p>
       </div>
 

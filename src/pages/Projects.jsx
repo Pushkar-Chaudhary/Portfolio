@@ -1,4 +1,4 @@
-import Navbar from "../components/Navbar.jsx";
+
 import SEO from "../components/SEO.jsx";
 
 const projects = [
@@ -32,7 +32,7 @@ function Projects() {
         description="Explore web development projects, experiments, and live apps created by Pushkar Chaudhary."
         path="/projects"
       />
-
+<div className=" mx-auto flex flex-wrap justify-center max-w-[520px]">
       <main className="container projects-page">
         <section className="projects-hero glass fade-in-up">
           <p className="projects-kicker">Selected Work</p>
@@ -91,7 +91,7 @@ function Projects() {
             </article>
           ))}
         </section>
-      </main>
+      </main></div>
     </>
   );
 }

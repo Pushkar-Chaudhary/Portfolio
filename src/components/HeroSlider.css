@@ -1,7 +1,7 @@
 .image-stack {
   position: relative;
-  width: 90px;
-  height: 170px;
+  width: 100px;
+  height: 100px;
   flex-shrink: 0;
   margin-right: 25px;
 }
@@ -9,9 +9,8 @@
 .stack-img {
   position: absolute;
   inset: 0;
-
-  width: 90px;
-  height: 170px;
+  width: 100px;
+  height: 100px;
 
   object-fit: contain;
   object-position: center;

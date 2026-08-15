@@ -33,7 +33,7 @@ function Contact() {
         path="/contact"
       />
 
-      <div className="container">
+      <div className="mx-auto flex flex-wrap justify-center max-w-[520px]">
         <div className="social-info">
           <h2>Connect With Me.</h2>
 
@@ -41,7 +41,7 @@ function Contact() {
 
           <ul className="wrapper">
             {socialLinks.map((social, index) => (
-              <span key={index}>
+              <li key={index}>
                 <a
                   href={social.url}
                   target="_blank"
@@ -50,7 +50,7 @@ function Contact() {
                 >
                   <i className={social.icon}></i>
                 </a>
-              </span>
+              </li>
             ))}
           </ul>
         </div>
