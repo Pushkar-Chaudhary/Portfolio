@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar.jsx";
 import SEO from "../components/SEO.jsx";
 
 const socialLinks = [
@@ -33,7 +32,7 @@ function Contact() {
         path="/contact"
       />
 
-      <div className="mx-auto flex flex-wrap justify-center max-w-[520px]">
+      <div className="mx-auto flex flex-wrap justify-center max-w-[570px]">
         <div className="social-info">
           <h2>Connect With Me.</h2>
 
@@ -64,31 +63,40 @@ function Contact() {
             className="form"
           >
             <fieldset>
-              <legend>Contact</legend>
+              <legend>Your Information</legend>
 
+              <label htmlFor="name">Name</label>
               <input
+                id="name"
                 type="text"
                 name="name"
                 placeholder="Your Name"
                 required
+                aria-label="Your name"
               />
 
+              <label htmlFor="email">Email</label>
               <input
+                id="email"
                 type="email"
                 name="_replyto"
                 placeholder="Your Email"
                 required
+                aria-label="Your email address"
               />
             </fieldset>
 
             <fieldset>
               <legend>Your Message</legend>
 
+              <label htmlFor="message">Message</label>
               <textarea
+                id="message"
                 name="message"
                 placeholder="I would like to say..."
                 rows="5"
                 required
+                aria-label="Your message"
               ></textarea>
             </fieldset>
 

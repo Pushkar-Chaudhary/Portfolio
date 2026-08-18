@@ -5,22 +5,28 @@ const projects = [
   {
     title: "Happy Birthday",
     demo: "https://happybirthdayto-you.vercel.app/",
+    github: "https://github.com/Pushkar-Chaudhary",
     description:
       "A simple birthday wish page that can be used to celebrate yourself or someone special.",
     featured: true,
+    tech: ["React", "Tailwind CSS", "Animations"],
   },
   {
     title: "Portfolio Website",
     demo: "https://pushkar-chaudhary.vercel.app",
+    github: "https://github.com/Pushkar-Chaudhary/Portfolio",
     description:
-      "A personal portfolio website that showcases my skills and projects.",
+      "A personal portfolio website that showcases my skills and projects with modern design.",
     featured: false,
+    tech: ["React", "Tailwind CSS", "Vite"],
   },
   {
     title:"Notes App",
     demo:"https://notes-app-kappa-ruby-64.vercel.app/",
-    description:"A simple notes app that allows users to create, edit, and delete notes.",
-    featured:false
+    github: "https://github.com/Pushkar-Chaudhary",
+    description:"A simple notes app that allows users to create, edit, and delete notes with local storage persistence.",
+    featured:false,
+    tech: ["React", "Tailwind CSS", "Local Storage"]
   }
 ];
 
@@ -32,7 +38,7 @@ function Projects() {
         description="Explore web development projects, experiments, and live apps created by Pushkar Chaudhary."
         path="/projects"
       />
-<div className=" mx-auto flex flex-wrap justify-center max-w-[520px]">
+<div className=" mx-auto flex flex-wrap justify-center max-w-[570px]">
       <main className="container projects-page">
         <section className="projects-hero glass fade-in-up">
           <p className="projects-kicker">Selected Work</p>
@@ -74,8 +80,9 @@ function Projects() {
               <p>{project.description}</p>
 
               <div className="tech-stack">
-                <span>React</span><br></br>
-                <span>TailwindCSS</span>
+                {project.tech.map((tech, idx) => (
+                  <span key={idx}>{tech}</span>
+                ))}
               </div>
 
               <div className="project-card__footer">
@@ -86,6 +93,15 @@ function Projects() {
                   className="btn"
                 >
                   View Live Demo
+                </a>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                  aria-label={`View ${project.title} on GitHub`}
+                >
+                  GitHub
                 </a>
               </div>
             </article>

@@ -22,7 +22,7 @@ function HeroSlider() {
         <img
           key={img}
           src={img}
-          alt=""
+          alt={`Pushkar Chaudhary portfolio showcase ${index + 1}`}
           className={`stack-img ${
             index === current ? "visible" : "hidden"
           }`}

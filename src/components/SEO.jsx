@@ -51,6 +51,37 @@ export default function SEO({ title, description, path = "" }) {
 
     let ogUrl = document.querySelector('meta[property="og:url"]');
     if (ogUrl) ogUrl.setAttribute("content", canonicalUrl);
+
+    // Add JSON-LD Structured Data for Person/Portfolio
+    let structuredData = document.querySelector('script[type="application/ld+json"]');
+    if (!structuredData) {
+      structuredData = document.createElement("script");
+      structuredData.type = "application/ld+json";
+      const jsonLd = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Pushkar Chaudhary",
+        url: BASE_URL,
+        image: `${BASE_URL}/about-me.jpg`,
+        jobTitle: "Frontend Developer & Student",
+        worksFor: {
+          "@type": "Organization",
+          name: "Self Employed"
+        },
+        sameAs: [
+          "https://twitter.com/pushkar_chau07",
+          "https://github.com/Pushkar-Chaudhary"
+        ],
+        description: "Frontend Developer from Nepal passionate about creating modern, fast, and responsive web experiences.",
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "NP",
+          addressLocality: "Lahan"
+        }
+      };
+      structuredData.textContent = JSON.stringify(jsonLd);
+      document.head.appendChild(structuredData);
+    }
   }, [title, description, canonicalUrl]);
 
   return null;

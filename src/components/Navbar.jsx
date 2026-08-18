@@ -4,78 +4,104 @@ import Switch from "./Theme";
 
 function Navbar({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+
   const textColor = darkMode ? "#f3f4f6" : "#111827";
-  const mutedTextColor = "#111827";
+  const mutedTextColor = darkMode ? "#9ca3af" : "#6b7280";
+
+  const links = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    { name: "Projects", path: "/projects" },
+    { name: "Dashboard", path: "/dashboard" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
-    <div
-      className="flex flex-wrap items-center mx-auto gap-4 mt-3 justify-between w-full px-3 md:justify-center md:gap-10 md:mt-2rem max-w-[520px]"
-      style={{ color: textColor }}
-    >
-      <header className="flex items-center">
-        <button
-          className="menu-btn"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle Menu"
-          style={{ color: textColor, marginTop: "4px" }}
-        >
-          ☰
-        </button>
-
-        <nav
-          className={`nav ${menuOpen ? "active" : ""}`}
-          style={{ color: textColor }}
-        >
-          <Link
-            to="/"
-            className="nav-link"
-            onClick={() => setMenuOpen(false)}
-            style={{ color: mutedTextColor }}
-          >
-            Home
-          </Link>
-
-          <Link
-            to="/about"
-            className="nav-link"
-            onClick={() => setMenuOpen(false)}
-            style={{ color: mutedTextColor }}
-          >
-            About
-          </Link>
-
-          <Link
-            to="/projects"
-            className="nav-link"
-            onClick={() => setMenuOpen(false)}
-            style={{ color: mutedTextColor }}
-          >
-            Projects
-          </Link>
-
-          <Link
-            to="/dashboard"
-            className="nav-link"
-            onClick={() => setMenuOpen(false)}
-            style={{ color: mutedTextColor }}
-          >
-            Dashboard
-          </Link>
-
-          <Link
-            to="/contact"
-            className="nav-link"
-            onClick={() => setMenuOpen(false)}
-            style={{ color: mutedTextColor }}
-          >
-            Contact
-          </Link>
-        </nav><div className="sm:margin-top:4px; margin">
-        <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-      </div>
-      </header>
+    <header className="fixed left-0 right-0 top-3 z-50 flex justify-center px-3">
       
-    </div>
+      <div className="flex items-center">
+
+        {/* Navbar */}
+        <nav
+          className={`
+            flex items-center
+            rounded-full
+            border
+            px-2 py-1
+            backdrop-blur-md
+            shadow-sm
+            transition-all
+            duration-300
+
+            ${
+              darkMode
+                ? "border-gray-700 bg-gray-900/70"
+                : "border-gray-200 bg-white/70"
+            }
+          `}
+        >
+
+          {/* Mobile menu button */}
+          <button
+            className="mr-1 flex h-8 w-8 items-center justify-center rounded-full text-lg md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle Menu"
+            style={{ color: textColor }}
+          >
+            ☰
+          </button>
+
+          {/* Links */}
+          <div
+            className={`
+              items-center
+              md:flex
+              ${
+                menuOpen
+                  ? "flex w-full flex-col py-2"
+                  : "hidden"
+              }
+              md:flex-row
+            `}
+          >
+            {links.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setMenuOpen(false)}
+                className={`
+                  rounded-full
+                  px-3
+                  py-2
+                  text-sm
+                  transition-all
+                  duration-200
+                  hover:bg-black/5
+                  dark:hover:bg-white/10
+                  ${
+                    menuOpen
+                      ? "w-full text-center"
+                      : ""
+                  }
+                `}
+                style={{ color: mutedTextColor }}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </nav>
+
+        {/* Theme Switch */}
+        <div className="ml-2 flex items-center">
+          <Switch
+            checked={darkMode}
+            onChange={() => setDarkMode(!darkMode)}
+          />
+        </div>
+
+      </div>
+    </header>
   );
 }
 
