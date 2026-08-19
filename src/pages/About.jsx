@@ -36,7 +36,7 @@ function About() {
   }, []);
 
   return (
-    <div className="mx-auto flex flex-wrap justify-center max-w-[560px]">
+    <div className="mx-auto flex flex-wrap justify-center max-w-[570px]">
       <SEO
         title="About Me | Pushkar Chaudhary - Frontend Developer"
         description="Learn more about Pushkar Chaudhary, a frontend developer and science student from Lahan, Nepal. Education, journey, and technical background."

@@ -7,6 +7,7 @@ import Dashboard from "./pages/Dashboard.jsx";
 import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 
+
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 

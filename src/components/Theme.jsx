@@ -15,7 +15,7 @@ const Switch = ({ checked, onChange }) => {
           <span className="star star_2"></span>
           <span className="star star_3"></span>
 
-          {/* Put your cloud SVG here if you had one */}
+
         </span>
       </label>
     </StyledWrapper>

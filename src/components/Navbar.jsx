@@ -17,33 +17,14 @@ function Navbar({ darkMode, setDarkMode }) {
   ];
 
   return (
-    <header className="fixed left-0 right-0 top-3 z-50 flex justify-center px-3">
-      
-      <div className="flex items-center">
+    <>
+      <header className="fixed left-0 right-0 top-3 z-50 flex justify-center px-3">
+        
+        <div className="flex w-full items-center justify-between md:justify-center md:w-auto">
 
-        {/* Navbar */}
-        <nav
-          className={`
-            flex items-center
-            rounded-full
-            border
-            px-2 py-1
-            backdrop-blur-md
-            shadow-sm
-            transition-all
-            duration-300
-
-            ${
-              darkMode
-                ? "border-gray-700 bg-gray-900/70"
-                : "border-gray-200 bg-white/70"
-            }
-          `}
-        >
-
-          {/* Mobile menu button */}
+          {/* Mobile menu button - Left side on mobile */}
           <button
-            className="mr-1 flex h-8 w-8 items-center justify-center rounded-full text-lg md:hidden"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-lg md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle Menu"
             style={{ color: textColor }}
@@ -51,57 +32,110 @@ function Navbar({ darkMode, setDarkMode }) {
             ☰
           </button>
 
-          {/* Links */}
-          <div
+          {/* Navbar */}
+          <nav
             className={`
-              items-center
-              md:flex
+              hidden md:flex items-center
+              rounded-full
+              border
+              px-2 py-1
+              backdrop-blur-md
+              shadow-sm
+              transition-all
+              duration-300
+
               ${
-                menuOpen
-                  ? "flex w-full flex-col py-2"
-                  : "hidden"
+                darkMode
+                  ? "border-gray-700 bg-gray-900/70"
+                  : "border-gray-200 bg-white/70"
               }
-              md:flex-row
             `}
           >
-            {links.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setMenuOpen(false)}
-                className={`
-                  rounded-full
-                  px-3
-                  py-2
-                  text-sm
-                  transition-all
-                  duration-200
-                  hover:bg-black/5
-                  dark:hover:bg-white/10
-                  ${
-                    menuOpen
-                      ? "w-full text-center"
-                      : ""
-                  }
-                `}
-                style={{ color: mutedTextColor }}
-              >
-                {link.name}
-              </Link>
-            ))}
+
+            {/* Desktop Links */}
+            <div className="hidden md:flex flex-row items-center">
+              {links.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMenuOpen(false)}
+                  className={`
+                    rounded-full
+                    px-3
+                    py-2
+                    text-sm
+                    transition-all
+                    duration-200
+                    hover:bg-black/5
+                    dark:hover:bg-white/10
+                  `}
+                  style={{ color: mutedTextColor }}
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+          </nav>
+
+          {/* Theme Switch - Right side on mobile */}
+          <div className="flex items-center">
+            <Switch
+              checked={darkMode}
+              onChange={() => setDarkMode(!darkMode)}
+            />
           </div>
-        </nav>
 
-        {/* Theme Switch */}
-        <div className="ml-2 flex items-center">
-          <Switch
-            checked={darkMode}
-            onChange={() => setDarkMode(!darkMode)}
-          />
         </div>
+      </header>
 
-      </div>
-    </header>
+      {menuOpen && (
+        <div
+          className={`
+            fixed top-16 left-3 z-40 md:hidden
+            rounded-lg
+            border
+            backdrop-blur-md
+            shadow-sm
+            overflow-hidden
+            transition-all
+            duration-300
+            ${
+              darkMode
+                ? "border-gray-700 bg-gray-900/70"
+                : "border-gray-200 bg-white/70"
+            }
+          `}
+        >
+          {links.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              onClick={() => setMenuOpen(false)}
+              className={`
+                block
+                w-full
+                px-4
+                py-3
+                text-sm
+                transition-all
+                duration-200
+                hover:bg-black/5
+                dark:hover:bg-white/10
+                border-b last:border-b-0
+                ${
+                  darkMode
+                    ? "border-gray-700"
+                    : "border-gray-200"
+                }
+              `}
+              style={{ color: mutedTextColor }}
+            >
+              {link.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 
