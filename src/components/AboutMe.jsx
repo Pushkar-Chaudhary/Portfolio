@@ -10,11 +10,6 @@ const AboutMe = () => {
         <h2 className="font-serif text-2xl ">
           About
         </h2>
-
-        <p className="mt-2 max-w-2xl text-s">
-          I craft thoughtful digital experiences that feel clear, fast,
-          and genuinely useful in everyday use.
-        </p>
       </div>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
