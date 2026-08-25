@@ -1,8 +1,0 @@
-[build]
-  command = "npm --prefix portfolio install && npm --prefix portfolio run build"
-  publish = "portfolio/dist"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
