@@ -3,7 +3,7 @@ import SEO from "../components/SEO.jsx";
 const socialLinks = [
   {
     icon: "fab fa-instagram",
-    url: "https://www.instagram.com/nvm.pushkarr/",
+    url: "https://www.instagram.com/pushkar.chau/",
     label: "Instagram",
   },
   {
