@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const BASE_URL = "https://pushkar-codes.netlify.app";
+const BASE_URL = "https://pushkar-chaudhary.vercel.app";
 
 export default function SEO({ title, description, path = "" }) {
   const location = useLocation();
@@ -52,36 +52,50 @@ export default function SEO({ title, description, path = "" }) {
     let ogUrl = document.querySelector('meta[property="og:url"]');
     if (ogUrl) ogUrl.setAttribute("content", canonicalUrl);
 
-    // Add JSON-LD Structured Data for Person/Portfolio
+    // Keep structured data aligned with the page during client-side navigation.
     let structuredData = document.querySelector('script[type="application/ld+json"]');
     if (!structuredData) {
       structuredData = document.createElement("script");
       structuredData.type = "application/ld+json";
-      const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Pushkar Chaudhary",
-        url: BASE_URL,
-        image: `${BASE_URL}/about-me.jpg`,
-        jobTitle: "Frontend Developer & Student",
-        worksFor: {
-          "@type": "Organization",
-          name: "Self Employed"
-        },
-        sameAs: [
-          "https://twitter.com/pushkar_chau07",
-          "https://github.com/Pushkar-Chaudhary"
-        ],
-        description: "Frontend Developer from Nepal passionate about creating modern, fast, and responsive web experiences.",
-        address: {
-          "@type": "PostalAddress",
-          addressCountry: "NP",
-          addressLocality: "Lahan"
-        }
-      };
-      structuredData.textContent = JSON.stringify(jsonLd);
       document.head.appendChild(structuredData);
     }
+
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": `${BASE_URL}/#person`,
+          name: "Pushkar Chaudhary",
+          url: BASE_URL,
+          image: `${BASE_URL}/og-image.png`,
+          jobTitle: "Frontend Developer",
+          description: "Frontend developer and science student from Nepal specializing in HTML, CSS, JavaScript, and React.",
+          sameAs: [
+            "https://github.com/Pushkar-Chaudhary",
+            "https://www.linkedin.com/in/anik-chy/",
+            "https://x.com/pushkar_chau07",
+            "https://www.instagram.com/nvm.pushkarr/"
+          ],
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Lahan",
+            addressCountry: "NP"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": `${canonicalUrl}#webpage`,
+          url: canonicalUrl,
+          name: title,
+          description,
+          isPartOf: { "@id": `${BASE_URL}/#website` },
+          about: { "@id": `${BASE_URL}/#person` },
+          inLanguage: "en-US"
+        }
+      ]
+    };
+    structuredData.textContent = JSON.stringify(jsonLd);
   }, [title, description, canonicalUrl]);
 
   return null;

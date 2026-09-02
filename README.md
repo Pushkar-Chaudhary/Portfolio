@@ -4,7 +4,7 @@ A modern, responsive portfolio website showcasing my frontend development projec
 
 ## 🌐 Live Demo
 
-Visit the live portfolio: **https://pushkar-codes.netlify.app**
+Visit the live portfolio: **https://pushkar-chaudhary.vercel.app**
 
 ## 🛠️ Tech Stack
 
@@ -70,13 +70,7 @@ src/
 
 ## 🚀 Deployment
 
-The portfolio is automatically deployed via **Netlify** and **Vercel**.
-
-### Deploy to Netlify
-```bash
-npm install -g netlify-cli
-netlify deploy --prod
-```
+The portfolio is automatically deployed via **Vercel**.
 
 ### Deploy to Vercel
 ```bash
