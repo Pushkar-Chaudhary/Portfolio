@@ -100,7 +100,7 @@ function Contact() {
               ></textarea>
             </fieldset>
 
-            <button type="submit" className="submit-btn">
+            <button type="submit" >
               Send
             </button>
           </form>
