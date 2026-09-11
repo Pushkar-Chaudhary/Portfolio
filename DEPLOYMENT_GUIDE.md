@@ -16,7 +16,7 @@ Your portfolio has been completely enhanced with:
 Your project is already connected to Vercel. Push is automatic when you merge to master!
 
 **Status**: ✅ Already pushed to master branch
-- Changes are live at: `https://pushkar-codes.netlify.app/`
+- Changes are live at: `https://pushkar-chaudhary.vercel.app/`
 
 ### Option 2: Manual Vercel Deployment
 
@@ -31,12 +31,12 @@ vercel --prod
 ### Step 1: Verify Site in Google Search Console
 1. Go to [Google Search Console](https://search.google.com/search-console)
 2. Click "Add Property"
-3. Enter your domain: `https://pushkar-codes.netlify.app`
+3. Enter your domain: `https://pushkar-chaudhary.vercel.app`
 4. Choose verification method (DNS or HTML file)
 
 ### Step 2: Submit Sitemap
 1. In Search Console, go to "Sitemaps"
-2. Add sitemap URL: `https://pushkar-codes.netlify.app/sitemap.xml`
+2. Add sitemap URL: `https://pushkar-chaudhary.vercel.app/sitemap.xml`
 3. Click Submit
 
 ### Step 3: Verify Your Portfolio
@@ -72,13 +72,13 @@ npm run preview  # Test production build locally
 - ✅ JSON-LD structured data added
 - ✅ Mobile responsive
 - ✅ Fast load times
-- ✅ HTTPS enabled (Netlify/Vercel)
+- ✅ HTTPS enabled (Vercel)
 - ✅ Accessibility WCAG 2.1 compliant
 
 ## 📈 Monitor Indexing
 
 ### Immediate Actions
-1. Visit `https://pushkar-codes.netlify.app/`
+1. Visit `https://pushkar-chaudhary.vercel.app/`
 2. Wait 24-48 hours for Google to crawl
 3. Check Google Search Console for indexing status
 
@@ -90,7 +90,7 @@ npm run preview  # Test production build locally
 
 ## 🔗 Important Links
 
-- **Your Portfolio**: https://pushkar-codes.netlify.app
+- **Your Portfolio**: https://pushkar-chaudhary.vercel.app
 - **GitHub Repository**: https://github.com/Pushkar-Chaudhary/Portfolio
 - **Google Search Console**: https://search.google.com/search-console
 - **Vercel Dashboard**: https://vercel.com/dashboard
