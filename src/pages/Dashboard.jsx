@@ -7,6 +7,7 @@ const GITHUB_USERNAME = "Pushkar-Chaudhary";
 const GITHUB_PROFILE = `https://github.com/${GITHUB_USERNAME}`;
 const WAKATIME_PROFILE = "https://wakatime.com/@bf434ed0-2f6c-46e7-ae66-53b01d7fad3d";
 const WAKATIME_BADGE_URL = "https://wakatime.com/badge/user/bf434ed0-2f6c-46e7-ae66-53b01d7fad3d.svg";
+const CURRENT_YEAR = new Date().getFullYear();
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(
@@ -18,13 +19,27 @@ const Dashboard = () => {
   const [githubError, setGithubError] = useState(false);
 
   useEffect(() => {
-    fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`)
+    const controller = new AbortController();
+
+    fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`, {
+      signal: controller.signal,
+      cache: "no-store",
+    })
       .then((response) => {
         if (!response.ok) throw new Error("Unable to load contributions");
         return response.json();
       })
-      .then(setContributionData)
-      .catch(() => setGithubError(true));
+      .then((data) => {
+        if (!Array.isArray(data.contributions) || !data.total) {
+          throw new Error("Invalid contribution data");
+        }
+        setContributionData(data);
+      })
+      .catch((error) => {
+        if (error.name !== "AbortError") setGithubError(true);
+      });
+
+    return () => controller.abort();
   }, []);
 
   const contributionWeeks = useMemo(() => {
@@ -52,7 +67,7 @@ const Dashboard = () => {
       <main className="dashboard-shell">
         <header className="dashboard-heading">
           <div>
-            <p className="dashboard-kicker">Developer activity / 2026</p>
+            <p className="dashboard-kicker">Developer activity / {CURRENT_YEAR}</p>
             <h1>Proof of practice.</h1>
             <p className="dashboard-intro">
               A small window into the hours and commits behind the work.
@@ -86,6 +101,11 @@ const Dashboard = () => {
         </section>
 
         <section className="dashboard-grid">
+              <div className="wakatime-time">
+              <a className="wakatime-badge" href={WAKATIME_PROFILE} target="_blank" rel="noreferrer">
+                <img src={WAKATIME_BADGE_URL} alt="WakaTime coding time" />
+              </a>
+            </div>
           <article className="activity-panel github-panel">
             <div className="panel-heading">
               <div>
@@ -125,22 +145,7 @@ const Dashboard = () => {
               <span>More</span>
             </div>
           </article>
-
-          <article className="activity-panel wakatime-panel">
-            <div className="panel-heading">
-              <div>
-                <span className="panel-eyebrow panel-eyebrow--orange">WakaTime</span>
-                <h2>Time in the editor</h2>
-              </div>
-              <span className="panel-period">Live badge</span>
-            </div>
-            <div className="wakatime-time">
-              <a className="wakatime-badge" href={WAKATIME_PROFILE} target="_blank" rel="noreferrer">
-                <img src={WAKATIME_BADGE_URL} alt="WakaTime coding time" />
-              </a>
-            </div>
-          </article>
-        </section>
+          </section>
       </main>
     </div>
   );

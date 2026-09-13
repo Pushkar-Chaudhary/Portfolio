@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /dashboard
 
-Sitemap: https://pushkar-chaudhary.vercel.app/sitemap.xml
+Sitemap: https://pushkarchaudhary.com.np/sitemap.xml
