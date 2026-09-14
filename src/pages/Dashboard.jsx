@@ -9,11 +9,6 @@ const WAKATIME_PROFILE = "https://wakatime.com/@bf434ed0-2f6c-46e7-ae66-53b01d7f
 const WAKATIME_BADGE_URL = "https://wakatime.com/badge/user/bf434ed0-2f6c-46e7-ae66-53b01d7fad3d.svg";
 const CURRENT_YEAR = new Date().getFullYear();
 
-const formatDate = (date) =>
-  new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(
-    new Date(date),
-  );
-
 const Dashboard = () => {
   const [contributionData, setContributionData] = useState(null);
   const [githubError, setGithubError] = useState(false);
@@ -21,7 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=last`, {
+    fetch(`https://github-contributions-api.jogruber.de/v4/${GITHUB_USERNAME}?y=${CURRENT_YEAR}`, {
       signal: controller.signal,
       cache: "no-store",
     })
@@ -53,7 +48,10 @@ const Dashboard = () => {
     }, []);
   }, [contributionData]);
 
-  const latestContribution = contributionData?.contributions?.at(-1);
+  const currentYearCommits = contributionData?.contributions?.reduce(
+    (total, contribution) => total + contribution.count,
+    0,
+  );
   const graphUrl = `https://ghchart.rshah.org/2f9e72/${GITHUB_USERNAME}`;
 
   return (
@@ -65,54 +63,23 @@ const Dashboard = () => {
       />
 
       <main className="dashboard-shell">
-        <header className="dashboard-heading">
-          <div>
-            <p className="dashboard-kicker">Developer activity / {CURRENT_YEAR}</p>
-            <h1>Proof of practice.</h1>
-            <p className="dashboard-intro">
-              A small window into the hours and commits behind the work.
-            </p>
-          </div>
-          <a className="dashboard-profile-link" href={GITHUB_PROFILE} target="_blank" rel="noreferrer">
-            <FaGithub aria-hidden="true" />
-            View GitHub
-            <FaExternalLinkAlt aria-hidden="true" />
+        <div className="wakatime-time">
+          <a className="wakatime-badge" href={WAKATIME_PROFILE} target="_blank" rel="noreferrer">
+            <img src={WAKATIME_BADGE_URL} alt="WakaTime coding time" />
           </a>
-        </header>
-
-        <section className="dashboard-stats" aria-label="Activity summary">
-          <article className="stat-card stat-card--green">
-            <span className="stat-label">Commits · last year</span>
-            <strong>{contributionData ? contributionData.total.lastYear : "--"}</strong>
-            <span className="stat-note">
-              {latestContribution ? `Updated ${formatDate(latestContribution.date)}` : "Loading GitHub activity"}
-            </span>
-          </article>
-          <article className="stat-card">
-            <span className="stat-label">GitHub presence</span>
-            <strong>{contributionData ? "Live" : "..."}</strong>
-            <span className="stat-note">Public contribution history</span>
-          </article>
-          <article className="stat-card stat-card--orange">
-            <span className="stat-label">Time tracked</span>
-            <strong>WakaTime</strong>
-            <span className="stat-note">Language and editor breakdown</span>
-          </article>
-        </section>
-
+        </div>
         <section className="dashboard-grid">
-              <div className="wakatime-time">
-              <a className="wakatime-badge" href={WAKATIME_PROFILE} target="_blank" rel="noreferrer">
-                <img src={WAKATIME_BADGE_URL} alt="WakaTime coding time" />
-              </a>
-            </div>
           <article className="activity-panel github-panel">
             <div className="panel-heading">
               <div>
                 <span className="panel-eyebrow"><FaGithub aria-hidden="true" /> GitHub</span>
-                <h2>Contribution graph</h2>
+                <h2>{currentYearCommits ?? "--"} commits this year</h2>
               </div>
-              <span className="panel-period">Last 12 months</span>
+              <a className="dashboard-profile-link" href={GITHUB_PROFILE} target="_blank" rel="noreferrer">
+                <FaGithub aria-hidden="true" />
+                View GitHub
+                <FaExternalLinkAlt aria-hidden="true" />
+              </a>
             </div>
             <div className="contribution-graph" aria-label="GitHub contribution graph">
               {contributionWeeks.length > 0 ? (
@@ -145,7 +112,7 @@ const Dashboard = () => {
               <span>More</span>
             </div>
           </article>
-          </section>
+        </section>
       </main>
     </div>
   );
