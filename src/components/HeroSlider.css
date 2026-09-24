@@ -1,21 +1,26 @@
 .image-stack {
   position: relative;
-  width: 120px;
-  height: 140px;
+  width: 110px;
+  height: 180px;
   flex-shrink: 0;
-  margin-right: 25px;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .stack-img {
   position: absolute;
   inset: 0;
-  width: 120px;
-  height: 140px;
-
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  object-position: center;
-
-  transition: opacity 0.35s ease-in-out;
+  object-position: center top;
+  border-radius: 0;
+  opacity: 1;
+  visibility: visible;
+  transition: none;
 }
 
 .stack-img.visible {

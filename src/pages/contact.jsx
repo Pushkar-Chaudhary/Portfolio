@@ -25,23 +25,26 @@ const socialLinks = [
 
 function Contact() {
   return (
-    <>
+    <div className="page-shell page-shell--narrow">
       <SEO
         title="Contact | Pushkar Chaudhary - Get in Touch"
         description="Connect with Pushkar Chaudhary via email or social channels (GitHub, LinkedIn, Instagram, X)."
         path="/contact"
       />
 
-      <div className="mx-auto flex flex-wrap justify-center max-w-[570px]">
-        <div className="social-info">
-          <h2>Connect With Me.</h2>
+      <main className="page-stack">
+        <section className="content-card">
+          <p className="eyebrow">Contact</p>
+          <h1 className="section-title">Let’s build something simple.</h1>
+          <p className="lead">
+            You can reach me through social media or send a message below.
+          </p>
 
-          <p>You can contact me from the following options:</p>
-
-          <ul className="wrapper">
-            {socialLinks.map((social, index) => (
-              <li key={index}>
+          <ul className="social-list">
+            {socialLinks.map((social) => (
+              <li key={social.label}>
                 <a
+                  className="social-link"
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -52,43 +55,44 @@ function Contact() {
               </li>
             ))}
           </ul>
-        </div>
+        </section>
 
-        <div className="contact-form">
-          <h2>Or Send Me a Message.</h2>
+        <section className="content-card">
+          <div className="section-header">
+            <p className="eyebrow">Message</p>
+            <h2>Send a quick note</h2>
+          </div>
 
           <form
             action="https://formspree.io/f/xwvnoegw"
             method="POST"
-            className="form"
+            className="contact-form"
           >
-            <fieldset>
-              <legend>Your Information</legend>
-
+            <div className="form-field">
               <label htmlFor="name">Name</label>
               <input
                 id="name"
                 type="text"
                 name="name"
-                placeholder="Your Name"
+                placeholder="Your name"
                 required
                 aria-label="Your name"
               />
+            </div>
 
+            <div className="form-field">
               <label htmlFor="email">Email</label>
               <input
                 id="email"
                 type="email"
                 name="_replyto"
-                placeholder="Your Email"
+                placeholder="Your email"
                 required
                 aria-label="Your email address"
               />
-            </fieldset>
+            </div>
 
-            <fieldset>
-              <legend>Your Message</legend>
-
+            <div className="form-field">
               <label htmlFor="message">Message</label>
               <textarea
                 id="message"
@@ -98,23 +102,23 @@ function Contact() {
                 required
                 aria-label="Your message"
               ></textarea>
-            </fieldset>
+            </div>
 
-            <button type="submit" >
-              Send
+            <button type="submit" className="button button-primary">
+              Send message
             </button>
           </form>
 
-          <p style={{ marginTop: "20px" }}>
-            Or you can directly contact me at:
-          </p>
-
-          <a href="mailto:pushkarchaudhary256@gmail.com">
+          <p className="muted-text">Or email me directly:</p>
+          <a
+            className="contact-email"
+            href="mailto:pushkarchaudhary256@gmail.com"
+          >
             pushkarchaudhary256@gmail.com
           </a>
-        </div>
-      </div>
-    </>
+        </section>
+      </main>
+    </div>
   );
 }
 

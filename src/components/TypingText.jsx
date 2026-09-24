@@ -16,7 +16,7 @@ export default function TypingText() {
       backDelay: 180,
       delay: 500,
       loop: true,
-      showCursor: true,
+      showCursor: false,
     });
 
     return () => typed.destroy();
