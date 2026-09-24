@@ -17,10 +17,11 @@ export default function TypingText() {
       delay: 500,
       loop: true,
       showCursor: false,
+      smartBackspace: true,
     });
 
     return () => typed.destroy();
   }, []);
 
-  return <span ref={el}></span>;
+  return <span className="typing-role" ref={el} />;
 }
