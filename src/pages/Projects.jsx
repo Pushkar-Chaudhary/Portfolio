@@ -11,14 +11,6 @@ const projects = [
     tech: ["Node.js", "EJS"],
   },
   {
-    title: "Wishly",
-    demo: "https://wishly-chi.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary/happy-birthday",
-    description: "A lightweight birthday page designed made by vibe-coding to celebrate someone special with a warm feel.",
-    featured: true,
-    tech: ["React", "Tailwind CSS", "Animations","Nodejs"],
-  },
-  {
     title: "Portfolio Website",
     demo: "https://pushkar-chaudhary.vercel.app",
     github: "https://github.com/Pushkar-Chaudhary/Portfolio",
