@@ -11,12 +11,12 @@ const projects = [
     tech: ["Node.js", "EJS"],
   },
   {
-    title: "Happy Birthday",
-    demo: "https://happybirthdayto-you.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary",
-    description: "A lightweight birthday page designed to celebrate someone special with a warm feel.",
+    title: "Wishly",
+    demo: "https://wishly-chi.vercel.app/",
+    github: "https://github.com/Pushkar-Chaudhary/happy-birthday",
+    description: "A lightweight birthday page designed made by vibe-coding to celebrate someone special with a warm feel.",
     featured: true,
-    tech: ["React", "Tailwind CSS", "Animations"],
+    tech: ["React", "Tailwind CSS", "Animations","Nodejs"],
   },
   {
     title: "Portfolio Website",
