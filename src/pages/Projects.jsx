@@ -100,7 +100,6 @@ function Projects() {
       <main className="page-stack">
         <header className="page-intro">
           <p className="eyebrow">Selected work</p>
-          <h1>Minimal builds.</h1>
           <p className="lead">
             Small experiments, personal ideas, and pages I’ve turned into working
             products.

@@ -7,9 +7,8 @@ export default function TypingText() {
   useEffect(() => {
     const typed = new Typed(el.current, {
       strings: [
-        "Frontend Developer",
-        "UI Designer",
-        "Mobile App Developer",
+        "Developer",
+        "BCA Student",
       ],
       typeSpeed: 60,
       backSpeed: 35,

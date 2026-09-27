@@ -16,16 +16,16 @@ const Home = () => {
 
       <main className="page-stack">
         <section className="hero-panel">
-          <HeroSlider />
-
+          <div className="hero-visual">
+            <HeroSlider />
+          </div>
           <div className="hero-copy">
-            <p className="eyebrow">Frontend developer</p>
             <h1 className="intro">Pushkar Chaudhary</h1>
             <h2 className="sub-intro">
               <TypingText />
             </h2>
             <p className="lead">
-              Frontend Developer from Nepal passionate about creating modern,
+             Developer from Nepal passionate about creating modern,
               fast, and responsive web experiences with clean design and smooth
               user interactions.
             </p>

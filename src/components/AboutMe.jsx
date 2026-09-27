@@ -14,8 +14,8 @@ const AboutMe = () => {
       </div>
 
       <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-        <div className="relative h-40 overflow-hidden rounded-[22px] bg-[#ece6df] p-5 shadow-[0_12px_24px_rgba(17,17,17,0.04)]">
-          <div className="h-1.5 w-12 rounded-full bg-[#d8cfc3]" />
+        <div className="relative h-40 overflow-hidden rounded-[22px] bg-[#f1ece7] p-5 shadow-[0_10px_24px_rgba(17,17,17,0.04)]">
+          <div className="h-1.5 w-12 rounded-full bg-[#d9cfc1]" />
 
           <div className="mt-8 flex flex-col gap-2">
             <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-neutral-500">
@@ -34,7 +34,7 @@ const AboutMe = () => {
           </Link>
         </div>
 
-        <div className="relative h-40 rounded-[22px] bg-[#f5f1eb] p-5 shadow-[0_12px_24px_rgba(17,17,17,0.04)]">
+        <div className="relative h-40 rounded-[22px] bg-[#f8f3ee] p-5 shadow-[0_10px_24px_rgba(17,17,17,0.04)]">
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-neutral-500">
             Current role
           </p>
@@ -48,7 +48,7 @@ const AboutMe = () => {
           </span>
         </div>
 
-        <div className="relative h-64 overflow-hidden rounded-[22px] shadow-[0_18px_28px_rgba(17,17,17,0.08)] md:row-span-2">
+        <div className="relative h-64 overflow-hidden rounded-[22px] bg-[#e6dfd6] shadow-[0_12px_26px_rgba(17,17,17,0.06)] md:row-span-2">
           <img
             src={minzoro}
             alt="Pushkar Chaudhary"
@@ -60,7 +60,7 @@ const AboutMe = () => {
           </div>
         </div>
 
-        <div className="h-40 rounded-[22px] bg-[#ded5c9] p-5 shadow-[0_12px_24px_rgba(17,17,17,0.04)]">
+        <div className="h-40 rounded-[22px] bg-[#e8e0d7] p-5 shadow-[0_10px_24px_rgba(17,17,17,0.04)]">
           <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-neutral-700">
             Welcome
           </p>
@@ -74,7 +74,7 @@ const AboutMe = () => {
           </h3>
         </div>
 
-        <div className="h-40 rounded-[22px] bg-[#1c1c1c] p-5 text-white shadow-[0_18px_28px_rgba(17,17,17,0.12)] md:col-span-2">
+        <div className="h-40 rounded-[22px] bg-[#1d1d1d] p-5 text-white shadow-[0_12px_26px_rgba(17,17,17,0.1)] md:col-span-2">
           <h3 className="text-lg font-bold tracking-[-0.04em]">Constantly Learning</h3>
 
           <p className="mt-3 max-w-[24rem] text-sm leading-6 text-neutral-300">
