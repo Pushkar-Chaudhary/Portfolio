@@ -17,7 +17,7 @@ const projects = [
     featured: true,
     tech: ["Node.js", "EJS"],
 
-  }
+  },
   {
     title: "Portfolio Website",
     demo: "https://pushkar-chaudhary.vercel.app",
