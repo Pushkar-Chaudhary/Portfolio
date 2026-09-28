@@ -10,6 +10,14 @@ const projects = [
     featured: true,
     tech: ["Node.js", "EJS"],
   },
+  { title: "Wishly",
+    demo: "https://wishly-wish.vercel.app/",
+    github: "https://github.com/Pushkar-Chaudhary",
+    description: "A birthday wishing page made with vibe-coding to make your special one feel special on their day..",
+    featured: true,
+    tech: ["Node.js", "EJS"],
+
+  }
   {
     title: "Portfolio Website",
     demo: "https://pushkar-chaudhary.vercel.app",
