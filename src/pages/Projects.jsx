@@ -15,7 +15,7 @@ const projects = [
     github: "https://github.com/Pushkar-Chaudhary",
     description: "A birthday wishing page made with vibe-coding to make your special one feel special on their day..",
     featured: true,
-    tech: ["Node.js", "EJS"],
+    tech: ["Node.js", "React"],
 
   },
   {
