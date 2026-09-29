@@ -16,12 +16,14 @@ function App() {
       ? {
           bg: "#030712",
           surface: "#111827",
-          surfaceAlt: "#0f172a",
-          border: "rgba(148, 163, 184, 0.18)",
-          text: "#f9fafb",
-          muted: "#9ca3af",
-          primary: "#f9fafb",
-          primaryHover: "#d1d5db",
+          surfaceAlt: "#182235",
+          border: "rgba(148, 163, 184, 0.22)",
+          text: "#e5eaf2",
+          muted: "#aab5c5",
+          primary: "#f3f6fb",
+          primaryHover: "#cbd5e1",
+          accent: "#8fb8a2",
+          accentSoft: "#1d3028",
           shadow: "0 24px 48px rgba(2, 6, 23, 0.45)",
         }
       : {
@@ -33,6 +35,8 @@ function App() {
           muted: "#6b7280",
           primary: "#111827",
           primaryHover: "#374151",
+          accent: "#28734f",
+          accentSoft: "#e8f3ec",
           shadow: "0 24px 48px rgba(15, 23, 42, 0.08)",
         };
 
@@ -45,12 +49,15 @@ function App() {
     root.style.setProperty("--primary", palette.primary);
     root.style.setProperty("--primary-hover", palette.primaryHover);
     root.style.setProperty("--shadow", palette.shadow);
+    root.style.setProperty("--accent", palette.accent);
+    root.style.setProperty("--accent-soft", palette.accentSoft);
+    root.dataset.theme = darkMode ? "dark" : "light";
     document.body.style.backgroundColor = palette.bg;
     document.body.style.color = palette.text;
   }, [darkMode]);
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell${darkMode ? " theme-dark" : ""}`}>
       <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
       <Routes>

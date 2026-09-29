@@ -29,13 +29,6 @@ const Home = () => {
               fast, and responsive web experiences with clean design and smooth
               user interactions.
             </p>
-
-            <div className="hero-meta">
-              <span className="status-pill">
-                <span className="status-dot" aria-hidden="true" />
-                Available for select projects
-              </span>
-
               <div className="hero-actions">
                 <Link to="/projects" className="primary-link">
                   View Projects
@@ -45,7 +38,6 @@ const Home = () => {
                 </Link>
               </div>
             </div>
-          </div>
         </section>
 
         <AboutMe />

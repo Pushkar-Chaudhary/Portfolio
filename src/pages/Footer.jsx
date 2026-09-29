@@ -10,16 +10,16 @@ const Footer = () => {
 
       
           <div className="text-center md:text-left">
-            <h2 className="text-2xl font-bold text-white dark:text-black">
+            <h2 className="text-2xl font-bold text-[var(--primary)]">
               Pushkar Chaudhary<span className="text-cyan-400">.</span>
             </h2>
-            <p className="text-gray-400 mt-2 max-w-sm">
+            <p className="mt-2 max-w-sm text-[var(--muted)]">
               Frontend Developer from Nepal crafting beautiful web experiences with React and Tailwind CSS.
             </p>
           </div>
 
       
-          <div className="flex flex-wrap justify-center gap-6 text-black-300">
+          <div className="flex flex-wrap justify-center gap-6 text-[var(--text)]">
             <a href="/#" className="hover:text-cyan-400 transition">Home</a>
             <a href="/#/about" className="hover:text-cyan-400 transition">About</a>
             <a href="/#/projects" className="hover:text-cyan-400 transition">Projects</a>
@@ -36,10 +36,10 @@ const Footer = () => {
     
         <div className="flex flex-col md:flex-row justify-between items-center gap-5">
 
-          <p className="text-gray-500 text-sm text-center">
+          <p className="text-sm text-center text-[var(--muted)]">
             © {new Date().getFullYear()} Pushkar Chaudhary. All rights reserved.
           </p>
-          <div className="flex gap-5 text-xl text-black-300">
+          <div className="flex gap-5 text-xl text-[var(--text)]">
             <a
               href="https://github.com/Pushkar-Chaudhary"
               target="_blank"
