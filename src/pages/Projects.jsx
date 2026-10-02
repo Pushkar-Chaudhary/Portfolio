@@ -18,6 +18,14 @@ const projects = [
     tech: ["Node.js", "React"],
 
   },
+  { title: "Career Sathi",
+    demo: "https://career-sathii.vercel.app/",
+    github: "https://github.com/Pushkar-Chaudhary",
+    description: "A career guiding app made from Nodejs React and Using the Google Gemini API.",
+    featured: true,
+    tech: ["Node.js", "React"],
+
+  },
   {
     title: "Portfolio Website",
     demo: "https://pushkar-chaudhary.vercel.app",
