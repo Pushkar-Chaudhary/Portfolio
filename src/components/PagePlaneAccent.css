@@ -1,0 +1,124 @@
+.page-plane-accent {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  z-index: 1;
+  width: 76px;
+  color: var(--accent);
+  opacity: 0.78;
+  pointer-events: none;
+}
+
+.page-plane-accent.is-flying {
+  animation: page-plane-flight 3.6s ease-in-out infinite alternate;
+}
+
+.page-plane-control {
+  position: absolute;
+  top: 14px;
+  right: 18px;
+  z-index: 2;
+  display: grid;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  transform: translateY(82px);
+  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.page-plane-control:hover {
+  transform: translateY(81px);
+  background: var(--accent);
+  color: var(--surface-strong);
+}
+
+.page-plane-control:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.page-plane-control svg {
+  width: 13px;
+  height: 13px;
+}
+
+.page-plane-accent svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.page-plane-trail {
+  opacity: 0.58;
+}
+
+.page-plane-shape {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.about-intro-card .section-title {
+  max-width: calc(100% - 82px);
+}
+
+.page-intro {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-intro > :not(.page-plane-accent) {
+  position: relative;
+  z-index: 1;
+  max-width: calc(100% - 88px);
+}
+
+@keyframes page-plane-flight {
+  0%,
+  100% {
+    transform: translate3d(-24px, 2px, 0) rotate(-5deg);
+  }
+
+  50% {
+    transform: translate3d(8px, -3px, 0) rotate(3deg);
+  }
+}
+
+@media (max-width: 520px) {
+  .page-plane-accent {
+    top: 11px;
+    right: 12px;
+    width: 58px;
+  }
+
+  .page-plane-control {
+    top: 11px;
+    right: 10px;
+    transform: translateY(64px);
+  }
+
+  .page-plane-control:hover {
+    transform: translateY(63px);
+  }
+
+  .about-intro-card .section-title {
+    max-width: calc(100% - 50px);
+  }
+
+  .page-intro > :not(.page-plane-accent) {
+    max-width: calc(100% - 55px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-plane-accent {
+    animation: none;
+  }
+}

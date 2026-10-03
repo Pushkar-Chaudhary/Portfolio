@@ -1,30 +1,31 @@
 
 import SEO from "../components/SEO.jsx";
+import TiltCard from "../components/TiltCard.jsx";
+import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
 
 const projects = [
   {
     title: "Aafno Kura",
     demo: "https://aafno-kura.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary",
-    description: "A simple post page for publishing short updates and daily thoughts.",
+    github: "https://github.com/Pushkar-Chaudhary/aafno-kura",
+    description: "A social app for sharing updates, with a public feed and tools for managing posts.",
     featured: true,
-    tech: ["Node.js", "EJS"],
+    tech: ["Node.js", "Express", "EJS", "MongoDB"],
   },
-  { title: "Wishly",
+  {
+    title: "Wishly",
     demo: "https://wishly-wish.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary",
-    description: "A birthday wishing page made with vibe-coding to make your special one feel special on their day..",
+    description: "A birthday wishing page made with vibe-coding to help someone special feel celebrated.",
     featured: true,
     tech: ["Node.js", "React"],
-
   },
-  { title: "Career Sathi",
+  {
+    title: "Career Sathi",
     demo: "https://career-sathii.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary",
-    description: "A career guiding app made from Nodejs React and Using the Google Gemini API.",
+    github: "https://github.com/Pushkar-Chaudhary/career-sathi",
+    description: "A career guidance app built with React and Node.js, with Gemini-powered features.",
     featured: true,
-    tech: ["Node.js", "React"],
-
+    tech: ["React", "Node.js", "Express", "MongoDB", "Gemini API"],
   },
   {
     title: "Portfolio Website",
@@ -37,16 +38,19 @@ const projects = [
   {
     title: "Notes App",
     demo: "https://notes-app-kappa-ruby-64.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary",
-    description: "A minimal notes app that lets users create, edit, and remove entries with local persistence.",
+    github: "https://github.com/Pushkar-Chaudhary/notes",
+    description: "A minimal notes app for creating and removing notes.",
     featured: false,
-    tech: ["React", "Tailwind CSS", "Local Storage"],
+    tech: ["React", "Tailwind CSS"],
   },
 ];
 
 function ProjectCard({ project }) {
   return (
-    <article className={`project-card ${project.featured ? "featured" : ""}`}>
+    <TiltCard
+      as="article"
+      className={`project-card tilt-card ${project.featured ? "featured" : ""}`}
+    >
       <div className="project-top">
         <div>
           {project.featured && <span className="project-badge">Featured</span>}
@@ -82,17 +86,19 @@ function ProjectCard({ project }) {
           Live demo
         </a>
 
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="button button-secondary"
-          aria-label={`View ${project.title} on GitHub`}
-        >
-          GitHub
-        </a>
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button-secondary"
+            aria-label={`View ${project.title} on GitHub`}
+          >
+            GitHub
+          </a>
+        )}
       </div>
-    </article>
+    </TiltCard>
   );
 }
 
@@ -107,6 +113,7 @@ function Projects() {
 
       <main className="page-stack">
         <header className="page-intro">
+          <PagePlaneAccent />
           <p className="eyebrow">Selected work</p>
           <p className="lead">
             Small experiments, personal ideas, and pages I’ve turned into working

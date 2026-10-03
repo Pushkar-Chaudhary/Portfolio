@@ -8,6 +8,7 @@ const Switch = ({ checked, onChange }) => {
           type="checkbox"
           checked={checked}
           onChange={onChange}
+          aria-label="Toggle dark mode"
         />
 
         <span className="slider">
@@ -36,9 +37,19 @@ const StyledWrapper = styled.div`
   }
 
   .switch input {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    margin: 0;
+    cursor: pointer;
     opacity: 0;
-    width: 0;
-    height: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .switch:focus-within .slider {
+    outline: 2px solid var(--accent, #8fb8a2);
+    outline-offset: 3px;
   }
 
   .slider {
@@ -70,7 +81,7 @@ const StyledWrapper = styled.div`
   }
 
   .switch input:checked + .slider {
-    background-color: #00a6ff;
+    background-color: var(--accent, #3f7b68);
   }
 
   .switch input:checked + .slider:before {

@@ -1,12 +1,24 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import Switch from "./Theme";
 
 function Navbar({ darkMode, setDarkMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuToggleRef = useRef(null);
 
-  const textColor = darkMode ? "#f3f4f6" : "#111827";
-  const mutedTextColor = darkMode ? "#9ca3af" : "#6b7280";
+  useEffect(() => {
+    if (!menuOpen) return undefined;
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuToggleRef.current?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
 
   const links = [
     { name: "Home", path: "/" },
@@ -18,123 +30,62 @@ function Navbar({ darkMode, setDarkMode }) {
 
   return (
     <>
-      <header className="fixed left-0 right-0 top-3 z-50 flex justify-center px-3">
-        
-        <div className="flex w-full items-center justify-between md:justify-center md:w-auto">
-
-          {/* Mobile menu button - Left side on mobile */}
+      <header className="top-nav-shell">
+        <div className="top-nav-inner">
           <button
-            className="flex h-8 w-8 items-center justify-center rounded-full text-lg md:hidden"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle Menu"
-            style={{ color: textColor }}
+            ref={menuToggleRef}
+            type="button"
+            className="nav-menu-toggle"
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-controls="mobile-navigation"
+            aria-expanded={menuOpen}
           >
             ☰
           </button>
 
-          {/* Navbar */}
-          <nav
-            className={`
-              hidden md:flex items-center
-              rounded-full
-              border
-              px-2 py-1
-              backdrop-blur-md
-              shadow-sm
-              transition-all
-              duration-300
-
-              ${
-                darkMode
-                  ? "border-gray-700 bg-gray-900/70"
-                  : "border-gray-200 bg-white/70"
-              }
-            `}
-          >
-
-            {/* Desktop Links */}
-            <div className="hidden md:flex flex-row items-center">
-              {links.map((link) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setMenuOpen(false)}
-                  className={`
-                    rounded-full
-                    px-3
-                    py-2
-                    text-sm
-                    transition-all
-                    duration-200
-                    hover:bg-black/5
-                    dark:hover:bg-white/10
-                  `}
-                  style={{ color: mutedTextColor }}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
+          <nav className="site-nav" aria-label="Primary navigation">
+            {links.map((link) => (
+              <NavLink
+                key={link.path}
+                to={link.path}
+                end={link.path === "/"}
+                onClick={() => setMenuOpen(false)}
+                className={({ isActive }) =>
+                  `nav-link ${isActive ? "nav-link--active" : ""}`
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
           </nav>
 
-          {/* Theme Switch - Right side on mobile */}
-          <div className="flex items-center">
-            <Switch
-              checked={darkMode}
-              onChange={() => setDarkMode(!darkMode)}
-            />
+          <div className="nav-toggle-wrap">
+            <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
           </div>
-
         </div>
       </header>
 
-      {menuOpen && (
-        <div
-          className={`
-            fixed top-16 left-3 z-40 md:hidden
-            rounded-lg
-            border
-            backdrop-blur-md
-            shadow-sm
-            overflow-hidden
-            transition-all
-            duration-300
-            ${
-              darkMode
-                ? "border-gray-700 bg-gray-900/70"
-                : "border-gray-200 bg-white/70"
+      <nav
+        id="mobile-navigation"
+        className={`mobile-menu ${darkMode ? "mobile-menu--dark" : ""}`}
+        aria-label="Mobile primary navigation"
+        hidden={!menuOpen}
+      >
+        {links.map((link) => (
+          <NavLink
+            key={link.path}
+            to={link.path}
+            end={link.path === "/"}
+            onClick={() => setMenuOpen(false)}
+            className={({ isActive }) =>
+              `mobile-nav-link ${isActive ? "mobile-nav-link--active" : ""}`
             }
-          `}
-        >
-          {links.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              onClick={() => setMenuOpen(false)}
-              className={`
-                block
-                w-full
-                px-4
-                py-3
-                text-sm
-                transition-all
-                duration-200
-                hover:bg-black/5
-                dark:hover:bg-white/10
-                border-b last:border-b-0
-                ${
-                  darkMode
-                    ? "border-gray-700"
-                    : "border-gray-200"
-                }
-              `}
-              style={{ color: mutedTextColor }}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-      )}
+          >
+            {link.name}
+          </NavLink>
+        ))}
+      </nav>
     </>
   );
 }

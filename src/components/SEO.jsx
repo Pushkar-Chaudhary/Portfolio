@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const BASE_URL = "https://pushkar-chaudhary.vercel.app";
+const BASE_URL = "https://pushkarchaudhary.com.np";
 
 export default function SEO({ title, description, path = "" }) {
   const location = useLocation();
@@ -68,14 +68,14 @@ export default function SEO({ title, description, path = "" }) {
           "@id": `${BASE_URL}/#person`,
           name: "Pushkar Chaudhary",
           url: BASE_URL,
-          image: `${BASE_URL}/og-image.png`,
+          image: `${BASE_URL}/fav.png`,
           jobTitle: "Frontend Developer",
           description: "Frontend developer and science student from Nepal specializing in HTML, CSS, JavaScript, and React.",
           sameAs: [
             "https://github.com/Pushkar-Chaudhary",
             "https://www.linkedin.com/in/anik-chy/",
             "https://x.com/pushkar_chau07",
-            "https://www.instagram.com/nvm.pushkarr/"
+            "https://www.instagram.com/pushkar.chau/"
           ],
           address: {
             "@type": "PostalAddress",

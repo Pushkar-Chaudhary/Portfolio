@@ -1,4 +1,5 @@
-import { FaGithub, FaLinkedin,} from "react-icons/fa";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -11,7 +12,7 @@ const Footer = () => {
       
           <div className="text-center md:text-left">
             <h2 className="text-2xl font-bold text-[var(--primary)]">
-              Pushkar Chaudhary<span className="text-cyan-400">.</span>
+              Pushkar Chaudhary<span className="text-[var(--accent)]">.</span>
             </h2>
             <p className="mt-2 max-w-sm text-[var(--muted)]">
               Frontend Developer from Nepal crafting beautiful web experiences with React and Tailwind CSS.
@@ -20,18 +21,19 @@ const Footer = () => {
 
       
           <div className="flex flex-wrap justify-center gap-6 text-[var(--text)]">
-            <a href="/#" className="hover:text-cyan-400 transition">Home</a>
-            <a href="/#/about" className="hover:text-cyan-400 transition">About</a>
-            <a href="/#/projects" className="hover:text-cyan-400 transition">Projects</a>
-            <a href="/#/contact" className="hover:text-cyan-400 transition">Contact</a>
-            <a href="https://feedback.fish/265a18dcee38b3" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition">Feedback</a>
+            <Link to="/" className="transition hover:text-[var(--accent)]">Home</Link>
+            <Link to="/about" className="transition hover:text-[var(--accent)]">About</Link>
+            <Link to="/projects" className="transition hover:text-[var(--accent)]">Projects</Link>
+            <Link to="/dashboard" className="transition hover:text-[var(--accent)]">Dashboard</Link>
+            <Link to="/contact" className="transition hover:text-[var(--accent)]">Contact</Link>
+            <a href="https://feedback.fish/265a18dcee38b3" target="_blank" rel="noopener noreferrer" className="transition hover:text-[var(--accent)]">Feedback</a>
           </div>
 
 
         
         </div>
 
-        <div className="border-t border-white/10 my-8"></div>
+        <div className="my-8 border-t border-[var(--border)]"></div>
 
     
         <div className="flex flex-col md:flex-row justify-between items-center gap-5">
@@ -44,18 +46,20 @@ const Footer = () => {
               href="https://github.com/Pushkar-Chaudhary"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white transition"
+              className="transition hover:text-[var(--accent)]"
+              aria-label="GitHub profile"
             >
-              <FaGithub />
+              <FaGithub aria-hidden="true" />
             </a>
 
             <a
               href="https://www.linkedin.com/in/anik-chy/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-cyan-400 transition"
+              className="transition hover:text-[var(--accent)]"
+              aria-label="LinkedIn profile"
             >
-              <FaLinkedin />
+              <FaLinkedin aria-hidden="true" />
             </a>
           </div>
         </div>

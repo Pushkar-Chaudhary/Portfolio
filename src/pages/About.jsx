@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO.jsx";
+import TiltCard from "../components/TiltCard.jsx";
+import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
 import sgc from "../assets/sgc.png";
 import koshi from "../assets/koshi.jpg";
 import pabs from "../assets/pabs.jpg";
-import trackerImg from "../assets/favicon.png";
 
 const education = [
   { name: "Sushma Godawari College, Itahari (+2)", image: sgc, alt: "Sushma Godawari College" },
@@ -26,30 +28,70 @@ const timelineEntries = [
   },
 ];
 
+const skillGroups = [
+  {
+    name: "Frontend",
+    skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS"],
+  },
+  {
+    name: "Backend & data",
+    skills: ["Node.js", "Express", "EJS", "MongoDB"],
+  },
+  {
+    name: "Tools & integrations",
+    skills: ["Vite", "Google Gemini API"],
+  },
+];
+
 function About() {
   const trackerRef = useRef(null);
   const timelineRef = useRef(null);
+  const reducedMotion = useReducedMotion();
+  const revealProps = reducedMotion
+    ? {
+        initial: false,
+        whileInView: { opacity: 1 },
+        viewport: { once: true, amount: 0.15 },
+        transition: { duration: 0 },
+      }
+    : {
+        initial: { opacity: 0, y: 16 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.15 },
+        transition: { duration: 0.55, ease: "easeOut" },
+      };
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frameId = 0;
+
+    const updateTracker = () => {
       const tracker = trackerRef.current;
       const timeline = timelineRef.current;
 
       if (!tracker || !timeline) return;
 
-      const timelineTop = timeline.offsetTop;
-      const timelineHeight = timeline.offsetHeight;
-      const scrollY = window.scrollY;
-
-      let progress =
-        (scrollY - timelineTop + window.innerHeight / 2) / timelineHeight;
-
-      progress = Math.max(0, Math.min(progress, 1));
+      const timelineBounds = timeline.getBoundingClientRect();
+      const timelineHeight = timeline.clientHeight;
+      const viewportProgress =
+        (window.innerHeight / 2 - timelineBounds.top) / timelineHeight;
+      const progress = Math.max(0, Math.min(viewportProgress, 1));
       tracker.style.transform = `translateY(${progress * timelineHeight}px)`;
     };
 
+    const handleScroll = () => {
+      window.cancelAnimationFrame(frameId);
+      frameId = window.requestAnimationFrame(updateTracker);
+    };
+
+    updateTracker();
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleScroll);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
   return (
@@ -61,7 +103,8 @@ function About() {
       />
 
       <main className="page-stack">
-        <section className="content-card">
+        <motion.section className="content-card about-intro-card" {...revealProps}>
+          <PagePlaneAccent />
           <p className="eyebrow">About</p>
           <h1 className="section-title">Hi, I’m Pushkar Chaudhary.</h1>
           <p className="lead">
@@ -70,9 +113,9 @@ function About() {
             React while constantly learning new technologies and improving my
             skills.
           </p>
-        </section>
+        </motion.section>
 
-        <section className="content-card">
+        <motion.section className="content-card about-section-card" {...revealProps}>
           <div className="section-header">
             <p className="eyebrow">Education</p>
             <h2>Learning path</h2>
@@ -80,26 +123,52 @@ function About() {
 
           <div className="education-list">
             {education.map((item) => (
-              <div className="school" key={item.name}>
+              <TiltCard as="div" className="school" key={item.name}>
                 <img src={item.image} alt={item.alt} />
                 <p>{item.name}</p>
+              </TiltCard>
+            ))}
+          </div>
+        </motion.section>
+
+        <motion.section
+          className="content-card about-section-card skills-section"
+          {...revealProps}
+          aria-labelledby="skills-title"
+        >
+          <div className="section-header">
+            <p className="eyebrow">Technology</p>
+            <h2 id="skills-title">Tools I use to build</h2>
+            <p className="skills-intro">
+              Technologies already in my projects and learning journey.
+            </p>
+          </div>
+
+          <div className="skills-grid">
+            {skillGroups.map((group) => (
+              <div className="skill-group" key={group.name}>
+                <h3>{group.name}</h3>
+                <ul className="skill-list" aria-label={group.name}>
+                  {group.skills.map((skill) => (
+                    <li key={skill}>{skill}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        <section className="content-card">
+        <motion.section className="content-card about-section-card" {...revealProps}>
           <div className="section-header">
             <p className="eyebrow">Journey</p>
             <h2>So far</h2>
           </div>
 
           <div className="timeline" ref={timelineRef}>
-            <img
-              src={trackerImg}
+            <span
               className="timeline-tracker"
               ref={trackerRef}
-              alt="Timeline tracker"
+              aria-hidden="true"
             />
 
             {timelineEntries.map((entry) => (
@@ -113,9 +182,9 @@ function About() {
               </div>
             ))}
           </div>
-        </section>
+        </motion.section>
 
-        <section className="content-card">
+        <motion.section className="content-card about-section-card" {...revealProps}>
           <div className="section-header">
             <p className="eyebrow">Mood</p>
             <h2>Current favorite song</h2>
@@ -132,7 +201,7 @@ function About() {
               loading="lazy"
             ></iframe>
           </div>
-        </section>
+        </motion.section>
       </main>
     </div>
   );

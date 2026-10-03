@@ -6,6 +6,8 @@ import About from "./pages/About.jsx";
 import Projects from "./pages/Projects.jsx";
 import Contact from "./pages/contact.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
+import Footer from "./pages/Footer.jsx";
+import CustomCursor from "./components/CustomCursor.jsx";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -57,17 +59,21 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className={`app-shell${darkMode ? " theme-dark" : ""}`}>
-      <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+    <>
+      <CustomCursor />
+      <div className={`app-shell${darkMode ? " theme-dark" : ""}`}>
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Routes>
-    </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
+        <Footer />
+      </div>
+    </>
   );
 }
 

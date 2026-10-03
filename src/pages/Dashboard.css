@@ -1,15 +1,35 @@
 .dashboard-page {
   min-height: 100vh;
   width: 100%;
-  padding: 0 16px 72px;
-  background: var(--bg);
+  padding: 98px 16px 72px;
+  background: transparent;
   color: var(--text);
   overflow: hidden;
 }
 
 .dashboard-shell {
-  width: min(570px, 100%);
+  width: min(820px, 100%);
   margin: 0 auto;
+}
+
+.dashboard-intro-card {
+  margin-bottom: 18px;
+  padding: clamp(22px, 5vw, 38px);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background:
+    radial-gradient(ellipse at 95% 0%, rgba(124, 154, 176, 0.15), transparent 40%),
+    var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.dashboard-intro-card h1 {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(2.25rem, 6vw, 3.6rem);
+  font-weight: 650;
+  letter-spacing: -0.065em;
+  line-height: 1;
 }
 
 .dashboard-heading {
@@ -51,6 +71,8 @@
   flex-shrink: 0;
   padding: 11px 15px;
   border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-alt);
   color: var(--text);
   text-decoration: none;
   font-size: 0.85rem;
@@ -72,6 +94,7 @@
 .stat-card, .activity-panel {
   border: 1px solid var(--border);
   background: var(--surface);
+  border-radius: 20px;
 }
 
 .stat-card {
@@ -89,7 +112,7 @@
 .stat-card--orange { border-top: 3px solid #e59652; }
 
 .dashboard-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
-.activity-panel { min-height: 376px; padding: 26px; }
+.activity-panel { min-height: 376px; padding: 26px; box-shadow: var(--shadow); }
 .panel-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
 .panel-eyebrow { display: flex; align-items: center; gap: 7px; color: var(--accent); font-weight: 600; }
 .panel-eyebrow--orange { color: #c47a3d; }
@@ -106,6 +129,8 @@
 .contribution-day--4 { background: #247b4d; }
 .contribution-graph img { width: 100%; max-width: 100%; image-rendering: auto; }
 .graph-loading { width: 100%; color: var(--muted); text-align: center; font-size: 0.85rem; }
+.graph-fallback { display: grid; justify-items: center; gap: 8px; }
+.graph-fallback a { color: var(--accent); font-weight: 600; }
 .graph-footer { display: flex; align-items: center; justify-content: flex-end; gap: 5px; margin-top: 16px; color: var(--muted); letter-spacing: 0; text-transform: none; }
 .graph-footer .contribution-day { width: 11px; height: 11px; flex: 0 0 11px; }
 
@@ -118,12 +143,15 @@
 .wakatime-empty a { display: inline-flex; align-items: center; gap: 7px; margin-top: 22px; color: #b66323; font-size: 0.82rem; text-decoration: none; }
 .wakatime-empty a:hover { text-decoration: underline; }
 .wakatime-empty a svg { font-size: 0.62rem; }
-.wakatime-time { min-height: 250px; display: grid; place-items: center; margin: 0; }
-.wakatime-badge { display: block; }
+.wakatime-time { min-height: 0; display: grid; place-items: center; margin: 0 0 18px; }
+.wakatime-badge { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 54px; padding: 8px 16px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface); box-shadow: 0 14px 30px rgba(15, 23, 42, 0.06); }
 .wakatime-badge img { display: block; max-width: 100%; height: auto; }
+.wakatime-loading { color: var(--muted); font-size: 0.8rem; }
+.wakatime-fallback { display: inline-flex; align-items: center; gap: 8px; color: var(--text); font-size: 0.84rem; }
 .wakatime-frame { width: 100%; height: 278px; margin-top: 24px; border: 0; }
 
 .theme-dark .dashboard-page { --dashboard-orange: #d69a69; }
+.theme-dark .dashboard-intro-card { background: radial-gradient(ellipse at 95% 0%, rgba(118, 152, 139, 0.13), transparent 40%), var(--surface); }
 .theme-dark .stat-card--green { border-top-color: #6eaa87; }
 .theme-dark .stat-card--orange,
 .theme-dark .wakatime-panel { border-top-color: #bd8256; }
@@ -140,7 +168,7 @@
 .theme-dark .contribution-day--4 { background: #6eaa87; }
 
 @media (max-width: 760px) {
-  .dashboard-page { padding: 0 12px 48px; }
+  .dashboard-page { padding: 88px 12px 48px; }
   .dashboard-heading { margin-bottom: 0; }
   .dashboard-heading h1 { font-size: clamp(2.35rem, 13vw, 3.2rem); }
   .dashboard-stats, .dashboard-grid { grid-template-columns: 1fr; gap: 10px; }
