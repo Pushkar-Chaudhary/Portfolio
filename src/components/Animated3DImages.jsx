@@ -53,11 +53,10 @@ function Animated3DImages() {
       </button>
       <div className="animated3d-car-track">
         <span
-          className={`animated3d-rc-car${isCarRunning ? " is-running" : ""}`}
+          className={`animated3d-rc-car${isCarRunning ? "" : " is-paused"}`}
           aria-hidden="true"
         >
           <svg viewBox="0 0 180 94" fill="none">
-            <ellipse cx="91" cy="81" rx="67" ry="6" fill="currentColor" opacity=".12" />
             <g className="animated3d-wheel">
               <circle cx="54" cy="67" r="14" fill="var(--primary)" />
               <circle cx="54" cy="67" r="5" fill="var(--surface-strong)" />
