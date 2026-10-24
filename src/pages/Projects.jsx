@@ -1,4 +1,5 @@
-
+import { motion, useReducedMotion } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import SEO from "../components/SEO.jsx";
 import TiltCard from "../components/TiltCard.jsx";
 import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
@@ -8,31 +9,32 @@ const projects = [
     title: "Aafno Kura",
     demo: "https://aafno-kura.vercel.app/",
     github: "https://github.com/Pushkar-Chaudhary/aafno-kura",
-    description: "A social app for sharing updates, with a public feed and tools for managing posts.",
-    featured: true,
+    description:
+      "A social app for sharing updates, with a public feed and tools for managing posts.",
+    hero: true,
     tech: ["Node.js", "Express", "EJS", "MongoDB"],
-  },
-  {
-    title: "Wishly",
-    demo: "https://wishly-wish.vercel.app/",
-    description: "A birthday wishing page made with vibe-coding to help someone special feel celebrated.",
-    featured: true,
-    tech: ["Node.js", "React"],
   },
   {
     title: "Career Sathi",
     demo: "https://career-sathii.vercel.app/",
     github: "https://github.com/Pushkar-Chaudhary/career-sathi",
-    description: "A career guidance app built with React and Node.js, with Gemini-powered features.",
-    featured: true,
+    description:
+      "A career guidance app built with React and Node.js, with Gemini-powered features.",
     tech: ["React", "Node.js", "Express", "MongoDB", "Gemini API"],
+  },
+  {
+    title: "Wishly",
+    demo: "https://wishly-wish.vercel.app/",
+    description:
+      "A birthday wishing page made with vibe-coding to help someone special feel celebrated.",
+    tech: ["Node.js", "React"],
   },
   {
     title: "Portfolio Website",
     demo: "https://pushkar-chaudhary.vercel.app",
     github: "https://github.com/Pushkar-Chaudhary/Portfolio",
-    description: "A personal portfolio that presents my work, interests, and development journey.",
-    featured: false,
+    description:
+      "A personal portfolio that presents my work, interests, and development journey.",
     tech: ["React", "Tailwind CSS", "Vite"],
   },
   {
@@ -40,20 +42,32 @@ const projects = [
     demo: "https://notes-app-kappa-ruby-64.vercel.app/",
     github: "https://github.com/Pushkar-Chaudhary/notes",
     description: "A minimal notes app for creating and removing notes.",
-    featured: false,
     tech: ["React", "Tailwind CSS"],
   },
 ];
 
-function ProjectCard({ project }) {
+function ProjectCard({ project, index }) {
+  const reducedMotion = useReducedMotion();
+  const revealProps = reducedMotion
+    ? { initial: false, animate: { opacity: 1, y: 0 } }
+    : {
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.12 },
+        transition: { duration: 0.45, ease: "easeOut", delay: index * 0.07 },
+      };
+
   return (
     <TiltCard
-      as="article"
-      className={`project-card tilt-card ${project.featured ? "featured" : ""}`}
+      as={motion.article}
+      className={`project-card${project.hero ? " project-card--hero" : ""}`}
+      {...revealProps}
     >
       <div className="project-top">
-        <div>
-          {project.featured && <span className="project-badge">Featured</span>}
+        <div className="project-meta">
+          {project.hero && (
+            <span className="project-badge">Featured</span>
+          )}
           <h2>{project.title}</h2>
         </div>
 
@@ -62,13 +76,13 @@ function ProjectCard({ project }) {
           target="_blank"
           rel="noopener noreferrer"
           className="project-link"
-          aria-label={`Open ${project.title}`}
+          aria-label={`Open ${project.title} live demo`}
         >
-          ↗
+          <FaExternalLinkAlt aria-hidden="true" />
         </a>
       </div>
 
-      <p>{project.description}</p>
+      <p className="project-desc">{project.description}</p>
 
       <div className="tech-list">
         {project.tech.map((tech) => (
@@ -83,7 +97,7 @@ function ProjectCard({ project }) {
           rel="noopener noreferrer"
           className="button button-primary"
         >
-          Live demo
+          Live demo <FaExternalLinkAlt aria-hidden="true" />
         </a>
 
         {project.github && (
@@ -94,7 +108,7 @@ function ProjectCard({ project }) {
             className="button button-secondary"
             aria-label={`View ${project.title} on GitHub`}
           >
-            GitHub
+            <FaGithub aria-hidden="true" /> GitHub
           </a>
         )}
       </div>
@@ -112,18 +126,19 @@ function Projects() {
       />
 
       <main className="page-stack">
-        <header className="page-intro">
+        <header className="projects-header">
           <PagePlaneAccent />
           <p className="eyebrow">Selected work</p>
+          <h1 className="section-title">Things I've built.</h1>
           <p className="lead">
-            Small experiments, personal ideas, and pages I’ve turned into working
-            products.
+            Small experiments, personal ideas, and pages I've turned into
+            working products.
           </p>
         </header>
 
-        <section className="project-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+        <section className="project-grid" aria-label="Projects">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </section>
       </main>

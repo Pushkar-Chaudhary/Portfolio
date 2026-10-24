@@ -1,11 +1,25 @@
 import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO.jsx";
-import TiltCard from "../components/TiltCard.jsx";
 import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
 import sgc from "../assets/sgc.png";
 import koshi from "../assets/koshi.jpg";
 import pabs from "../assets/pabs.jpg";
+import {
+  SiVscodium,
+  SiMongodb,
+  SiReact,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiHtml5,
+  SiCss,
+  SiJavascript,
+  SiExpress,
+  SiVite,
+  SiGooglegemini,
+  SiCursor,
+} from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
 
 const education = [
   { name: "Sushma Godawari College, Itahari (+2)", image: sgc, alt: "Sushma Godawari College" },
@@ -28,19 +42,28 @@ const timelineEntries = [
   },
 ];
 
-const skillGroups = [
-  {
-    name: "Frontend",
-    skills: ["HTML", "CSS", "JavaScript", "React", "Tailwind CSS"],
-  },
-  {
-    name: "Backend & data",
-    skills: ["Node.js", "Express", "EJS", "MongoDB"],
-  },
-  {
-    name: "Tools & integrations",
-    skills: ["Vite", "Google Gemini API"],
-  },
+const AntigravityIcon = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true">
+    <circle cx="12" cy="12" r="3.5" />
+    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 17.5A7.5 7.5 0 1 1 19.5 12 7.51 7.51 0 0 1 12 19.5Z" opacity=".35"/>
+    <path d="M12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.5 5.5 0 0 0 12 6.5Zm0 9A3.5 3.5 0 1 1 15.5 12 3.5 3.5 0 0 1 12 15.5Z" opacity=".6"/>
+  </svg>
+);
+
+const tools = [
+  { name: "VS Code",     icon: <VscVscode />,       color: "#007ACC" },
+  { name: "Cursor",      icon: <SiCursor />,         color: "#000000" },
+  { name: "Antigravity", icon: <AntigravityIcon />,  color: "#6C63FF" },
+  { name: "Node.js",     icon: <SiNodedotjs />,      color: "#339933" },
+  { name: "MongoDB",     icon: <SiMongodb />,        color: "#47A248" },
+  { name: "React",       icon: <SiReact />,          color: "#61DAFB" },
+  { name: "Tailwind CSS",icon: <SiTailwindcss />,    color: "#06B6D4" },
+  { name: "HTML",        icon: <SiHtml5 />,          color: "#E34F26" },
+  { name: "CSS",         icon: <SiCss />,            color: "#1572B6" },
+  { name: "JavaScript",  icon: <SiJavascript />,     color: "#F7DF1E" },
+  { name: "Express",     icon: <SiExpress />,        color: "#888"    },
+  { name: "Vite",        icon: <SiVite />,           color: "#646CFF" },
+  { name: "Gemini API",  icon: <SiGooglegemini />,   color: "#8E75B2" },
 ];
 
 function About() {
@@ -103,7 +126,7 @@ function About() {
       />
 
       <main className="page-stack">
-        <motion.section className="content-card about-intro-card" {...revealProps}>
+        <motion.section className="about-intro-section" {...revealProps}>
           <PagePlaneAccent />
           <p className="eyebrow">About</p>
           <h1 className="section-title">Hi, I’m Pushkar Chaudhary.</h1>
@@ -115,7 +138,7 @@ function About() {
           </p>
         </motion.section>
 
-        <motion.section className="content-card about-section-card" {...revealProps}>
+        <motion.section className="about-section" {...revealProps}>
           <div className="section-header">
             <p className="eyebrow">Education</p>
             <h2>Learning path</h2>
@@ -123,16 +146,16 @@ function About() {
 
           <div className="education-list">
             {education.map((item) => (
-              <TiltCard as="div" className="school" key={item.name}>
+              <div className="school" key={item.name}>
                 <img src={item.image} alt={item.alt} />
                 <p>{item.name}</p>
-              </TiltCard>
+              </div>
             ))}
           </div>
         </motion.section>
 
         <motion.section
-          className="content-card about-section-card skills-section"
+          className="about-section skills-section"
           {...revealProps}
           aria-labelledby="skills-title"
         >
@@ -144,21 +167,19 @@ function About() {
             </p>
           </div>
 
-          <div className="skills-grid">
-            {skillGroups.map((group) => (
-              <div className="skill-group" key={group.name}>
-                <h3>{group.name}</h3>
-                <ul className="skill-list" aria-label={group.name}>
-                  {group.skills.map((skill) => (
-                    <li key={skill}>{skill}</li>
-                  ))}
-                </ul>
+          <div className="tools-grid" role="list" aria-label="Tools and technologies">
+            {tools.map((tool) => (
+              <div className="tool-tile" key={tool.name} role="listitem">
+                <span className="tool-icon" style={{ color: tool.color }} aria-hidden="true">
+                  {tool.icon}
+                </span>
+                <span className="tool-name">{tool.name}</span>
               </div>
             ))}
           </div>
         </motion.section>
 
-        <motion.section className="content-card about-section-card" {...revealProps}>
+        <motion.section className="about-section" {...revealProps}>
           <div className="section-header">
             <p className="eyebrow">Journey</p>
             <h2>So far</h2>
@@ -184,7 +205,7 @@ function About() {
           </div>
         </motion.section>
 
-        <motion.section className="content-card about-section-card" {...revealProps}>
+        <motion.section className="about-section" {...revealProps}>
           <div className="section-header">
             <p className="eyebrow">Mood</p>
             <h2>Current favorite song</h2>

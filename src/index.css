@@ -101,7 +101,7 @@ textarea {
 
 .page-stack {
   display: grid;
-  gap: 28px;
+  gap: 48px;
 }
 
 .top-nav-shell {
@@ -263,42 +263,30 @@ textarea {
 
 .content-card,
 .page-intro {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  box-shadow: var(--shadow);
-  transform-style: preserve-3d;
-  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+  /* Flat — no card chrome */
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 28px 0;
 }
 
-.content-card:hover,
-.page-intro:hover {
-  transform: perspective(1400px) rotateX(0.6deg) translateY(-2px);
-  box-shadow: 0 32px 64px rgba(15, 23, 42, 0.14);
+/* Contact cards keep horizontal padding for form readability */
+.contact-card {
+  padding: 28px 24px;
 }
 
-.about-intro-card {
+/* Intro section — no box, just breathing room */
+.about-intro-section {
   position: relative;
-  overflow: hidden;
   isolation: isolate;
+  padding: 24px 0 8px;
 }
 
-.about-intro-card::after {
-  position: absolute;
-  z-index: -1;
-  top: -120px;
-  right: -100px;
-  width: 300px;
-  height: 300px;
-  border: 1px solid rgba(112, 139, 156, 0.2);
-  border-radius: 50%;
-  box-shadow: 0 0 0 28px rgba(112, 139, 156, 0.035), 0 0 0 58px rgba(112, 139, 156, 0.025);
-  content: "";
-  pointer-events: none;
-}
-
-.about-section-card {
-  transform-style: preserve-3d;
+/* Generic about section — flat, no card chrome */
+.about-section {
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
 }
 
 .about-me-card {
@@ -617,76 +605,60 @@ textarea {
   transform: translateY(-2px);
 }
 
+/* ========================
+   Projects page header
+   ======================== */
+.projects-header {
+  position: relative;
+  isolation: isolate;
+  padding: 24px 0 8px;
+}
+
+/* ========================
+   Project grid
+   ======================== */
 .project-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: stretch;
+  align-items: start;
   gap: 18px;
 }
 
-.project-grid > .project-card.featured:first-child {
+/* First card (hero) spans full width */
+.project-card--hero {
   grid-column: 1 / -1;
 }
 
+/* Base card */
 .project-card {
-  display: grid;
-  gap: 18px;
-  padding: 24px;
-  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px;
+  border-radius: 20px;
   border: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.74);
-  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.06);
+  background: var(--surface);
+  box-shadow: 0 8px 32px rgba(15, 23, 42, 0.05);
   transform-style: preserve-3d;
-  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+  height: 100%;
 }
 
 .project-card:hover {
-  transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
-  border-color: rgba(77, 98, 121, 0.4);
-  box-shadow: 0 28px 54px rgba(15, 23, 42, 0.1);
+  transform: perspective(1100px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-4px);
+  border-color: rgba(63, 123, 104, 0.4);
+  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.1);
 }
 
-.tilt-surface {
-  --tilt-x: 0deg;
-  --tilt-y: 0deg;
-  transform-style: preserve-3d;
-  transition: transform 280ms ease, box-shadow 280ms ease, border-color 280ms ease;
-}
-
-.tilt-surface:hover {
-  transform: perspective(1100px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateY(-3px);
-}
-
-.tilt-card {
-  --rx: 0deg;
-  --ry: 0deg;
-}
-
-.project-card.featured {
-  border-color: rgba(109, 132, 161, 0.42);
-}
-
-.project-card.featured:first-child {
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-  align-content: center;
-  gap: 18px 28px;
-  padding: clamp(24px, 5vw, 38px);
-  background:
-    linear-gradient(115deg, var(--surface) 0%, var(--surface) 70%, var(--accent-soft) 100%);
-}
-
-.project-card.featured:first-child .project-top,
-.project-card.featured:first-child .project-actions {
-  grid-column: 1 / -1;
-}
-
-.project-card.featured:first-child > p {
-  grid-column: 1;
-}
-
-.project-card.featured:first-child .tech-list {
-  grid-column: 2;
-  align-self: center;
+/* Hero card gets a soft gradient accent */
+.project-card--hero {
+  background: linear-gradient(
+    120deg,
+    var(--surface) 0%,
+    var(--surface) 65%,
+    var(--accent-soft) 100%
+  );
+  border-color: rgba(63, 123, 104, 0.22);
 }
 
 .project-top {
@@ -696,43 +668,73 @@ textarea {
   gap: 16px;
 }
 
+.project-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
 .project-badge {
   display: inline-block;
-  margin-bottom: 6px;
-  padding: 5px 10px;
+  width: fit-content;
+  padding: 3px 10px;
   border-radius: 999px;
-  background: var(--surface-alt);
-  color: var(--muted);
-  font-size: 0.7rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .project-card h2 {
   margin: 0;
-  font-size: clamp(1.35rem, 2vw, 2rem);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
   color: var(--primary);
   letter-spacing: -0.04em;
+  line-height: 1.2;
 }
 
-.project-card p {
+.project-desc {
   margin: 0;
   color: var(--muted);
+  font-size: 0.9rem;
   line-height: 1.7;
+  flex: 1;
+}
+
+/* Push actions to bottom of card */
+.project-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-actions {
+  margin-top: auto;
 }
 
 .project-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   border: 1px solid var(--border);
   background: var(--surface-alt);
-  color: var(--primary);
-  font-size: 1.2rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.project-link:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--bg);
+  transform: translateY(-2px);
 }
 
 .tech-list {
@@ -744,18 +746,37 @@ textarea {
 .tech-list span {
   display: inline-flex;
   align-items: center;
-  padding: 6px 10px;
+  padding: 5px 10px;
   border-radius: 999px;
   background: var(--surface-alt);
-  color: var(--text);
+  color: var(--muted);
   border: 1px solid var(--border);
-  font-size: 0.74rem;
+  font-size: 0.73rem;
+  font-weight: 600;
 }
 
 .project-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+/* TiltCard base — keeps CSS variables defined */
+.tilt-surface {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  transform-style: preserve-3d;
+}
+
+/* ========================
+   Footer
+   ======================== */
+footer {
+  border-top: 1px solid var(--border);
+  margin-top: 16px;
+  color: var(--text);
+  font-size: 0.88rem;
 }
 
 .button {
@@ -785,6 +806,16 @@ textarea {
 .button-secondary {
   background: transparent;
   color: var(--text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.button-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
 }
 
 .social-list {
@@ -926,10 +957,7 @@ textarea {
 
 .skill-group {
   min-width: 0;
-  padding: 18px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--surface-alt);
+  padding: 0 0 8px;
 }
 
 .skill-group h3 {
@@ -969,23 +997,77 @@ textarea {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 16px;
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 15px 32px rgba(15, 23, 42, 0.04);
+  padding: 12px 0;
 }
 
 .school img {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .school p {
   margin: 0;
   color: var(--text);
+  font-size: 0.93rem;
+}
+
+/* ========================
+   Tools grid (About page)
+   ======================== */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.tool-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 10px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-alt);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+  cursor: default;
+}
+
+.tool-tile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(63, 123, 104, 0.35);
+  background: var(--surface);
+}
+
+.tool-icon {
+  font-size: 1.85rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 180ms ease;
+}
+
+.tool-tile:hover .tool-icon {
+  transform: scale(1.12);
+}
+
+.tool-name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* Education list — CSS-only separator */
+.education-list .school + .school {
+  border-top: 1px solid var(--border);
 }
 
 .timeline {
@@ -1062,9 +1144,7 @@ textarea {
 .music-player {
   margin-top: 12px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.7);
+  border-radius: 14px;
 }
 
 .custom-cursor {
@@ -1125,11 +1205,10 @@ textarea {
   --shadow: 0 30px 60px rgba(2, 6, 23, 0.42);
 }
 
-.theme-dark .content-card,
-.theme-dark .page-intro,
-.theme-dark .project-card,
-.theme-dark .school,
-.theme-dark .music-player,
+.theme-dark .project-card {
+  background: rgba(17, 24, 39, 0.82);
+}
+
 .theme-dark .contact-card--intro,
 .theme-dark .form-field input,
 .theme-dark .form-field textarea {
@@ -1258,9 +1337,8 @@ Mobile
 padding-top: 72px;
 }
 
-.page-intro,
-.content-card {
-padding: 20px 18px;
+.contact-card {
+  padding: 20px 16px;
 }
 
 .project-card {
@@ -1300,7 +1378,11 @@ flex: 1 1 100%;
 }
 
 .social-list {
-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.tools-grid {
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
 }
 }
 
@@ -1339,19 +1421,13 @@ justify-content: flex-start;
   min-height: 280px;
 }
 
-.skills-grid,
+/* On mobile, stack project grid to single column */
 .project-grid {
   grid-template-columns: minmax(0, 1fr);
 }
 
-.project-card.featured:first-child {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.project-card.featured:first-child > p,
-.project-card.featured:first-child .tech-list,
-.project-card.featured:first-child .project-top,
-.project-card.featured:first-child .project-actions {
+/* Hero card already full-width — reset grid-column */
+.project-card--hero {
   grid-column: 1;
 }
 }
