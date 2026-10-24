@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import minzoro from "../assets/minizoro.jpeg";
 import TiltCard from "./TiltCard.jsx";
 
 const AboutMe = () => {
@@ -12,10 +11,9 @@ const AboutMe = () => {
 
       <div className="about-bento-grid">
         <TiltCard className="about-me-card about-intro-tile">
-          <div className="about-tile-accent" aria-hidden="true" />
           <div className="about-tile-copy">
             <p className="about-tile-label">Based in Nepal</p>
-            <p>Designing interfaces that feel effortless and memorable.</p>
+            <p>Designing interfaces that feel effortless.</p>
           </div>
 
           <Link to="/about" className="about-tile-link">
@@ -26,22 +24,8 @@ const AboutMe = () => {
         <TiltCard className="about-me-card about-role-tile">
           <p className="about-tile-label">Current role</p>
           <h3>Frontend Developer &amp; Student</h3>
-          <span className="about-role-status">
-            <span aria-hidden="true" /> Active
-          </span>
         </TiltCard>
 
-        <TiltCard className="about-me-card about-photo-card">
-          <img
-            src={minzoro}
-            alt="Pushkar Chaudhary"
-            className="about-photo-image"
-            loading="lazy"
-            decoding="async"
-          />
-
-          <span className="about-photo-caption">Silly Me</span>
-        </TiltCard>
 
         <TiltCard className="about-me-card about-welcome-tile">
           <p className="about-tile-label">Welcome</p>
