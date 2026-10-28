@@ -23,6 +23,14 @@ const projects = [
     tech: ["React", "Node.js", "Express", "MongoDB", "Gemini API"],
   },
   {
+    title: "Sajilo Blog",
+    demo: "https://sajiloblog.vercel.app/",
+    github: "https://github.com/Pushkar-Chaudhary/sajilo-blog",
+    description:
+      "A simple blog app for sharing thoughts and experiences.",
+    tech: ["React", "Node.js", "Express", "MongoDB"],
+  },
+  {
     title: "Wishly",
     demo: "https://wishly-wish.vercel.app/",
     description:
