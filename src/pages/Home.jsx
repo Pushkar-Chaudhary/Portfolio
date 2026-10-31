@@ -1,11 +1,15 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import TypingText from "../components/TypingText.jsx";
 import SEO from "../components/SEO.jsx";
 import AboutMe from "../components/AboutMe.jsx";
 import Animated3DImages from "../components/Animated3DImages.jsx";
+import ProjectShowcase from "../components/ProjectShowcase.jsx";
+import EducationShowcase from "../components/EducationShowcase.jsx";
 
 const Home = () => {
+  const reducedMotion = useReducedMotion();
+
   return (
     <div className="page-shell page-shell--narrow">
       <SEO
@@ -22,10 +26,11 @@ const Home = () => {
 
           <motion.div
             className="hero-copy"
-            initial={{ opacity: 0, y: 16 }}
+            initial={reducedMotion ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
+            transition={{ duration: reducedMotion ? 0 : 0.7, ease: "easeOut" }}
           >
+            <p className="eyebrow">Based in Nepal · Building for the web</p>
             <h1 className="intro">Pushkar Chaudhary</h1>
             <h2 className="sub-intro">
               <TypingText />
@@ -46,6 +51,8 @@ const Home = () => {
           </motion.div>
         </section>
 
+        <EducationShowcase />
+        <ProjectShowcase />
         <AboutMe />
       </main>
 

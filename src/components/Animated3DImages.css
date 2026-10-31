@@ -1,158 +1,85 @@
-.animated3d-images {
+.animated3d-stage {
   display: grid;
   width: 100%;
   min-height: 450px;
-  max-width: 100%;
-  padding: 0;
+  place-items: center;
+}
+
+.animated3d-images {
   position: relative;
-  z-index: 2;
+  display: grid;
+  width: 100%;
+  min-height: 450px;
+  padding: 0;
   place-items: center;
   border: 0;
+  border-radius: 24px;
   background: transparent;
-  color: inherit;
   cursor: pointer;
   overflow: hidden;
   touch-action: manipulation;
 }
 
-.animated3d-stage {
-  position: relative;
-  width: 100%;
-  min-height: 450px;
+.animated3d-hint {
+  position: absolute;
+  right: 12px;
+  bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.animated3d-content {
-  display: grid;
-  width: 100%;
-  height: 100%;
-  min-height: inherit;
-  place-items: center;
+.animated3d-speech {
+  position: absolute;
+  top: calc(50% - 155px);
+  left: calc(50% + 48px);
+  padding: 8px 13px;
+  border: 1px solid var(--border);
+  border-radius: 14px 14px 14px 4px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.8rem;
+  font-weight: 750;
+  opacity: 0;
+  transform: translateY(5px) scale(0.96);
+  transition: opacity 180ms ease, transform 180ms ease;
+  pointer-events: none;
+}
+
+.animated3d-speech::after {
+  position: absolute;
+  bottom: -5px;
+  left: 8px;
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  content: "";
+  transform: rotate(45deg);
+}
+
+.animated3d-speech.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .animated3d-images:focus-visible {
   outline-offset: -3px;
-  border-radius: 24px;
-}
-
-.animated3d-car-track {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  width: 100%;
-  height: 100%;
-  container-type: inline-size;
-  perspective: 800px;
-  pointer-events: none;
-}
-
-.animated3d-rc-car {
-  position: absolute;
-  bottom: 38px;
-  left: 0;
-  width: clamp(84px, 29%, 122px);
-  color: var(--primary);
-  transform: translateX(0);
-  transform-origin: center bottom;
-  animation: animated3d-car-drive-across 5s linear infinite alternate;
-}
-
-.animated3d-rc-car svg {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-
-.animated3d-wheel {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: animated3d-wheel-spin 280ms linear infinite;
-}
-
-.animated3d-car-body {
-  animation: animated3d-car-bounce 180ms ease-in-out infinite alternate;
-  transform-box: fill-box;
-  transform-origin: center bottom;
-}
-
-.animated3d-rc-car.is-paused,
-.animated3d-rc-car.is-paused .animated3d-wheel,
-.animated3d-rc-car.is-paused .animated3d-car-body {
-  animation-play-state: paused;
-}
-
-.animated3d-car-button {
-  position: absolute;
-  z-index: 4;
-  bottom: 4px;
-  left: 50%;
-  display: grid;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  place-items: center;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
-  cursor: pointer;
-  transform: translateX(-50%);
-  transition: background-color 180ms ease, color 180ms ease, transform 180ms ease;
-  pointer-events: auto;
-}
-
-.animated3d-car-button svg {
-  width: 13px;
-  height: 13px;
-}
-
-.animated3d-car-button:hover {
-  transform: translate(-50%, -1px);
-  background: var(--accent);
-  color: var(--surface-strong);
-}
-
-.animated3d-car-button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-@keyframes animated3d-car-drive-across {
-  0% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(calc(100cqw - 100%));
-  }
-}
-
-@keyframes animated3d-wheel-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes animated3d-car-bounce {
-  from {
-    transform: translateY(-1px);
-  }
-
-  to {
-    transform: translateY(2px);
-  }
-}
-
-.animated3d-scene {
-  display: grid;
-  width: 100%;
-  min-height: inherit;
-  place-items: center;
 }
 
 .animated3d-assembly {
   position: relative;
+  display: block;
   width: min(100%, 300px);
   height: 300px;
 }
@@ -168,36 +95,35 @@
   object-fit: contain;
   object-position: center;
   user-select: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 280ms ease, transform 350ms ease;
 }
 
 .animated3d-image--standing {
   z-index: 2;
   opacity: 1;
-  transform: translate(-50%, -50%);
 }
 
 .animated3d-image--greeting {
   z-index: 1;
   opacity: 0;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(0.96);
 }
 
-.animated3d-assembly.is-greeting .animated3d-image--standing {
+.animated3d-image--standing.is-hidden {
   z-index: 1;
   opacity: 0;
+  transform: translate(-50%, -50%) scale(0.96);
 }
 
-.animated3d-assembly.is-greeting .animated3d-image--greeting {
+.animated3d-image--greeting.is-visible {
   z-index: 2;
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 @media (max-width: 760px) {
   .animated3d-stage,
-  .animated3d-content {
-    min-height: 340px;
-  }
-
   .animated3d-images {
     min-height: 340px;
   }
@@ -211,21 +137,14 @@
     height: min(74%, 205px);
   }
 
-  .animated3d-rc-car {
-    width: clamp(84px, 29%, 108px);
-  }
-
-  .animated3d-car-track {
-    inset: 0;
+  .animated3d-speech {
+    top: calc(50% - 145px);
+    left: calc(50% + 42px);
   }
 }
 
 @media (max-width: 420px) {
   .animated3d-stage,
-  .animated3d-content {
-    min-height: 300px;
-  }
-
   .animated3d-images {
     min-height: 300px;
   }
@@ -238,15 +157,14 @@
     height: min(74%, 185px);
   }
 
-  .animated3d-car-track {
-    inset: 0;
+  .animated3d-speech {
+    top: calc(50% - 130px);
+    left: calc(50% + 30px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animated3d-rc-car,
-  .animated3d-wheel,
-  .animated3d-car-body {
-    animation: none;
+  .animated3d-image {
+    transition: none;
   }
 }

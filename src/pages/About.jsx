@@ -1,12 +1,8 @@
-import { useEffect, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO.jsx";
 import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
-import sgc from "../assets/sgc.png";
-import koshi from "../assets/koshi.jpg";
-import pabs from "../assets/pabs.jpg";
+import education from "../data/education.js";
 import {
-  SiVscodium,
   SiMongodb,
   SiReact,
   SiTailwindcss,
@@ -20,12 +16,6 @@ import {
   SiCursor,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
-
-const education = [
-  { name: "Sushma Godawari College, Itahari (+2)", image: sgc, alt: "Sushma Godawari College" },
-  { name: "Koshi Saint James Residential Secondary School", image: koshi, alt: "Koshi Saint James" },
-  { name: "Public Aims Boarding School (Primary Education)", image: pabs, alt: "Public Aims Boarding School" },
-];
 
 const timelineEntries = [
   {
@@ -67,8 +57,6 @@ const tools = [
 ];
 
 function About() {
-  const trackerRef = useRef(null);
-  const timelineRef = useRef(null);
   const reducedMotion = useReducedMotion();
   const revealProps = reducedMotion
     ? {
@@ -83,39 +71,6 @@ function About() {
         viewport: { once: true, amount: 0.15 },
         transition: { duration: 0.55, ease: "easeOut" },
       };
-
-  useEffect(() => {
-    let frameId = 0;
-
-    const updateTracker = () => {
-      const tracker = trackerRef.current;
-      const timeline = timelineRef.current;
-
-      if (!tracker || !timeline) return;
-
-      const timelineBounds = timeline.getBoundingClientRect();
-      const timelineHeight = timeline.clientHeight;
-      const viewportProgress =
-        (window.innerHeight / 2 - timelineBounds.top) / timelineHeight;
-      const progress = Math.max(0, Math.min(viewportProgress, 1));
-      tracker.style.transform = `translateY(${progress * timelineHeight}px)`;
-    };
-
-    const handleScroll = () => {
-      window.cancelAnimationFrame(frameId);
-      frameId = window.requestAnimationFrame(updateTracker);
-    };
-
-    updateTracker();
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-
-    return () => {
-      window.cancelAnimationFrame(frameId);
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
 
   return (
     <div className="page-shell page-shell--wide">
@@ -183,26 +138,25 @@ function About() {
           <div className="section-header">
             <p className="eyebrow">Journey</p>
             <h2>So far</h2>
+            <p className="journey-intro">
+              A few steps that brought me from my first webpage to building full
+              experiences.
+            </p>
           </div>
 
-          <div className="timeline" ref={timelineRef}>
-            <span
-              className="timeline-tracker"
-              ref={trackerRef}
-              aria-hidden="true"
-            />
-
-            {timelineEntries.map((entry) => (
-              <div className="timeline-item" key={entry.year}>
-                <div className="timeline-dot" />
-
-                <div className="timeline-content">
-                  <h3>{entry.year}</h3>
-                  <p>{entry.text}</p>
-                </div>
-              </div>
+          <ol className="timeline">
+            {timelineEntries.map((entry, index) => (
+              <li className="timeline-item" key={entry.year}>
+                <span className="timeline-step" aria-hidden="true">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <time className="timeline-year" dateTime={entry.year}>
+                  {entry.year}
+                </time>
+                <p className="timeline-content">{entry.text}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </motion.section>
 
         <motion.section className="about-section" {...revealProps}>

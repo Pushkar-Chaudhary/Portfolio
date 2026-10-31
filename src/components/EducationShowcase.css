@@ -1,0 +1,188 @@
+.education-showcase {
+  padding: clamp(20px, 4vw, 32px);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface);
+}
+
+.education-showcase-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.education-showcase-heading .eyebrow {
+  margin-bottom: 7px;
+}
+
+.education-showcase-heading h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(1.45rem, 3.5vw, 2rem);
+  font-weight: 750;
+  letter-spacing: -0.055em;
+  line-height: 1.15;
+}
+
+.education-showcase-hint {
+  flex: 0 0 auto;
+  margin: 0 0 3px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.education-showcase-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.school-logo-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.school-logo-option {
+  display: flex;
+  min-width: 0;
+  min-height: 124px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 8px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.school-logo-option:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+
+.school-logo-option.is-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.school-logo-option img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
+}
+
+.school-logo-option span {
+  font-size: 0.62rem;
+  font-weight: 750;
+  line-height: 1.3;
+  text-align: center;
+}
+
+.school-logo-option:focus-visible {
+  outline-offset: 3px;
+}
+
+.school-selected {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 18px;
+  padding: 18px;
+  border-left: 2px solid var(--accent);
+  background: var(--surface-alt);
+}
+
+.school-selected > img {
+  width: 72px;
+  height: 72px;
+  flex: 0 0 72px;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
+}
+
+.school-selected > div {
+  min-width: 0;
+}
+
+.school-selected > div > p {
+  margin: 0 0 5px;
+  color: var(--accent);
+  font-size: 0.64rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.school-selected h3 {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.45;
+}
+
+.school-selected-index {
+  align-self: flex-start;
+  margin-left: auto;
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.school-selected-index span {
+  color: var(--muted);
+}
+
+@media (max-width: 600px) {
+  .education-showcase-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .education-showcase-content {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .school-logo-option {
+    min-height: 104px;
+  }
+
+  .school-logo-option img {
+    width: 48px;
+    height: 48px;
+  }
+
+  .school-selected {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .school-selected > img {
+    width: 56px;
+    height: 56px;
+    flex-basis: 56px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .school-logo-option {
+    transition: none;
+  }
+}

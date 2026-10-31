@@ -1,0 +1,246 @@
+.project-showcase {
+  width: min(100%, 470px);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.project-showcase-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.project-showcase-header p,
+.showcase-count {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.67rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.project-showcase-header p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.showcase-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.showcase-count {
+  font-variant-numeric: tabular-nums;
+}
+
+.showcase-count span {
+  padding: 0 4px;
+  color: var(--border);
+}
+
+.project-showcase-display {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  padding: 18px 20px 20px;
+}
+
+.project-showcase-art {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface-alt);
+  aspect-ratio: 16 / 9;
+}
+
+.project-showcase-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.project-showcase-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.showcase-category {
+  margin: 2px 0 8px;
+  color: var(--accent);
+  font-size: 0.65rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.project-showcase-copy h2 {
+  margin: 0;
+  color: var(--primary);
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  font-weight: 750;
+  letter-spacing: -0.06em;
+  line-height: 1.1;
+}
+
+.showcase-description {
+  margin: 10px 0 12px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.showcase-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.showcase-stack span {
+  padding: 4px 7px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 0.61rem;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.showcase-project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 16px;
+  color: var(--primary);
+  font-size: 0.76rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.showcase-project-link svg {
+  font-size: 0.62rem;
+  transition: transform 180ms ease;
+}
+
+.showcase-project-link:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.project-showcase-picker {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--border);
+}
+
+.showcase-project-option {
+  display: flex;
+  min-width: 0;
+  min-height: 48px;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 0;
+  border-right: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-align: left;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.showcase-project-option:last-child {
+  border-right: 0;
+}
+
+.showcase-project-option img {
+  width: 36px;
+  height: 27px;
+  flex: 0 0 36px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.showcase-project-option.is-active {
+  background: var(--surface-alt);
+  color: var(--text);
+}
+
+.showcase-option-arrow {
+  margin-left: auto;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.showcase-project-option.is-active .showcase-option-arrow,
+.showcase-project-option:hover .showcase-option-arrow {
+  opacity: 1;
+}
+
+.showcase-project-option:hover {
+  color: var(--text);
+}
+
+.showcase-project-option:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline-offset: -3px;
+}
+
+@media (max-width: 760px) {
+  .project-showcase {
+    width: 100%;
+  }
+}
+
+@media (max-width: 440px) {
+  .project-showcase-display {
+    padding: 14px;
+  }
+
+  .showcase-project-option {
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 6px 4px;
+    font-size: 0.56rem;
+    text-align: center;
+  }
+
+  .showcase-project-option img {
+    width: 44px;
+    height: 30px;
+    flex-basis: 30px;
+  }
+
+  .showcase-option-arrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-project-option,
+  .showcase-project-link svg {
+    transition: none;
+  }
+}

@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import SEO from "../components/SEO.jsx";
-import TiltCard from "../components/TiltCard.jsx";
 import "./Dashboard.css";
 
 const GITHUB_USERNAME = "Pushkar-Chaudhary";
@@ -105,10 +104,10 @@ const Dashboard = () => {
       />
 
       <main className="dashboard-shell">
-        <motion.header className="dashboard-intro-card" {...revealProps}>
+        <motion.header className="dashboard-intro-header" {...revealProps}>
           <p className="dashboard-kicker">Live dashboard</p>
           <h1>Coding activity</h1>
-          <p className="dashboard-intro">
+          <p className="dashboard-description">
             A live look at GitHub contributions and WakaTime tracking.
           </p>
         </motion.header>
@@ -143,11 +142,7 @@ const Dashboard = () => {
           </a>
         </div>
         <section className="dashboard-grid">
-          <TiltCard
-            as={motion.article}
-            className="activity-panel github-panel"
-            {...revealProps}
-          >
+          <motion.article className="dashboard-activity" {...revealProps}>
             <div className="panel-heading">
               <div>
                 <span className="panel-eyebrow"><FaGithub aria-hidden="true" /> GitHub</span>
@@ -210,7 +205,7 @@ const Dashboard = () => {
               <i className="contribution-day contribution-day--4" />
               <span>More</span>
             </div>
-          </TiltCard>
+          </motion.article>
         </section>
       </main>
     </div>
