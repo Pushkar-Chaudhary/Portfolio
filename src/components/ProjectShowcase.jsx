@@ -49,12 +49,14 @@ function ProjectShowcase() {
       <div className="project-showcase-display" aria-live="polite">
         <div className="project-showcase-art">
           <img
+            key={activeProject.name}
             src={activeProject.preview}
             alt={`${activeProject.name} website preview`}
+            style={{ animation: "fadeIn 0.3s ease" }}
           />
         </div>
 
-        <div className="project-showcase-copy">
+        <div className="project-showcase-copy" key={`copy-${activeProject.name}`}>
           <p className="showcase-category">{activeProject.category}</p>
           <h2>{activeProject.name}</h2>
           <p className="showcase-description">{activeProject.description}</p>

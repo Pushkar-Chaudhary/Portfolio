@@ -1,50 +1,52 @@
 import { Link } from "react-router-dom";
-import TiltCard from "./TiltCard.jsx";
+import { FaCode, FaServer, FaBolt, FaArrowRight } from "react-icons/fa";
 
 const AboutMe = () => {
   return (
-    <section className="about-bento" aria-labelledby="about-bento-title">
-      <div className="about-bento-header">
-        <h2 id="about-bento-title">About</h2>
-        <span>Portfolio</span>
+    <section className="about-bento-section" aria-labelledby="about-bento-title">
+      <div className="section-eyebrow-wrap">
+        <span className="section-kicker">Core Principles</span>
+        <h2 id="about-bento-title" className="section-headline">
+          Engineering with precision &amp; intent.
+        </h2>
       </div>
 
-      <div className="about-bento-grid">
-        <TiltCard className="about-me-card about-intro-tile">
-          <div className="about-tile-copy">
-            <p className="about-tile-label">Based in Nepal</p>
-            <p>Designing interfaces that feel effortless.</p>
+      <div className="bento-grid">
+        <div className="bento-card bento-card--large">
+          <div className="bento-card-icon">
+            <FaCode aria-hidden="true" />
           </div>
-
-          <Link to="/about" className="about-tile-link">
-            About me <span aria-hidden="true">↗</span>
-          </Link>
-        </TiltCard>
-
-        <TiltCard className="about-me-card about-role-tile">
-          <p className="about-tile-label">Current role</p>
-          <h3>Frontend Developer &amp; Student</h3>
-        </TiltCard>
-
-
-        <TiltCard className="about-me-card about-welcome-tile">
-          <p className="about-tile-label">Welcome</p>
-          <h3>
-            Welcome to my
-            <br />
-            corner on the
-            <br />
-            internet.
-          </h3>
-        </TiltCard>
-
-        <TiltCard className="about-me-card about-learning-tile">
-          <h3>Constantly Learning</h3>
-          <p>
-            After frontend, I&apos;m diving deeper into backend architecture and
-            building more complete digital experiences.
+          <span className="bento-label">Frontend Architecture</span>
+          <h3 className="bento-title">Component-Driven &amp; Accessible</h3>
+          <p className="bento-text">
+            Specializing in React, Tailwind CSS, and Framer Motion. Every interface is built with strict semantic HTML, WCAG accessibility, and fluid responsiveness across every screen size.
           </p>
-        </TiltCard>
+          <Link to="/about" className="bento-link">
+            Read full background <FaArrowRight aria-hidden="true" />
+          </Link>
+        </div>
+
+        <div className="bento-card">
+          <div className="bento-card-icon">
+            <FaServer aria-hidden="true" />
+          </div>
+          <span className="bento-label">Backend &amp; Data</span>
+          <h3 className="bento-title">Node.js &amp; MongoDB</h3>
+          <p className="bento-text">
+            Developing robust RESTful APIs, scalable database schemas with Mongoose, and secure serverless functions.
+          </p>
+        </div>
+
+        <div className="bento-card">
+          <div className="bento-card-icon">
+            <FaBolt aria-hidden="true" />
+          </div>
+          <span className="bento-label">AI Integration</span>
+          <h3 className="bento-title">Generative APIs</h3>
+          <p className="bento-text">
+            Integrating Google Gemini and LLMs into production tools like Career Sathi to deliver real-time personalized recommendations.
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import SEO from "../components/SEO.jsx";
 import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
+import NepalClock from "../components/NepalClock.jsx";
 import education from "../data/education.js";
 import {
   SiMongodb,
@@ -14,167 +15,213 @@ import {
   SiVite,
   SiGooglegemini,
   SiCursor,
+  SiTypescript,
+  SiGit,
+  SiGithub,
+  SiVercel,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
+
+const skillCategories = [
+  {
+    category: "Languages & Core",
+    skills: [
+      { name: "JavaScript", icon: <SiJavascript /> },
+      { name: "TypeScript", icon: <SiTypescript /> },
+      { name: "HTML5", icon: <SiHtml5 /> },
+      { name: "CSS3", icon: <SiCss /> },
+    ],
+  },
+  {
+    category: "Frontend Architecture",
+    skills: [
+      { name: "React 19", icon: <SiReact /> },
+      { name: "Vite", icon: <SiVite /> },
+      { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+    ],
+  },
+  {
+    category: "Backend & Database",
+    skills: [
+      { name: "Node.js", icon: <SiNodedotjs /> },
+      { name: "Express.js", icon: <SiExpress /> },
+      { name: "MongoDB", icon: <SiMongodb /> },
+    ],
+  },
+  {
+    category: "AI & External APIs",
+    skills: [
+      { name: "Gemini API", icon: <SiGooglegemini /> },
+    ],
+  },
+  {
+    category: "Workflow & Tooling",
+    skills: [
+      { name: "VS Code", icon: <VscVscode /> },
+      { name: "Cursor", icon: <SiCursor /> },
+      { name: "Git", icon: <SiGit /> },
+      { name: "GitHub", icon: <SiGithub /> },
+      { name: "Vercel", icon: <SiVercel /> },
+    ],
+  },
+];
 
 const timelineEntries = [
   {
     year: "2026",
-    text: "Learned React and Tailwind CSS, redesigned my portfolio, and started exploring backend development with Node.js.",
+    title: "Full-Stack & AI Systems",
+    text: "Building end-to-end applications with React 19, Node.js, and Express. Integrating Gemini API into production utilities and refining developer workflow.",
   },
   {
     year: "2025",
-    text: "After learning HTML, CSS, and responsive design, I built my portfolio and focused on improving the UX.",
+    title: "Component Architecture & UX",
+    text: "Deepened expertise in React state management, Tailwind CSS design systems, Framer Motion, and responsive mobile-first interfaces.",
   },
   {
     year: "2024",
-    text: "Started learning web development with HTML and CSS and explored the basics of programming.",
+    title: "Web Fundamentals",
+    text: "Started engineering for the web with modern semantic HTML5, CSS grid/flexbox, JavaScript ES6+, and foundational programming concepts.",
   },
-];
-
-const AntigravityIcon = () => (
-  <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true">
-    <circle cx="12" cy="12" r="3.5" />
-    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm0 17.5A7.5 7.5 0 1 1 19.5 12 7.51 7.51 0 0 1 12 19.5Z" opacity=".35"/>
-    <path d="M12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.5 5.5 0 0 0 12 6.5Zm0 9A3.5 3.5 0 1 1 15.5 12 3.5 3.5 0 0 1 12 15.5Z" opacity=".6"/>
-  </svg>
-);
-
-const tools = [
-  { name: "VS Code",     icon: <VscVscode />,       color: "#007ACC" },
-  { name: "Cursor",      icon: <SiCursor />,         color: "#000000" },
-  { name: "Antigravity", icon: <AntigravityIcon />,  color: "#6C63FF" },
-  { name: "Node.js",     icon: <SiNodedotjs />,      color: "#339933" },
-  { name: "MongoDB",     icon: <SiMongodb />,        color: "#47A248" },
-  { name: "React",       icon: <SiReact />,          color: "#61DAFB" },
-  { name: "Tailwind CSS",icon: <SiTailwindcss />,    color: "#06B6D4" },
-  { name: "HTML",        icon: <SiHtml5 />,          color: "#E34F26" },
-  { name: "CSS",         icon: <SiCss />,            color: "#1572B6" },
-  { name: "JavaScript",  icon: <SiJavascript />,     color: "#F7DF1E" },
-  { name: "Express",     icon: <SiExpress />,        color: "#888"    },
-  { name: "Vite",        icon: <SiVite />,           color: "#646CFF" },
-  { name: "Gemini API",  icon: <SiGooglegemini />,   color: "#8E75B2" },
 ];
 
 function About() {
   const reducedMotion = useReducedMotion();
+
   const revealProps = reducedMotion
-    ? {
-        initial: false,
-        whileInView: { opacity: 1 },
-        viewport: { once: true, amount: 0.15 },
-        transition: { duration: 0 },
-      }
+    ? { initial: false, animate: { opacity: 1 } }
     : {
-        initial: { opacity: 0, y: 16 },
+        initial: { opacity: 0, y: 14 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, amount: 0.15 },
-        transition: { duration: 0.55, ease: "easeOut" },
+        transition: { duration: 0.45, ease: "easeOut" },
       };
 
   return (
-    <div className="page-shell page-shell--wide">
+    <div className="page-shell page-shell--narrow">
       <SEO
-        title="About Me | Pushkar Chaudhary - Frontend Developer"
-        description="Learn more about Pushkar Chaudhary, a frontend developer and science student from Lahan, Nepal. Education, journey, and technical background."
+        title="About | Pushkar Chaudhary - Developer & Designer"
+        description="Learn more about Pushkar Chaudhary, a frontend and web developer based in Nepal. Technical background, skill architecture, and education."
         path="/about"
       />
 
       <main className="page-stack">
-        <motion.section className="about-intro-section" {...revealProps}>
+        {/* Intro */}
+        <motion.section className="about-hero-section" {...revealProps}>
           <PagePlaneAccent />
-          <p className="eyebrow">About</p>
-          <h1 className="section-title">Hi, I’m Pushkar Chaudhary.</h1>
+          <span className="section-kicker">About Me</span>
+          <h1 className="section-title">Designing interfaces that feel effortless.</h1>
           <p className="lead">
-            I’m a web developer who enjoys turning ideas into clean, interactive,
-            and user-friendly websites. I work with HTML, CSS, JavaScript, and
-            React while constantly learning new technologies and improving my
-            skills.
+            I&apos;m a developer from Nepal passionate about engineering clean, fast,
+            and accessible web experiences. I bridge the gap between design
+            precision and resilient full-stack code.
           </p>
+          <div className="about-bio-meta">
+            <div className="bio-stat">
+              <span className="bio-stat-label">Location &amp; Local Time</span>
+              <span className="bio-stat-val">
+                Itahari, Nepal · <NepalClock compact={true} showLocation={false} />
+              </span>
+            </div>
+            <div className="bio-stat-sep" />
+            <div className="bio-stat">
+              <span className="bio-stat-label">Primary Stack</span>
+              <span className="bio-stat-val">React · Node.js · MongoDB</span>
+            </div>
+            <div className="bio-stat-sep" />
+            <div className="bio-stat">
+              <span className="bio-stat-label">Status</span>
+              <span className="bio-stat-val">Shipping Web Products</span>
+            </div>
+          </div>
         </motion.section>
 
-        <motion.section className="about-section" {...revealProps}>
+        {/* Technical Skills by Category */}
+        <motion.section className="about-content-section" {...revealProps}>
           <div className="section-header">
-            <p className="eyebrow">Education</p>
-            <h2>Learning path</h2>
+            <span className="section-kicker">Technical Skills</span>
+            <h2 className="section-subtitle">Tools &amp; technologies</h2>
+            <p className="section-subtext">
+              Categorized technologies utilized in active production applications and experiments.
+            </p>
           </div>
 
-          <div className="education-list">
+          <div className="skills-category-list">
+            {skillCategories.map((group) => (
+              <div key={group.category} className="skills-group">
+                <h3 className="skills-group-title">{group.category}</h3>
+                <div className="skills-pill-grid">
+                  {group.skills.map((skill) => (
+                    <div key={skill.name} className="skill-item-chip">
+                      <span className="skill-item-icon" aria-hidden="true">
+                        {skill.icon}
+                      </span>
+                      <span className="skill-item-name">{skill.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.section>
+
+        {/* Education Timeline */}
+        <motion.section className="about-content-section" {...revealProps}>
+          <div className="section-header">
+            <span className="section-kicker">Education</span>
+            <h2 className="section-subtitle">Academic foundations</h2>
+          </div>
+
+          <div className="academic-list">
             {education.map((item) => (
-              <div className="school" key={item.name}>
-                <img src={item.image} alt={item.alt} />
-                <p>{item.name}</p>
+              <div className="academic-row" key={item.name}>
+                <img src={item.image} alt={item.alt} className="academic-logo" />
+                <div className="academic-info">
+                  <h3 className="academic-name">{item.name}</h3>
+                  <span className="academic-stage">{item.stage}</span>
+                </div>
               </div>
             ))}
           </div>
         </motion.section>
 
-        <motion.section
-          className="about-section skills-section"
-          {...revealProps}
-          aria-labelledby="skills-title"
-        >
+        {/* Journey Timeline */}
+        <motion.section className="about-content-section" {...revealProps}>
           <div className="section-header">
-            <p className="eyebrow">Technology</p>
-            <h2 id="skills-title">Tools I use to build</h2>
-            <p className="skills-intro">
-              Technologies already in my projects and learning journey.
-            </p>
+            <span className="section-kicker">Timeline</span>
+            <h2 className="section-subtitle">Development milestones</h2>
           </div>
 
-          <div className="tools-grid" role="list" aria-label="Tools and technologies">
-            {tools.map((tool) => (
-              <div className="tool-tile" key={tool.name} role="listitem">
-                <span className="tool-icon" style={{ color: tool.color }} aria-hidden="true">
-                  {tool.icon}
-                </span>
-                <span className="tool-name">{tool.name}</span>
-              </div>
-            ))}
-          </div>
-        </motion.section>
-
-        <motion.section className="about-section" {...revealProps}>
-          <div className="section-header">
-            <p className="eyebrow">Journey</p>
-            <h2>So far</h2>
-            <p className="journey-intro">
-              A few steps that brought me from my first webpage to building full
-              experiences.
-            </p>
-          </div>
-
-          <ol className="timeline">
-            {timelineEntries.map((entry, index) => (
-              <li className="timeline-item" key={entry.year}>
-                <span className="timeline-step" aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <time className="timeline-year" dateTime={entry.year}>
-                  {entry.year}
-                </time>
-                <p className="timeline-content">{entry.text}</p>
+          <ol className="clean-timeline">
+            {timelineEntries.map((entry) => (
+              <li className="clean-timeline-item" key={entry.year}>
+                <span className="clean-timeline-year">{entry.year}</span>
+                <div className="clean-timeline-body">
+                  <h3 className="clean-timeline-title">{entry.title}</h3>
+                  <p className="clean-timeline-text">{entry.text}</p>
+                </div>
               </li>
             ))}
           </ol>
         </motion.section>
 
-        <motion.section className="about-section" {...revealProps}>
+        {/* Spotify / Currently Listening */}
+        <motion.section className="about-content-section" {...revealProps}>
           <div className="section-header">
-            <p className="eyebrow">Mood</p>
-            <h2>Current favorite song</h2>
+            <span className="section-kicker">Focus &amp; Mood</span>
+            <h2 className="section-subtitle">Currently listening to</h2>
           </div>
 
-          <div className="music-player">
+          <div className="clean-spotify-wrapper">
             <iframe
               title="Spotify Player"
               src="https://open.spotify.com/embed/track/70C4NyhjD5OZUMzvWZ3njJ?utm_source=generator"
               width="100%"
-              height="352"
+              height="152"
               frameBorder="0"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
-            ></iframe>
+              className="clean-spotify-frame"
+            />
           </div>
         </motion.section>
       </main>

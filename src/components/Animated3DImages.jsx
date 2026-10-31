@@ -4,41 +4,46 @@ import greetingImage from "../assets/img2.png";
 import "./Animated3DImages.css";
 
 function Animated3DImages() {
-  const [showGreeting, setShowGreeting] = useState(false);
+  const [isWaving, setIsWaving] = useState(false);
 
   return (
-    <div className="animated3d-stage">
-      <button
-        type="button"
-        className="animated3d-images"
-        onClick={() => setShowGreeting((greeting) => !greeting)}
-        aria-label={showGreeting ? "Return avatar to standing pose" : "Make avatar say hi"}
-        aria-pressed={showGreeting}
+    <div className="dev-avatar-stage">
+      <div
+        className="dev-avatar-container"
+        onMouseEnter={() => setIsWaving(true)}
+        onMouseLeave={() => setIsWaving(false)}
+        onClick={() => setIsWaving((prev) => !prev)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            setIsWaving((prev) => !prev);
+          }
+        }}
+        aria-label="Pushkar Chaudhary developer avatar"
       >
-        <span className="animated3d-assembly" aria-hidden="true">
+        <div className="avatar-frame">
           <img
-            className={`animated3d-image animated3d-image--standing${showGreeting ? " is-hidden" : ""}`}
+            className={`avatar-img avatar-standing${isWaving ? " is-faded" : ""}`}
             src={standingImage}
-            alt=""
+            alt="Pushkar Chaudhary"
             draggable="false"
           />
           <img
-            className={`animated3d-image animated3d-image--greeting${showGreeting ? " is-visible" : ""}`}
+            className={`avatar-img avatar-waving${isWaving ? " is-active" : ""}`}
             src={greetingImage}
-            alt=""
+            alt="Pushkar waving"
             draggable="false"
           />
-        </span>
-        <span className="animated3d-hint">
-          {showGreeting ? "Click me again to wave" : "Click me to say hi"}
-        </span>
-        <span
-          className={`animated3d-speech${showGreeting ? " is-visible" : ""}`}
-          aria-live="polite"
-        >
-          {showGreeting ? "Hi there!" : ""}
-        </span>
-      </button>
+        </div>
+
+        <div className="avatar-meta-bar">
+          <span className="avatar-status-dot" />
+          <span className="avatar-status-text">
+            {isWaving ? "Hello! Welcome to my portfolio" : "Hover or tap avatar to wave"}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

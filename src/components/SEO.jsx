@@ -79,7 +79,7 @@ export default function SEO({ title, description, path = "" }) {
           ],
           address: {
             "@type": "PostalAddress",
-            addressLocality: "Lahan",
+            addressLocality: "Itahari",
             addressCountry: "NP"
           }
         },

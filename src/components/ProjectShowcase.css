@@ -1,9 +1,9 @@
 .project-showcase {
-  width: min(100%, 470px);
+  width: 100%;
   margin: 0 auto;
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: 16px;
   background: var(--surface);
   box-shadow: var(--shadow);
 }
@@ -14,7 +14,7 @@
   justify-content: space-between;
   gap: 12px;
   min-height: 48px;
-  padding: 0 18px;
+  padding: 0 20px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -22,9 +22,9 @@
 .showcase-count {
   margin: 0;
   color: var(--muted);
-  font-size: 0.67rem;
-  font-weight: 750;
-  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
@@ -42,27 +42,34 @@
 }
 
 .showcase-count {
-  font-variant-numeric: tabular-nums;
-}
-
-.showcase-count span {
-  padding: 0 4px;
-  color: var(--border);
+  font-family: var(--font-mono);
 }
 
 .project-showcase-display {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 16px;
-  padding: 18px 20px 20px;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  padding: 24px;
+  align-items: center;
 }
 
 .project-showcase-art {
   overflow: hidden;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: 12px;
   background: var(--surface-alt);
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.2;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .project-showcase-art img {
@@ -78,68 +85,74 @@
   min-width: 0;
   flex-direction: column;
   align-items: flex-start;
+  gap: 10px;
 }
 
 .showcase-category {
-  margin: 2px 0 8px;
+  margin: 0;
   color: var(--accent);
-  font-size: 0.65rem;
-  font-weight: 750;
-  letter-spacing: 0.13em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .project-showcase-copy h2 {
   margin: 0;
   color: var(--primary);
-  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
   font-weight: 750;
-  letter-spacing: -0.06em;
-  line-height: 1.1;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
 }
 
 .showcase-description {
-  margin: 10px 0 12px;
+  margin: 0;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   line-height: 1.6;
 }
 
 .showcase-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
+  margin-top: 4px;
 }
 
 .showcase-stack span {
-  padding: 4px 7px;
+  padding: 3px 8px;
   border: 1px solid var(--border);
-  border-radius: 999px;
-  color: var(--muted);
-  font-size: 0.61rem;
-  font-weight: 650;
-  line-height: 1.2;
+  border-radius: 6px;
+  background: var(--surface-alt);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 600;
+  font-family: var(--font-mono);
 }
 
 .showcase-project-link {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: auto;
-  padding-top: 16px;
-  color: var(--primary);
-  font-size: 0.76rem;
-  font-weight: 750;
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: var(--bg);
+  font-size: 0.82rem;
+  font-weight: 600;
   text-decoration: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.showcase-project-link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 .showcase-project-link svg {
-  font-size: 0.62rem;
-  transition: transform 180ms ease;
-}
-
-.showcase-project-link:hover svg {
-  transform: translate(2px, -2px);
+  font-size: 0.7rem;
 }
 
 .project-showcase-picker {
@@ -151,19 +164,19 @@
 .showcase-project-option {
   display: flex;
   min-width: 0;
-  min-height: 48px;
+  min-height: 54px;
   align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
+  gap: 10px;
+  padding: 10px 14px;
   border: 0;
   border-right: 1px solid var(--border);
   background: transparent;
   color: var(--muted);
   cursor: pointer;
-  font-size: 0.66rem;
-  font-weight: 700;
+  font-size: 0.82rem;
+  font-weight: 600;
   text-align: left;
-  transition: background-color 180ms ease, color 180ms ease;
+  transition: background-color 160ms ease, color 160ms ease;
 }
 
 .showcase-project-option:last-child {
@@ -171,76 +184,48 @@
 }
 
 .showcase-project-option img {
-  width: 36px;
-  height: 27px;
-  flex: 0 0 36px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   object-fit: cover;
-  object-position: top center;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+
+.showcase-project-option:hover {
+  background: var(--surface-alt);
+  color: var(--primary);
 }
 
 .showcase-project-option.is-active {
   background: var(--surface-alt);
-  color: var(--text);
+  color: var(--primary);
+  font-weight: 700;
 }
 
 .showcase-option-arrow {
   margin-left: auto;
+  font-size: 0.8rem;
   color: var(--accent);
-  opacity: 0;
-  transition: opacity 180ms ease;
 }
 
-.showcase-project-option.is-active .showcase-option-arrow,
-.showcase-project-option:hover .showcase-option-arrow {
-  opacity: 1;
-}
-
-.showcase-project-option:hover {
-  color: var(--text);
-}
-
-.showcase-project-option:focus-visible {
-  position: relative;
-  z-index: 1;
-  outline-offset: -3px;
-}
-
-@media (max-width: 760px) {
-  .project-showcase {
-    width: 100%;
-  }
-}
-
-@media (max-width: 440px) {
+@media (max-width: 768px) {
   .project-showcase-display {
-    padding: 14px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .project-showcase-picker {
+    grid-template-columns: 1fr;
   }
 
   .showcase-project-option {
-    flex-direction: column;
-    justify-content: center;
-    gap: 4px;
-    padding: 6px 4px;
-    font-size: 0.56rem;
-    text-align: center;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
   }
 
-  .showcase-project-option img {
-    width: 44px;
-    height: 30px;
-    flex-basis: 30px;
-  }
-
-  .showcase-option-arrow {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .showcase-project-option,
-  .showcase-project-link svg {
-    transition: none;
+  .showcase-project-option:last-child {
+    border-bottom: 0;
   }
 }

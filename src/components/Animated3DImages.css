@@ -1,170 +1,95 @@
-.animated3d-stage {
-  display: grid;
-  width: 100%;
-  min-height: 450px;
-  place-items: center;
-}
-
-.animated3d-images {
-  position: relative;
-  display: grid;
-  width: 100%;
-  min-height: 450px;
-  padding: 0;
-  place-items: center;
-  border: 0;
-  border-radius: 24px;
-  background: transparent;
-  cursor: pointer;
-  overflow: hidden;
-  touch-action: manipulation;
-}
-
-.animated3d-hint {
-  position: absolute;
-  right: 12px;
-  bottom: 18px;
-  display: inline-flex;
+.dev-avatar-stage {
+  display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 6px;
-  padding: 7px 10px;
+  width: 100%;
+}
+
+.dev-avatar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 20px;
   border: 1px solid var(--border);
-  border-radius: 999px;
   background: var(--surface);
-  color: var(--muted);
-  font-size: 0.65rem;
-  font-weight: 700;
-  opacity: 1;
-  transform: translateY(0);
+  cursor: pointer;
+  transition: border-color 200ms ease, box-shadow 200ms ease;
+  width: min(100%, 280px);
 }
 
-.animated3d-speech {
-  position: absolute;
-  top: calc(50% - 155px);
-  left: calc(50% + 48px);
-  padding: 8px 13px;
-  border: 1px solid var(--border);
-  border-radius: 14px 14px 14px 4px;
-  background: var(--surface);
-  color: var(--text);
-  font-size: 0.8rem;
-  font-weight: 750;
-  opacity: 0;
-  transform: translateY(5px) scale(0.96);
-  transition: opacity 180ms ease, transform 180ms ease;
-  pointer-events: none;
+.dev-avatar-container:hover {
+  border-color: var(--accent);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.06);
 }
 
-.animated3d-speech::after {
-  position: absolute;
-  bottom: -5px;
-  left: 8px;
-  width: 8px;
-  height: 8px;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  content: "";
-  transform: rotate(45deg);
-}
-
-.animated3d-speech.is-visible {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-}
-
-.animated3d-images:focus-visible {
-  outline-offset: -3px;
-}
-
-.animated3d-assembly {
+.avatar-frame {
   position: relative;
-  display: block;
-  width: min(100%, 300px);
-  height: 300px;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--surface-alt);
 }
 
-.animated3d-image {
+.avatar-img {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  display: block;
-  width: auto;
-  height: min(74%, 220px);
-  max-width: 80%;
+  width: 85%;
+  height: 85%;
   object-fit: contain;
   object-position: center;
   user-select: none;
-  transform: translate(-50%, -50%);
-  transition: opacity 280ms ease, transform 350ms ease;
+  transition: opacity 240ms ease, transform 240ms ease;
 }
 
-.animated3d-image--standing {
-  z-index: 2;
+.avatar-standing {
   opacity: 1;
+  transform: scale(1);
 }
 
-.animated3d-image--greeting {
-  z-index: 1;
+.avatar-standing.is-faded {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.96);
+  transform: scale(0.96);
 }
 
-.animated3d-image--standing.is-hidden {
-  z-index: 1;
+.avatar-waving {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.96);
+  transform: scale(0.96);
 }
 
-.animated3d-image--greeting.is-visible {
-  z-index: 2;
+.avatar-waving.is-active {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: scale(1);
 }
 
-@media (max-width: 760px) {
-  .animated3d-stage,
-  .animated3d-images {
-    min-height: 340px;
-  }
-
-  .animated3d-assembly {
-    width: min(100%, 280px);
-    height: 280px;
-  }
-
-  .animated3d-image {
-    height: min(74%, 205px);
-  }
-
-  .animated3d-speech {
-    top: calc(50% - 145px);
-    left: calc(50% + 42px);
-  }
+.avatar-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.74rem;
+  color: var(--muted);
+  font-weight: 500;
 }
 
-@media (max-width: 420px) {
-  .animated3d-stage,
-  .animated3d-images {
-    min-height: 300px;
-  }
-
-  .animated3d-assembly {
-    height: 250px;
-  }
-
-  .animated3d-image {
-    height: min(74%, 185px);
-  }
-
-  .animated3d-speech {
-    top: calc(50% - 130px);
-    left: calc(50% + 30px);
-  }
+.avatar-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animated3d-image {
-    transition: none;
+@media (max-width: 768px) {
+  .dev-avatar-container {
+    width: min(100%, 240px);
+    padding: 12px;
+  }
+
+  .avatar-frame {
+    width: 180px;
+    height: 180px;
   }
 }
