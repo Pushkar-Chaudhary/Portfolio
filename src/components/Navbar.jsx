@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./Theme.jsx";
 
@@ -32,9 +32,9 @@ function Navbar({ darkMode, setDarkMode }) {
     <>
       <header className="top-nav-shell">
         <div className="top-nav-inner">
-          <Link to="/" className="nav-brand" aria-label="Home">
-            <span className="nav-brand-mark">PC</span>
-          </Link>
+          <div className="nav-left-actions">
+            <ThemeToggle checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+          </div>
 
           <nav className="site-nav" aria-label="Primary navigation">
             {links.map((link) => (
@@ -52,8 +52,6 @@ function Navbar({ darkMode, setDarkMode }) {
           </nav>
 
           <div className="nav-right-actions">
-            <ThemeToggle checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
-
             <button
               ref={menuToggleRef}
               type="button"
@@ -90,6 +88,15 @@ function Navbar({ darkMode, setDarkMode }) {
           </div>
         </div>
       </header>
+
+      {/* Backdrop to close menu when clicking outside */}
+      {menuOpen && (
+        <div
+          className="mobile-backdrop"
+          onClick={() => setMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
 
       {/* Mobile Navigation Drawer */}
       <nav

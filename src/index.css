@@ -96,7 +96,7 @@ img {
 .page-shell {
   width: 100%;
   margin: 0 auto;
-  padding: 100px 24px 84px;
+  padding: 88px 24px 72px;
 }
 
 .page-shell--narrow {
@@ -162,12 +162,12 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
+  gap: 6px;
+  padding: 8px 16px;
   border-radius: 8px;
   background: var(--primary);
   color: var(--bg);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   text-decoration: none;
   border: 1px solid transparent;
@@ -184,12 +184,12 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 20px;
+  gap: 6px;
+  padding: 8px 16px;
   border-radius: 8px;
   background: var(--surface);
   color: var(--text);
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   text-decoration: none;
   border: 1px solid var(--border);
@@ -224,44 +224,28 @@ img {
 
 .top-nav-inner {
   width: min(896px, 100%);
-  height: 52px;
+  height: 48px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
 }
 
-.nav-brand {
+.nav-left-actions {
   display: flex;
   align-items: center;
-  gap: 0;
-  text-decoration: none;
-  color: var(--primary);
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.nav-brand-mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  background: var(--surface-alt);
-  color: var(--primary);
-  font-size: 0.65rem;
-  font-weight: 800;
-  font-family: var(--font-mono);
+  flex: 0 0 auto;
+  min-width: 32px;
 }
 
 .site-nav {
   display: flex;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 2px;
+  flex: 1;
 }
 
 .nav-link {
@@ -269,7 +253,7 @@ img {
   align-items: center;
   padding: 4px 10px;
   border-radius: 999px;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 500;
   color: var(--muted);
   text-decoration: none;
@@ -289,7 +273,9 @@ img {
 .nav-right-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: flex-end;
+  flex: 0 0 auto;
+  min-width: 32px;
 }
 
 .theme-toggle-btn {
@@ -325,17 +311,27 @@ img {
   cursor: pointer;
 }
 
-/* Mobile Navigation */
+/* Mobile Navigation Backdrop & Drawer */
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  top: 48px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 98;
+}
+
 .mobile-menu {
   position: fixed;
-  top: 56px;
+  top: 48px;
   left: 0;
   right: 0;
   background: var(--bg);
   border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow);
   z-index: 99;
   display: none;
-  padding: 16px 24px;
+  padding: 14px 20px;
 }
 
 .mobile-menu.is-open {
@@ -345,21 +341,24 @@ img {
 .mobile-menu-inner {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
 }
 
 .mobile-nav-link {
-  padding: 10px 14px;
+  padding: 9px 12px;
   border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 500;
   color: var(--muted);
   text-decoration: none;
+  transition: all 160ms ease;
 }
 
+.mobile-nav-link:hover,
 .mobile-nav-link--active {
   background: var(--surface-alt);
   color: var(--primary);
+  font-weight: 600;
 }
 
 /* ==============================================================
@@ -369,13 +368,13 @@ img {
 .hero-panel {
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 32px;
 }
 
 .hero-copy {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 10px;
   flex: 1;
 }
 
@@ -403,43 +402,46 @@ img {
 
 .hero-title {
   margin: 0;
-  font-size: clamp(1.9rem, 4.5vw, 2.8rem);
-  font-weight: 800;
-  letter-spacing: -0.05em;
-  line-height: 1.05;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+  line-height: 1.1;
   color: var(--primary);
 }
 
 .hero-subline {
   margin: 0;
-  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
   font-weight: 600;
   color: var(--accent);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
+  min-height: 1.5em;
 }
 
 .hero-lead {
   margin: 0;
   color: var(--muted);
-  font-size: 0.92rem;
-  line-height: 1.7;
+  font-size: 0.86rem;
+  line-height: 1.65;
 }
 
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .hero-social-links {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 0.82rem;
+  gap: 8px;
+  row-gap: 6px;
+  flex-wrap: wrap;
+  font-size: 0.78rem;
   color: var(--muted);
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 .hero-social-item {
@@ -463,6 +465,11 @@ img {
 .hero-location-text {
   font-family: var(--font-mono);
   font-size: 0.78rem;
+}
+
+.typing-role {
+  display: inline-block;
+  min-width: 2ch;
 }
 
 /* Stack Strip */
@@ -1214,9 +1221,19 @@ img {
    RESPONSIVE DESIGN (PART 5)
    ============================================================== */
 
+@media (hover: none) and (pointer: coarse) {
+  .custom-cursor {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .page-shell {
-    padding: 84px 18px 56px;
+    padding: 68px 16px 40px;
+  }
+
+  .page-stack {
+    gap: 44px;
   }
 
   .site-nav {
@@ -1229,8 +1246,14 @@ img {
 
   .hero-panel {
     flex-direction: column-reverse;
-    align-items: flex-start;
-    gap: 28px;
+    align-items: stretch;
+    gap: 20px;
+  }
+
+  .hero-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 
   .bento-grid {
@@ -1239,6 +1262,46 @@ img {
 
   .bento-card--large {
     grid-column: auto;
+  }
+
+  .connect-cta-panel {
+    padding: 24px 20px;
+    gap: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .connect-cta-actions {
+    width: 100%;
+  }
+
+  .connect-cta-actions .btn-primary {
+    width: 100%;
+  }
+
+  .clean-timeline-item {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .academic-row {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .academic-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .direct-email-strip {
+    width: 100%;
+    padding: 10px 12px;
+  }
+
+  .direct-email-link {
+    word-break: break-all;
+    font-size: 0.8rem;
   }
 
   .form-grid-two,
@@ -1250,6 +1313,42 @@ img {
   .footer-bottom-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-actions {
+    width: 100%;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .skills-pill-grid {
+    gap: 6px;
+  }
+
+  .skill-item-chip {
+    padding: 5px 10px;
+    font-size: 0.78rem;
+  }
+
+  .bio-stat-sep {
+    display: none;
+  }
+
+  .about-bio-meta {
+    gap: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .stack-strip-section {
+    padding: 12px 14px;
   }
 }
 

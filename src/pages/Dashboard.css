@@ -184,8 +184,8 @@
 /* Key Metric Tickers (WakaTime) */
 .waka-metrics-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
 }
 
 .waka-metric-card {
@@ -475,6 +475,7 @@
 .heatmap-scroll-wrapper {
   width: 100%;
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   padding: 12px 0 8px;
   scrollbar-width: thin;
 }
@@ -707,11 +708,12 @@
 /* Responsive */
 @media (max-width: 768px) {
   .dashboard-flow {
-    gap: 40px;
+    gap: 36px;
   }
 
   .waka-metrics-row {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .breakdown-grid {
@@ -723,6 +725,34 @@
   }
 
   .github-stats-ticker {
-    gap: 16px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .telemetry-block-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .telemetry-header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 480px) {
+  .waka-metric-card {
+    padding: 16px 14px;
+  }
+
+  .weekly-chart-box {
+    padding: 16px 12px;
+  }
+
+  .breakdown-card {
+    padding: 16px 14px;
   }
 }

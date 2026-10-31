@@ -46,11 +46,6 @@ const Home = () => {
           </div>
 
           <motion.div className="hero-copy" {...revealProps}>
-            <div className="hero-status-pill">
-              <span className="hero-status-dot" />
-              <span>Available for engineering opportunities</span>
-            </div>
-
             <h1 className="hero-title">Pushkar Chaudhary</h1>
 
             <h2 className="hero-subline">
