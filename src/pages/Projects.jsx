@@ -15,6 +15,7 @@ import {
   FaMagic,
   FaStickyNote,
   FaGift,
+  FaShoppingCart,
 } from "react-icons/fa";
 import SEO from "../components/SEO.jsx";
 import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
@@ -86,6 +87,24 @@ const projectsData = [
     year: "2025",
   },
   {
+    id: "sajilo-pasal",
+    title: "Sajilo Pasal",
+    category: "E-Commerce",
+    demo: "https://sajilo-pasal-tau.vercel.app/",
+    preview: null,
+    icon: <FaShoppingCart />,
+    description:
+      "A local shopping platform featuring thoughtfully selected products from sellers across Nepal.",
+    hero: false,
+    tech: ["React"],
+    highlights: [
+      "Shop products from local sellers across Nepal",
+      "Discover thoughtfully selected products",
+    ],
+    status: "Live App",
+    year: "2026",
+  },
+  {
     id: "wishly",
     title: "Wishly",
     category: "Frontend",
@@ -146,7 +165,7 @@ const projectsData = [
   },
 ];
 
-const categories = ["All", "Full-Stack", "AI & Gemini", "Frontend"];
+const categories = ["All", "Full-Stack", "AI & Gemini", "Frontend", "E-Commerce"];
 
 function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("All");
