@@ -43,6 +43,30 @@ npm run build
 npm run preview
 ```
 
+### WakaTime dashboard data
+
+The dashboard can show public all-time totals without authentication. WakaTime API
+keys are write-only, so reading the all-time best coding day requires an OAuth
+access token with the `read_stats` scope.
+
+1. Create an OAuth app at [wakatime.com/apps](https://wakatime.com/apps) and add
+   `https://wakatime.com/oauth/test` as an authorized redirect URL.
+2. Add the app's `WAKATIME_CLIENT_ID` and `WAKATIME_CLIENT_SECRET` to
+   `portfolio/.env.local`. These are server-side values; never use `VITE_` names.
+3. Run `npm run wakatime:authorize` from the `portfolio` folder, authorize the
+   app, and paste the full redirected WakaTime URL into the terminal. The helper
+   exchanges the code and saves the access token to the ignored `.env.local`
+   file without printing it.
+4. Restart the dev server. For production, add the resulting
+   `WAKATIME_OAUTH_ACCESS_TOKEN` value to Vercel's server-side Environment
+   Variables and redeploy. Never paste the token into chat or commit it.
+
+### Favorite song
+
+The About page embeds the Spotify player for the featured favorite song. To
+change it, update the track URL and title in `src/pages/About.jsx`. The
+currently-listening integration has been removed.
+
 ## 📁 Project Structure
 
 ```
@@ -61,6 +85,9 @@ src/
 │   ├── Footer.jsx        # Footer with social links
 │   ├── Home.jsx          # Home/landing page
 │   └── Projects.jsx      # Projects showcase
+├── data/
+│   ├── education.js      # Education entries
+│   └── projects.js       # Project details used by the home and projects pages
 ├── assets/               # Images and static files
 ├── App.jsx               # Main app component
 ├── App.css               # App styles
@@ -102,7 +129,9 @@ The portfolio is optimized for search engines with:
 Edit Tailwind config or CSS variables in `src/index.css`
 
 ### Update Projects
-Modify the projects array in `src/pages/Projects.jsx`
+Edit `src/data/projects.js` to update project descriptions, links, screenshots,
+technologies, and featured-project details. The home showcase and Projects page
+read from this shared file.
 
 ### Add New Pages
 1. Create new component in `src/pages/`

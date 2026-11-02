@@ -1,35 +1,22 @@
-import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FaGithub, FaLinkedin, FaArrowRight, FaCode, FaLaptopCode, FaCheckCircle } from "react-icons/fa";
-import TypingText from "../components/TypingText.jsx";
+import { FaGithub, FaLinkedin, FaArrowRight } from "react-icons/fa";
 import SEO from "../components/SEO.jsx";
+import TypingText from "../components/TypingText.jsx";
 import AboutMe from "../components/AboutMe.jsx";
 import Animated3DImages from "../components/Animated3DImages.jsx";
 import ProjectShowcase from "../components/ProjectShowcase.jsx";
 import NepalClock from "../components/NepalClock.jsx";
 
 const coreStack = [
-  "React 19",
+  "React",
   "Node.js",
   "Express.js",
   "MongoDB",
+  "JavaScript",
   "Tailwind CSS",
-  "Gemini API",
-  "TypeScript",
-  "Vite",
 ];
 
 const Home = () => {
-  const reducedMotion = useReducedMotion();
-
-  const revealProps = reducedMotion
-    ? { initial: false, animate: { opacity: 1 } }
-    : {
-      initial: { opacity: 0, y: 14 },
-      animate: { opacity: 1, y: 0 },
-      transition: { duration: 0.5, ease: "easeOut" },
-    };
-
   return (
     <div className="page-shell page-shell--narrow">
       <SEO
@@ -45,25 +32,25 @@ const Home = () => {
             <Animated3DImages />
           </div>
 
-          <motion.div className="hero-copy" {...revealProps}>
-            <h1 className="hero-title">Pushkar Chaudhary</h1>
+          <div className="hero-copy">
+            <p className="hero-greeting">Hey, I&apos;m</p>
+            <h1 className="hero-title">Pushkar Chaudhary.</h1>
 
             <h2 className="hero-subline">
               <TypingText />
             </h2>
 
             <p className="hero-lead">
-              Developer based in Nepal specializing in building fast, minimal, and
-              responsive web products. Focused on React architecture, clean UI
-              design, and production-ready full-stack applications.
+              I&apos;m based in Itahari, where I study and build web apps with
+              React and Node.js. Here are a few things I&apos;ve been working on.
             </p>
 
             <div className="hero-actions">
               <Link to="/projects" className="btn-primary">
-                View Selected Work <FaArrowRight aria-hidden="true" />
+                See my projects <FaArrowRight aria-hidden="true" />
               </Link>
               <Link to="/contact" className="btn-secondary">
-                Let&apos;s Connect
+                Get in touch
               </Link>
             </div>
 
@@ -92,41 +79,49 @@ const Home = () => {
               <span className="hero-social-sep">·</span>
               <NepalClock compact={true} showLocation={true} />
             </div>
-          </motion.div>
+          </div>
         </section>
 
-        {/* Core Stack Strip */}
         <section className="stack-strip-section" aria-label="Core technologies">
           <div className="stack-strip-header">
-            <span className="stack-strip-label">Production Stack</span>
+            <span className="stack-strip-label">Tools I use</span>
           </div>
-          <div className="stack-strip-chips">
-            {coreStack.map((tech) => (
-              <span key={tech} className="stack-chip">
-                {tech}
-              </span>
-            ))}
+          <div className="stack-strip-window">
+            <div className="stack-strip-chips">
+              <div className="stack-strip-group" role="list">
+                {coreStack.map((tech) => (
+                  <span key={tech} className="stack-item" role="listitem">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+              <div className="stack-strip-group" aria-hidden="true">
+                {coreStack.map((tech) => (
+                  <span key={tech} className="stack-item">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Featured Projects Showcase */}
         <ProjectShowcase />
 
-        {/* Principles / About Bento */}
         <AboutMe />
 
-        {/* Direct Connect CTA */}
         <section className="connect-cta-panel">
           <div className="connect-cta-content">
-            <span className="section-kicker">Get in Touch</span>
-            <h2 className="connect-cta-title">Have an idea or need an engineer?</h2>
+            <span className="section-kicker">Say hello</span>
+            <h2 className="connect-cta-title">Have something in mind?</h2>
             <p className="connect-cta-desc">
-              I&apos;m always open to discussing new projects, frontend engineering roles, or creative technical collaborations.
+              I&apos;m open to interesting projects, opportunities, and a good conversation about building for the web.
             </p>
           </div>
           <div className="connect-cta-actions">
             <Link to="/contact" className="btn-primary">
-              Send a Message <FaArrowRight aria-hidden="true" />
+              Write to me <FaArrowRight aria-hidden="true" />
             </Link>
           </div>
         </section>

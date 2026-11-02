@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import wakatimeHandler from './api/wakatime.js'
 import githubHandler from './api/github.js'
+import spotifyHandler from './api/spotify.js'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -54,6 +55,30 @@ export default defineConfig(({ mode }) => {
           }
           try {
             await githubHandler(req, mockRes)
+          } catch (e) {
+            res.statusCode = 500
+            res.end(JSON.stringify({ error: e.message }))
+          }
+          return
+        }
+
+        if (url.pathname === '/api/spotify') {
+          const mockRes = {
+            status(code) {
+              res.statusCode = code
+              return this
+            },
+            setHeader(name, val) {
+              res.setHeader(name, val)
+              return this
+            },
+            json(data) {
+              res.setHeader('Content-Type', 'application/json')
+              res.end(JSON.stringify(data))
+            },
+          }
+          try {
+            await spotifyHandler(req, mockRes)
           } catch (e) {
             res.statusCode = 500
             res.end(JSON.stringify({ error: e.message }))

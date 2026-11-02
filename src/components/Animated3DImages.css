@@ -12,13 +12,13 @@
   align-items: center;
   gap: 0;
   cursor: pointer;
-  width: min(100%, 200px);
+  width: min(100%, 164px);
 }
 
 .avatar-frame {
   position: relative;
-  width: 200px;
-  height: 220px;
+  width: 164px;
+  height: 180px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -88,8 +88,12 @@
 }
 
 @media (max-width: 768px) {
+  .dev-avatar-container {
+    width: min(100%, 136px);
+  }
+
   .avatar-frame {
-    width: 160px;
-    height: 180px;
+    width: 136px;
+    height: 150px;
   }
 }

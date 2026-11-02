@@ -204,25 +204,27 @@ function About() {
           </ol>
         </motion.section>
 
-        {/* Spotify / Currently Listening */}
         <motion.section className="about-content-section" {...revealProps}>
-          <div className="section-header">
-            <span className="section-kicker">Focus &amp; Mood</span>
-            <h2 className="section-subtitle">Currently listening to</h2>
-          </div>
+          <section className="music-panel" aria-labelledby="favorite-music-title">
+            <div className="section-header">
+              <span className="section-kicker">An old favorite</span>
+              <h2 id="favorite-music-title" className="section-subtitle">
+                Favorite music
+              </h2>
+            </div>
 
-          <div className="clean-spotify-wrapper">
-            <iframe
-              title="Spotify Player"
-              src="https://open.spotify.com/embed/track/70C4NyhjD5OZUMzvWZ3njJ?utm_source=generator"
-              width="100%"
-              height="152"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-              loading="lazy"
-              className="clean-spotify-frame"
-            />
-          </div>
+            <div className="favorite-song">
+              <iframe
+                className="favorite-song-embed"
+                title="The Man Who Can’t Be Moved by The Script on Spotify"
+                src="https://open.spotify.com/embed/track/3nqqDo8CcCLke3ZoTgiOKf?utm_source=generator"
+                width="100%"
+                height="152"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+              />
+            </div>
+          </section>
         </motion.section>
       </main>
     </div>

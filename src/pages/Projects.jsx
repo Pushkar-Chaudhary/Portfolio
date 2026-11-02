@@ -20,152 +20,22 @@ import {
 import SEO from "../components/SEO.jsx";
 import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
 import TiltCard from "../components/TiltCard.jsx";
-import aafnoKuraPreview from "../assets/projects/aafno-kura.png";
-import careerSathiPreview from "../assets/projects/career-sathi.png";
-import sajiloBlogPreview from "../assets/projects/sajilo-blog.png";
+import projectsData from "../data/projects.js";
 import "./Projects.css";
 
-const projectsData = [
-  {
-    id: "aafno-kura",
-    title: "Aafno Kura",
-    category: "Full-Stack",
-    demo: "https://aafno-kura.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary/aafno-kura",
-    preview: aafnoKuraPreview,
-    description:
-      "A complete social platform featuring public community feeds, user post publishing, dynamic interactions, and responsive multi-device design.",
-    hero: true,
-    tech: ["Node.js", "Express", "EJS", "MongoDB", "REST API"],
-    highlights: [
-      "Dynamic feed with real-time updates and post creation",
-      "Robust MongoDB database schema with Mongoose models",
-      "Session-based user interactions and media support",
-      "Fully responsive design optimized for mobile and desktop screens",
-    ],
-    status: "Featured",
-    year: "2025",
-  },
-  {
-    id: "career-sathi",
-    title: "Career Sathi",
-    category: "AI & Gemini",
-    demo: "https://career-sathii.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary/career-sathi",
-    preview: careerSathiPreview,
-    description:
-      "An AI-powered career counseling platform integrating Google Gemini API to analyze user goals, recommend actionable roadmaps, and assess skill gaps.",
-    hero: false,
-    tech: ["React", "Node.js", "Express", "MongoDB", "Gemini API"],
-    highlights: [
-      "Context-aware AI career counseling using Gemini Flash model",
-      "Interactive step-by-step career path visualization",
-      "Dynamic skill assessments and actionable feedback",
-      "Secure backend proxy to protect API tokens and manage rate limits",
-    ],
-    status: "AI Powered",
-    year: "2025",
-  },
-  {
-    id: "sajilo-blog",
-    title: "Sajilo Blog",
-    category: "Full-Stack",
-    demo: "https://sajiloblog.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary/sajilo-blog",
-    preview: sajiloBlogPreview,
-    description:
-      "A fast, distraction-free blog engine and writing space designed for clean readability, seamless article creation, and optimized loading.",
-    hero: false,
-    tech: ["React", "Node.js", "Express", "MongoDB"],
-    highlights: [
-      "Minimalist reader UI with typography fine-tuned for legibility",
-      "Fast database querying with MongoDB indexing",
-      "Article tagging and category sorting engine",
-      "Lightweight bundle size with rapid initial paint",
-    ],
-    status: "Live App",
-    year: "2025",
-  },
-  {
-    id: "sajilo-pasal",
-    title: "Sajilo Pasal",
-    category: "E-Commerce",
-    demo: "https://sajilo-pasal-tau.vercel.app/",
-    preview: null,
-    icon: <FaShoppingCart />,
-    description:
-      "A local shopping platform featuring thoughtfully selected products from sellers across Nepal.",
-    hero: false,
-    tech: ["React"],
-    highlights: [
-      "Shop products from local sellers across Nepal",
-      "Discover thoughtfully selected products",
-    ],
-    status: "Live App",
-    year: "2026",
-  },
-  {
-    id: "wishly",
-    title: "Wishly",
-    category: "Frontend",
-    demo: "https://wishly-wish.vercel.app/",
-    preview: null,
-    icon: <FaGift />,
-    description:
-      "An interactive birthday wishing experience made with vibe-coding, celebratory animations, customized greeting flows, and sound effects.",
-    hero: false,
-    tech: ["React", "Node.js", "CSS Animations", "Canvas Confetti"],
-    highlights: [
-      "Custom celebratory sound effects and full-screen confetti cascades",
-      "Interactive greeting generator with shareable URLs",
-      "Playful micro-interactions with smooth easing curves",
-    ],
-    status: "Vibe Coded",
-    year: "2026",
-  },
-  {
-    id: "portfolio-website",
-    title: "Portfolio Website",
-    category: "Frontend",
-    demo: "https://pushkar-chaudhary.vercel.app",
-    github: "https://github.com/Pushkar-Chaudhary/Portfolio",
-    preview: null,
-    icon: <FaCode />,
-    description:
-      "My personal digital garden featuring 3D tilt mechanics, accessible light/dark modes, real-time GitHub telemetry, and smooth route transitions.",
-    hero: false,
-    tech: ["React 19", "Tailwind CSS", "Vite", "Framer Motion"],
-    highlights: [
-      "Bespoke custom cursor with element-specific magnetic states",
-      "Live GitHub commit calendar sync with error-resilient fallbacks",
-      "100% responsive fluid typography and micro-interactions",
-    ],
-    status: "Active",
-    year: "2026",
-  },
-  {
-    id: "notes-app",
-    title: "Notes App",
-    category: "Frontend",
-    demo: "https://notes-app-kappa-ruby-64.vercel.app/",
-    github: "https://github.com/Pushkar-Chaudhary/notes",
-    preview: null,
-    icon: <FaStickyNote />,
-    description:
-      "A lightweight, distraction-free notepad designed for quick capture, search-as-you-type filtering, and zero-latency local storage sync.",
-    hero: false,
-    tech: ["React", "Tailwind CSS", "LocalStorage API"],
-    highlights: [
-      "Instant offline persistence with zero setup needed",
-      "Quick keyboard shortcuts for note creation and deletion",
-      "Clean visual cards with color categorization",
-    ],
-    status: "Utility",
-    year: "2024",
-  },
-];
+const projectIcons = {
+  code: FaCode,
+  gift: FaGift,
+  shoppingCart: FaShoppingCart,
+  stickyNote: FaStickyNote,
+};
 
 const categories = ["All", "Full-Stack", "AI & Gemini", "Frontend", "E-Commerce"];
+
+function renderProjectIcon(iconName) {
+  const Icon = projectIcons[iconName] || FaCode;
+  return <Icon aria-hidden="true" />;
+}
 
 function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -424,7 +294,7 @@ function Projects() {
                               <span />
                             </div>
                             <div className="generative-center">
-                              <span className="generative-icon">{project.icon || <FaCode />}</span>
+                              <span className="generative-icon">{renderProjectIcon(project.icon)}</span>
                               <span className="generative-title">{project.title}</span>
                             </div>
                             <div className="generative-footer">
@@ -527,7 +397,7 @@ function Projects() {
                         />
                       ) : (
                         <div className="list-thumb" style={{ display: "grid", placeItems: "center" }}>
-                          {project.icon || <FaCode />}
+                          {renderProjectIcon(project.icon)}
                         </div>
                       )}
                       <div className="list-title-box">
@@ -615,7 +485,7 @@ function Projects() {
                   <div className="card-preview-generative" style={{ height: "100%" }}>
                     <div className="generative-center">
                       <span className="generative-icon" style={{ fontSize: "3rem" }}>
-                        {activeModalProject.icon || <FaCode />}
+                        {renderProjectIcon(activeModalProject.icon)}
                       </span>
                       <span className="generative-title" style={{ fontSize: "1.4rem" }}>
                         {activeModalProject.title}

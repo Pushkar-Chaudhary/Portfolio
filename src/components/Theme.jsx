@@ -1,4 +1,4 @@
-import { FaSun, FaMoon } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa";
 
 function ThemeToggle({ checked, onChange }) {
   return (
@@ -10,7 +10,11 @@ function ThemeToggle({ checked, onChange }) {
       title={checked ? "Switch to light theme" : "Switch to dark theme"}
     >
       <span className="theme-toggle-icon">
-        {checked ? <FaSun aria-hidden="true" /> : <FaMoon aria-hidden="true" />}
+        {checked ? (
+          <span aria-hidden="true">☀️</span>
+        ) : (
+          <FaMoon aria-hidden="true" />
+        )}
       </span>
     </button>
   );

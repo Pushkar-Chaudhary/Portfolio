@@ -7,10 +7,9 @@ function Animated3DImages() {
   const [isWaving, setIsWaving] = useState(false);
   const [touched, setTouched] = useState(false);
 
-  // Auto-cycle every 3s
   useEffect(() => {
     const interval = setInterval(() => {
-      setIsWaving((prev) => !prev);
+      setIsWaving((previous) => !previous);
     }, 3000);
     return () => clearInterval(interval);
   }, []);
@@ -18,9 +17,7 @@ function Animated3DImages() {
   const handleTouch = useCallback(() => {
     setTouched(true);
     setIsWaving(true);
-    setTimeout(() => {
-      setTouched(false);
-    }, 2000);
+    setTimeout(() => setTouched(false), 2000);
   }, []);
 
   return (
@@ -30,8 +27,8 @@ function Animated3DImages() {
         onClick={handleTouch}
         role="button"
         tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") handleTouch();
+        onKeyDown={(event) => {
+          if (event.key === "Enter" || event.key === " ") handleTouch();
         }}
         aria-label="Developer avatar — tap to wave"
       >
@@ -49,10 +46,7 @@ function Animated3DImages() {
             draggable="false"
           />
         </div>
-
-        {touched && (
-          <span className="avatar-greeting">Hi there! 👋</span>
-        )}
+        {touched && <span className="avatar-greeting">Hi there! 👋</span>}
       </div>
     </div>
   );

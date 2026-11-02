@@ -7,7 +7,6 @@ import Projects from "./pages/Projects.jsx";
 import Contact from "./pages/contact.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import Footer from "./pages/Footer.jsx";
-import CustomCursor from "./components/CustomCursor.jsx";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -72,7 +71,6 @@ function App() {
 
   return (
     <>
-      <CustomCursor />
       <div className={`app-shell${darkMode ? " theme-dark" : ""}`}>
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
 

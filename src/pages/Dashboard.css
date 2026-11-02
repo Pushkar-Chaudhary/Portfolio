@@ -26,57 +26,26 @@
   flex-wrap: wrap;
 }
 
-.live-status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  background: var(--accent-soft);
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.status-ping {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6);
-  animation: ping 2s infinite cubic-bezier(0, 0, 0.2, 1);
-}
-
-@keyframes ping {
-  70%, 100% {
-    transform: scale(2.2);
-    opacity: 0;
-  }
-}
-
 .dash-tz {
   color: var(--muted);
   font-size: 0.8rem;
-  font-family: var(--font-mono, monospace);
 }
 
 .dash-title {
   margin: 0;
   color: var(--primary);
-  font-size: clamp(2.2rem, 5vw, 3.4rem);
-  font-weight: 750;
-  letter-spacing: -0.04em;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 650;
+  letter-spacing: -0.025em;
   line-height: 1.08;
 }
 
 .dash-lead {
   margin: 0;
   color: var(--muted);
-  font-size: 1.02rem;
-  line-height: 1.65;
-  max-width: 640px;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  max-width: 58ch;
 }
 
 /* Telemetry Section Blocks */
@@ -105,10 +74,8 @@
   align-items: center;
   gap: 6px;
   color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.82rem;
+  font-weight: 600;
   margin-bottom: 4px;
 }
 
@@ -116,8 +83,8 @@
   margin: 0;
   color: var(--primary);
   font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 650;
+  letter-spacing: -0.015em;
 }
 
 .telemetry-header-actions {
@@ -128,8 +95,7 @@
 
 .sync-time-tag {
   color: var(--muted);
-  font-size: 0.75rem;
-  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
 }
 
 .icon-refresh-btn {
@@ -203,17 +169,15 @@
   align-items: center;
   gap: 6px;
   color: var(--muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .waka-metric-value {
   color: var(--primary);
   font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.1;
 }
 
@@ -249,8 +213,6 @@
 .chart-box-meta {
   color: var(--muted);
   font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 
 .weekly-bars-container {
@@ -347,9 +309,7 @@
 
 .breakdown-sub {
   color: var(--muted);
-  font-size: 0.74rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-size: 0.78rem;
 }
 
 .breakdown-items-list {
@@ -378,7 +338,6 @@
 
 .breakdown-percent {
   color: var(--muted);
-  font-family: var(--font-mono, monospace);
   font-size: 0.76rem;
 }
 
@@ -426,17 +385,15 @@
   align-items: center;
   gap: 6px;
   color: var(--muted);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 600;
 }
 
 .ticker-number {
   color: var(--primary);
   font-size: 1.6rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   line-height: 1.15;
 }
 
