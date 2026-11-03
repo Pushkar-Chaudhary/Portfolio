@@ -1,0 +1,12 @@
+---
+import Projects from "../views/Projects.jsx";
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+  title="Projects | Pushkar Chaudhary - Interactive Showcase"
+  description="Explore interactive web development projects, experiments, and live apps created by Pushkar Chaudhary."
+  path="/projects"
+>
+  <Projects client:load />
+</SiteLayout>

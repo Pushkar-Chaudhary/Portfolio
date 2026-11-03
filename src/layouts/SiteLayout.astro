@@ -1,0 +1,144 @@
+---
+import "../index.css";
+import "../styles/portfolio.css";
+import { ClientRouter } from "astro:transitions";
+import CustomCursor from "../components/CustomCursor.jsx";
+import Navbar from "../components/Navbar.jsx";
+import Footer from "../components/Footer.jsx";
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  intro?: boolean;
+}
+
+const {
+  title,
+  description,
+  path = Astro.url.pathname,
+  intro = false,
+} = Astro.props;
+const canonicalUrl = new URL(path, Astro.site);
+const pageUrl = canonicalUrl.toString();
+const personId = new URL("/#person", Astro.site).toString();
+const websiteId = new URL("/#website", Astro.site).toString();
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": personId,
+      name: "Pushkar Chaudhary",
+      alternateName: "Pushkar",
+      url: Astro.site?.toString(),
+      image: new URL("/fav.png", Astro.site).toString(),
+      jobTitle: "Web developer and BCA student",
+      description:
+        "A web developer and BCA student from Itahari, Nepal, building projects with React, Node.js, and MongoDB.",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Itahari",
+        addressCountry: "NP",
+      },
+      email: "pushkarchaudhary256@gmail.com",
+      sameAs: [
+        "https://github.com/Pushkar-Chaudhary",
+        "https://www.linkedin.com/in/anik-chy/",
+        "https://x.com/pushkar_chau07",
+        "https://www.instagram.com/pushkar.chau/",
+      ],
+      knowsAbout: [
+        "Web Development",
+        "Frontend Development",
+        "React",
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "UI/UX Design",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": websiteId,
+      url: Astro.site?.toString(),
+      name: "Pushkar Chaudhary Portfolio",
+      description: "Projects by Pushkar Chaudhary, a web developer in Itahari, Nepal.",
+      publisher: { "@id": personId },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: title,
+      description,
+      isPartOf: { "@id": websiteId },
+      about: { "@id": personId },
+      inLanguage: "en-US",
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Pushkar Chaudhary, Pushkar Chaudhary Portfolio, Pushkar Codes, Frontend Developer Nepal, Web Developer Nepal, React Developer Nepal, Itahari Nepal Developer" />
+    <meta name="author" content="Pushkar Chaudhary" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <link rel="canonical" href={pageUrl} />
+    <link rel="icon" type="image/png" href="/fav.png" />
+    <link rel="apple-touch-icon" href="/fav.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pushkar Chaudhary Portfolio" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://pushkarchaudhary.com.np/fav.png" />
+    <meta property="og:image:alt" content="Hand-drawn developer illustration" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@pushkar_chau07" />
+    <meta name="twitter:creator" content="@pushkar_chau07" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://pushkarchaudhary.com.np/fav.png" />
+    <meta name="google-site-verification" content="vWyYRwLvNg8_HrTs9IUBQi8AZevqSKSLbxOhPCmQLgE" />
+    <meta name="google-site-verification" content="SPUZ18zyy7uHmjGrFs7BoPRu9OMc_5Pryl7xEEhWBrQ" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    <script is:inline>
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem("portfolio-theme");
+        } catch {
+          theme = null;
+        }
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme =
+          theme === "dark" || (theme !== "light" && prefersDark) ? "dark" : "light";
+      })();
+    </script>
+    <script defer src="https://feedback.fish/ff.js?pid=8182609d645eda"></script>
+    <ClientRouter />
+  </head>
+  <body class:list={{ "intro-body": intro }}>
+    {!intro && <Navbar client:load activePath={Astro.url.pathname} />}
+    <div class="app-shell">
+      <slot />
+      {!intro && <Footer />}
+    </div>
+    {!intro && <CustomCursor client:load />}
+  </body>
+</html>

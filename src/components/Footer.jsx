@@ -1,6 +1,5 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -8,22 +7,22 @@ const Footer = () => {
       <div className="site-footer-inner">
         <div className="footer-top-row">
           <div className="footer-brand-col">
-            <Link to="/" className="footer-logo">
+            <a href="/home" className="footer-logo">
               Pushkar Chaudhary<span className="footer-dot" />
-            </Link>
+            </a>
             <p className="footer-tagline">
-              Frontend &amp; Fullstack Developer from Nepal. Building clean, fast, and accessible digital products.
+              BCA student and web developer in Itahari, Nepal.
             </p>
           </div>
 
           <nav className="footer-nav-col" aria-label="Footer navigation">
             <span className="footer-heading">Navigation</span>
             <div className="footer-links-grid">
-              <Link to="/" className="footer-link">Home</Link>
-              <Link to="/about" className="footer-link">About</Link>
-              <Link to="/projects" className="footer-link">Projects</Link>
-              <Link to="/dashboard" className="footer-link">Dashboard</Link>
-              <Link to="/contact" className="footer-link">Contact</Link>
+              <a href="/home" className="footer-link">Home</a>
+              <a href="/about" className="footer-link">About</a>
+              <a href="/projects" className="footer-link">Projects</a>
+              <a href="/dashboard" className="footer-link">Dashboard</a>
+              <a href="/contact" className="footer-link">Contact</a>
               <a
                 href="https://feedback.fish/265a18dcee38b3"
                 target="_blank"
@@ -73,6 +72,9 @@ const Footer = () => {
             </a>
           </div>
         </div>
+        <p className="footer-inspiration">
+          Visual inspiration: <span>Manish Tamang&apos;s portfolio.</span>
+        </p>
       </div>
     </footer>
   );

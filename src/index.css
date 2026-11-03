@@ -293,6 +293,11 @@ img {
   transition: all 160ms ease;
 }
 
+.theme-toggle-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
 .theme-toggle-btn:hover {
   border-color: var(--accent);
   color: var(--primary);

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import img1 from "../assets/img1.png";
 import img2 from "../assets/img2.png";
+import imageSource from "../lib/imageSource.js";
 import "./HeroSlider.css";
 
 const images = [img1, img2];
@@ -21,7 +22,7 @@ function HeroSlider() {
       {images.map((img, index) => (
         <img
           key={img}
-          src={img}
+          src={imageSource(img)}
           alt={`Pushkar Chaudhary portfolio showcase ${index + 1}`}
           className={`stack-img ${
             index === current ? "visible" : "hidden"

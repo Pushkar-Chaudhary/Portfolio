@@ -3,6 +3,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import aafnoKuraPreview from "../assets/projects/aafno-kura.png";
 import careerSathiPreview from "../assets/projects/career-sathi.png";
 import sajiloBlogPreview from "../assets/projects/sajilo-blog.png";
+import imageSource from "../lib/imageSource.js";
 import "./ProjectShowcase.css";
 
 const projects = [
@@ -10,7 +11,7 @@ const projects = [
     name: "Aafno Kura",
     category: "Social platform",
     description:
-      "A place to share updates, follow a public feed, and manage posts.",
+      "A community feed with post publishing, updates, and user interactions.",
     url: "https://aafno-kura.vercel.app/",
     preview: aafnoKuraPreview,
     stack: ["Node.js", "Express", "MongoDB"],
@@ -19,7 +20,7 @@ const projects = [
     name: "Career Sathi",
     category: "Career guidance",
     description:
-      "A career guidance app bringing practical tools and Gemini-powered features together.",
+      "Uses Gemini to turn career goals into roadmaps and skill-gap assessments.",
     url: "https://career-sathii.vercel.app/",
     preview: careerSathiPreview,
     stack: ["React", "Node.js", "Gemini API"],
@@ -28,7 +29,7 @@ const projects = [
     name: "Sajilo Blog",
     category: "Writing platform",
     description:
-      "A simple space for sharing thoughts and experiences through the web.",
+      "A blog with article publishing, tags, and category browsing.",
     url: "https://sajiloblog.vercel.app/",
     preview: sajiloBlogPreview,
     stack: ["React", "Express", "MongoDB"],
@@ -50,9 +51,11 @@ function ProjectShowcase() {
         <div className="project-showcase-art">
           <img
             key={activeProject.name}
-            src={activeProject.preview}
+            src={imageSource(activeProject.preview)}
             alt={`${activeProject.name} website preview`}
-            style={{ animation: "fadeIn 0.3s ease" }}
+            style={{ animation: "fadeIn 0.35s ease" }}
+            loading="eager"
+            decoding="async"
           />
         </div>
 
@@ -85,7 +88,7 @@ function ProjectShowcase() {
             onClick={() => setActiveIndex(index)}
             aria-pressed={activeIndex === index}
           >
-            <img src={project.preview} alt="" />
+            <img src={imageSource(project.preview)} alt="" />
             {project.name}
             <span className="showcase-option-arrow" aria-hidden="true">↗</span>
           </button>

@@ -1,138 +1,69 @@
-# Pushkar Chaudhary - Frontend Developer Portfolio
+# Pushkar Chaudhary Portfolio
 
-A modern, responsive portfolio website showcasing my frontend development projects and skills. Built with React, Vite, and Tailwind CSS with a focus on performance and accessibility.
+The portfolio is built with Astro, React, and Tailwind CSS 4. Astro renders each route on the server; the existing interactive React experiences hydrate only on the pages that use them.
 
-## 🌐 Live Demo
+## Routes
 
-Visit the live portfolio: **https://pushkar-chaudhary.vercel.app**
+- `/` — Minimal introduction with an immediate link to the portfolio.
+- `/home` — Existing homepage and featured projects.
+- `/about` — Skills, education, and development timeline.
+- `/projects` — Searchable, filterable project showcase.
+- `/contact` — Contact form and social links.
+- `/dashboard` — WakaTime and GitHub activity.
 
-## 🛠️ Tech Stack
+## Development
 
-- **React** 18+ - UI library
-- **Vite** - Next-generation build tool
-- **Tailwind CSS** - Utility-first CSS framework
-- **React Router** - Client-side routing
-- **React Icons** - Icon library
-- **Formspree** - Form submissions
-
-## ✨ Features
-
-- **Responsive Design** - Works seamlessly on all devices
-- **Dark Mode Support** - Light/dark theme toggle
-- **SEO Optimized** - JSON-LD structured data, meta tags, sitemap
-- **Fast Performance** - Optimized bundle size, lazy loading
-- **Accessible** - WCAG 2.1 compliant with proper aria labels
-- **Hero Slider** - Animated image carousel
-- **Project Showcase** - Featured and regular projects with demo links
-- **Contact Form** - Direct messaging via Formspree
-- **Timeline** - Educational and career journey
-
-## 📦 Installation & Setup
+Use Node.js 22.23.4 or later (required by Astro 7).
 
 ```bash
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
-
-# Build for production
 npm run build
-
-# Preview production build
 npm run preview
+npm run lint
 ```
 
-## 📁 Project Structure
+The Astro development server serves `/api/wakatime` and `/api/github` through the same handlers used in production.
+
+## Environment variables
+
+Set server-only values in `.env.local` for local development and in Vercel Project Settings for deployment:
+
+- `WAKATIME_API_KEY` — Optional authenticated WakaTime statistics.
+- `WAKATIME_USER_ID` — Optional public WakaTime profile identifier.
+- `GITHUB_USERNAME` — GitHub account used for contribution activity.
+- `GITHUB_TOKEN` — Optional server-side GitHub GraphQL token.
+
+Do not prefix these values with `PUBLIC_` or `VITE_`. The API handlers keep credentials on the server and retain their existing response formats.
+
+## Project structure
 
 ```
 src/
 ├── components/
-│   ├── AboutMe.jsx       # Home page about section
-│   ├── HeroSlider.jsx    # Image carousel
-│   ├── Navbar.jsx        # Navigation bar with dark mode
-│   ├── SEO.jsx           # Meta tags & structured data
-│   ├── Theme.jsx         # Theme toggle component
-│   └── TypingText.jsx    # Animated typing effect
+│   ├── Footer.jsx
+│   ├── Navbar.jsx
+│   └── ...
+├── layouts/
+│   └── SiteLayout.astro
 ├── pages/
-│   ├── About.jsx         # About page with timeline
-│   ├── contact.jsx       # Contact form page
-│   ├── Dashboard.jsx     # Dashboard page
-│   ├── Footer.jsx        # Footer with social links
-│   ├── Home.jsx          # Home/landing page
-│   └── Projects.jsx      # Projects showcase
-├── assets/               # Images and static files
-├── App.jsx               # Main app component
-├── App.css               # App styles
-├── index.css             # Global styles
-└── main.jsx              # Entry point
+│   ├── api/
+│   ├── index.astro
+│   └── *.astro
+├── styles/
+├── views/                 # Existing React page experiences
+└── assets/                # Existing project screenshots and images
+api/                       # Original server-side API handlers
+astro.config.mjs
 ```
 
-## 🚀 Deployment
+## Deployment
 
-The portfolio is automatically deployed via **Vercel**.
+The Astro Vercel adapter is configured in `astro.config.mjs`. Import the repository into Vercel, configure the server-side environment variables, and deploy; no SPA rewrite is required.
 
-### Deploy to Vercel
-```bash
-npm install -g vercel
-vercel --prod
-```
+## Contact
 
-## 🔍 SEO & Google Indexing
-
-The portfolio is optimized for search engines with:
-- Automatic sitemap generation (`/sitemap.xml`)
-- robots.txt configuration
-- JSON-LD structured data (Person schema)
-- Optimized meta tags and descriptions
-- Mobile-friendly responsive design
-
-**Google Search Console**: https://search.google.com/search-console
-
-## 📊 Performance
-
-- **Bundle Size**: ~296 KB JavaScript (95 KB gzipped)
-- **CSS**: 33.55 KB (7.57 KB gzipped)
-- **Build Time**: ~2.3 seconds
-- **Lighthouse Score**: Optimized for Core Web Vitals
-
-## 🎨 Customization
-
-### Change Theme Colors
-Edit Tailwind config or CSS variables in `src/index.css`
-
-### Update Projects
-Modify the projects array in `src/pages/Projects.jsx`
-
-### Add New Pages
-1. Create new component in `src/pages/`
-2. Add route in `src/App.jsx`
-3. Update navigation links
-
-## 📝 Content to Update
-
-- Profile image: `public/about-me.jpg`
-- Social links in Navbar and Footer
-- Project information and demo links
-- Contact form endpoint (Formspree)
-- Meta descriptions for better SEO
-
-## 🤝 Contributing
-
-This is a personal portfolio. For suggestions or improvements, feel free to reach out!
-
-## 📧 Contact
-
-- **Email**: pushkarchaudhary256@gmail.com
-- **GitHub**: https://github.com/Pushkar-Chaudhary
-- **LinkedIn**: https://www.linkedin.com/in/anik-chy/
-- **Twitter/X**: https://x.com/pushkar_chau07
-
-## 📄 License
-
-© 2026 Pushkar Chaudhary. All rights reserved.
-
----
-
-**Last Updated**: 2026-08-18
-**Status**: ✅ Production Ready
+- Email: pushkarchaudhary256@gmail.com
+- GitHub: https://github.com/Pushkar-Chaudhary
+- LinkedIn: https://www.linkedin.com/in/anik-chy/
+- X: https://x.com/pushkar_chau07

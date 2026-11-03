@@ -1,18 +1,41 @@
-import { NavLink } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import ThemeToggle from "./Theme.jsx";
 
 const links = [
-  { name: "Home", path: "/" },
+  { name: "Home", path: "/home" },
   { name: "About", path: "/about" },
   { name: "Projects", path: "/projects" },
   { name: "Dashboard", path: "/dashboard" },
   { name: "Contact", path: "/contact" },
 ];
 
-function Navbar({ darkMode, setDarkMode }) {
+const subscribeToTheme = (onChange) => {
+  window.addEventListener("portfolio-theme-change", onChange);
+  return () => window.removeEventListener("portfolio-theme-change", onChange);
+};
+
+const getThemeSnapshot = () => document.documentElement.dataset.theme === "dark";
+const getServerThemeSnapshot = () => false;
+
+function Navbar({ activePath }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const darkMode = useSyncExternalStore(
+    subscribeToTheme,
+    getThemeSnapshot,
+    getServerThemeSnapshot,
+  );
   const menuToggleRef = useRef(null);
+
+  const toggleTheme = () => {
+    const nextDarkMode = !getThemeSnapshot();
+    document.documentElement.dataset.theme = nextDarkMode ? "dark" : "light";
+    try {
+      localStorage.setItem("portfolio-theme", nextDarkMode ? "dark" : "light");
+    } catch {
+      // Theme changes still apply when storage is unavailable.
+    }
+    window.dispatchEvent(new Event("portfolio-theme-change"));
+  };
 
   useEffect(() => {
     if (!menuOpen) return undefined;
@@ -33,21 +56,19 @@ function Navbar({ darkMode, setDarkMode }) {
       <header className="top-nav-shell">
         <div className="top-nav-inner">
           <div className="nav-left-actions">
-            <ThemeToggle checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+            <ThemeToggle checked={darkMode} onChange={toggleTheme} />
           </div>
 
           <nav className="site-nav" aria-label="Primary navigation">
             {links.map((link) => (
-              <NavLink
+              <a
                 key={link.path}
-                to={link.path}
-                end={link.path === "/"}
-                className={({ isActive }) =>
-                  `nav-link ${isActive ? "nav-link--active" : ""}`
-                }
+                href={link.path}
+                aria-current={activePath === link.path ? "page" : undefined}
+                className={`nav-link ${activePath === link.path ? "nav-link--active" : ""}`}
               >
                 {link.name}
-              </NavLink>
+              </a>
             ))}
           </nav>
 
@@ -107,17 +128,15 @@ function Navbar({ darkMode, setDarkMode }) {
       >
         <div className="mobile-menu-inner">
           {links.map((link) => (
-            <NavLink
+            <a
               key={link.path}
-              to={link.path}
-              end={link.path === "/"}
+              href={link.path}
               onClick={() => setMenuOpen(false)}
-              className={({ isActive }) =>
-                `mobile-nav-link ${isActive ? "mobile-nav-link--active" : ""}`
-              }
+              aria-current={activePath === link.path ? "page" : undefined}
+              className={`mobile-nav-link ${activePath === link.path ? "mobile-nav-link--active" : ""}`}
             >
               {link.name}
-            </NavLink>
+            </a>
           ))}
         </div>
       </nav>

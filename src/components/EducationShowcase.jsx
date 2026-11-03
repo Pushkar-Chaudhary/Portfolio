@@ -1,5 +1,6 @@
 import { useState } from "react";
 import education from "../data/education.js";
+import imageSource from "../lib/imageSource.js";
 import "./EducationShowcase.css";
 
 function EducationShowcase() {
@@ -27,14 +28,14 @@ function EducationShowcase() {
               aria-pressed={index === activeSchoolIndex}
               aria-label={`Show ${school.name}`}
             >
-              <img src={school.image} alt="" />
+              <img src={imageSource(school.image)} alt="" />
               <span>{school.stage}</span>
             </button>
           ))}
         </div>
 
         <div className="school-selected" aria-live="polite">
-          <img src={activeSchool.image} alt={activeSchool.alt} />
+          <img src={imageSource(activeSchool.image)} alt={activeSchool.alt} />
           <div>
             <p>{activeSchool.stage}</p>
             <h3>{activeSchool.name}</h3>

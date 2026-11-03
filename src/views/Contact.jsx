@@ -10,7 +10,6 @@ import {
   FaPaperPlane,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import SEO from "../components/SEO.jsx";
 
 const socialChannels = [
   {
@@ -49,7 +48,7 @@ function Contact() {
   const revealProps = reducedMotion
     ? { initial: false, animate: { opacity: 1 } }
     : {
-        initial: { opacity: 0, y: 14 },
+        initial: false,
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, amount: 0.15 },
         transition: { duration: 0.45, ease: "easeOut" },
@@ -86,19 +85,13 @@ function Contact() {
 
   return (
     <div className="page-shell page-shell--narrow">
-      <SEO
-        title="Contact | Pushkar Chaudhary - Get in Touch"
-        description="Connect with Pushkar Chaudhary regarding engineering opportunities, freelance projects, or web development."
-        path="/contact"
-      />
-
       <main className="page-stack">
         {/* Header */}
         <motion.header className="contact-header-section" {...revealProps}>
           <span className="section-kicker">Get In Touch</span>
-          <h1 className="section-title">Let&apos;s build something exceptional.</h1>
+          <h1 className="section-title">Get in touch.</h1>
           <p className="lead">
-            Feel free to reach out directly via email, social channels, or the contact form below. I typically respond within 24 hours.
+            Email me, use the form, or find me on social.
           </p>
 
           <div className="direct-email-strip">
@@ -127,7 +120,7 @@ function Contact() {
 
         {/* Channels Grid */}
         <motion.section className="social-channels-section" {...revealProps}>
-          <h2 className="section-subtitle">Verified Channels</h2>
+          <h2 className="section-subtitle">Find me online</h2>
           <div className="channels-grid">
             {socialChannels.map((channel) => (
               <a

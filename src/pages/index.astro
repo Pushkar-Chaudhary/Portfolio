@@ -1,0 +1,44 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import NepalClock from "../components/NepalClock.jsx";
+---
+
+<SiteLayout
+  title="Pushkar Chaudhary | Web Developer"
+  description="I'm Pushkar, a BCA student in Itahari, Nepal. I build web projects with React, Node.js, and MongoDB."
+  path="/"
+  intro={true}
+>
+  <main class="intro-screen">
+    <div class="intro-topline" aria-label="Portfolio introduction">
+      <span class="intro-edition-label">Pushkar Chaudhary</span>
+      <span class="intro-edition">Portfolio</span>
+    </div>
+
+    <section class="intro-content" aria-labelledby="intro-name">
+      <div class="intro-copy">
+        <p class="intro-eyebrow"><span class="intro-status-dot"></span> BCA student <span class="intro-divider">/</span> Web developer</p>
+        <h1 id="intro-name" class="intro-name">Pushkar<br /><span>Chaudhary</span></h1>
+        <p class="intro-location">Itahari, Nepal</p>
+        <p class="intro-description">
+          I build web projects with React, Node.js, and MongoDB. Here&apos;s what I&apos;ve been working on.
+        </p>
+        <div class="intro-actions">
+          <a class="intro-explore" href="/home">
+            <span>See my work</span>
+            <span class="intro-explore-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="intro-footer">
+      <span class="intro-footer-location">
+        Itahari, Nepal <span class="intro-footer-separator">·</span>
+        <NepalClock client:load compact={true} showLocation={false} />
+      </span>
+      <span>React · Node.js · MongoDB</span>
+      <a href="https://github.com/Pushkar-Chaudhary" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </footer>
+  </main>
+</SiteLayout>

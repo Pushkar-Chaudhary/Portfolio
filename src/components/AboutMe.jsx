@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { FaCode, FaServer, FaBolt, FaArrowRight } from "react-icons/fa";
 
 const AboutMe = () => {
@@ -21,9 +20,9 @@ const AboutMe = () => {
           <p className="bento-text">
             Specializing in React, Tailwind CSS, and Framer Motion. Every interface is built with strict semantic HTML, WCAG accessibility, and fluid responsiveness across every screen size.
           </p>
-          <Link to="/about" className="bento-link">
+          <a href="/about" className="bento-link">
             Read full background <FaArrowRight aria-hidden="true" />
-          </Link>
+          </a>
         </div>
 
         <div className="bento-card">

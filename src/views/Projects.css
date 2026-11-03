@@ -330,8 +330,8 @@
   gap: 7px;
   padding: 8px 18px;
   border-radius: 999px;
-  background: #ffffff;
-  color: #09090b;
+  background: var(--surface);
+  color: var(--primary);
   font-size: 0.82rem;
   font-weight: 700;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -640,7 +640,7 @@
   border-radius: 16px;
   border: 1px solid var(--border);
   background: var(--surface);
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
   position: relative;

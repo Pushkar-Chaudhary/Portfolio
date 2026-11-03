@@ -1,30 +1,40 @@
 .dev-avatar-stage {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   width: 100%;
+  margin: 0;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .dev-avatar-container {
+  display: block;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
+  width: min(100%, 112px);
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
   cursor: pointer;
-  width: min(100%, 200px);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dev-avatar-container:hover {
+  transform: translateY(-4px);
 }
 
 .avatar-frame {
   position: relative;
-  width: 200px;
-  height: 220px;
+  width: 100%;
+  aspect-ratio: 204 / 400;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border-radius: 16px;
   background: transparent;
+  animation: avatar-float 5.5s ease-in-out infinite;
 }
 
 .avatar-img {
@@ -34,7 +44,8 @@
   object-fit: contain;
   object-position: center bottom;
   user-select: none;
-  transition: opacity 350ms ease, transform 350ms ease;
+  transition: opacity 450ms ease, transform 550ms cubic-bezier(0.2, 0.75, 0.3, 1);
+  image-rendering: pixelated;
 }
 
 .avatar-standing {
@@ -59,12 +70,12 @@
 
 .avatar-greeting {
   position: absolute;
-  bottom: -8px;
+  bottom: 12px;
   left: 50%;
   transform: translateX(-50%);
   padding: 4px 12px;
-  border-radius: 999px;
-  background: var(--surface-alt);
+  border-radius: 3px;
+  background: var(--bg);
   border: 1px solid var(--border);
   color: var(--text);
   font-size: 0.72rem;
@@ -73,6 +84,19 @@
   animation: greetPop 200ms ease-out;
   pointer-events: none;
   z-index: 2;
+}
+
+.avatar-caption {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.avatar-caption span {
+  padding-inline: 5px;
+  color: var(--accent);
 }
 
 @keyframes greetPop {
@@ -89,7 +113,17 @@
 
 @media (max-width: 768px) {
   .avatar-frame {
-    width: 160px;
-    height: 180px;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar-frame {
+    animation: none;
+  }
+
+  .dev-avatar-container,
+  .avatar-img {
+    transition: none;
   }
 }

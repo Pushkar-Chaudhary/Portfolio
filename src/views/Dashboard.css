@@ -552,11 +552,11 @@
 .heat-level-3 { background: #329a5f; }
 .heat-level-4 { background: #1a6d3f; }
 
-.theme-dark .heat-level-0 { background: rgba(255, 255, 255, 0.06); }
-.theme-dark .heat-level-1 { background: #153b27; }
-.theme-dark .heat-level-2 { background: #225f3c; }
-.theme-dark .heat-level-3 { background: #358d57; }
-.theme-dark .heat-level-4 { background: #51c47e; }
+:root[data-theme="dark"] .heat-level-0 { background: rgba(255, 255, 255, 0.06); }
+:root[data-theme="dark"] .heat-level-1 { background: #153b27; }
+:root[data-theme="dark"] .heat-level-2 { background: #225f3c; }
+:root[data-theme="dark"] .heat-level-3 { background: #358d57; }
+:root[data-theme="dark"] .heat-level-4 { background: #51c47e; }
 
 .heatmap-footer-legend {
   display: flex;

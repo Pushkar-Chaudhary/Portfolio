@@ -1,14 +1,17 @@
 import Typed from "typed.js";
+import { useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 export default function TypingText() {
   const el = useRef(null);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
+    if (reducedMotion) return undefined;
     const typed = new Typed(el.current, {
       strings: [
-        "Developer",
-        "BCA Student",
+        "Web developer",
+        "BCA student",
       ],
       typeSpeed: 50,
       backSpeed: 30,
@@ -20,7 +23,11 @@ export default function TypingText() {
     });
 
     return () => typed.destroy();
-  }, []);
+  }, [reducedMotion]);
 
-  return <span className="typing-role" ref={el} />;
+  return (
+    <span className="typing-role" ref={el}>
+      {reducedMotion ? "Web developer" : null}
+    </span>
+  );
 }

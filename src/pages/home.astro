@@ -1,0 +1,12 @@
+---
+import Home from "../views/Home.jsx";
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+  title="Pushkar Chaudhary | Web Developer"
+  description="I'm Pushkar, a BCA student in Itahari, Nepal. I build web projects with React, Node.js, and MongoDB."
+  path="/home"
+>
+  <Home client:load />
+</SiteLayout>

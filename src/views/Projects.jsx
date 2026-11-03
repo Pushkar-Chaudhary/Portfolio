@@ -17,12 +17,12 @@ import {
   FaGift,
   FaShoppingCart,
 } from "react-icons/fa";
-import SEO from "../components/SEO.jsx";
 import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
 import TiltCard from "../components/TiltCard.jsx";
 import aafnoKuraPreview from "../assets/projects/aafno-kura.png";
 import careerSathiPreview from "../assets/projects/career-sathi.png";
 import sajiloBlogPreview from "../assets/projects/sajilo-blog.png";
+import imageSource from "../lib/imageSource.js";
 import "./Projects.css";
 
 const projectsData = [
@@ -74,7 +74,7 @@ const projectsData = [
     github: "https://github.com/Pushkar-Chaudhary/sajilo-blog",
     preview: sajiloBlogPreview,
     description:
-      "A fast, distraction-free blog engine and writing space designed for clean readability, seamless article creation, and optimized loading.",
+      "A blog app for writing and reading articles, with tags and category browsing.",
     hero: false,
     tech: ["React", "Node.js", "Express", "MongoDB"],
     highlights: [
@@ -94,12 +94,12 @@ const projectsData = [
     preview: null,
     icon: <FaShoppingCart />,
     description:
-      "A local shopping platform featuring thoughtfully selected products from sellers across Nepal.",
+      "A local shopping app for browsing products from sellers across Nepal.",
     hero: false,
     tech: ["React"],
     highlights: [
       "Shop products from local sellers across Nepal",
-      "Discover thoughtfully selected products",
+      "Browse products from local sellers",
     ],
     status: "Live App",
     year: "2026",
@@ -229,12 +229,6 @@ function Projects() {
 
   return (
     <div className="page-shell page-shell--wide">
-      <SEO
-        title="Projects | Pushkar Chaudhary - Interactive Showcase"
-        description="Explore interactive web development projects, experiments, and live apps created by Pushkar Chaudhary."
-        path="/projects"
-      />
-
       <main className="page-stack">
         <header className="projects-header">
           <PagePlaneAccent />
@@ -411,10 +405,11 @@ function Projects() {
                       >
                         {project.preview ? (
                           <img
-                            src={project.preview}
+                            src={imageSource(project.preview)}
                             alt={`${project.title} screenshot`}
                             className="card-preview-img"
                             loading="lazy"
+                            decoding="async"
                           />
                         ) : (
                           <div className="card-preview-generative">
@@ -521,9 +516,11 @@ function Projects() {
                     <div className="list-project-name">
                       {project.preview ? (
                         <img
-                          src={project.preview}
+                          src={imageSource(project.preview)}
                           alt=""
                           className="list-thumb"
+                          loading="lazy"
+                          decoding="async"
                         />
                       ) : (
                         <div className="list-thumb" style={{ display: "grid", placeItems: "center" }}>
@@ -607,9 +604,10 @@ function Projects() {
               <div className="modal-hero-stage">
                 {activeModalProject.preview ? (
                   <img
-                    src={activeModalProject.preview}
+                    src={imageSource(activeModalProject.preview)}
                     alt={`${activeModalProject.title} preview`}
                     className="modal-hero-img"
+                    decoding="async"
                   />
                 ) : (
                   <div className="card-preview-generative" style={{ height: "100%" }}>

@@ -1,6 +1,27 @@
 // Serverless Function: /api/wakatime
 // Fetches real WakaTime statistics securely server-side without exposing API keys.
 
+function findBestDay(stats) {
+  if (stats.best_day?.date && stats.best_day?.text) {
+    return {
+      date: stats.best_day.date,
+      text: stats.best_day.text,
+    };
+  }
+
+  const bestDay = (stats.days || []).reduce((best, day) => {
+    const seconds = Number(day.total_seconds) || 0;
+    return seconds > (best?.total_seconds || 0) ? { ...day, total_seconds: seconds } : best;
+  }, null);
+
+  if (!bestDay?.date || bestDay.total_seconds <= 0) return null;
+
+  return {
+    date: bestDay.date,
+    text: bestDay.text || `${Math.round(bestDay.total_seconds / 3600)} hrs`,
+  };
+}
+
 export default async function handler(req, res) {
   // CORS & Cache headers
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -28,6 +49,7 @@ export default async function handler(req, res) {
       if (statsRes.status === "fulfilled" && statsRes.value.ok) {
         const statsData = await statsRes.value.json();
         const d = statsData?.data || {};
+        const bestDay = findBestDay(d);
 
         let cumulativeTotal = d.human_readable_total || "0 hrs";
         if (allTimeRes.status === "fulfilled" && allTimeRes.value.ok) {
@@ -72,12 +94,7 @@ export default async function handler(req, res) {
           authenticated: true,
           totalCodingTime: cumulativeTotal,
           dailyAverage: d.human_readable_daily_average || "0 hrs",
-          bestDay: d.best_day
-            ? {
-                date: d.best_day.date,
-                text: d.best_day.text,
-              }
-            : null,
+          bestDay,
           mostCodedDay,
           languages: topLanguages,
           projects: topProjects,
@@ -97,6 +114,7 @@ export default async function handler(req, res) {
       if (publicRes.ok) {
         const pubData = await publicRes.json();
         const d = pubData?.data || {};
+        const bestDay = findBestDay(d);
 
         const topLanguages = (d.languages || []).slice(0, 6).map((l) => ({
           name: l.name,
@@ -131,7 +149,7 @@ export default async function handler(req, res) {
           authenticated: false,
           totalCodingTime: d.human_readable_total || "97 hrs 9 mins",
           dailyAverage: d.human_readable_daily_average || "1 hr 42 mins",
-          bestDay: d.best_day ? { date: d.best_day.date, text: d.best_day.text } : null,
+          bestDay,
           mostCodedDay: mostCodedDayPub,
           activeDays: d.days_minus_holidays || 57,
           totalDays: d.days_including_holidays || 126,

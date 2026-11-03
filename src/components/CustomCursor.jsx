@@ -72,8 +72,6 @@ function CustomCursor() {
     };
   }, []);
 
-  if (!isFinePointer()) return null;
-
   return (
     <div
       ref={cursorRef}

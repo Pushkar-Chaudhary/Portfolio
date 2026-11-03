@@ -10,10 +10,8 @@ import {
   FaSyncAlt,
   FaExclamationCircle,
   FaInfoCircle,
-  FaStar,
 } from "react-icons/fa";
 import { SiWakatime } from "react-icons/si";
-import SEO from "../components/SEO.jsx";
 import NepalClock from "../components/NepalClock.jsx";
 import "./Dashboard.css";
 
@@ -22,7 +20,11 @@ const monthNames = [
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
 ];
 
-const weekdayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+async function requestJson(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+}
 
 function Dashboard() {
   const [wakaData, setWakaData] = useState(null);
@@ -39,45 +41,58 @@ function Dashboard() {
   const revealProps = reducedMotion
     ? { initial: false, animate: { opacity: 1 } }
     : {
-        initial: { opacity: 0, y: 12 },
+        initial: false,
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, amount: 0.1 },
         transition: { duration: 0.45, ease: "easeOut" },
       };
 
-  const fetchWakaTime = async () => {
+  const refreshWakaTime = () => {
     setWakaLoading(true);
     setWakaError(null);
-    try {
-      const res = await fetch("/api/wakatime");
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      setWakaData(data);
-    } catch (err) {
-      setWakaError(err.message || "Failed to load WakaTime telemetry");
-    } finally {
-      setWakaLoading(false);
-    }
+    void requestJson("/api/wakatime")
+      .then(setWakaData)
+      .catch((error) => setWakaError(error.message || "Failed to load WakaTime telemetry"))
+      .finally(() => setWakaLoading(false));
   };
 
-  const fetchGitHub = async () => {
+  const refreshGitHub = () => {
     setGithubLoading(true);
     setGithubError(null);
-    try {
-      const res = await fetch("/api/github");
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-      setGithubData(data);
-    } catch (err) {
-      setGithubError(err.message || "Failed to load GitHub activity");
-    } finally {
-      setGithubLoading(false);
-    }
+    void requestJson("/api/github")
+      .then(setGithubData)
+      .catch((error) => setGithubError(error.message || "Failed to load GitHub activity"))
+      .finally(() => setGithubLoading(false));
   };
 
   useEffect(() => {
-    fetchWakaTime();
-    fetchGitHub();
+    let active = true;
+
+    requestJson("/api/wakatime")
+      .then((data) => {
+        if (active) setWakaData(data);
+      })
+      .catch((error) => {
+        if (active) setWakaError(error.message || "Failed to load WakaTime telemetry");
+      })
+      .finally(() => {
+        if (active) setWakaLoading(false);
+      });
+
+    requestJson("/api/github")
+      .then((data) => {
+        if (active) setGithubData(data);
+      })
+      .catch((error) => {
+        if (active) setGithubError(error.message || "Failed to load GitHub activity");
+      })
+      .finally(() => {
+        if (active) setGithubLoading(false);
+      });
+
+    return () => {
+      active = false;
+    };
   }, []);
 
   // Compute month label offsets across calendar weeks
@@ -108,20 +123,10 @@ function Dashboard() {
 
   return (
     <div className="page-shell page-shell--wide">
-      <SEO
-        title="Dashboard | Pushkar Chaudhary - Developer Analytics"
-        description="Live developer telemetry, GitHub contributions, and WakaTime coding activity for Pushkar Chaudhary."
-        path="/dashboard"
-      />
-
       <main className="dashboard-flow">
         {/* Editorial Header */}
         <motion.header className="dash-hero" {...revealProps}>
           <div className="dash-hero-top">
-            <span className="live-status-badge">
-              <span className="status-ping" />
-              <span>Telemetry &amp; Activity</span>
-            </span>
             <NepalClock showLocation={true} />
           </div>
 
@@ -154,7 +159,7 @@ function Dashboard() {
               )}
               <button
                 type="button"
-                onClick={fetchWakaTime}
+                onClick={refreshWakaTime}
                 className="icon-refresh-btn"
                 title="Refresh WakaTime data"
                 aria-label="Refresh WakaTime telemetry"
@@ -180,7 +185,7 @@ function Dashboard() {
               <div className="alert-body">
                 <strong>Unable to load WakaTime telemetry</strong>
                 <p>{wakaError}</p>
-                <button type="button" onClick={fetchWakaTime} className="alert-retry-btn">
+                <button type="button" onClick={refreshWakaTime} className="alert-retry-btn">
                   Try Again
                 </button>
               </div>
@@ -213,10 +218,10 @@ function Dashboard() {
 
                 <div className="waka-metric-card">
                   <span className="waka-metric-label">
-                    <FaFire aria-hidden="true" /> {wakaData?.bestDay ? "Best Coding Day" : "Active Coding Days"}
+                    <FaFire aria-hidden="true" /> Most Hours in One Day
                   </span>
                   <span className="waka-metric-value">
-                    {wakaData?.bestDay?.text || (wakaData?.activeDays ? `${wakaData.activeDays} Days` : "--")}
+                    {wakaData?.bestDay?.text || "--"}
                   </span>
                   <span className="waka-metric-sub">
                     {wakaData?.bestDay?.date
@@ -225,9 +230,9 @@ function Dashboard() {
                           day: "numeric",
                           year: "numeric",
                         })
-                      : wakaData?.rangeText
-                      ? `Recorded ${wakaData.rangeText}`
-                      : "Highest recorded hours"}
+                      : wakaData?.authenticated === false
+                        ? "Enable WakaTime stats access to show daily hours"
+                        : "Highest daily total in the available WakaTime stats"}
                   </span>
                 </div>
 
@@ -472,7 +477,7 @@ function Dashboard() {
                 <div className="alert-body">
                   <strong>Failed to stream GitHub contributions</strong>
                   <p>{githubError}</p>
-                  <button type="button" onClick={fetchGitHub} className="alert-retry-btn">
+                  <button type="button" onClick={refreshGitHub} className="alert-retry-btn">
                     Retry
                   </button>
                 </div>

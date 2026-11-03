@@ -1,8 +1,8 @@
 import { motion, useReducedMotion } from "framer-motion";
-import SEO from "../components/SEO.jsx";
 import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
 import NepalClock from "../components/NepalClock.jsx";
 import education from "../data/education.js";
+import imageSource from "../lib/imageSource.js";
 import {
   SiMongodb,
   SiReact,
@@ -13,6 +13,7 @@ import {
   SiJavascript,
   SiExpress,
   SiVite,
+  SiAstro,
   SiGooglegemini,
   SiCursor,
   SiTypescript,
@@ -35,9 +36,10 @@ const skillCategories = [
   {
     category: "Frontend Architecture",
     skills: [
+      { name: "Astro", icon: <SiAstro /> },
       { name: "React 19", icon: <SiReact /> },
       { name: "Vite", icon: <SiVite /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss /> },
+      { name: "Tailwind CSS 4", icon: <SiTailwindcss /> },
     ],
   },
   {
@@ -69,18 +71,18 @@ const skillCategories = [
 const timelineEntries = [
   {
     year: "2026",
-    title: "Full-Stack & AI Systems",
-    text: "Building end-to-end applications with React 19, Node.js, and Express. Integrating Gemini API into production utilities and refining developer workflow.",
+    title: "Full-stack projects",
+    text: "Working with React, Express, and MongoDB, and adding Gemini features to Career Sathi.",
   },
   {
     year: "2025",
-    title: "Component Architecture & UX",
-    text: "Deepened expertise in React state management, Tailwind CSS design systems, Framer Motion, and responsive mobile-first interfaces.",
+    title: "React and interface work",
+    text: "Practiced React, responsive layouts, and small interface interactions.",
   },
   {
     year: "2024",
-    title: "Web Fundamentals",
-    text: "Started engineering for the web with modern semantic HTML5, CSS grid/flexbox, JavaScript ES6+, and foundational programming concepts.",
+    title: "Learning web basics",
+    text: "Started with HTML, CSS, and JavaScript, then began making small web pages.",
   },
 ];
 
@@ -90,7 +92,7 @@ function About() {
   const revealProps = reducedMotion
     ? { initial: false, animate: { opacity: 1 } }
     : {
-        initial: { opacity: 0, y: 14 },
+        initial: false,
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, amount: 0.15 },
         transition: { duration: 0.45, ease: "easeOut" },
@@ -98,22 +100,15 @@ function About() {
 
   return (
     <div className="page-shell page-shell--narrow">
-      <SEO
-        title="About | Pushkar Chaudhary - Developer & Designer"
-        description="Learn more about Pushkar Chaudhary, a frontend and web developer based in Nepal. Technical background, skill architecture, and education."
-        path="/about"
-      />
-
       <main className="page-stack">
         {/* Intro */}
         <motion.section className="about-hero-section" {...revealProps}>
           <PagePlaneAccent />
           <span className="section-kicker">About Me</span>
-          <h1 className="section-title">Designing interfaces that feel effortless.</h1>
+          <h1 className="section-title">A developer from Itahari.</h1>
           <p className="lead">
-            I&apos;m a developer from Nepal passionate about engineering clean, fast,
-            and accessible web experiences. I bridge the gap between design
-            precision and resilient full-stack code.
+            I&apos;m a BCA student in Itahari, Nepal. I build web projects with
+            React and Node.js, and learn by making things that work.
           </p>
           <div className="about-bio-meta">
             <div className="bio-stat">
@@ -129,8 +124,8 @@ function About() {
             </div>
             <div className="bio-stat-sep" />
             <div className="bio-stat">
-              <span className="bio-stat-label">Status</span>
-              <span className="bio-stat-val">Shipping Web Products</span>
+              <span className="bio-stat-label">Currently</span>
+              <span className="bio-stat-val">Studying BCA</span>
             </div>
           </div>
         </motion.section>
@@ -141,7 +136,7 @@ function About() {
             <span className="section-kicker">Technical Skills</span>
             <h2 className="section-subtitle">Tools &amp; technologies</h2>
             <p className="section-subtext">
-              Categorized technologies utilized in active production applications and experiments.
+              A few tools I&apos;ve used across my projects.
             </p>
           </div>
 
@@ -174,7 +169,7 @@ function About() {
           <div className="academic-list">
             {education.map((item) => (
               <div className="academic-row" key={item.name}>
-                <img src={item.image} alt={item.alt} className="academic-logo" />
+                <img src={imageSource(item.image)} alt={item.alt} className="academic-logo" loading="lazy" decoding="async" />
                 <div className="academic-info">
                   <h3 className="academic-name">{item.name}</h3>
                   <span className="academic-stage">{item.stage}</span>

@@ -1,0 +1,12 @@
+---
+import Dashboard from "../views/Dashboard.jsx";
+import SiteLayout from "../layouts/SiteLayout.astro";
+---
+
+<SiteLayout
+  title="Dashboard | Pushkar Chaudhary - Developer Analytics"
+  description="Live developer telemetry, GitHub contributions, and WakaTime coding activity for Pushkar Chaudhary."
+  path="/dashboard"
+>
+  <Dashboard client:load />
+</SiteLayout>
