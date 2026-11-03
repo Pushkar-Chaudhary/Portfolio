@@ -23,7 +23,20 @@ const Home = () => {
           </div>
 
           <motion.div className="hero-copy" {...revealProps}>
-            <h1 className="hero-title">Pushkar Chaudhary</h1>
+            <h1 className="hero-title">
+              Pushkar Chaudhary
+              <svg
+                className="hero-sword-mark"
+                viewBox="0 0 32 32"
+                fill="none"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <path d="M4 4 22 22l-5-2L4 6V4Z" fill="currentColor" fillOpacity=".2" />
+                <path d="m28 4-18 18 5-2L28 6V4Z" fill="currentColor" fillOpacity=".2" />
+                <path d="M4 4 22 22m-5-2 4-4m1 6 4 4M28 4 10 22m5-2-4-4m-1 6-4 4" />
+              </svg>
+            </h1>
 
             <h2 className="hero-subline">
               <TypingText />
