@@ -1,19 +1,19 @@
 # Pushkar Chaudhary Portfolio
 
-The portfolio is built with Astro, React, and Tailwind CSS 4. Astro renders each route on the server; the existing interactive React experiences hydrate only on the pages that use them.
+The site uses Astro for its routes and server rendering, with React components for interactive sections. Animations respect the user's reduced-motion preference.
 
 ## Routes
 
-- `/` — Minimal introduction with an immediate link to the portfolio.
-- `/home` — Existing homepage and featured projects.
-- `/about` — Skills, education, and development timeline.
-- `/projects` — Searchable, filterable project showcase.
-- `/contact` — Contact form and social links.
-- `/dashboard` — WakaTime and GitHub activity.
+- `/` — Minimal introduction
+- `/home` — Homepage and featured projects
+- `/about` — Skills, education, and development timeline
+- `/projects` — Searchable, filterable project list
+- `/contact` — Contact form and social links
+- `/dashboard` — WakaTime and GitHub activity
 
 ## Development
 
-Use Node.js 22.23.4 or later (required by Astro 7).
+Use Node.js 22.23.4 or later.
 
 ```bash
 npm install
@@ -23,43 +23,48 @@ npm run preview
 npm run lint
 ```
 
-The Astro development server serves `/api/wakatime` and `/api/github` through the same handlers used in production.
-
 ## Environment variables
 
-Set server-only values in `.env.local` for local development and in Vercel Project Settings for deployment:
+Keep local values in `.env.local` and add deployment values as server-side environment variables in Vercel. Do not use `PUBLIC_` or `VITE_` prefixes for credentials.
 
-- `WAKATIME_API_KEY` — Optional authenticated WakaTime statistics.
+- `GITHUB_USERNAME` — Account used for contribution activity.
+- `GITHUB_TOKEN` — Optional token for GitHub GraphQL requests.
 - `WAKATIME_USER_ID` — Optional public WakaTime profile identifier.
-- `GITHUB_USERNAME` — GitHub account used for contribution activity.
-- `GITHUB_TOKEN` — Optional server-side GitHub GraphQL token.
+- `WAKATIME_OAUTH_ACCESS_TOKEN` — Optional token with the WakaTime `read_stats` scope for private statistics.
+- `WAKATIME_CLIENT_ID` and `WAKATIME_CLIENT_SECRET` — Local OAuth setup credentials; not needed in production after obtaining an access token.
+- `SPOTIFY_CLIENT_ID` and `SPOTIFY_REFRESH_TOKEN` — Used by the current-playback endpoint.
 
-Do not prefix these values with `PUBLIC_` or `VITE_`. The API handlers keep credentials on the server and retain their existing response formats.
+The WakaTime and Spotify authorization helpers save tokens to `.env.local`; never commit or share the file.
 
-## Project structure
+### WakaTime authorization
 
+Create a WakaTime OAuth app with `https://wakatime.com/oauth/test` as its authorized redirect URL. Add its client ID and secret to `.env.local`, then run:
+
+```bash
+npm run wakatime:authorize
 ```
-src/
-├── components/
-│   ├── Footer.jsx
-│   ├── Navbar.jsx
-│   └── ...
-├── layouts/
-│   └── SiteLayout.astro
-├── pages/
-│   ├── api/
-│   ├── index.astro
-│   └── *.astro
-├── styles/
-├── views/                 # Existing React page experiences
-└── assets/                # Existing project screenshots and images
-api/                       # Original server-side API handlers
-astro.config.mjs
+
+Authorize the app, paste the redirected URL into the terminal, and restart the dev server. For deployment, set `WAKATIME_OAUTH_ACCESS_TOKEN` in Vercel.
+
+### Spotify authorization
+
+Add `http://127.0.0.1:8888/callback` as a redirect URI in the Spotify app settings and set `SPOTIFY_CLIENT_ID` in `.env.local`. Then run:
+
+```bash
+npm run spotify:authorize
 ```
+
+Open the printed URL and approve access. The helper writes the refresh token to `.env.local`. Set both Spotify variables in Vercel to enable `/api/spotify`.
+
+The About page's favorite-song embed is a separate, manually selected track.
+
+## Project data
+
+Edit `src/data/projects.js` to update project descriptions, links, screenshots, and technologies. The homepage showcase and Projects page use this shared file.
 
 ## Deployment
 
-The Astro Vercel adapter is configured in `astro.config.mjs`. Import the repository into Vercel, configure the server-side environment variables, and deploy; no SPA rewrite is required.
+The Astro Vercel adapter is configured in `astro.config.mjs`. Add the repository to Vercel, configure the required environment variables, and deploy; no SPA rewrite is needed.
 
 ## Contact
 

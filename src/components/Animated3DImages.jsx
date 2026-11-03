@@ -55,7 +55,6 @@ function Animated3DImages() {
             decoding="async"
           />
         </div>
-
         {touched && (
           <span className="avatar-greeting">Namaste, I&apos;m Pushkar.</span>
         )}

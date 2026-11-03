@@ -10,6 +10,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "lint": "eslint .",
+    "spotify:authorize": "node scripts/spotify-authorize.js",
+    "wakatime:authorize": "node scripts/wakatime-authorize.js",
     "preview": "astro preview"
   },
   "dependencies": {

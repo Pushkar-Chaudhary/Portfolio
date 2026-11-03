@@ -1,182 +1,158 @@
-// Serverless Function: /api/wakatime
-// Fetches real WakaTime statistics securely server-side without exposing API keys.
-
-function findBestDay(stats) {
+function getBestDay(stats) {
   if (stats.best_day?.date && stats.best_day?.text) {
-    return {
-      date: stats.best_day.date,
-      text: stats.best_day.text,
-    };
+    return { date: stats.best_day.date, text: stats.best_day.text };
   }
 
   const bestDay = (stats.days || []).reduce((best, day) => {
-    const seconds = Number(day.total_seconds) || 0;
-    return seconds > (best?.total_seconds || 0) ? { ...day, total_seconds: seconds } : best;
+    const totalSeconds = Number(day.total_seconds) || 0;
+    return totalSeconds > (best?.totalSeconds || 0)
+      ? { ...day, totalSeconds }
+      : best;
   }, null);
 
-  if (!bestDay?.date || bestDay.total_seconds <= 0) return null;
+  if (!bestDay?.date || bestDay.totalSeconds <= 0) return null;
 
   return {
     date: bestDay.date,
-    text: bestDay.text || `${Math.round(bestDay.total_seconds / 3600)} hrs`,
+    text: bestDay.text || `${Math.round(bestDay.totalSeconds / 3600)} hrs`,
   };
 }
 
-export default async function handler(req, res) {
-  // CORS & Cache headers
+function getBreakdown(items = []) {
+  const entries = Array.isArray(items) ? items : [];
+  return entries.slice(0, 6).map((item) => ({
+    name: item.name,
+    percent: Number(item.percent || 0),
+    text: item.text || `${Math.round((item.total_seconds || 0) / 3600)} hrs`,
+    totalSeconds: item.total_seconds || 0,
+  }));
+}
+
+function getMostCodedDay(days = []) {
+  const weekdayTotals = new Array(7).fill(0);
+
+  days.forEach((day) => {
+    if (!day.date) return;
+    const weekday = new Date(`${day.date}T00:00:00Z`).getUTCDay();
+    weekdayTotals[weekday] += Number(day.total_seconds ?? day.totalSeconds) || 0;
+  });
+
+  const highestDay = weekdayTotals.indexOf(Math.max(...weekdayTotals));
+  const weekdayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  return weekdayTotals[highestDay] > 0 ? weekdayNames[highestDay] : null;
+}
+
+function getWeeklyActivity(days = []) {
+  return days.map((day) => ({
+    date: day.date,
+    totalSeconds: Number(day.total_seconds) || 0,
+    text: day.text || "0 hrs",
+  }));
+}
+
+export default async function handler(_req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET");
-  res.setHeader("Cache-Control", "s-maxage=1800, stale-while-revalidate=900");
+  res.setHeader("Cache-Control", "s-maxage=300, stale-while-revalidate=60");
 
-  const apiKey = (process.env.WAKATIME_API_KEY || "").trim();
+  const accessToken = (process.env.WAKATIME_OAUTH_ACCESS_TOKEN || "").trim();
   const rawUser = process.env.WAKATIME_USER_ID || "bf434ed0-2f6c-46e7-ae66-53b01d7fad3d";
   const cleanUser = rawUser.replace(/^@/, "");
 
   try {
-    // 1. If WAKATIME_API_KEY is configured, call official authenticated API
-    if (apiKey) {
-      const authHeader = `Basic ${Buffer.from(apiKey).toString("base64")}`;
-
-      const [statsRes, allTimeRes] = await Promise.allSettled([
+    if (accessToken) {
+      const [weeklyResult, allTimeResult] = await Promise.allSettled([
         fetch("https://wakatime.com/api/v1/users/current/stats/last_7_days", {
-          headers: { Authorization: authHeader },
+          headers: { Authorization: `Bearer ${accessToken}` },
         }),
-        fetch("https://wakatime.com/api/v1/users/current/all_time_since_today", {
-          headers: { Authorization: authHeader },
+        fetch("https://wakatime.com/api/v1/users/current/stats/all_time", {
+          headers: { Authorization: `Bearer ${accessToken}` },
         }),
       ]);
 
-      if (statsRes.status === "fulfilled" && statsRes.value.ok) {
-        const statsData = await statsRes.value.json();
-        const d = statsData?.data || {};
-        const bestDay = findBestDay(d);
+      const weeklyData =
+        weeklyResult.status === "fulfilled" && weeklyResult.value.ok
+          ? await weeklyResult.value.json()
+          : null;
+      const allTimeData =
+        allTimeResult.status === "fulfilled" && allTimeResult.value.ok
+          ? await allTimeResult.value.json()
+          : null;
 
-        let cumulativeTotal = d.human_readable_total || "0 hrs";
-        if (allTimeRes.status === "fulfilled" && allTimeRes.value.ok) {
-          const allTimeData = await allTimeRes.value.json();
-          if (allTimeData?.data?.text) {
-            cumulativeTotal = allTimeData.data.text;
-          }
-        }
-
-        const topLanguages = (d.languages || []).slice(0, 6).map((lang) => ({
-          name: lang.name,
-          percent: Number(lang.percent || 0),
-          text: lang.text || `${Math.round((lang.total_seconds || 0) / 3600)} hrs`,
-          totalSeconds: lang.total_seconds || 0,
-        }));
-
-        const topProjects = (d.projects || []).slice(0, 6).map((proj) => ({
-          name: proj.name,
-          percent: Number(proj.percent || 0),
-          text: proj.text || `${Math.round((proj.total_seconds || 0) / 3600)} hrs`,
-          totalSeconds: proj.total_seconds || 0,
-        }));
-
-        const weeklyDays = (d.days || []).map((day) => ({
-          date: day.date,
-          totalSeconds: day.total_seconds || 0,
-          text: day.text || "0 hrs",
-        }));
-
-        // Most coded weekday
-        const weekdayTotals = new Array(7).fill(0);
-        const weekdayNames = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        (d.days || []).forEach((day) => {
-          const dow = new Date(day.date).getDay();
-          weekdayTotals[dow] += day.total_seconds || 0;
-        });
-        const topDowIdx = weekdayTotals.indexOf(Math.max(...weekdayTotals));
-        const mostCodedDay = weekdayTotals[topDowIdx] > 0 ? weekdayNames[topDowIdx] : null;
+      if (allTimeData?.data) {
+        const allTime = allTimeData.data;
+        const weekly = weeklyData?.data || {};
+        const weeklyDays = getWeeklyActivity(weekly.days);
 
         return res.status(200).json({
           configured: true,
           authenticated: true,
-          totalCodingTime: cumulativeTotal,
-          dailyAverage: d.human_readable_daily_average || "0 hrs",
-          bestDay,
-          mostCodedDay,
-          languages: topLanguages,
-          projects: topProjects,
+          totalCodingTime:
+            allTime.human_readable_total || allTime.text || "--",
+          rangeText: allTime.human_readable_range || "",
+          dailyAverage:
+            allTime.human_readable_daily_average ||
+            weekly.human_readable_daily_average ||
+            "--",
+          bestDay: getBestDay(allTime),
+          mostCodedDay: getMostCodedDay(weeklyDays),
+          languages: getBreakdown(allTime.languages),
+          projects: getBreakdown(allTime.projects),
           weeklyActivity: weeklyDays,
+          activeDays: allTime.days_minus_holidays,
           lastSynced: new Date().toISOString(),
         });
       }
     }
 
-    // 2. Fallback to real public WakaTime profile stats (all_time range)
-    try {
-      const publicRes = await fetch(
-        `https://wakatime.com/api/v1/users/${cleanUser}/stats/all_time`,
-        { headers: { Accept: "application/json" } }
-      );
+    const publicResponse = await fetch(
+      `https://wakatime.com/api/v1/users/${cleanUser}/stats/all_time`,
+      { headers: { Accept: "application/json" } },
+    );
 
-      if (publicRes.ok) {
-        const pubData = await publicRes.json();
-        const d = pubData?.data || {};
-        const bestDay = findBestDay(d);
+    if (publicResponse.ok) {
+      const publicData = await publicResponse.json();
+      const stats = publicData?.data || {};
+      const weeklyActivity = getWeeklyActivity(stats.days);
 
-        const topLanguages = (d.languages || []).slice(0, 6).map((l) => ({
-          name: l.name,
-          percent: Number(l.percent || 0),
-          text: l.text,
-        }));
-
-        const topProjects = (d.projects || []).slice(0, 6).map((p) => ({
-          name: p.name,
-          percent: Number(p.percent || 0),
-          text: p.text,
-        }));
-
-        const weeklyDays = (d.days || []).map((day) => ({
-          date: day.date,
-          totalSeconds: day.total_seconds || 0,
-          text: day.text || "0 hrs",
-        }));
-
-        // Most coded weekday (public stats)
-        const weekdayTotalsPub = new Array(7).fill(0);
-        const weekdayNamesPub = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-        (d.days || []).forEach((day) => {
-          const dow = new Date(day.date).getDay();
-          weekdayTotalsPub[dow] += day.total_seconds || 0;
-        });
-        const topDowIdxPub = weekdayTotalsPub.indexOf(Math.max(...weekdayTotalsPub));
-        const mostCodedDayPub = weekdayTotalsPub[topDowIdxPub] > 0 ? weekdayNamesPub[topDowIdxPub] : null;
-
-        return res.status(200).json({
-          configured: true,
-          authenticated: false,
-          totalCodingTime: d.human_readable_total || "97 hrs 9 mins",
-          dailyAverage: d.human_readable_daily_average || "1 hr 42 mins",
-          bestDay,
-          mostCodedDay: mostCodedDayPub,
-          activeDays: d.days_minus_holidays || 57,
-          totalDays: d.days_including_holidays || 126,
-          rangeText: d.human_readable_range || "since Jun 27 2026",
-          languages: topLanguages,
-          projects: topProjects,
-          weeklyActivity: weeklyDays,
-          publicProfileUrl: `https://wakatime.com/@${cleanUser}`,
-          lastSynced: new Date().toISOString(),
-        });
-      }
-    } catch {
-      // Fall through if network error
+      return res.status(200).json({
+        configured: false,
+        authenticated: false,
+        totalCodingTime: stats.human_readable_total || "--",
+        dailyAverage: stats.human_readable_daily_average || "--",
+        bestDay: getBestDay(stats),
+        mostCodedDay: getMostCodedDay(weeklyActivity),
+        activeDays: stats.days_minus_holidays,
+        totalDays: stats.days_including_holidays,
+        rangeText: stats.human_readable_range || "",
+        languages: getBreakdown(stats.languages),
+        projects: getBreakdown(stats.projects),
+        weeklyActivity,
+        publicProfileUrl: `https://wakatime.com/@${cleanUser}`,
+        lastSynced: new Date().toISOString(),
+      });
     }
 
-    // 3. Fallback notice
     return res.status(200).json({
       configured: false,
       authenticated: false,
       message:
-        "WAKATIME_API_KEY is not configured yet. Add WAKATIME_API_KEY in your server-side environment variables or .env.local to stream live coding telemetry.",
+        "Public WakaTime stats are unavailable. Configure a WAKATIME_OAUTH_ACCESS_TOKEN with read_stats scope to retrieve coding telemetry.",
       publicProfileUrl: `https://wakatime.com/@${cleanUser}`,
       lastSynced: new Date().toISOString(),
     });
   } catch (error) {
     return res.status(500).json({
-      configured: Boolean(apiKey),
+      configured: Boolean(accessToken),
       error: "Unable to retrieve WakaTime statistics at this time.",
       details: error.message,
       lastSynced: new Date().toISOString(),

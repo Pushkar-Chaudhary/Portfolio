@@ -112,6 +112,10 @@
 }
 
 @media (max-width: 768px) {
+  .dev-avatar-container {
+    width: min(100%, 136px);
+  }
+
   .avatar-frame {
     width: 100%;
   }

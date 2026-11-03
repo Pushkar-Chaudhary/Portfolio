@@ -26,6 +26,34 @@ async function requestJson(url) {
   return response.json();
 }
 
+const WAKATIME_CACHE_KEY = "portfolio-dashboard-wakatime";
+const GITHUB_CACHE_KEY = "portfolio-dashboard-github";
+
+function readDashboardCache(key) {
+  if (typeof window === "undefined") return null;
+
+  try {
+    const cached = window.localStorage.getItem(key);
+    if (!cached) return null;
+
+    const data = JSON.parse(cached);
+    return data && typeof data === "object" ? data : null;
+  } catch (error) {
+    console.warn("Unable to read cached dashboard data.", error);
+    return null;
+  }
+}
+
+function writeDashboardCache(key, data) {
+  if (typeof window === "undefined") return;
+
+  try {
+    window.localStorage.setItem(key, JSON.stringify(data));
+  } catch (error) {
+    console.warn("Unable to cache dashboard data.", error);
+  }
+}
+
 function Dashboard() {
   const [wakaData, setWakaData] = useState(null);
   const [wakaLoading, setWakaLoading] = useState(true);
@@ -47,30 +75,59 @@ function Dashboard() {
         transition: { duration: 0.45, ease: "easeOut" },
       };
 
-  const refreshWakaTime = () => {
+  const refreshWakaTime = async () => {
     setWakaLoading(true);
     setWakaError(null);
-    void requestJson("/api/wakatime")
-      .then(setWakaData)
-      .catch((error) => setWakaError(error.message || "Failed to load WakaTime telemetry"))
-      .finally(() => setWakaLoading(false));
+    try {
+      const data = await requestJson("/api/wakatime");
+      setWakaData(data);
+      writeDashboardCache(WAKATIME_CACHE_KEY, data);
+    } catch (error) {
+      setWakaError(error.message || "Failed to load WakaTime telemetry");
+    } finally {
+      setWakaLoading(false);
+    }
   };
 
-  const refreshGitHub = () => {
+  const refreshGitHub = async () => {
     setGithubLoading(true);
     setGithubError(null);
-    void requestJson("/api/github")
-      .then(setGithubData)
-      .catch((error) => setGithubError(error.message || "Failed to load GitHub activity"))
-      .finally(() => setGithubLoading(false));
+    try {
+      const data = await requestJson("/api/github");
+      setGithubData(data);
+      writeDashboardCache(GITHUB_CACHE_KEY, data);
+    } catch (error) {
+      setGithubError(error.message || "Failed to load GitHub activity");
+    } finally {
+      setGithubLoading(false);
+    }
   };
 
   useEffect(() => {
     let active = true;
 
+    Promise.resolve().then(() => {
+      if (!active) return;
+
+      const cachedWakaData = readDashboardCache(WAKATIME_CACHE_KEY);
+      if (cachedWakaData) {
+        setWakaData(cachedWakaData);
+        setWakaLoading(false);
+      }
+
+      const cachedGitHubData = readDashboardCache(GITHUB_CACHE_KEY);
+      if (cachedGitHubData) {
+        setGithubData(cachedGitHubData);
+        setGithubLoading(false);
+      }
+    });
+
     requestJson("/api/wakatime")
       .then((data) => {
-        if (active) setWakaData(data);
+        if (active) {
+          setWakaData(data);
+          writeDashboardCache(WAKATIME_CACHE_KEY, data);
+        }
       })
       .catch((error) => {
         if (active) setWakaError(error.message || "Failed to load WakaTime telemetry");
@@ -81,7 +138,10 @@ function Dashboard() {
 
     requestJson("/api/github")
       .then((data) => {
-        if (active) setGithubData(data);
+        if (active) {
+          setGithubData(data);
+          writeDashboardCache(GITHUB_CACHE_KEY, data);
+        }
       })
       .catch((error) => {
         if (active) setGithubError(error.message || "Failed to load GitHub activity");
@@ -124,15 +184,14 @@ function Dashboard() {
   return (
     <div className="page-shell page-shell--wide">
       <main className="dashboard-flow">
-        {/* Editorial Header */}
         <motion.header className="dash-hero" {...revealProps}>
           <div className="dash-hero-top">
             <NepalClock showLocation={true} />
           </div>
 
-          <h1 className="dash-title">Developer Activity</h1>
+          <h1 className="dash-title">What I&apos;ve been working on</h1>
           <p className="dash-lead">
-            Real-time coding analytics streamed directly from verified GitHub contributions and WakaTime telemetry.
+            A snapshot of my coding time and GitHub contributions.
           </p>
         </motion.header>
 
@@ -170,7 +229,7 @@ function Dashboard() {
           </div>
 
           {/* Loading Skeleton */}
-          {wakaLoading && (
+          {wakaLoading && !wakaData && (
             <div className="telemetry-skeleton-grid">
               <div className="dash-skeleton-box" />
               <div className="dash-skeleton-box" />
@@ -179,7 +238,7 @@ function Dashboard() {
           )}
 
           {/* Error State */}
-          {!wakaLoading && wakaError && (
+          {!wakaLoading && wakaError && !wakaData && (
             <div className="telemetry-alert-box alert-error" role="alert">
               <FaExclamationCircle className="alert-icon" aria-hidden="true" />
               <div className="alert-body">
@@ -193,8 +252,17 @@ function Dashboard() {
           )}
 
           {/* Key Metric Tickers */}
-          {!wakaLoading && !wakaError && (
+          {wakaData && (
             <>
+              {!wakaLoading && wakaError && (
+                <div className="telemetry-info-banner" role="status">
+                  <FaInfoCircle className="info-icon" aria-hidden="true" />
+                  <div className="info-body">
+                    <p>Could not refresh WakaTime; showing the last saved stats. {wakaError}</p>
+                  </div>
+                </div>
+              )}
+
               <div className="waka-metrics-row">
                 <div className="waka-metric-card">
                   <span className="waka-metric-label">
@@ -203,7 +271,9 @@ function Dashboard() {
                   <span className="waka-metric-value">
                     {wakaData?.totalCodingTime || "--"}
                   </span>
-                  <span className="waka-metric-sub">Cumulative tracked time</span>
+                  <span className="waka-metric-sub">
+                    {wakaData?.rangeText ? `All-time · ${wakaData.rangeText}` : "All-time cumulative tracked time"}
+                  </span>
                 </div>
 
                 <div className="waka-metric-card">
@@ -239,7 +309,7 @@ function Dashboard() {
                 {wakaData?.mostCodedDay && (
                   <div className="waka-metric-card">
                     <span className="waka-metric-label">
-                      <FaCalendarAlt aria-hidden="true" /> Most Coded Day
+                      <FaCalendarAlt aria-hidden="true" /> Most Coded Weekday
                     </span>
                     <span className="waka-metric-value">
                       {wakaData.mostCodedDay}
@@ -349,16 +419,16 @@ function Dashboard() {
                 </div>
               </div>
 
-              {/* Notice when WAKATIME_API_KEY is not configured */}
+              {/* Private daily records require WakaTime OAuth access. */}
               {!wakaData?.authenticated && (
                 <div className="telemetry-info-banner">
                   <FaInfoCircle className="info-icon" aria-hidden="true" />
                   <div className="info-body">
-                    <strong>WakaTime Configuration Note</strong>
+                    <strong>All-Time Daily Record Requires OAuth</strong>
                     <p>
-                      To stream authenticated personal coding telemetry, set{" "}
-                      <code>WAKATIME_API_KEY</code> in your Vercel Environment Variables or{" "}
-                      <code>.env.local</code>. Public telemetry profile is linked at{" "}
+                      WakaTime API keys are write-only. Configure a server-side{" "}
+                      <code>WAKATIME_OAUTH_ACCESS_TOKEN</code> with the <code>read_stats</code> scope to fetch the all-time best coding day.{" "}
+                      Public telemetry profile:{" "}
                       <a
                         href={wakaData?.publicProfileUrl || "https://wakatime.com/@bf434ed0-2f6c-46e7-ae66-53b01d7fad3d"}
                         target="_blank"
@@ -410,7 +480,7 @@ function Dashboard() {
           </div>
 
           {/* GitHub Key Stats Row */}
-          {!githubLoading && !githubError && (
+          {githubData && (
             <div className="github-stats-ticker">
               <div className="stat-ticker-item">
                 <span className="ticker-label">
@@ -465,13 +535,13 @@ function Dashboard() {
 
           {/* Heatmap Container */}
           <div className="heatmap-scroll-wrapper" role="region" aria-label="Contribution calendar">
-            {githubLoading && (
+            {githubLoading && !githubData && (
               <div className="heatmap-loading-state" role="status">
                 <FaSyncAlt className="is-spinning" /> Loading 12-month GitHub calendar...
               </div>
             )}
 
-            {!githubLoading && githubError && (
+            {!githubLoading && githubError && !githubData && (
               <div className="telemetry-alert-box alert-error">
                 <FaExclamationCircle className="alert-icon" />
                 <div className="alert-body">
@@ -484,7 +554,16 @@ function Dashboard() {
               </div>
             )}
 
-            {!githubLoading && !githubError && githubData?.weeks && (
+            {githubData?.weeks && (
+              <>
+              {!githubLoading && githubError && (
+                <div className="telemetry-info-banner" role="status">
+                  <FaInfoCircle className="info-icon" aria-hidden="true" />
+                  <div className="info-body">
+                    <p>Could not refresh GitHub; showing the last saved calendar. {githubError}</p>
+                  </div>
+                </div>
+              )}
               <div className="heatmap-matrix">
                 {/* Weekday indicators column */}
                 <div className="heatmap-weekdays" aria-hidden="true">
@@ -532,6 +611,7 @@ function Dashboard() {
                   </div>
                 </div>
               </div>
+              </>
             )}
           </div>
 
