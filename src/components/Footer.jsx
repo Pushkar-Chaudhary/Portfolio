@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="site-footer-inner">
         <div className="footer-top-row">
           <div className="footer-brand-col">
-            <a href="/home" className="footer-logo">
+            <a href="/" className="footer-logo">
               Pushkar Chaudhary<span className="footer-dot" />
             </a>
             <p className="footer-tagline">
@@ -18,7 +18,7 @@ const Footer = () => {
           <nav className="footer-nav-col" aria-label="Footer navigation">
             <span className="footer-heading">Navigation</span>
             <div className="footer-links-grid">
-              <a href="/home" className="footer-link">Home</a>
+              <a href="/" className="footer-link">Home</a>
               <a href="/about" className="footer-link">About</a>
               <a href="/projects" className="footer-link">Projects</a>
               <a href="/dashboard" className="footer-link">Dashboard</a>

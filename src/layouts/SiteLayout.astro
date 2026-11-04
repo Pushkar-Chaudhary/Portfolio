@@ -10,14 +10,12 @@ interface Props {
   title: string;
   description: string;
   path?: string;
-  intro?: boolean;
 }
 
 const {
   title,
   description,
   path = Astro.url.pathname,
-  intro = false,
 } = Astro.props;
 const canonicalUrl = new URL(path, Astro.site);
 const pageUrl = canonicalUrl.toString();
@@ -133,12 +131,12 @@ const structuredData = {
     <script defer src="https://feedback.fish/ff.js?pid=8182609d645eda"></script>
     <ClientRouter />
   </head>
-  <body class:list={{ "intro-body": intro }}>
-    {!intro && <Navbar client:load activePath={Astro.url.pathname} />}
+  <body>
+    <Navbar client:load activePath={Astro.url.pathname} />
     <div class="app-shell">
       <slot />
-      {!intro && <Footer />}
+      <Footer />
     </div>
-    {!intro && <CustomCursor client:load />}
+    <CustomCursor client:load />
   </body>
 </html>

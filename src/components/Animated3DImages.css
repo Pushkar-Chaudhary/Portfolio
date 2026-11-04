@@ -48,24 +48,35 @@
   image-rendering: pixelated;
 }
 
-.avatar-standing {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.avatar-standing.is-faded {
+.avatar-animation-frame {
   opacity: 0;
-  transform: scale(0.97);
+  transform: none;
+  transform-origin: center bottom;
+  transition: none;
 }
 
-.avatar-waving {
-  opacity: 0;
-  transform: scale(0.97);
+.avatar-animation-frame--2 {
+  transform: translateY(8.5%) scale(1.1);
 }
 
-.avatar-waving.is-active {
+.avatar-animation-frame.is-current {
   opacity: 1;
-  transform: scale(1);
+}
+
+.dev-avatar-container.is-interacting .avatar-animation-frame,
+.dev-avatar-container.is-finishing-interaction .avatar-animation-frame {
+  opacity: 0;
+}
+
+.avatar-interaction-image {
+  opacity: 0;
+  transform: translateY(8.5%) scale(1.08);
+  transform-origin: center bottom;
+  transition: opacity 700ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dev-avatar-container.is-interacting .avatar-interaction-image {
+  opacity: 1;
 }
 
 .avatar-greeting {

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import ThemeToggle from "./Theme.jsx";
 
 const links = [
-  { name: "Home", path: "/home" },
+  { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Projects", path: "/projects" },
   { name: "Dashboard", path: "/dashboard" },
