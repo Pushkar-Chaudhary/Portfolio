@@ -1,17 +1,19 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
-const Footer = () => {
+const Footer = ({ isHome = false }) => {
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="footer-top-row">
           <div className="footer-brand-col">
-            <a href="/" className="footer-logo">
-              Pushkar Chaudhary<span className="footer-dot" />
+            <a href="/" className="footer-logo" aria-label="Pushkar Chaudhary (@zorocodes) Home">
+              <span className="footer-name-text">Pushkar Chaudhary</span>
+              <span className="footer-handle-badge">@zorocodes</span>
+              <span className="footer-dot" />
             </a>
             <p className="footer-tagline">
-              BCA student and web developer in Itahari, Nepal.
+              Full-stack developer &amp; designer crafting minimal digital experiences in Itahari, Nepal.
             </p>
           </div>
 
@@ -37,7 +39,7 @@ const Footer = () => {
 
         <div className="footer-bottom-row">
           <p className="footer-copyright">
-            &copy; {new Date().getFullYear()} Pushkar Chaudhary. All rights reserved.
+            &copy; {new Date().getFullYear()} Pushkar Chaudhary (@zorocodes). All rights reserved.
           </p>
 
           <div className="footer-social-group">
@@ -72,9 +74,20 @@ const Footer = () => {
             </a>
           </div>
         </div>
-        <p className="footer-inspiration">
-          Visual inspiration: <span>Manish Tamang&apos;s portfolio.</span>
-        </p>
+
+        {isHome && (
+          <p className="footer-inspiration">
+            Visual inspiration:{" "}
+            <a
+              href="https://manishtamang.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-inspiration-link"
+            >
+              Manish Tamang&apos;s portfolio (manishtamang.com)
+            </a>
+          </p>
+        )}
       </div>
     </footer>
   );

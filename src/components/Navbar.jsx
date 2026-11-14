@@ -15,7 +15,7 @@ const subscribeToTheme = (onChange) => {
 };
 
 const getThemeSnapshot = () => document.documentElement.dataset.theme === "dark";
-const getServerThemeSnapshot = () => false;
+const getServerThemeSnapshot = () => true;
 
 function Navbar({ activePath }) {
   const [menuOpen, setMenuOpen] = useState(false);

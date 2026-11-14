@@ -1,88 +1,170 @@
 .tools-train {
+  --rail: color-mix(in srgb, var(--accent) 34%, var(--border));
   width: 100%;
-  padding: 20px 0 12px;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  padding: 18px 0 10px;
+  border-block: 1px solid var(--border);
 }
 
 .tools-train-heading {
-  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .tools-train-title {
   margin: 0;
   color: var(--primary);
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.tools-train-control {
+  padding: 4px 0;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+
+.tools-train-control:hover {
+  color: var(--accent);
+}
+
+.tools-train-control:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 .tools-train-window {
   position: relative;
   overflow: hidden;
-  padding: 5px 0;
-  scrollbar-color: var(--accent) var(--surface-alt);
-  scrollbar-width: thin;
-}
-
-.tools-train-window:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  padding: 8px 0 12px;
+  background-image: linear-gradient(var(--rail), var(--rail));
+  background-repeat: no-repeat;
+  background-position: left calc(100% - 5px);
+  background-size: 100% 2px;
+  mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
 }
 
 .tools-train-track,
 .tools-train-set {
   display: flex;
   width: max-content;
-  align-items: center;
+  align-items: flex-end;
 }
 
-.tools-train-track {
-  animation: tools-train-roll 46s linear infinite;
+.tools-train-window:not(.is-moving) .tools-train-track {
+  animation-play-state: paused;
 }
 
-.tools-train:hover .tools-train-track,
+.tools-train-window.is-moving .tools-train-track {
+  animation: tools-train-roll 52s linear infinite;
+}
+
+.tools-train-window:hover .tools-train-track,
 .tools-train-window:focus-within .tools-train-track {
   animation-play-state: paused;
 }
 
 .tools-train-set {
-  gap: 22px;
+  gap: 8px;
   margin: 0;
-  padding: 0 22px 0 0;
+  padding: 0 8px 0 0;
   list-style: none;
 }
 
-.tools-train-set li {
-  color: var(--muted);
-  font-size: 0.78rem;
+.tools-train-car {
+  position: relative;
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-bottom: 3px solid var(--rail);
+  border-radius: 7px 7px 3px 3px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.74rem;
   white-space: nowrap;
 }
 
-.tools-train-set li:not(:first-child)::before {
-  margin-right: 22px;
-  color: var(--border);
-  content: "/";
+.tools-train-car::after {
+  position: absolute;
+  right: 8px;
+  bottom: -7px;
+  width: 6px;
+  height: 6px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+  background: var(--bg);
+  content: "";
+}
+
+.tools-train-icon {
+  display: inline-flex;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.tools-train-engine {
+  display: inline-flex;
+  width: 76px;
+  height: 48px;
+  align-items: flex-end;
+  margin-right: 4px;
+  color: var(--accent);
+}
+
+.tools-train-engine svg {
+  display: block;
+  width: 76px;
+  height: 44px;
+  overflow: visible;
+  fill: currentColor;
+}
+
+.tools-train-engine .engine-window,
+.tools-train-engine .engine-wheel {
+  fill: var(--bg);
+}
+
+.tools-train-engine::after {
+  align-self: flex-end;
+  width: 5px;
+  height: 5px;
+  margin: 0 0 2px 3px;
+  border-radius: 50%;
+  background: var(--muted);
+  content: "";
 }
 
 @keyframes tools-train-roll {
-  to {
-    transform: translateX(-50%);
-  }
+  to { transform: translateX(-50%); }
 }
 
 @media (max-width: 560px) {
   .tools-train-window {
     overflow-x: auto;
+    mask-image: none;
+  }
+
+  .tools-train-window.is-moving {
+    overflow: hidden;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .tools-train-window {
     overflow-x: auto;
+    mask-image: none;
   }
 
-  .tools-train-track {
+  .tools-train-window .tools-train-track {
     animation: none;
   }
 

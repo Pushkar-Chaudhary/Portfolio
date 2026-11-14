@@ -10,7 +10,8 @@ export default function TypingText() {
     if (reducedMotion) return undefined;
     const typed = new Typed(el.current, {
       strings: [
-        "Web developer",
+        "Software developer",
+        "Frontend & UI designer",
         "BCA student",
       ],
       typeSpeed: 50,

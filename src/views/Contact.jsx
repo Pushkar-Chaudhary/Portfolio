@@ -88,10 +88,10 @@ function Contact() {
       <main className="page-stack">
         {/* Header */}
         <motion.header className="contact-header-section" {...revealProps}>
-          <span className="section-kicker">Get In Touch</span>
-          <h1 className="section-title">Get in touch.</h1>
+          <span className="section-kicker">Contact</span>
+          <h1 className="section-title">Let&apos;s build together.</h1>
           <p className="lead">
-            Email me, use the form, or find me on social.
+            Have a project, opportunity, or collaboration in mind? Reach out directly or send a message below.
           </p>
 
           <div className="direct-email-strip">

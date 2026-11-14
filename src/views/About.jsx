@@ -104,11 +104,10 @@ function About() {
         {/* Intro */}
         <motion.section className="about-hero-section" {...revealProps}>
           <PagePlaneAccent />
-          <span className="section-kicker">About Me</span>
-          <h1 className="section-title">A developer from Itahari.</h1>
+          <span className="section-kicker">About</span>
+          <h1 className="section-title">Developer &amp; UI craftsman.</h1>
           <p className="lead">
-            I&apos;m a BCA student in Itahari, Nepal. I build web projects with
-            React and Node.js, and learn by making things that work.
+            Full-stack developer and BCA student based in Itahari, Nepal. Focused on building responsive, minimal, and performant web experiences with React, TypeScript, and Node.js.
           </p>
           <div className="about-bio-meta">
             <div className="bio-stat">

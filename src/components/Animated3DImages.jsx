@@ -2,119 +2,110 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useReducedMotion } from "framer-motion";
 import standingImage from "../assets/img1.png";
 import greetingImage from "../assets/img2.png";
-import walkingImage from "../assets/img3.png";
-import workingImage from "../assets/img4.png";
 import imageSource from "../lib/imageSource.js";
 import "./Animated3DImages.css";
 
-const animationFrames = [standingImage, greetingImage, walkingImage];
-
 function Animated3DImages() {
-  const [currentFrame, setCurrentFrame] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
-  const [isFinishingInteraction, setIsFinishingInteraction] = useState(false);
-  const [touched, setTouched] = useState(false);
+  const [isWaving, setIsWaving] = useState(false);
+  const [showSpeechBubble, setShowSpeechBubble] = useState(false);
   const reducedMotion = useReducedMotion();
-  const greetingTimeout = useRef(null);
-  const clickTimeout = useRef(null);
-  const interactionActive = isHovered || isFocused || isClicked;
+  const bubbleTimeout = useRef(null);
+  const waveTimeout = useRef(null);
 
+  // Periodic friendly wave every 6s when idle
   useEffect(() => {
-    if (reducedMotion || interactionActive || isFinishingInteraction) {
-      return undefined;
-    }
+    if (reducedMotion) return undefined;
 
     const interval = setInterval(() => {
-      setCurrentFrame((prev) => (prev + 1) % animationFrames.length);
-    }, 650);
-    return () => clearInterval(interval);
-  }, [reducedMotion, interactionActive, isFinishingInteraction]);
-
-  useEffect(
-    () => () => {
-      clearTimeout(greetingTimeout.current);
-      clearTimeout(clickTimeout.current);
-    },
-    [],
-  );
-
-  const handleTouch = useCallback(() => {
-    setTouched(true);
-    clearTimeout(greetingTimeout.current);
-    greetingTimeout.current = setTimeout(() => {
-      setTouched(false);
+      setIsWaving(true);
+      waveTimeout.current = setTimeout(() => {
+        setIsWaving(false);
+      }, 1800);
     }, 2000);
-    setIsClicked(true);
-    setIsFinishingInteraction(true);
-    clearTimeout(clickTimeout.current);
-    clickTimeout.current = setTimeout(() => {
-      setIsClicked(false);
-    }, 2000);
-  }, []);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(waveTimeout.current);
+    };
+  }, [reducedMotion]);
 
   useEffect(() => {
-    if (interactionActive || !isFinishingInteraction) return undefined;
-    const timeout = setTimeout(() => setIsFinishingInteraction(false), 750);
-    return () => clearTimeout(timeout);
-  }, [interactionActive, isFinishingInteraction]);
+    return () => {
+      clearTimeout(bubbleTimeout.current);
+      clearTimeout(waveTimeout.current);
+    };
+  }, []);
 
-  const handleInteractionTransitionEnd = (event) => {
-    if (event.propertyName === "opacity" && !interactionActive) {
-      setIsFinishingInteraction(false);
-    }
-  };
+  const triggerInteraction = useCallback(() => {
+    setIsWaving(true);
+    setShowSpeechBubble(true);
+
+    clearTimeout(bubbleTimeout.current);
+    bubbleTimeout.current = setTimeout(() => {
+      setShowSpeechBubble(false);
+    }, 2400);
+
+    clearTimeout(waveTimeout.current);
+    waveTimeout.current = setTimeout(() => {
+      setIsWaving(false);
+    }, 2400);
+  }, []);
+
+  const handlePointerEnter = useCallback((e) => {
+    if (e.pointerType === "touch") return;
+    setIsWaving(true);
+    setShowSpeechBubble(true);
+  }, []);
+
+  const handlePointerLeave = useCallback((e) => {
+    if (e.pointerType === "touch") return;
+    setIsWaving(false);
+    setShowSpeechBubble(false);
+  }, []);
 
   return (
-    <figure className="dev-avatar-stage">
+    <div className="dev-avatar-stage">
       <button
-        className={[
-          "dev-avatar-container",
-          interactionActive ? "is-interacting" : "",
-          isFinishingInteraction ? "is-finishing-interaction" : "",
-        ].filter(Boolean).join(" ")}
-        onClick={handleTouch}
-        onPointerEnter={() => {
-          setIsHovered(true);
-          setIsFinishingInteraction(true);
-        }}
-        onPointerLeave={() => setIsHovered(false)}
+        className="dev-avatar-container"
+        onClick={triggerInteraction}
+        onPointerEnter={handlePointerEnter}
+        onPointerLeave={handlePointerLeave}
         onFocus={() => {
-          setIsFocused(true);
-          setIsFinishingInteraction(true);
+          setIsWaving(true);
+          setShowSpeechBubble(true);
         }}
-        onBlur={() => setIsFocused(false)}
+        onBlur={() => {
+          setIsWaving(false);
+          setShowSpeechBubble(false);
+        }}
         type="button"
-        aria-label="Pushkar Chaudhary — hover or click to see him working"
+        aria-label="Pushkar Chaudhary avatar — click or hover to wave"
       >
+        {showSpeechBubble && (
+          <div className="avatar-greeting">
+            <span>Hi there!</span>
+          </div>
+        )}
+
         <div className="avatar-frame">
-          {animationFrames.map((image, index) => (
-            <img
-              key={image}
-              className={`avatar-img avatar-animation-frame avatar-animation-frame--${index + 1}${index === currentFrame ? " is-current" : ""}`}
-              src={imageSource(image)}
-              alt={index === 0 ? "Pushkar Chaudhary" : ""}
-              draggable="false"
-              fetchPriority={index === 0 ? "high" : undefined}
-              decoding="async"
-            />
-          ))}
           <img
-            className="avatar-img avatar-interaction-image"
-            src={imageSource(workingImage)}
+            className={`avatar-img avatar-standing ${isWaving ? "is-faded" : "is-active"}`}
+            src={imageSource(standingImage)}
+            alt="Pushkar Chaudhary (@zorocodes)"
+            draggable="false"
+            fetchPriority="high"
+            decoding="async"
+          />
+          <img
+            className={`avatar-img avatar-waving ${isWaving ? "is-active" : "is-faded"}`}
+            src={imageSource(greetingImage)}
             alt=""
             draggable="false"
             decoding="async"
-            onTransitionEnd={handleInteractionTransitionEnd}
           />
         </div>
-        {touched && (
-          <span className="avatar-greeting">Namaste, I&apos;m Pushkar.</span>
-        )}
       </button>
-      <figcaption className="avatar-caption">Frontend developer <span>·</span> Nepal</figcaption>
-    </figure>
+    </div>
   );
 }
 

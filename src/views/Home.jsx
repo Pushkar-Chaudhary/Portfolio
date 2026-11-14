@@ -24,7 +24,15 @@ const Home = () => {
 
           <motion.div className="hero-copy" {...revealProps}>
             <h1 className="hero-title">
-              Pushkar Chaudhary
+              <span
+                className="hero-name-swap"
+                tabIndex={0}
+                role="text"
+                aria-label="Pushkar Chaudhary (@zorocodes)"
+              >
+                <span className="hero-name-primary">Pushkar Chaudhary</span>
+                <span className="hero-name-secondary">@zorocodes</span>
+              </span>
               <svg
                 className="hero-sword-mark"
                 viewBox="0 0 32 32"
@@ -43,8 +51,7 @@ const Home = () => {
             </h2>
 
             <p className="hero-lead">
-              I&apos;m a BCA student in Itahari. I spend my time building web
-              projects, mostly with React, Node.js, and MongoDB.
+              Developer and BCA student based in Itahari, Nepal. Crafting minimal, performant web applications with React, Node.js, and modern interface design.
             </p>
 
             <div className="hero-actions">

@@ -127,9 +127,9 @@ const projects = [
     preview: null,
     icon: "code",
     description:
-      "My portfolio, built with Astro and React.",
+      "My portfolio, built with React, Vite, and Tailwind CSS.",
     hero: false,
-    tech: ["Astro", "React", "Tailwind CSS", "Framer Motion"],
+    tech: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
     highlights: [
       "Server-rendered pages with interactive React components",
       "Responsive layouts and light/dark themes",

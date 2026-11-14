@@ -1,3 +1,77 @@
+import { spawn } from "node:child_process";
+
+function curlJson(url, accessToken) {
+  return new Promise((resolve, reject) => {
+    const request = spawn(
+      "curl",
+      ["--config", "-", "--write-out", "\n%{http_code}"],
+      { stdio: ["pipe", "pipe", "pipe"] }
+    );
+    let output = "";
+    let errorOutput = "";
+
+    request.stdout.setEncoding("utf8");
+    request.stderr.setEncoding("utf8");
+    request.stdout.on("data", (chunk) => {
+      output += chunk;
+    });
+    request.stderr.on("data", (chunk) => {
+      errorOutput += chunk;
+    });
+    request.on("error", reject);
+    request.on("close", (code) => {
+      if (code !== 0) {
+        reject(new Error(errorOutput.trim() || `curl exited with code ${code}`));
+        return;
+      }
+
+      const statusSeparator = output.lastIndexOf("\n");
+      const status = Number(output.slice(statusSeparator + 1));
+      const responseBody = output.slice(0, statusSeparator);
+      try {
+        const data = JSON.parse(responseBody);
+        resolve({
+          ok: status >= 200 && status < 300,
+          status,
+          json: async () => data,
+        });
+      } catch {
+        reject(new Error(`WakaTime returned an invalid response (HTTP ${status}).`));
+      }
+    });
+
+    const quoteConfig = (value) => `"${value.replace(/[\\"]/g, "\\$&")}"`;
+    const config = [
+      "silent",
+      "show-error",
+      `url = ${quoteConfig(url)}`,
+      'header = "Accept: application/json"',
+      ...(accessToken
+        ? [`header = ${quoteConfig(`Authorization: Bearer ${accessToken}`)}`]
+        : []),
+    ].join("\n");
+    request.stdin.end(config);
+  });
+}
+
+async function fetchWakaTime(url, accessToken = "") {
+  const options = accessToken
+    ? { headers: { Authorization: `Bearer ${accessToken}` } }
+    : { headers: { Accept: "application/json" } };
+
+  try {
+    return await fetch(url, options);
+  } catch (fetchError) {
+    try {
+      return await curlJson(url, accessToken);
+    } catch (curlError) {
+      throw new Error(
+        `Node fetch failed (${fetchError.message}); curl fallback failed (${curlError.message}).`
+      );
+    }
+  }
+}
+
 function getBestDay(stats) {
   if (stats.best_day?.date && stats.best_day?.text) {
     return { date: stats.best_day.date, text: stats.best_day.text };
@@ -71,12 +145,14 @@ export default async function handler(_req, res) {
   try {
     if (accessToken) {
       const [weeklyResult, allTimeResult] = await Promise.allSettled([
-        fetch("https://wakatime.com/api/v1/users/current/stats/last_7_days", {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }),
-        fetch("https://wakatime.com/api/v1/users/current/stats/all_time", {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        }),
+        fetchWakaTime(
+          "https://wakatime.com/api/v1/users/current/stats/last_7_days",
+          accessToken
+        ),
+        fetchWakaTime(
+          "https://wakatime.com/api/v1/users/current/stats/all_time",
+          accessToken
+        ),
       ]);
 
       const weeklyData =
@@ -114,9 +190,8 @@ export default async function handler(_req, res) {
       }
     }
 
-    const publicResponse = await fetch(
-      `https://wakatime.com/api/v1/users/${cleanUser}/stats/all_time`,
-      { headers: { Accept: "application/json" } },
+    const publicResponse = await fetchWakaTime(
+      `https://wakatime.com/api/v1/users/${cleanUser}/stats/all_time`
     );
 
     if (publicResponse.ok) {

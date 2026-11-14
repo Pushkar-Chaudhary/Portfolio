@@ -1,5 +1,6 @@
 // Serverless Function: /api/github
 // Fetches real GitHub 12-month contribution calendar securely server-side.
+import { curlJson } from "./curl.js";
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -36,17 +37,22 @@ export default async function handler(req, res) {
         }
       `;
 
-      const ghRes = await fetch("https://api.github.com/graphql", {
-        method: "POST",
-        headers: {
-          Authorization: `bearer ${token.trim()}`,
-          "Content-Type": "application/json",
-          "User-Agent": "Portfolio-Telemetry-Bot",
-        },
-        body: JSON.stringify({ query: graphqlQuery, variables: { login: username } }),
-      });
+      let ghRes = null;
+      try {
+        ghRes = await fetch("https://api.github.com/graphql", {
+          method: "POST",
+          headers: {
+            Authorization: `bearer ${token.trim()}`,
+            "Content-Type": "application/json",
+            "User-Agent": "Portfolio-Telemetry-Bot",
+          },
+          body: JSON.stringify({ query: graphqlQuery, variables: { login: username } }),
+        });
+      } catch {
+        // If the optional authenticated request cannot connect, try the public feed below.
+      }
 
-      if (ghRes.ok) {
+      if (ghRes?.ok) {
         const result = await ghRes.json();
         const cal = result?.data?.user?.contributionsCollection?.contributionCalendar;
 
@@ -111,15 +117,19 @@ export default async function handler(req, res) {
     }
 
     // 2. Fallback to authentic public GitHub contributions API
-    const fallbackRes = await fetch(
-      `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
-      {
+    const fallbackUrl = `https://github-contributions-api.jogruber.de/v4/${username}?y=last`;
+    const fallbackOptions = {
         headers: {
           Accept: "application/json",
           "User-Agent": "Portfolio-Telemetry-Bot",
         },
-      }
-    );
+      };
+    let fallbackRes;
+    try {
+      fallbackRes = await fetch(fallbackUrl, fallbackOptions);
+    } catch {
+      fallbackRes = await curlJson(fallbackUrl, fallbackOptions.headers);
+    }
 
     if (!fallbackRes.ok) {
       throw new Error(`Failed to load GitHub calendar for ${username}`);

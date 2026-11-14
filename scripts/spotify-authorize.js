@@ -7,12 +7,14 @@ import process from "node:process";
 
 const port = 8888;
 const redirectUri = `http://127.0.0.1:${port}/callback`;
-const envPath = resolve(process.cwd(), ".env.local");
+const envPath = existsSync(resolve(process.cwd(), ".env.local"))
+  ? resolve(process.cwd(), ".env.local")
+  : resolve(process.cwd(), ".env");
 if (existsSync(envPath)) process.loadEnvFile(envPath);
 const clientId = process.env.SPOTIFY_CLIENT_ID?.trim();
 
 if (!clientId) {
-  console.error("Add SPOTIFY_CLIENT_ID to portfolio/.env.local first.");
+  console.error("Add SPOTIFY_CLIENT_ID to .env first.");
   process.exitCode = 1;
 } else {
   const state = randomBytes(24).toString("hex");
@@ -70,7 +72,6 @@ if (!clientId) {
         throw new Error(`Spotify did not issue a refresh token: ${reason}.`);
       }
 
-      const envPath = resolve(process.cwd(), ".env.local");
       let envContents = "";
       try {
         envContents = await readFile(envPath, "utf8");
