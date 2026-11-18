@@ -45,9 +45,22 @@
   box-sizing: border-box;
 }
 
+* {
+  scrollbar-width: none;
+}
+
 html {
   overflow-x: hidden;
   scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+*::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 body {
@@ -214,8 +227,8 @@ img {
   z-index: 100;
   background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  transition: background-color 200ms ease, border-color 200ms ease;
+  border-bottom: 0;
+  transition: background-color 200ms ease;
 }
 
 .theme-dark .top-nav-shell {

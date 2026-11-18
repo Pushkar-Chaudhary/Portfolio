@@ -13,7 +13,7 @@ const Footer = ({ isHome = false }) => {
               <span className="footer-dot" />
             </a>
             <p className="footer-tagline">
-              Full-stack developer &amp; designer crafting minimal digital experiences in Itahari, Nepal.
+              I’m a developer in Itahari, Nepal, building things for the web and learning as I go.
             </p>
           </div>
 
@@ -39,7 +39,7 @@ const Footer = ({ isHome = false }) => {
 
         <div className="footer-bottom-row">
           <p className="footer-copyright">
-            &copy; {new Date().getFullYear()} Pushkar Chaudhary (@zorocodes). All rights reserved.
+            &copy; {new Date().getFullYear()} Pushkar Chaudhary (@zorocodes).
           </p>
 
           <div className="footer-social-group">

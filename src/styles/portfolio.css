@@ -54,7 +54,6 @@ body {
 .top-nav-shell,
 :root[data-theme="dark"] .top-nav-shell {
   background: color-mix(in srgb, var(--bg) 90%, transparent);
-  border-bottom-color: color-mix(in srgb, var(--border) 80%, transparent);
   backdrop-filter: blur(18px);
 }
 

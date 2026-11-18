@@ -40,46 +40,44 @@ function renderProjectIcon(iconName) {
 function Projects() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState("grid"); // "grid" or "list"
+  const [viewMode, setViewMode] = useState("grid");
   const [activeModalProject, setActiveModalProject] = useState(null);
   const [copiedLink, setCopiedLink] = useState(false);
   const reducedMotion = useReducedMotion();
+  const query = searchQuery.toLowerCase().trim();
 
-  // Filter projects by category and search term
   const filteredProjects = useMemo(() => {
     return projectsData.filter((project) => {
       const matchesCategory =
         selectedCategory === "All" || project.category === selectedCategory;
 
-      const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
-        !q ||
-        project.title.toLowerCase().includes(q) ||
-        project.description.toLowerCase().includes(q) ||
-        project.tech.some((t) => t.toLowerCase().includes(q)) ||
-        project.category.toLowerCase().includes(q);
+        !query ||
+        project.title.toLowerCase().includes(query) ||
+        project.description.toLowerCase().includes(query) ||
+        project.tech.some((technology) => technology.toLowerCase().includes(query)) ||
+        project.category.toLowerCase().includes(query);
 
       return matchesCategory && matchesSearch;
     });
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, query]);
 
-  // Keyboard navigation for modal
   useEffect(() => {
     if (!activeModalProject) return undefined;
 
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
         setActiveModalProject(null);
-      } else if (e.key === "ArrowRight") {
+      } else if (event.key === "ArrowRight") {
         const currentIndex = filteredProjects.findIndex(
-          (p) => p.id === activeModalProject.id,
+          (project) => project.id === activeModalProject.id,
         );
         if (currentIndex < filteredProjects.length - 1) {
           setActiveModalProject(filteredProjects[currentIndex + 1]);
         }
-      } else if (e.key === "ArrowLeft") {
+      } else if (event.key === "ArrowLeft") {
         const currentIndex = filteredProjects.findIndex(
-          (p) => p.id === activeModalProject.id,
+          (project) => project.id === activeModalProject.id,
         );
         if (currentIndex > 0) {
           setActiveModalProject(filteredProjects[currentIndex - 1]);
@@ -98,38 +96,36 @@ function Projects() {
   };
 
   return (
-    <div className="page-shell page-shell--wide">
+    <div className="page-shell page-shell--narrow">
       <main className="page-stack">
         <header className="projects-header">
           <PagePlaneAccent />
-          <p className="eyebrow">Interactive Portfolio</p>
+          <p className="eyebrow">My projects</p>
           <h1 className="section-title">Things I&apos;ve built.</h1>
           <p className="lead">
-            Interactive experiments, full-stack web applications, and AI integrations crafted with clean architecture and modern UX.
+            A few things I’ve built while learning, solving everyday problems, and trying out new ideas.
           </p>
         </header>
 
         <section className="projects-interactive-shell" aria-label="Interactive projects">
-          {/* Interactive Toolbar */}
           <div className="projects-toolbar">
             <div className="projects-toolbar-row">
-              {/* Category Filter Tabs */}
               <div className="filter-tabs" role="tablist" aria-label="Filter by project category">
-                {categories.map((cat) => {
-                  const isActive = selectedCategory === cat;
+                {categories.map((category) => {
+                  const isActive = selectedCategory === category;
                   const count =
-                    cat === "All"
+                    category === "All"
                       ? projectsData.length
-                      : projectsData.filter((p) => p.category === cat).length;
+                      : projectsData.filter((project) => project.category === category).length;
 
                   return (
                     <button
-                      key={cat}
+                      key={category}
                       type="button"
                       role="tab"
                       aria-selected={isActive}
                       className={`filter-tab${isActive ? " is-active" : ""}`}
-                      onClick={() => setSelectedCategory(cat)}
+                      onClick={() => setSelectedCategory(category)}
                     >
                       {isActive && (
                         <motion.div
@@ -138,22 +134,21 @@ function Projects() {
                           transition={{ type: "spring", stiffness: 450, damping: 35 }}
                         />
                       )}
-                      <span>{cat}</span>
+                      <span>{category}</span>
                       <span className="filter-count">({count})</span>
                     </button>
                   );
                 })}
               </div>
 
-              {/* Search & View Controls */}
               <div className="projects-search-group">
                 <div className="search-input-wrap">
                   <FaSearch className="search-icon" aria-hidden="true" />
                   <input
                     type="text"
                     value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search by title, tech, or stack..."
+                    onChange={(event) => setSearchQuery(event.target.value)}
+                    placeholder="Search projects, tools, or ideas..."
                     className="projects-search-input"
                     aria-label="Search projects"
                   />
@@ -192,10 +187,9 @@ function Projects() {
               </div>
             </div>
 
-            {/* Results Counter Row */}
             <div className="results-meta-row">
               <span>
-                Showing <strong>{filteredProjects.length}</strong> of{" "}
+                Found <strong>{filteredProjects.length}</strong> of{" "}
                 <strong>{projectsData.length}</strong> project{projectsData.length === 1 ? "" : "s"}
                 {selectedCategory !== "All" && ` in ${selectedCategory}`}
                 {searchQuery && ` matching "${searchQuery}"`}
@@ -215,12 +209,11 @@ function Projects() {
             </div>
           </div>
 
-          {/* Empty State */}
           {filteredProjects.length === 0 && (
             <div className="projects-empty-state">
               <FaSearch className="empty-icon" aria-hidden="true" />
-              <h3>No projects matched your criteria</h3>
-              <p>Try searching for a different keyword or resetting your category filter.</p>
+              <h3>No matches this time</h3>
+              <p>Try another search, or clear the filters to see all my projects.</p>
               <button
                 type="button"
                 className="reset-search-btn"
@@ -234,7 +227,6 @@ function Projects() {
             </div>
           )}
 
-          {/* Grid View */}
           {viewMode === "grid" && filteredProjects.length > 0 && (
             <motion.div
               layout
@@ -260,14 +252,13 @@ function Projects() {
                       className={`interactive-card${project.hero ? " interactive-card--hero" : ""}`}
                       {...revealProps}
                     >
-                      {/* Preview Stage */}
                       <div
                         className="card-preview-stage"
                         onClick={() => setActiveModalProject(project)}
                         role="button"
                         tabIndex={0}
-                        onKeyDown={(e) => {
-                          if (e.key === "Enter" || e.key === " ") {
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter" || event.key === " ") {
                             setActiveModalProject(project);
                           }
                         }}
@@ -301,12 +292,11 @@ function Projects() {
 
                         <div className="card-preview-overlay">
                           <span className="preview-overlay-btn">
-                            <FaMagic aria-hidden="true" /> Quick Inspect
+                            <FaMagic aria-hidden="true" /> Take a closer look
                           </span>
                         </div>
                       </div>
 
-                      {/* Content Body */}
                       <div className="card-content-body">
                         <div className="card-header-bar">
                           <div className="card-title-group">
@@ -319,9 +309,9 @@ function Projects() {
                         <p className="card-description">{project.description}</p>
 
                         <div className="card-tech-wrap" aria-label="Technologies used">
-                          {project.tech.map((tech) => (
-                            <span key={`${project.id}-${tech}`} className="card-tech-chip">
-                              {tech}
+                          {project.tech.map((technology) => (
+                            <span key={`${project.id}-${technology}`} className="card-tech-chip">
+                              {technology}
                             </span>
                           ))}
                         </div>
@@ -334,7 +324,7 @@ function Projects() {
                               rel="noopener noreferrer"
                               className="action-launch-link"
                             >
-                              Live App <FaExternalLinkAlt aria-hidden="true" />
+                              Visit site <FaExternalLinkAlt aria-hidden="true" />
                             </a>
 
                             {project.github && (
@@ -345,7 +335,7 @@ function Projects() {
                                 className="action-github-link"
                                 aria-label={`View ${project.title} on GitHub`}
                               >
-                                <FaGithub aria-hidden="true" /> Code
+                                <FaGithub aria-hidden="true" /> Source
                               </a>
                             )}
                           </div>
@@ -366,7 +356,6 @@ function Projects() {
             </motion.div>
           )}
 
-          {/* List / Compact View */}
           {viewMode === "list" && filteredProjects.length > 0 && (
             <motion.div
               layout
@@ -406,9 +395,9 @@ function Projects() {
                     <span className="list-category">{project.category}</span>
 
                     <div className="list-tech-wrap">
-                      {project.tech.slice(0, 3).map((t) => (
-                        <span key={t} className="card-tech-chip">
-                          {t}
+                      {project.tech.slice(0, 3).map((technology) => (
+                        <span key={technology} className="card-tech-chip">
+                          {technology}
                         </span>
                       ))}
                       {project.tech.length > 3 && (
@@ -422,7 +411,7 @@ function Projects() {
                         className="action-inspect-btn"
                         onClick={() => setActiveModalProject(project)}
                       >
-                        Inspect
+                        Details
                       </button>
                       <a
                         href={project.demo}
@@ -430,7 +419,7 @@ function Projects() {
                         rel="noreferrer"
                         className="action-launch-link"
                       >
-                        Demo <FaExternalLinkAlt aria-hidden="true" />
+                        Visit site <FaExternalLinkAlt aria-hidden="true" />
                       </a>
                     </div>
                   </motion.div>
@@ -441,7 +430,6 @@ function Projects() {
         </section>
       </main>
 
-      {/* Interactive Quick View Modal */}
       <AnimatePresence>
         {activeModalProject && (
           <motion.div
@@ -457,7 +445,7 @@ function Projects() {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 16 }}
               transition={{ type: "spring", damping: 25, stiffness: 350 }}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(event) => event.stopPropagation()}
               role="dialog"
               aria-modal="true"
               aria-labelledby="modal-project-title"
@@ -505,16 +493,16 @@ function Projects() {
                 </header>
 
                 <div className="modal-section">
-                  <span className="modal-section-title">Overview</span>
+                  <span className="modal-section-title">About this project</span>
                   <p className="modal-desc">{activeModalProject.description}</p>
                 </div>
 
                 {activeModalProject.highlights && (
                   <div className="modal-section">
-                    <span className="modal-section-title">Architecture Highlights</span>
+                    <span className="modal-section-title">A few details</span>
                     <ul className="modal-highlights-list">
-                      {activeModalProject.highlights.map((highlight, idx) => (
-                        <li key={idx}>{highlight}</li>
+                      {activeModalProject.highlights.map((highlight, index) => (
+                        <li key={`${activeModalProject.id}-highlight-${index}`}>{highlight}</li>
                       ))}
                     </ul>
                   </div>
@@ -523,9 +511,9 @@ function Projects() {
                 <div className="modal-section">
                   <span className="modal-section-title">Technologies</span>
                   <div className="card-tech-wrap">
-                    {activeModalProject.tech.map((t) => (
-                      <span key={t} className="card-tech-chip">
-                        {t}
+                    {activeModalProject.tech.map((technology) => (
+                      <span key={technology} className="card-tech-chip">
+                        {technology}
                       </span>
                     ))}
                   </div>
@@ -539,7 +527,7 @@ function Projects() {
                       rel="noopener noreferrer"
                       className="action-launch-link"
                     >
-                      Open Live Demo <FaExternalLinkAlt aria-hidden="true" />
+                      Visit the site <FaExternalLinkAlt aria-hidden="true" />
                     </a>
 
                     {activeModalProject.github && (
@@ -549,7 +537,7 @@ function Projects() {
                         rel="noopener noreferrer"
                         className="action-github-link"
                       >
-                        <FaGithub aria-hidden="true" /> Source Code
+                        <FaGithub aria-hidden="true" /> Source
                       </a>
                     )}
 
@@ -564,7 +552,7 @@ function Projects() {
                         </>
                       ) : (
                         <>
-                          <FaCopy /> Copy Link
+                          <FaCopy /> Copy link
                         </>
                       )}
                     </button>
@@ -575,36 +563,36 @@ function Projects() {
                       type="button"
                       className="modal-nav-btn"
                       onClick={() => {
-                        const curIdx = filteredProjects.findIndex(
-                          (p) => p.id === activeModalProject.id,
+                        const currentIndex = filteredProjects.findIndex(
+                          (project) => project.id === activeModalProject.id,
                         );
-                        if (curIdx > 0) {
-                          setActiveModalProject(filteredProjects[curIdx - 1]);
+                        if (currentIndex > 0) {
+                          setActiveModalProject(filteredProjects[currentIndex - 1]);
                         }
                       }}
                       disabled={
                         filteredProjects.findIndex(
-                          (p) => p.id === activeModalProject.id,
+                          (project) => project.id === activeModalProject.id,
                         ) === 0
                       }
                       title="Previous project (Left Arrow)"
                     >
-                      <FaArrowLeft /> Prev
+                      <FaArrowLeft /> Previous
                     </button>
                     <button
                       type="button"
                       className="modal-nav-btn"
                       onClick={() => {
-                        const curIdx = filteredProjects.findIndex(
-                          (p) => p.id === activeModalProject.id,
+                        const currentIndex = filteredProjects.findIndex(
+                          (project) => project.id === activeModalProject.id,
                         );
-                        if (curIdx < filteredProjects.length - 1) {
-                          setActiveModalProject(filteredProjects[curIdx + 1]);
+                        if (currentIndex < filteredProjects.length - 1) {
+                          setActiveModalProject(filteredProjects[currentIndex + 1]);
                         }
                       }}
                       disabled={
                         filteredProjects.findIndex(
-                          (p) => p.id === activeModalProject.id,
+                          (project) => project.id === activeModalProject.id,
                         ) ===
                         filteredProjects.length - 1
                       }

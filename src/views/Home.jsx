@@ -16,7 +16,6 @@ const Home = () => {
   return (
     <div className="page-shell page-shell--narrow">
       <main className="page-stack">
-        {/* Hero Section */}
         <section className="hero-panel" aria-label="Introduction">
           <div className="hero-visual">
             <Animated3DImages />
@@ -51,7 +50,7 @@ const Home = () => {
             </h2>
 
             <p className="hero-lead">
-              Developer and BCA student based in Itahari, Nepal. Crafting minimal, performant web applications with React, Node.js, and modern interface design.
+              I’m a BCA student and developer from Itahari, Nepal. I enjoy building useful websites with React and Node.js, and paying attention to the small details that make them feel good to use.
             </p>
 
             <div className="hero-actions">
@@ -93,15 +92,14 @@ const Home = () => {
 
         <ToolsTrain />
 
-        {/* Featured Projects Showcase */}
         <ProjectShowcase />
 
         <section className="connect-cta-panel">
           <div className="connect-cta-content">
-            <span className="section-kicker">Contact</span>
-            <h2 className="connect-cta-title">Have a project in mind?</h2>
+            <span className="section-kicker">Get in touch</span>
+            <h2 className="connect-cta-title">What are you working on?</h2>
             <p className="connect-cta-desc">
-              Send me a note and tell me what you&apos;re working on.
+              I’d love to hear about it.
             </p>
           </div>
           <div className="connect-cta-actions">

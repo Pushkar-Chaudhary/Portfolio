@@ -41,7 +41,7 @@ const socialChannels = [
 const DIRECT_EMAIL = "pushkarchaudhary256@gmail.com";
 
 function Contact() {
-  const [submissionState, setSubmissionState] = useState("idle"); // idle | sending | sent | error
+  const [submissionState, setSubmissionState] = useState("idle");
   const [copiedEmail, setCopiedEmail] = useState(false);
   const reducedMotion = useReducedMotion();
 
@@ -86,16 +86,15 @@ function Contact() {
   return (
     <div className="page-shell page-shell--narrow">
       <main className="page-stack">
-        {/* Header */}
         <motion.header className="contact-header-section" {...revealProps}>
           <span className="section-kicker">Contact</span>
           <h1 className="section-title">Let&apos;s build together.</h1>
           <p className="lead">
-            Have a project, opportunity, or collaboration in mind? Reach out directly or send a message below.
+            Have a question, an idea, or just want to say hi? Send me a note.
           </p>
 
           <div className="direct-email-strip">
-            <span className="direct-email-label">Direct Email:</span>
+            <span className="direct-email-label">Email me:</span>
             <a href={`mailto:${DIRECT_EMAIL}`} className="direct-email-link">
               <FaEnvelope aria-hidden="true" /> {DIRECT_EMAIL}
             </a>
@@ -118,7 +117,6 @@ function Contact() {
           </div>
         </motion.header>
 
-        {/* Channels Grid */}
         <motion.section className="social-channels-section" {...revealProps}>
           <h2 className="section-subtitle">Find me online</h2>
           <div className="channels-grid">
@@ -142,7 +140,6 @@ function Contact() {
           </div>
         </motion.section>
 
-        {/* Minimal Message Form */}
         <motion.section className="contact-form-section" {...revealProps}>
           <div className="section-header">
             <span className="section-kicker">Direct Note</span>
@@ -185,7 +182,7 @@ function Contact() {
               <textarea
                 id="contact-message"
                 name="message"
-                placeholder="Tell me about your project, timeline, or idea..."
+              placeholder="What’s on your mind?"
                 rows="5"
                 required
               />
@@ -213,7 +210,7 @@ function Contact() {
                   aria-live={submissionState === "error" ? "assertive" : "polite"}
                 >
                   {submissionState === "sent"
-                    ? "✓ Thank you. Your message has been sent successfully."
+                    ? "Thanks for reaching out. I’ll get back to you as soon as I can."
                     : submissionState === "error"
                     ? "✕ Delivery failed. Please email pushkarchaudhary256@gmail.com directly."
                     : "Connecting to mail server..."}

@@ -110,7 +110,6 @@ function Navbar({ activePath }) {
         </div>
       </header>
 
-      {/* Backdrop to close menu when clicking outside */}
       {menuOpen && (
         <div
           className="mobile-backdrop"
@@ -119,7 +118,6 @@ function Navbar({ activePath }) {
         />
       )}
 
-      {/* Mobile Navigation Drawer */}
       <nav
         id="mobile-navigation"
         className={`mobile-menu ${menuOpen ? "is-open" : ""}`}

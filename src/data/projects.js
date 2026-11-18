@@ -1,6 +1,10 @@
-import aafnoKuraPreview from "../assets/projects/aafno-kura.png";
-import careerSathiPreview from "../assets/projects/career-sathi.png";
-import sajiloBlogPreview from "../assets/projects/sajilo-blog.png";
+import aafnoKuraPreview from "../assets/projects/aafno-kura-live.png";
+import careerSathiPreview from "../assets/projects/career-sathi-live.png";
+import sajiloBlogPreview from "../assets/projects/sajilo-blog-live.png";
+import sajiloPasalPreview from "../assets/projects/sajilo-pasal.png";
+import wishlyPreview from "../assets/projects/wishly.png";
+import portfolioPreview from "../assets/projects/portfolio-website.png";
+import notesPreview from "../assets/projects/notes-app.png";
 
 const projects = [
   {
@@ -11,21 +15,21 @@ const projects = [
     github: "https://github.com/Pushkar-Chaudhary/aafno-kura",
     preview: aafnoKuraPreview,
     description:
-      "A community feed for sharing posts and responding to other users.",
+      "A place to share what’s on your mind and catch up with the community.",
     hero: true,
     tech: ["Node.js", "Express", "EJS", "MongoDB", "REST API"],
     highlights: [
-      "Dynamic feed with real-time updates and post creation",
-      "Robust MongoDB database schema with Mongoose models",
-      "Session-based user interactions and media support",
-      "Fully responsive design optimized for mobile and desktop screens",
+      "Share posts and follow what the community is talking about",
+      "Posts and profiles stored in MongoDB",
+      "Sign in to post, react, and share media",
+      "Works on phones and larger screens",
     ],
     status: "Featured",
     year: "2025",
     showcase: {
       category: "Social platform",
       description:
-        "A place to share updates, follow a public feed, and manage posts.",
+        "Share an update, see what others are posting, and join the conversation.",
       tech: ["Node.js", "Express", "MongoDB"],
     },
   },
@@ -37,21 +41,21 @@ const projects = [
     github: "https://github.com/Pushkar-Chaudhary/career-sathi",
     preview: careerSathiPreview,
     description:
-      "Turns career goals into roadmaps and skill-gap assessments with Gemini.",
+      "A career planning app that helps turn your next goal into a practical plan.",
     hero: false,
     tech: ["React", "Node.js", "Express", "MongoDB", "Gemini API"],
     highlights: [
-      "Context-aware AI career counseling using Gemini Flash model",
-      "Interactive step-by-step career path visualization",
-      "Dynamic skill assessments and actionable feedback",
-      "Secure backend proxy to protect API tokens and manage rate limits",
+      "Get suggestions shaped around your career goals",
+      "Break a career path into steps you can work through",
+      "See which skills you already have and which to build next",
+      "Gemini requests go through a server-side API",
     ],
-    status: "AI Powered",
+    status: "AI project",
     year: "2025",
     showcase: {
       category: "Career guidance",
       description:
-        "Explore career paths and identify skills to work on with Gemini.",
+        "Think through your next career move and get ideas for what to learn.",
       tech: ["React", "Node.js", "Gemini API"],
     },
   },
@@ -63,21 +67,21 @@ const projects = [
     github: "https://github.com/Pushkar-Chaudhary/sajilo-blog",
     preview: sajiloBlogPreview,
     description:
-      "A place to publish articles and browse posts by tag or category.",
+      "A simple blog for publishing stories and finding something good to read.",
     hero: false,
     tech: ["React", "Node.js", "Express", "MongoDB"],
     highlights: [
-      "Minimalist reader UI with typography fine-tuned for legibility",
-      "Fast database querying with MongoDB indexing",
-      "Article tagging and category sorting engine",
-      "Lightweight bundle size with rapid initial paint",
+      "A quiet reading layout that keeps the focus on the story",
+      "Browse articles by tag or category",
+      "Write and publish your own posts",
+      "Built with React, Express, and MongoDB",
     ],
     status: "Live App",
     year: "2025",
     showcase: {
       category: "Writing platform",
       description:
-        "A simple space for sharing thoughts and experiences through the web.",
+        "A place to share a story or find a new point of view.",
       tech: ["React", "Express", "MongoDB"],
     },
   },
@@ -86,15 +90,15 @@ const projects = [
     title: "Sajilo Pasal",
     category: "E-Commerce",
     demo: "https://sajilo-pasal-tau.vercel.app/",
-    preview: null,
+    preview: sajiloPasalPreview,
     icon: "shoppingCart",
     description:
-      "A local shopping app for browsing products from sellers across Nepal.",
+      "Browse products from independent sellers around Nepal.",
     hero: false,
     tech: ["React"],
     highlights: [
-      "Shop products from local sellers across Nepal",
-      "Discover thoughtfully selected products",
+      "Find goods from local sellers",
+      "Explore products made and sold in Nepal",
     ],
     status: "Live App",
     year: "2026",
@@ -104,18 +108,18 @@ const projects = [
     title: "Wishly",
     category: "Frontend",
     demo: "https://wishly-wish.vercel.app/",
-    preview: null,
+    preview: wishlyPreview,
     icon: "gift",
     description:
-      "An animated birthday greeting with a few ways to personalize and share it.",
+      "Make a birthday surprise with a personal note, flowers, and a little confetti.",
     hero: false,
     tech: ["React", "Node.js", "CSS Animations", "Canvas Confetti"],
     highlights: [
-      "Custom celebratory sound effects and full-screen confetti cascades",
-      "Interactive greeting generator with shareable URLs",
-      "Playful micro-interactions with smooth easing curves",
+      "Write a note and choose the flowers",
+      "Share the finished surprise with a link",
+      "Small animations and confetti for the celebration",
     ],
-    status: "Vibe Coded",
+    status: "Personal project",
     year: "2026",
   },
   {
@@ -124,16 +128,16 @@ const projects = [
     category: "Frontend",
     demo: "https://pushkar-chaudhary.vercel.app",
     github: "https://github.com/Pushkar-Chaudhary/Portfolio",
-    preview: null,
+    preview: portfolioPreview,
     icon: "code",
     description:
-      "My portfolio, built with React, Vite, and Tailwind CSS.",
+      "The site you’re on now. I built it with React, Vite, and Tailwind CSS.",
     hero: false,
     tech: ["React", "Vite", "Tailwind CSS", "Framer Motion"],
     highlights: [
-      "Server-rendered pages with interactive React components",
-      "Responsive layouts and light/dark themes",
-      "WakaTime and GitHub activity on the dashboard",
+      "Pages built with React and Vite",
+      "A layout that adapts to phones and desktops, with light and dark themes",
+      "A dashboard for my coding time and GitHub activity",
     ],
     status: "Active",
     year: "2026",
@@ -144,16 +148,16 @@ const projects = [
     category: "Frontend",
     demo: "https://notes-app-kappa-ruby-64.vercel.app/",
     github: "https://github.com/Pushkar-Chaudhary/notes",
-    preview: null,
+    preview: notesPreview,
     icon: "stickyNote",
     description:
-      "A lightweight, distraction-free notepad designed for quick capture, search-as-you-type filtering, and zero-latency local storage sync.",
+      "A small notes app for jotting things down, finding them quickly, and keeping them in your browser.",
     hero: false,
     tech: ["React", "Tailwind CSS", "LocalStorage API"],
     highlights: [
-      "Instant offline persistence with zero setup needed",
-      "Quick keyboard shortcuts for note creation and deletion",
-      "Clean visual cards with color categorization",
+      "Notes stay saved in your browser, even when you’re offline",
+      "Use keyboard shortcuts to add or remove a note",
+      "Sort notes at a glance with color labels",
     ],
     status: "Utility",
     year: "2024",

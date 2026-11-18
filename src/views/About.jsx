@@ -25,7 +25,7 @@ import { VscVscode } from "react-icons/vsc";
 
 const skillCategories = [
   {
-    category: "Languages & Core",
+    category: "Languages",
     skills: [
       { name: "JavaScript", icon: <SiJavascript /> },
       { name: "TypeScript", icon: <SiTypescript /> },
@@ -34,7 +34,7 @@ const skillCategories = [
     ],
   },
   {
-    category: "Frontend Architecture",
+    category: "Frontend",
     skills: [
       { name: "Astro", icon: <SiAstro /> },
       { name: "React 19", icon: <SiReact /> },
@@ -43,7 +43,7 @@ const skillCategories = [
     ],
   },
   {
-    category: "Backend & Database",
+    category: "Backend",
     skills: [
       { name: "Node.js", icon: <SiNodedotjs /> },
       { name: "Express.js", icon: <SiExpress /> },
@@ -51,13 +51,13 @@ const skillCategories = [
     ],
   },
   {
-    category: "AI & External APIs",
+    category: "AI & APIs",
     skills: [
       { name: "Gemini API", icon: <SiGooglegemini /> },
     ],
   },
   {
-    category: "Workflow & Tooling",
+    category: "Tools I use",
     skills: [
       { name: "VS Code", icon: <VscVscode /> },
       { name: "Cursor", icon: <SiCursor /> },
@@ -71,13 +71,13 @@ const skillCategories = [
 const timelineEntries = [
   {
     year: "2026",
-    title: "Full-stack projects",
-    text: "Working with React, Express, and MongoDB, and adding Gemini features to Career Sathi.",
+    title: "Building full-stack apps",
+    text: "These days I’m building with React, Express, and MongoDB, and adding Gemini features to Career Sathi.",
   },
   {
     year: "2025",
-    title: "React and interface work",
-    text: "Practiced React, responsive layouts, and small interface interactions.",
+    title: "Getting comfortable with React",
+    text: "I learned to build responsive pages and add the small interactions that make them easier to use.",
   },
   {
     year: "2024",
@@ -101,39 +101,37 @@ function About() {
   return (
     <div className="page-shell page-shell--narrow">
       <main className="page-stack">
-        {/* Intro */}
         <motion.section className="about-hero-section" {...revealProps}>
           <PagePlaneAccent />
           <span className="section-kicker">About</span>
-          <h1 className="section-title">Developer &amp; UI craftsman.</h1>
+          <h1 className="section-title">A little about me.</h1>
           <p className="lead">
-            Full-stack developer and BCA student based in Itahari, Nepal. Focused on building responsive, minimal, and performant web experiences with React, TypeScript, and Node.js.
+            I’m Pushkar, a BCA student and developer from Itahari, Nepal. I build web apps with React, TypeScript, and Node.js, and I’m always learning how to make them simpler and more useful.
           </p>
           <div className="about-bio-meta">
             <div className="bio-stat">
-              <span className="bio-stat-label">Location &amp; Local Time</span>
+              <span className="bio-stat-label">Based in</span>
               <span className="bio-stat-val">
                 Itahari, Nepal · <NepalClock compact={true} showLocation={false} />
               </span>
             </div>
             <div className="bio-stat-sep" />
             <div className="bio-stat">
-              <span className="bio-stat-label">Primary Stack</span>
+              <span className="bio-stat-label">What I build with</span>
               <span className="bio-stat-val">React · Node.js · MongoDB</span>
             </div>
             <div className="bio-stat-sep" />
             <div className="bio-stat">
-              <span className="bio-stat-label">Currently</span>
+              <span className="bio-stat-label">Right now</span>
               <span className="bio-stat-val">Studying BCA</span>
             </div>
           </div>
         </motion.section>
 
-        {/* Technical Skills by Category */}
         <motion.section className="about-content-section" {...revealProps}>
           <div className="section-header">
-            <span className="section-kicker">Technical Skills</span>
-            <h2 className="section-subtitle">Tools &amp; technologies</h2>
+            <span className="section-kicker">Things I use</span>
+            <h2 className="section-subtitle">My tools</h2>
             <p className="section-subtext">
               A few tools I&apos;ve used across my projects.
             </p>
@@ -158,11 +156,10 @@ function About() {
           </div>
         </motion.section>
 
-        {/* Education Timeline */}
         <motion.section className="about-content-section" {...revealProps}>
           <div className="section-header">
             <span className="section-kicker">Education</span>
-            <h2 className="section-subtitle">Academic foundations</h2>
+            <h2 className="section-subtitle">Where I studied</h2>
           </div>
 
           <div className="academic-list">
@@ -178,11 +175,10 @@ function About() {
           </div>
         </motion.section>
 
-        {/* Journey Timeline */}
         <motion.section className="about-content-section" {...revealProps}>
           <div className="section-header">
             <span className="section-kicker">Timeline</span>
-            <h2 className="section-subtitle">Development milestones</h2>
+            <h2 className="section-subtitle">What I’ve been learning</h2>
           </div>
 
           <ol className="clean-timeline">

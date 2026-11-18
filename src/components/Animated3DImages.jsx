@@ -12,7 +12,7 @@ function Animated3DImages() {
   const bubbleTimeout = useRef(null);
   const waveTimeout = useRef(null);
 
-  // Periodic friendly wave every 6s when idle
+  // Wave occasionally while the avatar is idle.
   useEffect(() => {
     if (reducedMotion) return undefined;
 

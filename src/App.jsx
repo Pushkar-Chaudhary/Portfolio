@@ -7,31 +7,32 @@ import About from "./views/About.jsx";
 import Projects from "./views/Projects.jsx";
 import Contact from "./views/Contact.jsx";
 import Dashboard from "./views/Dashboard.jsx";
+import IntroLoader from "./components/IntroLoader.jsx";
 
 const pages = {
   "/": {
     title: "Pushkar Chaudhary (@zorocodes) | Developer & Designer",
-    description: "Pushkar Chaudhary (@zorocodes) — Full-stack developer and BCA student from Itahari, Nepal. Crafting minimal, performant web applications with React, Node.js, and TypeScript.",
+    description: "I’m Pushkar, a BCA student and developer in Itahari, Nepal. Take a look at the websites and small tools I’ve been building.",
     Component: Home,
   },
   "/about": {
     title: "About | Pushkar Chaudhary (@zorocodes) - Developer & Designer",
-    description: "Learn about Pushkar Chaudhary (@zorocodes), a full-stack developer and designer based in Itahari, Nepal. Technical skill stack, background, and timeline.",
+    description: "A little about Pushkar: what he’s learning, the tools he uses, and his path into web development.",
     Component: About,
   },
   "/projects": {
-    title: "Projects | Pushkar Chaudhary (@zorocodes) - Work & Experiments",
-    description: "Explore web development projects, full-stack applications, and experiments created by Pushkar Chaudhary (@zorocodes).",
+    title: "Projects | Pushkar Chaudhary (@zorocodes) - Things I’ve Made",
+    description: "Websites and small apps Pushkar has built, from a community feed to a career planning tool.",
     Component: Projects,
   },
   "/contact": {
     title: "Contact | Pushkar Chaudhary (@zorocodes) - Get in Touch",
-    description: "Connect with Pushkar Chaudhary (@zorocodes) regarding engineering opportunities, freelance collaborations, or design inquiries.",
+    description: "Want to talk about a project or just say hello? Here’s how to get in touch with Pushkar.",
     Component: Contact,
   },
   "/dashboard": {
-    title: "Dashboard | Pushkar Chaudhary (@zorocodes) - Telemetry & Analytics",
-    description: "Live telemetry, GitHub contribution calendar, and WakaTime coding activity for Pushkar Chaudhary (@zorocodes).",
+    title: "Dashboard | Pushkar Chaudhary (@zorocodes) - Coding Activity",
+    description: "A look at Pushkar’s recent coding time and GitHub contributions.",
     Component: Dashboard,
   },
 };
@@ -65,7 +66,7 @@ function updateMeta(path, page) {
         url: siteUrl,
         image: `${siteUrl}/fav.png`,
         jobTitle: "Full-Stack Web Developer & Designer",
-        description: "Pushkar Chaudhary (@zorocodes) is a web developer and BCA student from Itahari, Nepal, building modern, minimal, and high-performance applications with React, Node.js, and TypeScript.",
+        description: "Pushkar Chaudhary (@zorocodes) is a web developer and BCA student from Itahari, Nepal. He builds web apps with React, Node.js, and TypeScript.",
         address: { "@type": "PostalAddress", addressLocality: "Itahari", addressCountry: "NP" },
         email: "pushkarchaudhary256@gmail.com",
         sameAs: ["https://github.com/Pushkar-Chaudhary", "https://www.linkedin.com/in/pushkar-chy/", "https://x.com/pushkar_chau07", "https://www.instagram.com/pushkar.chau/"],
@@ -76,7 +77,7 @@ function updateMeta(path, page) {
         "@id": `${siteUrl}/#website`,
         url: siteUrl,
         name: "Pushkar Chaudhary (@zorocodes) Portfolio",
-        description: "Projects and engineering portfolio of Pushkar Chaudhary (@zorocodes), web developer and designer in Itahari, Nepal.",
+        description: "Web projects by Pushkar Chaudhary (@zorocodes), a developer and BCA student in Itahari, Nepal.",
         publisher: { "@id": personId },
         inLanguage: "en-US",
       },
@@ -112,6 +113,7 @@ export default function App() {
 
   return (
     <>
+      <IntroLoader />
       <Navbar activePath={currentPath} />
       <div className="app-shell">
         <Page />

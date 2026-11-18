@@ -14,7 +14,7 @@ function ProjectShowcase() {
     <section className="project-showcase" aria-labelledby="project-showcase-title">
       <header className="project-showcase-header">
         <h2 id="project-showcase-title">A few things I&apos;ve made</h2>
-        <span className="showcase-count">Pick a project to see more</span>
+        <span className="showcase-count">Choose one to take a closer look</span>
       </header>
 
       <div className="project-showcase-display" aria-live="polite">
@@ -44,7 +44,7 @@ function ProjectShowcase() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Explore project <FaExternalLinkAlt aria-hidden="true" />
+            Visit the site <FaExternalLinkAlt aria-hidden="true" />
           </a>
         </div>
       </div>

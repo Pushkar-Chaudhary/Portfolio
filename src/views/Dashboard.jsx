@@ -55,9 +55,9 @@ function writeDashboardCache(key, data) {
 }
 
 function Dashboard() {
-  const [wakaData, setWakaData] = useState(null);
-  const [wakaLoading, setWakaLoading] = useState(true);
-  const [wakaError, setWakaError] = useState(null);
+  const [wakatimeData, setWakatimeData] = useState(null);
+  const [wakatimeLoading, setWakatimeLoading] = useState(true);
+  const [wakatimeError, setWakatimeError] = useState(null);
 
   const [githubData, setGithubData] = useState(null);
   const [githubLoading, setGithubLoading] = useState(true);
@@ -76,16 +76,16 @@ function Dashboard() {
       };
 
   const refreshWakaTime = async () => {
-    setWakaLoading(true);
-    setWakaError(null);
+    setWakatimeLoading(true);
+    setWakatimeError(null);
     try {
       const data = await requestJson("/api/wakatime");
-      setWakaData(data);
+      setWakatimeData(data);
       writeDashboardCache(WAKATIME_CACHE_KEY, data);
     } catch (error) {
-      setWakaError(error.message || "Failed to load WakaTime telemetry");
+      setWakatimeError(error.message || "WakaTime stats didn’t load.");
     } finally {
-      setWakaLoading(false);
+      setWakatimeLoading(false);
     }
   };
 
@@ -109,10 +109,10 @@ function Dashboard() {
     Promise.resolve().then(() => {
       if (!active) return;
 
-      const cachedWakaData = readDashboardCache(WAKATIME_CACHE_KEY);
-      if (cachedWakaData) {
-        setWakaData(cachedWakaData);
-        setWakaLoading(false);
+      const cachedWakatimeData = readDashboardCache(WAKATIME_CACHE_KEY);
+      if (cachedWakatimeData) {
+        setWakatimeData(cachedWakatimeData);
+        setWakatimeLoading(false);
       }
 
       const cachedGitHubData = readDashboardCache(GITHUB_CACHE_KEY);
@@ -125,15 +125,15 @@ function Dashboard() {
     requestJson("/api/wakatime")
       .then((data) => {
         if (active) {
-          setWakaData(data);
+          setWakatimeData(data);
           writeDashboardCache(WAKATIME_CACHE_KEY, data);
         }
       })
       .catch((error) => {
-        if (active) setWakaError(error.message || "Failed to load WakaTime telemetry");
+        if (active) setWakatimeError(error.message || "WakaTime stats didn’t load.");
       })
       .finally(() => {
-        if (active) setWakaLoading(false);
+        if (active) setWakatimeLoading(false);
       });
 
     requestJson("/api/github")
@@ -155,19 +155,18 @@ function Dashboard() {
     };
   }, []);
 
-  // Compute month label offsets across calendar weeks
   const monthLabelOffsets = useMemo(() => {
     if (!githubData?.weeks || githubData.weeks.length === 0) return [];
     const offsets = [];
-    let lastMonth = -1;
+    let lastMonth = null;
 
-    githubData.weeks.forEach((week, weekIdx) => {
-      const firstValidDay = week.find((d) => d && d.date);
-      if (firstValidDay) {
-        const m = new Date(firstValidDay.date).getMonth();
-        if (m !== lastMonth) {
-          offsets.push({ name: monthNames[m], weekIndex: weekIdx });
-          lastMonth = m;
+    githubData.weeks.forEach((week, weekIndex) => {
+      const firstDay = week.find((day) => day?.date);
+      if (firstDay) {
+        const month = new Date(firstDay.date).getMonth();
+        if (month !== lastMonth) {
+          offsets.push({ name: monthNames[month], weekIndex });
+          lastMonth = month;
         }
       }
     });
@@ -175,14 +174,13 @@ function Dashboard() {
     return offsets;
   }, [githubData]);
 
-  // Max seconds in weekly breakdown for scaling the bar chart
   const maxWeeklySeconds = useMemo(() => {
-    if (!wakaData?.weeklyActivity || wakaData.weeklyActivity.length === 0) return 1;
-    return Math.max(...wakaData.weeklyActivity.map((d) => d.totalSeconds || 0), 1);
-  }, [wakaData]);
+    if (!wakatimeData?.weeklyActivity || wakatimeData.weeklyActivity.length === 0) return 1;
+    return Math.max(...wakatimeData.weeklyActivity.map((day) => day.totalSeconds || 0), 1);
+  }, [wakatimeData]);
 
   return (
-    <div className="page-shell page-shell--wide">
+    <div className="page-shell page-shell--narrow">
       <main className="dashboard-flow">
         <motion.header className="dash-hero" {...revealProps}>
           <div className="dash-hero-top">
@@ -190,30 +188,25 @@ function Dashboard() {
           </div>
 
           <h1 className="dash-title">What I&apos;ve been working on</h1>
-          <p className="dash-lead">
-            A snapshot of my coding time and GitHub contributions.
-          </p>
+          <p className="dash-lead">A look at what I’ve been coding lately.</p>
         </motion.header>
 
-        {/* ============================================================== */}
-        {/* SECTION A: WAKATIME CODING ACTIVITY                            */}
-        {/* ============================================================== */}
         <motion.section className="telemetry-block" {...revealProps} aria-labelledby="wakatime-heading">
           <div className="telemetry-block-header">
             <div>
               <div className="telemetry-source-tag">
                 <SiWakatime aria-hidden="true" />
-                <span>WakaTime Official API</span>
+                <span>WakaTime</span>
               </div>
               <h2 id="wakatime-heading" className="telemetry-block-title">
-                Coding Time &amp; Velocity
+                My coding time
               </h2>
             </div>
 
             <div className="telemetry-header-actions">
-              {wakaData?.lastSynced && (
+              {wakatimeData?.lastSynced && (
                 <span className="sync-time-tag">
-                  Synced: {new Date(wakaData.lastSynced).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  Synced: {new Date(wakatimeData.lastSynced).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                 </span>
               )}
               <button
@@ -221,15 +214,14 @@ function Dashboard() {
                 onClick={refreshWakaTime}
                 className="icon-refresh-btn"
                 title="Refresh WakaTime data"
-                aria-label="Refresh WakaTime telemetry"
+                aria-label="Refresh WakaTime stats"
               >
-                <FaSyncAlt className={wakaLoading ? "is-spinning" : ""} />
+                <FaSyncAlt className={wakatimeLoading ? "is-spinning" : ""} />
               </button>
             </div>
           </div>
 
-          {/* Loading Skeleton */}
-          {wakaLoading && !wakaData && (
+          {wakatimeLoading && !wakatimeData && (
             <div className="telemetry-skeleton-grid">
               <div className="dash-skeleton-box" />
               <div className="dash-skeleton-box" />
@@ -237,13 +229,12 @@ function Dashboard() {
             </div>
           )}
 
-          {/* Error State */}
-          {!wakaLoading && wakaError && !wakaData && (
+          {!wakatimeLoading && wakatimeError && !wakatimeData && (
             <div className="telemetry-alert-box alert-error" role="alert">
               <FaExclamationCircle className="alert-icon" aria-hidden="true" />
               <div className="alert-body">
-                <strong>Unable to load WakaTime telemetry</strong>
-                <p>{wakaError}</p>
+                <strong>WakaTime stats didn’t load</strong>
+                <p>Please try again in a moment.</p>
                 <button type="button" onClick={refreshWakaTime} className="alert-retry-btn">
                   Try Again
                 </button>
@@ -251,14 +242,13 @@ function Dashboard() {
             </div>
           )}
 
-          {/* Key Metric Tickers */}
-          {wakaData && (
+          {wakatimeData && (
             <>
-              {!wakaLoading && wakaError && (
+              {!wakatimeLoading && wakatimeError && (
                 <div className="telemetry-info-banner" role="status">
                   <FaInfoCircle className="info-icon" aria-hidden="true" />
                   <div className="info-body">
-                    <p>Could not refresh WakaTime; showing the last saved stats. {wakaError}</p>
+                    <p>I couldn’t refresh the stats, so these are the last ones I saved.</p>
                   </div>
                 </div>
               )}
@@ -269,10 +259,10 @@ function Dashboard() {
                     <FaClock aria-hidden="true" /> Total Coding Time
                   </span>
                   <span className="waka-metric-value">
-                    {wakaData?.totalCodingTime || "--"}
+                    {wakatimeData?.totalCodingTime || "--"}
                   </span>
                   <span className="waka-metric-sub">
-                    {wakaData?.rangeText ? `All-time · ${wakaData.rangeText}` : "All-time cumulative tracked time"}
+                    {wakatimeData?.rangeText ? `All-time · ${wakatimeData.rangeText}` : "Since I started tracking"}
                   </span>
                 </div>
 
@@ -281,9 +271,9 @@ function Dashboard() {
                     <FaLaptopCode aria-hidden="true" /> Daily Average
                   </span>
                   <span className="waka-metric-value">
-                    {wakaData?.dailyAverage || "--"}
+                    {wakatimeData?.dailyAverage || "--"}
                   </span>
-                  <span className="waka-metric-sub">Across active coding days</span>
+                  <span className="waka-metric-sub">On days I coded</span>
                 </div>
 
                 <div className="waka-metric-card">
@@ -291,44 +281,43 @@ function Dashboard() {
                     <FaFire aria-hidden="true" /> Most Hours in One Day
                   </span>
                   <span className="waka-metric-value">
-                    {wakaData?.bestDay?.text || "--"}
+                    {wakatimeData?.bestDay?.text || "--"}
                   </span>
                   <span className="waka-metric-sub">
-                    {wakaData?.bestDay?.date
-                      ? new Date(wakaData.bestDay.date).toLocaleDateString(undefined, {
+                    {wakatimeData?.bestDay?.date
+                      ? new Date(wakatimeData.bestDay.date).toLocaleDateString(undefined, {
                           month: "short",
                           day: "numeric",
                           year: "numeric",
                         })
-                      : wakaData?.authenticated === false
-                        ? "Enable WakaTime stats access to show daily hours"
-                        : "Highest daily total in the available WakaTime stats"}
+                      : wakatimeData?.authenticated === false
+                        ? "More daily stats aren’t available yet"
+                        : "My best day in the available stats"}
                   </span>
                 </div>
 
-                {wakaData?.mostCodedDay && (
+                {wakatimeData?.mostCodedDay && (
                   <div className="waka-metric-card">
                     <span className="waka-metric-label">
-                      <FaCalendarAlt aria-hidden="true" /> Most Coded Weekday
+                      <FaCalendarAlt aria-hidden="true" /> Most active day
                     </span>
                     <span className="waka-metric-value">
-                      {wakaData.mostCodedDay}
+                      {wakatimeData.mostCodedDay}
                     </span>
-                    <span className="waka-metric-sub">Highest weekly output</span>
+                    <span className="waka-metric-sub">My busiest day this week</span>
                   </div>
                 )}
               </div>
 
-              {/* Weekly Activity Bar Chart */}
-              {wakaData?.weeklyActivity && wakaData.weeklyActivity.length > 0 && (
+              {wakatimeData?.weeklyActivity && wakatimeData.weeklyActivity.length > 0 && (
                 <div className="weekly-chart-box">
                   <div className="chart-box-header">
-                    <h3 className="chart-box-title">Weekly Coding Distribution</h3>
-                    <span className="chart-box-meta">Past 7 days activity</span>
+                    <h3 className="chart-box-title">Time spent coding each day</h3>
+                    <span className="chart-box-meta">The past week</span>
                   </div>
 
                   <div className="weekly-bars-container">
-                    {wakaData.weeklyActivity.map((day) => {
+                    {wakatimeData.weeklyActivity.map((day) => {
                       const heightPercent = Math.max(
                         Math.round(((day.totalSeconds || 0) / maxWeeklySeconds) * 100),
                         6
@@ -354,83 +343,77 @@ function Dashboard() {
                 </div>
               )}
 
-              {/* Breakdown Split: Languages & Projects */}
               <div className="breakdown-grid">
-                {/* Languages */}
                 <div className="breakdown-card">
                   <div className="breakdown-card-header">
                     <h3 className="breakdown-title">Top Languages</h3>
                     <span className="breakdown-sub">By time spent</span>
                   </div>
 
-                  {wakaData?.languages && wakaData.languages.length > 0 ? (
+                  {wakatimeData?.languages && wakatimeData.languages.length > 0 ? (
                     <div className="breakdown-items-list">
-                      {wakaData.languages.map((lang) => (
-                        <div key={lang.name} className="breakdown-row">
+                      {wakatimeData.languages.map((language) => (
+                        <div key={language.name} className="breakdown-row">
                           <div className="breakdown-row-info">
-                            <span className="breakdown-name">{lang.name}</span>
+                            <span className="breakdown-name">{language.name}</span>
                             <span className="breakdown-percent">
-                              {lang.percent ? `${lang.percent.toFixed(1)}%` : ""} ({lang.text})
+                              {language.percent ? `${language.percent.toFixed(1)}%` : ""} ({language.text})
                             </span>
                           </div>
                           <div className="breakdown-progress-track">
                             <div
                               className="breakdown-progress-bar"
-                              style={{ width: `${Math.min(lang.percent, 100)}%` }}
+                              style={{ width: `${Math.min(language.percent, 100)}%` }}
                             />
                           </div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="empty-subtext">No language statistics recorded for this period.</p>
+                    <p className="empty-subtext">No language stats to show for this period.</p>
                   )}
                 </div>
 
-                {/* Projects */}
                 <div className="breakdown-card">
                   <div className="breakdown-card-header">
-                    <h3 className="breakdown-title">Active Projects</h3>
-                    <span className="breakdown-sub">By coding duration</span>
+                    <h3 className="breakdown-title">Projects I’ve worked on</h3>
+                    <span className="breakdown-sub">By time spent</span>
                   </div>
 
-                  {wakaData?.projects && wakaData.projects.length > 0 ? (
+                  {wakatimeData?.projects && wakatimeData.projects.length > 0 ? (
                     <div className="breakdown-items-list">
-                      {wakaData.projects.map((proj) => (
-                        <div key={proj.name} className="breakdown-row">
+                      {wakatimeData.projects.map((project) => (
+                        <div key={project.name} className="breakdown-row">
                           <div className="breakdown-row-info">
-                            <span className="breakdown-name">{proj.name}</span>
+                            <span className="breakdown-name">{project.name}</span>
                             <span className="breakdown-percent">
-                              {proj.percent ? `${proj.percent.toFixed(1)}%` : ""} ({proj.text})
+                              {project.percent ? `${project.percent.toFixed(1)}%` : ""} ({project.text})
                             </span>
                           </div>
                           <div className="breakdown-progress-track">
                             <div
                               className="breakdown-progress-bar project-bar"
-                              style={{ width: `${Math.min(proj.percent, 100)}%` }}
+                              style={{ width: `${Math.min(project.percent, 100)}%` }}
                             />
                           </div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="empty-subtext">No project statistics recorded for this period.</p>
+                    <p className="empty-subtext">No project stats to show for this period.</p>
                   )}
                 </div>
               </div>
 
-              {/* Private daily records require WakaTime OAuth access. */}
-              {!wakaData?.authenticated && (
+              {!wakatimeData?.authenticated && (
                 <div className="telemetry-info-banner">
                   <FaInfoCircle className="info-icon" aria-hidden="true" />
                   <div className="info-body">
-                    <strong>All-Time Daily Record Requires OAuth</strong>
+                    <strong>More WakaTime stats</strong>
                     <p>
-                      WakaTime API keys are write-only. Configure a server-side{" "}
-                      <code>WAKATIME_OAUTH_ACCESS_TOKEN</code> with the <code>read_stats</code> scope to fetch the all-time best coding day.{" "}
-                      Public telemetry profile:{" "}
+                      My public WakaTime profile has a few more details:{" "}
                       <a
-                        href={wakaData?.publicProfileUrl || "https://wakatime.com/@bf434ed0-2f6c-46e7-ae66-53b01d7fad3d"}
+                        href={wakatimeData?.publicProfileUrl || "https://wakatime.com/@bf434ed0-2f6c-46e7-ae66-53b01d7fad3d"}
                         target="_blank"
                         rel="noreferrer"
                         className="info-link"
@@ -445,18 +428,15 @@ function Dashboard() {
           )}
         </motion.section>
 
-        {/* ============================================================== */}
-        {/* SECTION B: GITHUB 12-MONTH CONTRIBUTION HEATMAP                 */}
-        {/* ============================================================== */}
         <motion.section className="telemetry-block" {...revealProps} aria-labelledby="github-heading">
           <div className="telemetry-block-header">
             <div>
               <div className="telemetry-source-tag">
                 <FaGithub aria-hidden="true" />
-                <span>GitHub Contribution Calendar</span>
+                <span>GitHub</span>
               </div>
               <h2 id="github-heading" className="telemetry-block-title">
-                12-Month Contribution Heatmap
+                Contributions over the past year
               </h2>
             </div>
 
@@ -479,7 +459,6 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* GitHub Key Stats Row */}
           {githubData && (
             <div className="github-stats-ticker">
               <div className="stat-ticker-item">
@@ -499,7 +478,7 @@ function Dashboard() {
                 <span className="ticker-number">
                   {githubData?.longestStreak ? `${githubData.longestStreak} days` : "--"}
                 </span>
-                <span className="ticker-sub">Consecutive coding days</span>
+                <span className="ticker-sub">Days in a row with contributions</span>
               </div>
 
               <div className="stat-ticker-divider" />
@@ -509,12 +488,11 @@ function Dashboard() {
                 <span className="ticker-number">
                   {githubData?.currentStreak ? `${githubData.currentStreak} days` : "0 days"}
                 </span>
-                <span className="ticker-sub">Active continuous streak</span>
+                <span className="ticker-sub">Days in a row with contributions</span>
               </div>
             </div>
           )}
 
-          {/* Interactive Day Details Banner */}
           <div className="heatmap-hover-banner">
             {hoveredDay ? (
               <span className="hover-active-text">
@@ -528,16 +506,15 @@ function Dashboard() {
               </span>
             ) : (
               <span className="hover-idle-text">
-                Hover over calendar squares to inspect contribution dates and counts.
+                Move over a square to see the day and contribution count.
               </span>
             )}
           </div>
 
-          {/* Heatmap Container */}
           <div className="heatmap-scroll-wrapper" role="region" aria-label="Contribution calendar">
             {githubLoading && !githubData && (
               <div className="heatmap-loading-state" role="status">
-                <FaSyncAlt className="is-spinning" /> Loading 12-month GitHub calendar...
+                <FaSyncAlt className="is-spinning" /> Loading my GitHub activity...
               </div>
             )}
 
@@ -545,7 +522,7 @@ function Dashboard() {
               <div className="telemetry-alert-box alert-error">
                 <FaExclamationCircle className="alert-icon" />
                 <div className="alert-body">
-                  <strong>Failed to stream GitHub contributions</strong>
+                  <strong>GitHub contributions didn’t load</strong>
                   <p>{githubError}</p>
                   <button type="button" onClick={refreshGitHub} className="alert-retry-btn">
                     Retry
@@ -560,12 +537,11 @@ function Dashboard() {
                 <div className="telemetry-info-banner" role="status">
                   <FaInfoCircle className="info-icon" aria-hidden="true" />
                   <div className="info-body">
-                    <p>Could not refresh GitHub; showing the last saved calendar. {githubError}</p>
+                    <p>I couldn’t refresh the calendar, so this is the last one I saved.</p>
                   </div>
                 </div>
               )}
               <div className="heatmap-matrix">
-                {/* Weekday indicators column */}
                 <div className="heatmap-weekdays" aria-hidden="true">
                   <span>Sun</span>
                   <span>Mon</span>
@@ -576,25 +552,22 @@ function Dashboard() {
                   <span>Sat</span>
                 </div>
 
-                {/* Grid columns */}
                 <div className="heatmap-weeks-stream">
-                  {/* Month header row */}
                   <div className="heatmap-months-row" aria-hidden="true">
-                    {monthLabelOffsets.map((m, idx) => (
+                    {monthLabelOffsets.map((month, index) => (
                       <span
-                        key={`${m.name}-${idx}`}
+                        key={`${month.name}-${index}`}
                         className="month-header-label"
-                        style={{ gridColumnStart: m.weekIndex + 1 }}
+                        style={{ gridColumnStart: month.weekIndex + 1 }}
                       >
-                        {m.name}
+                        {month.name}
                       </span>
                     ))}
                   </div>
 
-                  {/* Calendar columns */}
                   <div className="heatmap-columns">
-                    {githubData.weeks.map((week, wIdx) => (
-                      <div key={`w-${wIdx}`} className="heatmap-col">
+                    {githubData.weeks.map((week, weekIndex) => (
+                      <div key={`week-${weekIndex}`} className="heatmap-col">
                         {week.map((day) => (
                           <span
                             key={day.date}
@@ -615,7 +588,6 @@ function Dashboard() {
             )}
           </div>
 
-          {/* Legend */}
           <div className="heatmap-footer-legend">
             <span className="legend-label">Less</span>
             <span className="heat-square heat-level-0" aria-hidden="true" />

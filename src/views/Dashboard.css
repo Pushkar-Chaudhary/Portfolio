@@ -434,7 +434,7 @@
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   padding: 12px 0 8px;
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }
 
 .heatmap-matrix {
