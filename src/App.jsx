@@ -7,6 +7,7 @@ import About from "./views/About.jsx";
 import Projects from "./views/Projects.jsx";
 import Contact from "./views/Contact.jsx";
 import Dashboard from "./views/Dashboard.jsx";
+import Guestbook from "./views/Guestbook.jsx";
 import IntroLoader from "./components/IntroLoader.jsx";
 
 const pages = {
@@ -34,6 +35,11 @@ const pages = {
     title: "Dashboard | Pushkar Chaudhary (@zorocodes) - Coding Activity",
     description: "A look at Pushkar’s recent coding time and GitHub contributions.",
     Component: Dashboard,
+  },
+  "/guestbook": {
+    title: "Guestbook | Pushkar Chaudhary (@zorocodes)",
+    description: "Leave a message in Pushkar’s guestbook. Sign in with Google or GitHub to post.",
+    Component: Guestbook,
   },
 };
 
@@ -113,7 +119,7 @@ export default function App() {
 
   return (
     <>
-      <IntroLoader />
+      <IntroLoader isHome={currentPath === "/"} />
       <Navbar activePath={currentPath} />
       <div className="app-shell">
         <Page />

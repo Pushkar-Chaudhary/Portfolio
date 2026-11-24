@@ -14,7 +14,7 @@ const Home = () => {
   };
 
   return (
-    <div className="page-shell page-shell--narrow">
+    <div className="page-shell page-shell--narrow page-shell--home">
       <main className="page-stack">
         <section className="hero-panel" aria-label="Introduction">
           <div className="hero-visual">

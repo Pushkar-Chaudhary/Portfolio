@@ -15,8 +15,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "^6.2.1",
+    "@supabase/supabase-js": "^2.119.2",
     "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.2.1",
+    "dotenv": "^18.0.10",
     "framer-motion": "^14.0.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

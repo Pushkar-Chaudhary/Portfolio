@@ -1,12 +1,29 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import ThemeToggle from "./Theme.jsx";
 
-const links = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Projects", path: "/projects" },
-  { name: "Dashboard", path: "/dashboard" },
-  { name: "Contact", path: "/contact" },
+const sections = [
+  {
+    label: "",
+    style: "primary",
+    links: [
+      { name: "Home", path: "/" },
+      { name: "About", path: "/about" },
+      { name: "Projects", path: "/projects" },
+    ],
+  },
+  {
+    label: "Personal",
+    style: "personal",
+    links: [{ name: "Dashboard", path: "/dashboard" }],
+  },
+  {
+    label: "Elsewhere",
+    style: "elsewhere",
+    links: [
+      { name: "Guestbook", path: "/guestbook" },
+      { name: "Contact", path: "/contact" },
+    ],
+  },
 ];
 
 const subscribeToTheme = (onChange) => {
@@ -19,11 +36,7 @@ const getServerThemeSnapshot = () => true;
 
 function Navbar({ activePath }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const darkMode = useSyncExternalStore(
-    subscribeToTheme,
-    getThemeSnapshot,
-    getServerThemeSnapshot,
-  );
+  const darkMode = useSyncExternalStore(subscribeToTheme, getThemeSnapshot, getServerThemeSnapshot);
   const menuToggleRef = useRef(null);
 
   const toggleTheme = () => {
@@ -39,40 +52,42 @@ function Navbar({ activePath }) {
 
   useEffect(() => {
     if (!menuOpen) return undefined;
-
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
         menuToggleRef.current?.focus();
       }
     };
-
     document.addEventListener("keydown", closeOnEscape);
     return () => document.removeEventListener("keydown", closeOnEscape);
   }, [menuOpen]);
+
+  const renderSections = (mobile = false) => sections.map((section) => (
+    <div className={`nav-section nav-section--${section.style}`} key={section.style}>
+      {section.label && <h2 className="nav-section-label">{section.label}</h2>}
+      <div className="nav-section-links">
+        {section.links.map((link) => (
+          <a
+            key={link.path}
+            href={link.path}
+            onClick={mobile ? () => setMenuOpen(false) : undefined}
+            aria-current={activePath === link.path ? "page" : undefined}
+            className={`nav-link ${activePath === link.path ? "nav-link--active" : ""}`}
+          >
+            <span className="nav-link-dot" aria-hidden="true" />
+            <span>{link.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  ));
 
   return (
     <>
       <header className="top-nav-shell">
         <div className="top-nav-inner">
-          <div className="nav-left-actions">
+          <div className="mobile-header-actions">
             <ThemeToggle checked={darkMode} onChange={toggleTheme} />
-          </div>
-
-          <nav className="site-nav" aria-label="Primary navigation">
-            {links.map((link) => (
-              <a
-                key={link.path}
-                href={link.path}
-                aria-current={activePath === link.path ? "page" : undefined}
-                className={`nav-link ${activePath === link.path ? "nav-link--active" : ""}`}
-              >
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
-          <div className="nav-right-actions">
             <button
               ref={menuToggleRef}
               type="button"
@@ -82,61 +97,30 @@ function Navbar({ activePath }) {
               aria-controls="mobile-navigation"
               aria-expanded={menuOpen}
             >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                {menuOpen ? (
-                  <>
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </>
-                ) : (
-                  <>
-                    <line x1="4" y1="8" x2="20" y2="8" />
-                    <line x1="4" y1="16" x2="20" y2="16" />
-                  </>
-                )}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                {menuOpen ? <><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></>
+                  : <><line x1="4" y1="8" x2="20" y2="8" /><line x1="4" y1="16" x2="20" y2="16" /></>}
               </svg>
             </button>
           </div>
         </div>
       </header>
 
-      {menuOpen && (
-        <div
-          className="mobile-backdrop"
-          onClick={() => setMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
+      <aside className="desktop-sidebar">
+        <nav className="sidebar-navigation" aria-label="Primary navigation">
+          {renderSections()}
+        </nav>
+      </aside>
 
-      <nav
-        id="mobile-navigation"
-        className={`mobile-menu ${menuOpen ? "is-open" : ""}`}
-        aria-label="Mobile primary navigation"
-        aria-hidden={!menuOpen}
-      >
-        <div className="mobile-menu-inner">
-          {links.map((link) => (
-            <a
-              key={link.path}
-              href={link.path}
-              onClick={() => setMenuOpen(false)}
-              aria-current={activePath === link.path ? "page" : undefined}
-              className={`mobile-nav-link ${activePath === link.path ? "mobile-nav-link--active" : ""}`}
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
+      <div className="theme-control">
+        <ThemeToggle checked={darkMode} onChange={toggleTheme} />
+      </div>
+
+      {menuOpen && <div className="mobile-backdrop" onClick={() => setMenuOpen(false)} aria-hidden="true" />}
+      <nav id="mobile-navigation" className={`mobile-menu ${menuOpen ? "is-open" : ""}`}
+        aria-label="Mobile primary navigation" aria-hidden={!menuOpen}>
+        {renderSections(true)}
       </nav>
     </>
   );

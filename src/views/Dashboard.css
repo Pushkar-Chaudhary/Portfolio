@@ -713,3 +713,194 @@
     padding: 16px 14px;
   }
 }
+
+/* Dashboard visual refresh */
+.dashboard-page { padding-top: 20px; }
+
+.dashboard-flow { gap: 68px; }
+
+.dash-hero {
+  gap: 12px;
+  padding: 0;
+  border: 0;
+}
+
+.dash-title {
+  color: var(--primary);
+  font-size: clamp(2.6rem, 5vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1;
+}
+
+.dash-date {
+  margin: 4px 0 0;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.telemetry-block {
+  gap: 26px;
+  padding-bottom: 40px;
+}
+
+.telemetry-block-header {
+  align-items: flex-start;
+}
+
+.telemetry-block-header > div:first-child { flex: 1; }
+
+.telemetry-block-title {
+  color: var(--primary);
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
+
+.dash-activity-copy {
+  max-width: 76ch;
+  margin: 14px 0 0;
+  color: var(--text);
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.65;
+}
+
+.dash-activity-copy a {
+  color: inherit;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 4px;
+}
+
+.dash-activity-copy a:hover { color: var(--accent); }
+
+.telemetry-header-actions { align-self: flex-start; }
+
+.waka-metrics-row {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  overflow: visible;
+}
+
+.waka-metric-card {
+  position: relative;
+  isolation: isolate;
+  min-height: 132px;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 18px 20px;
+  overflow: visible;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  box-shadow: none;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.waka-metric-card:nth-child(1) { background: #ff694f; }
+.waka-metric-card:nth-child(2) { background: #819ce9; }
+.waka-metric-card:nth-child(3) { background: #398d61; }
+
+.waka-metric-card::before {
+  position: absolute;
+  top: -43px;
+  left: 50%;
+  z-index: -1;
+  content: "\1F43C";
+  font-size: 44px;
+  line-height: 1;
+  opacity: 0;
+  transform: translate(-50%, 18px) scale(0.85);
+  transform-origin: center bottom;
+  transition: opacity 180ms ease, transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.waka-metric-card:hover,
+.waka-metric-card:focus-visible {
+  z-index: 1;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.14);
+  outline: none;
+}
+
+.waka-metric-card:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 4px;
+}
+
+.waka-metric-card:hover::before,
+.waka-metric-card:focus-visible::before {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+.waka-metric-label {
+  color: rgba(255, 255, 255, 0.94);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.waka-metric-label svg { display: none; }
+
+.waka-metric-value {
+  color: #fff;
+  font-size: clamp(1.65rem, 2.6vw, 2.35rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+
+.waka-metric-sub {
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.82rem;
+}
+
+.dashboard-sync-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: -8px;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.dashboard-sync-dot {
+  width: 9px;
+  height: 9px;
+  flex: 0 0 9px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+.dashboard-sync-separator { color: #f0a83c; }
+
+.telemetry-skeleton-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.dash-skeleton-box {
+  height: 132px;
+  border-radius: 6px;
+}
+
+.dash-skeleton-box:nth-child(1) { background: #ff694f; }
+.dash-skeleton-box:nth-child(2) { background: #819ce9; }
+.dash-skeleton-box:nth-child(3) { background: #398d61; }
+
+@media (max-width: 768px) {
+  .waka-metrics-row,
+  .telemetry-skeleton-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+  .dashboard-page { padding-top: 84px; }
+  .dashboard-flow { gap: 48px; }
+  .dash-title { font-size: clamp(2.5rem, 12vw, 3.4rem); }
+  .telemetry-block { gap: 20px; }
+  .telemetry-block-title { font-size: 2rem; }
+  .waka-metric-card { min-height: 124px; padding: 16px 18px; }
+  .dashboard-sync-status { flex-wrap: wrap; font-size: 0.82rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waka-metric-card,
+  .waka-metric-card::before { transition: none; }
+}

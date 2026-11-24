@@ -17,7 +17,6 @@ import {
   FaGift,
   FaShoppingCart,
 } from "react-icons/fa";
-import PagePlaneAccent from "../components/PagePlaneAccent.jsx";
 import TiltCard from "../components/TiltCard.jsx";
 import imageSource from "../lib/imageSource.js";
 import projectsData from "../data/projects.js";
@@ -99,7 +98,6 @@ function Projects() {
     <div className="page-shell page-shell--narrow">
       <main className="page-stack">
         <header className="projects-header">
-          <PagePlaneAccent />
           <p className="eyebrow">My projects</p>
           <h1 className="section-title">Things I&apos;ve built.</h1>
           <p className="lead">

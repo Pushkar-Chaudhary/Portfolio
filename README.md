@@ -10,6 +10,7 @@ The site is a React single-page app built with Vite. Vercel serves the static fr
 - `/projects` — Searchable, filterable project list
 - `/contact` — Contact form and social links
 - `/dashboard` — WakaTime and GitHub activity
+- `/guestbook` — Public messages posted by Google- or GitHub-authenticated visitors
 
 ## Development
 
@@ -25,7 +26,7 @@ npm run lint
 
 ## Environment variables
 
-A pre-configured template is available in `.env.example` and `.env`. You can copy or directly edit `.env` (or `.env.local` for local development), and configure them as server-side environment variables in Vercel for deployment. Do not use `PUBLIC_` or `VITE_` prefixes for credentials.
+Vite loads `.env` automatically during local development. Set secrets there and configure them as environment variables in Vercel for deployment. The Supabase URL and anon key below are public client settings; never expose private credentials with a `VITE_` prefix.
 
 - `GITHUB_USERNAME` — Account used for contribution activity.
 - `GITHUB_TOKEN` — Optional token for GitHub GraphQL requests.
@@ -33,6 +34,7 @@ A pre-configured template is available in `.env.example` and `.env`. You can cop
 - `WAKATIME_OAUTH_ACCESS_TOKEN` — Optional token with the WakaTime `read_stats` scope for private statistics.
 - `WAKATIME_CLIENT_ID` and `WAKATIME_CLIENT_SECRET` — Local OAuth setup credentials; not needed in production after obtaining an access token.
 - `SPOTIFY_CLIENT_ID` and `SPOTIFY_REFRESH_TOKEN` — Used by the current-playback endpoint.
+- `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` — Public Supabase project settings used by Guestbook. The anon key is designed for browser use; never put a Supabase `service_role` key in a `VITE_` variable.
 
 The WakaTime and Spotify authorization helpers save tokens to `.env.local`; never commit or share the file.
 
@@ -57,6 +59,17 @@ npm run spotify:authorize
 Open the printed URL and approve access. The helper writes the refresh token to `.env.local`. Set both Spotify variables in Vercel to enable `/api/spotify`.
 
 The About page's favorite-song embed is a separate, manually selected track.
+
+### Guestbook setup
+
+The Guestbook stores messages in Supabase Postgres and uses Supabase Auth for Google and GitHub OAuth. To enable it:
+
+1. Create a Supabase project and run [`supabase/migrations/20261123000000_guestbook.sql`](supabase/migrations/20261123000000_guestbook.sql) in the SQL Editor.
+2. In Supabase Authentication, enable Google and GitHub providers and enter each provider's OAuth client ID and secret. Use `https://<project-ref>.supabase.co/auth/v1/callback` as the provider callback URL.
+3. Set the Supabase Site URL to your deployed site and add both `http://localhost:5173/guestbook` and `https://pushkarchaudhary.com.np/guestbook` to the allowed redirect URLs. Add any Vercel Preview URL patterns you use as well.
+4. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in `.env` from the Supabase project settings. Add the same two public settings to Vercel for the Production and Preview environments, then redeploy.
+
+Row-level security makes messages publicly readable and only allows an authenticated user to post under their own account. A database trigger limits each account to five posts per hour. The browser only uses Supabase's public anon key; never expose a service-role key.
 
 ## Project data
 

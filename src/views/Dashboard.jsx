@@ -11,8 +11,6 @@ import {
   FaExclamationCircle,
   FaInfoCircle,
 } from "react-icons/fa";
-import { SiWakatime } from "react-icons/si";
-import NepalClock from "../components/NepalClock.jsx";
 import "./Dashboard.css";
 
 const monthNames = [
@@ -65,6 +63,11 @@ function Dashboard() {
 
   const [hoveredDay, setHoveredDay] = useState(null);
   const reducedMotion = useReducedMotion();
+  const currentDate = new Intl.DateTimeFormat("en-GB", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  }).format(new Date());
 
   const revealProps = reducedMotion
     ? { initial: false, animate: { opacity: 1 } }
@@ -180,35 +183,26 @@ function Dashboard() {
   }, [wakatimeData]);
 
   return (
-    <div className="page-shell page-shell--narrow">
+    <div className="page-shell page-shell--wide dashboard-page">
       <main className="dashboard-flow">
         <motion.header className="dash-hero" {...revealProps}>
-          <div className="dash-hero-top">
-            <NepalClock showLocation={true} />
-          </div>
-
-          <h1 className="dash-title">What I&apos;ve been working on</h1>
-          <p className="dash-lead">A look at what I’ve been coding lately.</p>
+          <h1 className="dash-title">Dashboard</h1>
+          <p className="dash-date">{currentDate}</p>
         </motion.header>
 
         <motion.section className="telemetry-block" {...revealProps} aria-labelledby="wakatime-heading">
           <div className="telemetry-block-header">
             <div>
-              <div className="telemetry-source-tag">
-                <SiWakatime aria-hidden="true" />
-                <span>WakaTime</span>
-              </div>
               <h2 id="wakatime-heading" className="telemetry-block-title">
-                My coding time
+                Coding Activity
               </h2>
+              <p className="dash-activity-copy">
+                Real-time coding statistics from <a href="https://wakatime.com" target="_blank" rel="noreferrer">WakaTime</a>.
+                Tracking my development journey across projects and languages.
+              </p>
             </div>
 
             <div className="telemetry-header-actions">
-              {wakatimeData?.lastSynced && (
-                <span className="sync-time-tag">
-                  Synced: {new Date(wakatimeData.lastSynced).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
-                </span>
-              )}
               <button
                 type="button"
                 onClick={refreshWakaTime}
@@ -254,9 +248,9 @@ function Dashboard() {
               )}
 
               <div className="waka-metrics-row">
-                <div className="waka-metric-card">
+                <div className="waka-metric-card" tabIndex={0}>
                   <span className="waka-metric-label">
-                    <FaClock aria-hidden="true" /> Total Coding Time
+                    <FaClock aria-hidden="true" /> Total Time Coded
                   </span>
                   <span className="waka-metric-value">
                     {wakatimeData?.totalCodingTime || "--"}
@@ -266,7 +260,7 @@ function Dashboard() {
                   </span>
                 </div>
 
-                <div className="waka-metric-card">
+                <div className="waka-metric-card" tabIndex={0}>
                   <span className="waka-metric-label">
                     <FaLaptopCode aria-hidden="true" /> Daily Average
                   </span>
@@ -276,9 +270,9 @@ function Dashboard() {
                   <span className="waka-metric-sub">On days I coded</span>
                 </div>
 
-                <div className="waka-metric-card">
+                <div className="waka-metric-card" tabIndex={0}>
                   <span className="waka-metric-label">
-                    <FaFire aria-hidden="true" /> Most Hours in One Day
+                    <FaFire aria-hidden="true" /> Best Day
                   </span>
                   <span className="waka-metric-value">
                     {wakatimeData?.bestDay?.text || "--"}
@@ -296,16 +290,16 @@ function Dashboard() {
                   </span>
                 </div>
 
-                {wakatimeData?.mostCodedDay && (
-                  <div className="waka-metric-card">
-                    <span className="waka-metric-label">
-                      <FaCalendarAlt aria-hidden="true" /> Most active day
-                    </span>
-                    <span className="waka-metric-value">
-                      {wakatimeData.mostCodedDay}
-                    </span>
-                    <span className="waka-metric-sub">My busiest day this week</span>
-                  </div>
+              </div>
+
+              <div className="dashboard-sync-status" role="status">
+                <span className="dashboard-sync-dot" aria-hidden="true" />
+                <span>Live synced from WakaTime</span>
+                {wakatimeData?.lastSynced && (
+                  <>
+                    <span className="dashboard-sync-separator" aria-hidden="true">{"\u2022"}</span>
+                    <span>Updated at {new Date(wakatimeData.lastSynced).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}</span>
+                  </>
                 )}
               </div>
 
