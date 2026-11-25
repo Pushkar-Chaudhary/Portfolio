@@ -12,8 +12,8 @@ import IntroLoader from "./components/IntroLoader.jsx";
 
 const pages = {
   "/": {
-    title: "Pushkar Chaudhary (@zorocodes) | Developer & Designer",
-    description: "I’m Pushkar, a BCA student and developer in Itahari, Nepal. Take a look at the websites and small tools I’ve been building.",
+    title: "Pushkar Chaudhary (@zorocodes) | Aspiring Full-Stack Developer",
+    description: "I’m Pushkar, an aspiring full-stack developer and BCA student in Itahari, Nepal. I build web applications with the MERN stack.",
     Component: Home,
   },
   "/about": {
@@ -71,8 +71,8 @@ function updateMeta(path, page) {
         alternateName: ["@zorocodes", "Pushkar Chaudhary", "Pushkar", "zorocodes"],
         url: siteUrl,
         image: `${siteUrl}/fav.png`,
-        jobTitle: "Full-Stack Web Developer & Designer",
-        description: "Pushkar Chaudhary (@zorocodes) is a web developer and BCA student from Itahari, Nepal. He builds web apps with React, Node.js, and TypeScript.",
+        jobTitle: "Aspiring Full-Stack Developer",
+        description: "Pushkar Chaudhary (@zorocodes) is an aspiring full-stack developer and BCA student from Itahari, Nepal. He builds full-stack web applications with the MERN stack: MongoDB, Express.js, React, and Node.js.",
         address: { "@type": "PostalAddress", addressLocality: "Itahari", addressCountry: "NP" },
         email: "pushkarchaudhary256@gmail.com",
         sameAs: ["https://github.com/Pushkar-Chaudhary", "https://www.linkedin.com/in/pushkar-chy/", "https://x.com/pushkar_chau07", "https://www.instagram.com/pushkar.chau/"],
@@ -83,7 +83,7 @@ function updateMeta(path, page) {
         "@id": `${siteUrl}/#website`,
         url: siteUrl,
         name: "Pushkar Chaudhary (@zorocodes) Portfolio",
-        description: "Web projects by Pushkar Chaudhary (@zorocodes), a developer and BCA student in Itahari, Nepal.",
+        description: "Web projects by Pushkar Chaudhary (@zorocodes), an aspiring full-stack developer and BCA student in Itahari, Nepal.",
         publisher: { "@id": personId },
         inLanguage: "en-US",
       },
