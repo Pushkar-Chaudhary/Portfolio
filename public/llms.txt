@@ -1,0 +1,60 @@
+# Pushkar Chaudhary
+
+> Personal portfolio of Pushkar Chaudhary (@zorocodes), a web developer and BCA student from Itahari, Nepal.
+
+## About
+
+Pushkar Chaudhary is a full-stack web developer and BCA student based in Itahari, Sunsari, Nepal. He builds web applications using the MERN stack (MongoDB, Express.js, React, Node.js) and is currently exploring Python and AI application development with the Gemini API.
+
+He is known online as @zorocodes.
+
+## Skills
+
+- JavaScript (ES6+), HTML5, CSS3
+- React 19, Vite, Tailwind CSS, Framer Motion
+- Node.js, Express.js
+- MongoDB
+- Gemini API (AI/LLM integration — actively exploring)
+- Python (currently learning)
+- Git, GitHub, Vercel, Supabase
+- Figma (UI/UX design basics)
+
+## Projects
+
+- **Aafno Kura** — A social platform for sharing posts and community discussion. Built with Node.js, Express, EJS, MongoDB. Live: https://aafno-kura.vercel.app/ | Source: https://github.com/Pushkar-Chaudhary/aafno-kura
+
+- **Career Sathi** — An AI-powered career planning app that uses the Gemini API to help users explore career paths. Built with React, Node.js, Express, MongoDB, and Gemini API. Live: https://career-sathii.vercel.app/ | Source: https://github.com/Pushkar-Chaudhary/career-sathi
+
+- **Sajilo Blog** — A clean blog platform for publishing and reading stories. Built with React, Node.js, Express, MongoDB. Live: https://sajiloblog.vercel.app/ | Source: https://github.com/Pushkar-Chaudhary/sajilo-blog
+
+- **Sajilo Pasal** — An e-commerce platform concept for local Nepali products. Built with React. Live: https://sajilo-pasal-tau.vercel.app/
+
+- **Wishly** — A fun birthday surprise app with animations and confetti. Built with React and Node.js. Live: https://wishly-wish.vercel.app/
+
+- **Notes App** — A browser-based note-taking app with localStorage persistence. Built with React and Tailwind CSS. Live: https://notes-app-kappa-ruby-64.vercel.app/ | Source: https://github.com/Pushkar-Chaudhary/notes
+
+- **Portfolio Website** — This website. Built with React 19, Vite, Tailwind CSS v4, Framer Motion, and Supabase. Source: https://github.com/Pushkar-Chaudhary/Portfolio
+
+## Currently Learning
+
+- Python
+- AI and LLM application development (Gemini API)
+- TypeScript
+
+## Contact & Profiles
+
+- Website: https://pushkarchaudhary.com.np
+- Email: pushkarchaudhary256@gmail.com
+- GitHub: https://github.com/Pushkar-Chaudhary
+- LinkedIn: https://www.linkedin.com/in/pushkar-chy/
+- X (Twitter): https://x.com/pushkar_chau07
+- Instagram: https://www.instagram.com/pushkar.chau/
+
+## Pages
+
+- Home / Introduction: https://pushkarchaudhary.com.np/
+- About Pushkar: https://pushkarchaudhary.com.np/about
+- Projects: https://pushkarchaudhary.com.np/projects
+- Contact: https://pushkarchaudhary.com.np/contact
+- Guestbook: https://pushkarchaudhary.com.np/guestbook
+- Coding Dashboard: https://pushkarchaudhary.com.np/dashboard

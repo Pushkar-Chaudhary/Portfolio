@@ -195,6 +195,31 @@ function About() {
         </motion.section>
 
         <motion.section className="about-content-section" {...revealProps}>
+          <div className="section-header">
+            <span className="section-kicker">Currently exploring</span>
+            <h2 className="section-subtitle">What I&apos;m learning next</h2>
+            <p className="section-subtext">
+              Things I&apos;m actively picking up — not yet proficient, but genuinely interested in.
+            </p>
+          </div>
+
+          <div className="exploring-list">
+            <div className="exploring-item">
+              <span className="exploring-item-label">Python</span>
+              <span className="exploring-item-desc">Getting comfortable with the language and its ecosystem for scripting and data work.</span>
+            </div>
+            <div className="exploring-item">
+              <span className="exploring-item-label">AI &amp; LLM development</span>
+              <span className="exploring-item-desc">Building AI-powered features with the Gemini API — currently applied in Career Sathi.</span>
+            </div>
+            <div className="exploring-item">
+              <span className="exploring-item-label">TypeScript</span>
+              <span className="exploring-item-desc">Moving toward typed JavaScript for more reliable projects.</span>
+            </div>
+          </div>
+        </motion.section>
+
+        <motion.section className="about-content-section" {...revealProps}>
           <section className="music-panel" aria-labelledby="favorite-music-title">
             <div className="section-header">
               <span className="section-kicker">An old favorite</span>

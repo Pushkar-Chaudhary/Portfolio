@@ -1559,3 +1559,45 @@ body {
     padding: 16px 0 0;
   }
 }
+
+
+/* ── Currently exploring section ─────────────────────────── */
+.exploring-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.exploring-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.exploring-item-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.exploring-item-desc {
+  font-size: 0.84rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+@media (min-width: 560px) {
+  .exploring-item {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 20px;
+  }
+
+  .exploring-item-label {
+    flex: 0 0 180px;
+  }
+}

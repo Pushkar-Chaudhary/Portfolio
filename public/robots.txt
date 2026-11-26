@@ -1,3 +1,41 @@
+﻿# Pushkar Chaudhary portfolio
+# Public pages are available to search and AI answer crawlers.
+
+User-agent: Googlebot
+Allow: /
+Disallow: /dashboard
+
+User-agent: Bingbot
+Allow: /
+Disallow: /dashboard
+
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /dashboard
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /dashboard
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /dashboard
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /dashboard
+
+User-agent: GoogleOther
+Allow: /
+Disallow: /dashboard
+
+# Training crawlers are disallowed; this does not affect Google Search indexing.
+User-agent: GPTBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
 User-agent: *
 Allow: /
 Disallow: /dashboard

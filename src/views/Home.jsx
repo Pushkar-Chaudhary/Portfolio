@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaArrowRight } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import TypingText from "../components/TypingText.jsx";
 import Animated3DImages from "../components/Animated3DImages.jsx";
 import ProjectShowcase from "../components/ProjectShowcase.jsx";
@@ -83,6 +84,17 @@ const Home = () => {
               >
                 <FaLinkedin aria-hidden="true" />
                 <span>LinkedIn</span>
+              </a>
+              <span className="hero-social-sep">·</span>
+              <a
+                href="https://x.com/pushkar_chau07"
+                target="_blank"
+                rel="noreferrer"
+                className="hero-social-item"
+                aria-label="X (Twitter) profile"
+              >
+                <FaXTwitter aria-hidden="true" />
+                <span>X</span>
               </a>
               <span className="hero-social-sep">·</span>
               <NepalClock compact={true} showLocation={true} />

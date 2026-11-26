@@ -66,7 +66,8 @@ async function fetchWakaTime(url, accessToken = "") {
       return await curlJson(url, accessToken);
     } catch (curlError) {
       throw new Error(
-        `Node fetch failed (${fetchError.message}); curl fallback failed (${curlError.message}).`
+        `Node fetch failed (${fetchError.message}); curl fallback failed (${curlError.message}).`,
+        { cause: curlError }
       );
     }
   }

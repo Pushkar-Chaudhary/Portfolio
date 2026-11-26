@@ -46,5 +46,18 @@ export default defineConfig(({ mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ""));
   return {
     plugins: [react(), tailwindcss(), localApiPlugin()],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (!id.includes("node_modules")) return undefined;
+            if (id.includes("react") || id.includes("scheduler")) return "react-vendor";
+            if (id.includes("framer-motion")) return "framer";
+            if (id.includes("react-icons")) return "icons";
+            return undefined;
+          },
+        },
+      },
+    },
   };
 });

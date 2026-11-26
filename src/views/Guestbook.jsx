@@ -30,7 +30,7 @@ function Guestbook() {
   const [session, setSession] = useState(null);
   const [messages, setMessages] = useState([]);
   const [draft, setDraft] = useState("");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!isSupabaseConfigured);
   const [posting, setPosting] = useState(false);
   const [deletingId, setDeletingId] = useState(null);
   const [authBusy, setAuthBusy] = useState(false);
@@ -78,7 +78,6 @@ function Guestbook() {
 
   useEffect(() => {
     if (!supabase) {
-      setLoading(false);
       return undefined;
     }
 

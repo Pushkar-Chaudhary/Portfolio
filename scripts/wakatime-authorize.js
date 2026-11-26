@@ -108,7 +108,7 @@ if (!clientId || !clientSecret) {
         redirect_uri: redirectUri,
       });
     } catch (error) {
-      throw new Error(`Could not exchange the WakaTime authorization code: ${error.message}`);
+      throw new Error(`Could not exchange the WakaTime authorization code: ${error.message}`, { cause: error });
     }
 
     if (typeof tokenData.access_token !== "string") {
